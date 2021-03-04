@@ -7,6 +7,5 @@ public class PantallaDespacho {
         System.out.println("hola mkos");
         System.out.println("prueba branch");
 
-
     }
 }
