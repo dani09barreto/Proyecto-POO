@@ -8,6 +8,7 @@ public class PantallaDespacho {
         System.out.println("prueba branch");
         System.out.println(" MENU ");
         System.out.println("1. inserte producto");
+        System.out.println("2. poner precio");
 
     }
 }
