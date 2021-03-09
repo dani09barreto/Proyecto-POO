@@ -3,7 +3,7 @@ package org.example.View;
 import org.example.Control.ControlDespacho;
 
 public class PantallaDespacho {
-    private ControlDespacho controlDespacho = new ControlDespacho();
+    private ControlDespacho centralDespacho = new ControlDespacho();
 
     public static void main(String[] args) {
         System.out.println("hola mkos");
