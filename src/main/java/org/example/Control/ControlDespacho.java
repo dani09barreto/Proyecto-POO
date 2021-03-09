@@ -1,4 +1,6 @@
-package org.example;
+package org.example.Control;
+
+import org.example.Model.Pedido;
 
 import java.util.ArrayList;
 
