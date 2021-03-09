@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Model;
 
 public class Cliente {
     private long cedula;

@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Model;
 
 public class ServicioAdicional {
     private long codigoServicio;

@@ -1,4 +1,6 @@
-package org.example;
+package org.example.View;
+
+import org.example.Control.ControlDespacho;
 
 public class PantallaDespacho {
     private ControlDespacho controlDespacho = new ControlDespacho();
@@ -9,6 +11,7 @@ public class PantallaDespacho {
         System.out.println(" MENU ");
         System.out.println("1. inserte producto");
         System.out.println("2. poner precio");
+        System.out.println("3. buenos dias");
 
     }
 }
