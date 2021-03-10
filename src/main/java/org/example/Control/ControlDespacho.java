@@ -5,9 +5,11 @@ import org.example.Model.Pedido;
 import java.util.ArrayList;
 
 public class ControlDespacho {
-    private GestionProductos gestionProductos;
+
+    private GestionProductos gestionProductos = new GestionProductos();
     private ArrayList<Pedido> pedidos = new ArrayList<>();
-    private GestionCliente gestionCliente;
+    private GestionCliente gestionCliente = new GestionCliente();
+
 
     public GestionCliente getGestionCliente() {
         return gestionCliente;
@@ -28,4 +30,5 @@ public class ControlDespacho {
     public void setGestionProductos(GestionProductos gestionProductos) {
         this.gestionProductos = gestionProductos;
     }
+
 }

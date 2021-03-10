@@ -9,6 +9,14 @@ public class Producto {
     private double iva;
     private String tienda;
 
+    public Producto(UUID prodId, String nombreComercial, double precio, double iva, String tienda) {
+        this.prodId = prodId;
+        this.nombreComercial = nombreComercial;
+        this.precio = precio;
+        this.iva = iva;
+        this.tienda = tienda;
+    }
+
     public UUID getProdId() {
         return prodId;
     }
@@ -47,5 +55,14 @@ public class Producto {
 
     public void setTienda(String tienda) {
         this.tienda = tienda;
+    }
+
+    @Override
+    public String toString() {
+        return  "Id: " + prodId +
+                "\nnombre: " + nombreComercial +
+                "\nprecio: " + precio +
+                "\niva: " + iva +
+                "\ntienda: " + tienda + "\n\n";
     }
 }
