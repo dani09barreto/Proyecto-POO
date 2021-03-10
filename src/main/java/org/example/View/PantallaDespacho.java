@@ -13,29 +13,37 @@ public class PantallaDespacho {
         PantallaDespacho Pantalla = new PantallaDespacho();
         int opcion = 0;
         Scanner in = new Scanner(System.in);
-        System.out.println("\n______Oficina de una agencia de reparto de Productos______\n");
-        System.out.println("1.  Ver Lista de Productos");
-        System.out.println("2.  Insertar Productos");
-        System.out.println("3.  Modificar Productos");
-        System.out.println("4.  Eliminar Productos");
-        System.out.println("5.  Ver listado de Clientes registrados en el sistema");
-        System.out.println("6.  Insertar Cliente");
-        System.out.println("7.  Modificar datos de Cliente");
-        System.out.println("8.  Eliminar un Cliente");
-        System.out.println("9.  Realizar el Pedido de un Producto");
-        System.out.println("10. Modificar un Pedido de un Producto");
-        System.out.println("11. Eliminar un Pedido de un Producto");
-        System.out.println("12. Ver listado de Pedidos existentes");
-        System.out.println("13. Ver listado de Pedidos existentes de Producto y fecha específica");
-        System.out.println("0. Salir");
-        System.out.print("Opcion: ");
-        in.nextInt();
-        switch (opcion) {
-            case 1:
-                Pantalla.centralDespacho.getGestionProductos().VerListadoDeProductos();
-                System.out.println("Lista de productos: \n");
-                System.out.println(Pantalla.centralDespacho.getGestionProductos().VerListadoDeProductos().toString());
-                break;
-        }
+        do {
+            System.out.println("\n\t______Oficina de una agencia de reparto de Productos______\n");
+            System.out.println("\t1.  Ver Lista de Productos");
+            System.out.println("\t2.  Insertar Productos");
+            System.out.println("\t3.  Modificar Productos");
+            System.out.println("\t4.  Eliminar Productos");
+            System.out.println("\t5.  Ver listado de Clientes registrados en el sistema");
+            System.out.println("\t6.  Insertar Cliente");
+            System.out.println("\t7.  Modificar datos de Cliente");
+            System.out.println("\t8.  Eliminar un Cliente");
+            System.out.println("\t9.  Realizar el Pedido de un Producto");
+            System.out.println("\t10. Modificar un Pedido de un Producto");
+            System.out.println("\t11. Eliminar un Pedido de un Producto");
+            System.out.println("\t12. Ver listado de Pedidos existentes");
+            System.out.println("\t13. Ver listado de Pedidos existentes de Producto y fecha específica");
+            System.out.println("\t0. Salir");
+            System.out.print("\tOpcion: ");
+            opcion = in.nextInt();
+            switch (opcion) {
+                case 1:
+
+                    if(Pantalla.centralDespacho.getGestionProductos().VerListadoDeProductos().size() != 0){
+
+                        System.out.println("\n\tLista de productos: \n");
+                        Pantalla.centralDespacho.getGestionProductos().VerListadoDeProductos();
+                        System.out.println(Pantalla.centralDespacho.getGestionProductos().VerListadoDeProductos().toString());
+                    }
+                    else
+                        System.out.println("\tNo hay productos disponibles para mostrar");
+                    break;
+            }
+        } while (opcion != 0);
     }
 }
