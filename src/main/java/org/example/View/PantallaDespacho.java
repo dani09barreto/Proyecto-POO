@@ -52,7 +52,7 @@ public class PantallaDespacho {
                     break;
 
                 case 2:
-                    
+
                     Producto nuevoProd = new Producto();
                     System.out.println();
                     System.out.println("[!] Insertar un producto: ");
