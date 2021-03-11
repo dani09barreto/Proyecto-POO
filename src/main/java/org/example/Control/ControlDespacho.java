@@ -1,8 +1,10 @@
 package org.example.Control;
 
 import org.example.Model.Pedido;
+import org.example.Model.Producto;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class ControlDespacho {
 
@@ -29,6 +31,26 @@ public class ControlDespacho {
 
     public void setGestionProductos(GestionProductos gestionProductos) {
         this.gestionProductos = gestionProductos;
+    }
+
+    public boolean eliminarProducto(UUID codigoEliminar) {
+        for (Producto p : this.getGestionProductos().getListaProductos()) {
+            if (p.getProdId().equals(codigoEliminar)) {
+                for (Pedido Pedi : this.getPedidos()) {
+                    if (Pedi.getProductoSolicitado().getProdId().equals(codigoEliminar))
+                        return false;
+                    else {
+                        gestionProductos.eliminarProduct(codigoEliminar);
+                        return true;
+                    }
+                }
+
+            } else {
+                System.out.println("\tPRODUCTO NO ENCONTRADO ");
+                return false;
+            }
+        }
+        return false;
     }
 
 }

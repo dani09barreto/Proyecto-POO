@@ -51,10 +51,16 @@ public class PantallaDespacho {
                         System.out.println("\tNo hay productos disponibles para mostrar");
                     break;
                 case 3:
-                    System.out.println("Digite el ID del producto que desea modificar");
+                    System.out.println("Digite el ID del producto que desea modificar: ");
                     UUID productId;
                     productId= UUID.fromString(in.next());
                     Pantalla.centralDespacho.getGestionProductos().modificarProducto(productId);
+                case 4:
+                    System.out.println("Digite el codigo de producto que desea eliminar: ");
+                    UUID productdelete;
+                    productdelete = UUID.fromString(in.next());
+                    Pantalla.centralDespacho.eliminarProducto(productdelete);
+                    break;
             }
         } while (opcion != 0);
     }

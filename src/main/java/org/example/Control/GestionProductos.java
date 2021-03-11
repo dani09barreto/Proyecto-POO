@@ -78,4 +78,12 @@ public class GestionProductos {
             }while(opcion!=0);
         }
     }
+    public void eliminarProduct(UUID codigo){
+        for(Producto p: listaProductos){
+            if(p.getProdId().equals(codigo)){
+                listaProductos.remove(p);
+            }
+        }
+    }
+
 }
