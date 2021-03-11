@@ -79,11 +79,23 @@ public class GestionProductos {
         }
     }
     public void eliminarProduct(UUID codigo){
+        boolean ver = true;
+        char confi = 'j';
         for(Producto p: listaProductos){
-            if(p.getProdId().equals(codigo)){
-                listaProductos.remove(p);
+            if (p.getProdId().equals(codigo)) {
+                ver = false;
+                System.out.println("\t Desea eliminar el producto? S = si, N = no");
+                Scanner s = new Scanner(System.in);
+                confi = s.next().charAt(0);
+                if(confi=='S'){
+                    listaProductos.remove(p);
+                    System.out.println("\tPRODUCTO ELIMINADO CON EXITO");
+                }
+                break;
             }
         }
+        if(ver && confi!='N')
+            System.out.println("\t PRODUCTO NO ENCONTRADO");
     }
 
     public void insertarProductos(Producto nuevoProducto) {
