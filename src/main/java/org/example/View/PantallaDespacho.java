@@ -65,7 +65,7 @@ public class PantallaDespacho {
                     nuevoProd.setProdId(UUID.randomUUID());
                     Pantalla.centralDespacho.getGestionProductos().insertarProductos(nuevoProd);
                     break;
-
+                    
                 case 3:
                     System.out.println("Digite el ID del producto que desea modificar: ");
                     UUID productId;
