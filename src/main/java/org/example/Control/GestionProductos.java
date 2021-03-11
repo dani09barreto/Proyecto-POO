@@ -91,6 +91,7 @@ public class GestionProductos {
         for (Producto prod : this.listaProductos){
             if (prod.getProdId() == nuevoProducto.getProdId()){
                 agregar = false;
+                System.out.println("[!] Error al agregar producto: Ya existe un producto con este ID.");
                 break;
             }
         }
