@@ -1,5 +1,6 @@
 package org.example.Control;
 
+import org.example.Model.Cliente;
 import org.example.Model.Producto;
 
 import java.util.ArrayList;
@@ -12,6 +13,15 @@ public class GestionProductos {
 
     public ArrayList<Producto> getListaProductos() {
         return listaProductos;
+    }
+
+    public Producto existeProducto (UUID codigo){
+        for (Producto protemp: listaProductos){
+            if (protemp.getProdId() == codigo){
+                return protemp;
+            }
+        }
+        return null;
     }
 
     public ArrayList<Producto> VerListadoDeProductos () {
@@ -78,6 +88,7 @@ public class GestionProductos {
             }while(opcion!=0);
         }
     }
+
     public void eliminarProduct(UUID codigo){
         boolean ver = true;
         char confi = 'j';

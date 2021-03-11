@@ -1,10 +1,19 @@
 package org.example.Model;
 
+import java.util.Objects;
+
 public class Cliente {
     private long cedula;
     private String nombreCompleto;
     private long telefonoContacto;
     private String direccion;
+
+    public Cliente(long cedula, String nombreCompleto, long telefonoContacto, String direccion) {
+        this.cedula = cedula;
+        this.nombreCompleto = nombreCompleto;
+        this.telefonoContacto = telefonoContacto;
+        this.direccion = direccion;
+    }
 
     public long getCedula() {
         return cedula;

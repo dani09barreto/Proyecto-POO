@@ -1,5 +1,6 @@
 package org.example.Control;
 
+import org.example.Model.Cliente;
 import org.example.Model.Pedido;
 import org.example.Model.Producto;
 
@@ -40,6 +41,14 @@ public class ControlDespacho {
             }
         }
             return false;
+    }
+    public boolean Pedido_cliente(long identificacionEliminar) {
+        for(Pedido p: pedidos){
+            if(p.getSolicitante().getCedula() == identificacionEliminar){
+                return true;
+            }
+        }
+        return false;
     }
 
 }
