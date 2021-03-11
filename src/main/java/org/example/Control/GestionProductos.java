@@ -86,4 +86,18 @@ public class GestionProductos {
         }
     }
 
+    public void insertarProductos(Producto nuevoProducto) {
+        boolean agregar = true;
+        for (Producto prod : this.listaProductos){
+            if (prod.getProdId() == nuevoProducto.getProdId()){
+                agregar = false;
+                break;
+            }
+        }
+        if (agregar){
+            nuevoProducto.setIva(nuevoProducto.getPrecio()*0.19);
+            this.listaProductos.add(nuevoProducto);
+        }
+    }
+
 }
