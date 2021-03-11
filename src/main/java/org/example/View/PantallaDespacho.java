@@ -42,13 +42,7 @@ public class PantallaDespacho {
             switch (opcion) {
 
                 case 1:
-<<<<<<< HEAD
-                    if(Pantalla.centralDespacho.getGestionProductos().VerListadoDeProductos().size() != 0){
-=======
-
                     if (Pantalla.centralDespacho.getGestionProductos().VerListadoDeProductos().size() != 0) {
-
->>>>>>> Agregue la funcion de eliminar producto
                         System.out.println("\n\tLista de productos: \n");
                         Pantalla.centralDespacho.getGestionProductos().VerListadoDeProductos();
                         System.out.println(Pantalla.centralDespacho.getGestionProductos().VerListadoDeProductos().toString());
