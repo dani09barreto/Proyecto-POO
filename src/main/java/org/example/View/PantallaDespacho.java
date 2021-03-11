@@ -42,15 +42,28 @@ public class PantallaDespacho {
             switch (opcion) {
                 
                 case 1:
-
                     if(Pantalla.centralDespacho.getGestionProductos().VerListadoDeProductos().size() != 0){
-
                         System.out.println("\n\tLista de productos: \n");
                         Pantalla.centralDespacho.getGestionProductos().VerListadoDeProductos();
                         System.out.println(Pantalla.centralDespacho.getGestionProductos().VerListadoDeProductos().toString());
                     }
                     else
                         System.out.println("\tNo hay productos disponibles para mostrar");
+                    break;
+
+                case 2:
+
+                    Producto nuevoProd = new Producto();
+                    System.out.println();
+                    System.out.println("[!] Insertar un producto: ");
+                    System.out.println("- Inserte el nombre del producto: ");
+                    nuevoProd.setNombreComercial(in.next());
+                    System.out.println("- Inserte el precio del producto con IVA: ");
+                    nuevoProd.setPrecio(in.nextInt());
+                    System.out.println("- Inserte la tienda del producto: ");
+                    nuevoProd.setTienda(in.next());
+                    nuevoProd.setProdId(UUID.randomUUID());
+                    Pantalla.centralDespacho.getGestionProductos().insertarProductos(nuevoProd);
                     break;
 
                 case 3:
