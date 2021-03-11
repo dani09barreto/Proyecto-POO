@@ -75,9 +75,11 @@ public class PantallaDespacho {
                     System.out.println("\tDigite el Id del producto que desea eliminar: ");
                     UUID deleteCode;
                     deleteCode = UUID.fromString(in.next());
+
                     if (Pantalla.centralDespacho.Pedido_Producto(deleteCode)) {
                         System.out.println("\tEL PRODUCTO PERTENCE A UN ENVIO");
-                    } else {
+                    }
+                    else {
                         Pantalla.centralDespacho.getGestionProductos().eliminarProduct(deleteCode);
                     }
                     break;
