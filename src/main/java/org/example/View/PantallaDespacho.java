@@ -1,6 +1,7 @@
 package org.example.View;
 
 import org.example.Control.ControlDespacho;
+import org.example.Model.Cliente;
 import org.example.Model.Producto;
 
 import java.util.Scanner;
@@ -15,10 +16,6 @@ public class PantallaDespacho {
         PantallaDespacho Pantalla = new PantallaDespacho();
         int opcion = 0;
         Scanner in = new Scanner(System.in);
-
-        //Producto para pruebas
-        Producto prod1=new Producto(UUID.randomUUID(),"Papas",25000,1200,"Jumbo");
-        Pantalla.centralDespacho.getGestionProductos().getListaProductos().add(prod1);
 
         do {
             System.out.println("\n\t______Oficina de una agencia de reparto de Productos______\n");
@@ -42,6 +39,7 @@ public class PantallaDespacho {
             switch (opcion) {
 
                 case 1:
+
                     if (Pantalla.centralDespacho.getGestionProductos().VerListadoDeProductos().size() != 0) {
                         System.out.println("\n\tLista de productos: \n");
                         Pantalla.centralDespacho.getGestionProductos().VerListadoDeProductos();
@@ -54,36 +52,64 @@ public class PantallaDespacho {
 
                     Producto nuevoProd = new Producto();
                     System.out.println();
-                    System.out.println("[!] Insertar un producto: ");
-                    System.out.println("- Inserte el nombre del producto: ");
+                    System.out.println("\n\tInsertar un producto: ");
+                    System.out.println("\tInserte el nombre del producto: ");
                     nuevoProd.setNombreComercial(in.next());
-                    System.out.println("- Inserte el precio del producto con IVA: ");
+                    System.out.println("\tInserte el precio del producto con IVA: ");
                     nuevoProd.setPrecio(in.nextInt());
-                    System.out.println("- Inserte la tienda del producto: ");
+                    System.out.println("\tInserte la tienda del producto: ");
                     nuevoProd.setTienda(in.next());
                     nuevoProd.setProdId(UUID.randomUUID());
                     Pantalla.centralDespacho.getGestionProductos().insertarProductos(nuevoProd);
                     break;
 
                 case 3:
-                    System.out.println("\tDigite el ID del producto que desea modificar: ");
+
+                    System.out.println("\n\tDigite el ID del producto que desea modificar: ");
                     UUID productId;
                     productId = UUID.fromString(in.next());
                     Pantalla.centralDespacho.getGestionProductos().modificarProducto(productId);
                     break;
+
                 case 4:
-                    System.out.println("\tDigite el Id del producto que desea eliminar: ");
+
+                    System.out.println("\n\tDigite el Id del producto que desea eliminar: ");
                     UUID deleteCode;
                     deleteCode = UUID.fromString(in.next());
 
-                    if (Pantalla.centralDespacho.Pedido_Producto(deleteCode)) {
-                        System.out.println("\tEL PRODUCTO PERTENCE A UN ENVIO");
+                    if (Pantalla.centralDespacho.getGestionProductos().existeProducto(deleteCode) == null){
+                        System.out.println("\t Producto no puede ser eliminado por que no existe");
+                    }
+                    else{
+                        if (Pantalla.centralDespacho.Pedido_Producto(deleteCode)) {
+                            System.out.println("\tEL PRODUCTO PERTENCE A UN ENVIO");
+                        }
+                        else {
+                            Pantalla.centralDespacho.getGestionProductos().eliminarProduct(deleteCode);
+                        }
+                    }
+                    break;
+                case 8:
+                    Cliente cl1 = new Cliente(1010, "Daniel", 171717, "Calle 82 sur");
+                    Pantalla.centralDespacho.getGestionCliente().getListaClientes().add(cl1);
+                    System.out.println("\n\tDigite la Identificacion del Cliente que desea eliminar: ");
+                    long deleteIdentification;
+                    deleteIdentification = in.nextLong();
+
+                    if (Pantalla.centralDespacho.getGestionCliente().existeCliente(deleteIdentification) == null) {
+                        System.out.println("\t Cliente no puede ser eliminado por que no existe");
                     }
                     else {
-                        Pantalla.centralDespacho.getGestionProductos().eliminarProduct(deleteCode);
+
+                        if (Pantalla.centralDespacho.Pedido_cliente(deleteIdentification)) {
+                            System.out.println("\tEL CLIENTE PERTENCE A UN PEDIDO");
+                        } else {
+                            Pantalla.centralDespacho.getGestionCliente().eliminarCliente(deleteIdentification);
+                        }
                     }
                     break;
             }
+            System.out.println("Fin");
         } while (opcion != 0);
     }
 }
