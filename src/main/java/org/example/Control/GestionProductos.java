@@ -95,7 +95,7 @@ public class GestionProductos {
         for(Producto p: listaProductos){
             if (p.getProdId().equals(codigo)) {
                 ver = false;
-                System.out.println("\t Desea eliminar el producto? S = si, N = no");
+                System.out.println("\t Desea eliminar el producto? \nS = si\nN = no");
                 Scanner s = new Scanner(System.in);
                 confi = s.next().charAt(0);
                 if(confi=='S'){
