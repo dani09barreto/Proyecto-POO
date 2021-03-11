@@ -89,6 +89,7 @@ public class GestionProductos {
                 confi = s.next().charAt(0);
                 if(confi=='S'){
                     listaProductos.remove(p);
+                    System.out.println("\tEl codigo del producto elimado es: "+p.getProdId());
                     System.out.println("\tPRODUCTO ELIMINADO CON EXITO");
                 }
                 break;
