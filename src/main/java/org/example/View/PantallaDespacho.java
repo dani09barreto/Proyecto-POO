@@ -54,7 +54,7 @@ public class PantallaDespacho {
                     break;
 
                 case 3:
-                    System.out.println("Digite el ID del producto que desea modificar");
+                    System.out.println("Digite el ID del producto que desea modificar: ");
                     UUID productId;
                     productId= UUID.fromString(in.next());
                     Pantalla.centralDespacho.getGestionProductos().modificarProducto(productId);
