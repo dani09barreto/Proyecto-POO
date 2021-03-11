@@ -40,4 +40,13 @@ public class GestionCliente {
         if(ver && confirmacion != 'N')
             System.out.println("\t PRODUCTO NO ENCONTRADO");
     }
+
+    public void verListadoClientes(){
+        if (this.listaClientes.size() != 0){
+            for (Cliente cliente : this.listaClientes){
+                cliente.toString();
+            }
+        }
+        else System.out.println("No hay clientes registrados en el sistema.");
+    }
 }

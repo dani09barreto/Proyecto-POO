@@ -89,6 +89,9 @@ public class PantallaDespacho {
                         }
                     }
                     break;
+                case 5:
+                    Pantalla.centralDespacho.getGestionCliente().verListadoClientes();
+                    break;
                 case 8:
 
                     System.out.println("\n\tDigite la Identificacion del Cliente que desea eliminar: ");
