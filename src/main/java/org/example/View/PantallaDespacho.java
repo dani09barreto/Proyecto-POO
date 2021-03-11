@@ -17,8 +17,8 @@ public class PantallaDespacho {
         Scanner in = new Scanner(System.in);
 
         //Producto para pruebas
-        Producto prod1=new Producto(UUID.randomUUID(),"Papas",25000,1200,"Jumbo");
-        Pantalla.centralDespacho.getGestionProductos().getListaProductos().add(prod1);
+        //Producto prod1=new Producto(UUID.randomUUID(),"Papas",25000,1200,"Jumbo");
+        //Pantalla.centralDespacho.getGestionProductos().getListaProductos().add(prod1);
 
         do {
             System.out.println("\n\t______Oficina de una agencia de reparto de Productos______\n");
@@ -38,7 +38,9 @@ public class PantallaDespacho {
             System.out.println("\t0. Salir");
             System.out.print("\tOpcion: ");
             opcion = in.nextInt();
+
             switch (opcion) {
+                
                 case 1:
 
                     if(Pantalla.centralDespacho.getGestionProductos().VerListadoDeProductos().size() != 0){
@@ -50,11 +52,13 @@ public class PantallaDespacho {
                     else
                         System.out.println("\tNo hay productos disponibles para mostrar");
                     break;
+
                 case 3:
                     System.out.println("Digite el ID del producto que desea modificar");
                     UUID productId;
                     productId= UUID.fromString(in.next());
                     Pantalla.centralDespacho.getGestionProductos().modificarProducto(productId);
+                    break;
             }
         } while (opcion != 0);
     }
