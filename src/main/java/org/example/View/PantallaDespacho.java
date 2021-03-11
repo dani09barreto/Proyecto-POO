@@ -43,7 +43,6 @@ public class PantallaDespacho {
                 
                 case 1:
                     if(Pantalla.centralDespacho.getGestionProductos().VerListadoDeProductos().size() != 0){
-
                         System.out.println("\n\tLista de productos: \n");
                         Pantalla.centralDespacho.getGestionProductos().VerListadoDeProductos();
                         System.out.println(Pantalla.centralDespacho.getGestionProductos().VerListadoDeProductos().toString());
@@ -53,6 +52,7 @@ public class PantallaDespacho {
                     break;
 
                 case 2:
+                    
                     Producto nuevoProd = new Producto();
                     System.out.println();
                     System.out.println("[!] Insertar un producto: ");
@@ -65,7 +65,7 @@ public class PantallaDespacho {
                     nuevoProd.setProdId(UUID.randomUUID());
                     Pantalla.centralDespacho.getGestionProductos().insertarProductos(nuevoProd);
                     break;
-                    
+
                 case 3:
                     System.out.println("Digite el ID del producto que desea modificar: ");
                     UUID productId;

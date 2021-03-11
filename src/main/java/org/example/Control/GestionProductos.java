@@ -94,7 +94,7 @@ public class GestionProductos {
                 System.out.println("[!] Error al agregar producto: Ya existe un producto con este ID.");
                 break;
             }
-            
+
         }
         if (agregar){
             nuevoProducto.setIva(nuevoProducto.getPrecio()*0.19);
