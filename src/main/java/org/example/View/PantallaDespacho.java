@@ -1,8 +1,10 @@
 package org.example.View;
 
 import org.example.Control.ControlDespacho;
+import org.example.Model.Producto;
 
 import java.util.Scanner;
+import java.util.UUID;
 
 public class PantallaDespacho {
 
@@ -13,7 +15,11 @@ public class PantallaDespacho {
         PantallaDespacho Pantalla = new PantallaDespacho();
         int opcion = 0;
         Scanner in = new Scanner(System.in);
-        
+
+        //Producto para pruebas
+        Producto prod1=new Producto(UUID.randomUUID(),"Papas",25000,1200,"Jumbo");
+        Pantalla.centralDespacho.getGestionProductos().getListaProductos().add(prod1);
+
         do {
             System.out.println("\n\t______Oficina de una agencia de reparto de Productos______\n");
             System.out.println("\t1.  Ver Lista de Productos");
@@ -44,6 +50,11 @@ public class PantallaDespacho {
                     else
                         System.out.println("\tNo hay productos disponibles para mostrar");
                     break;
+                case 3:
+                    System.out.println("Digite el ID del producto que desea modificar");
+                    UUID productId;
+                    productId= UUID.fromString(in.next());
+                    Pantalla.centralDespacho.getGestionProductos().modificarProducto(productId);
             }
         } while (opcion != 0);
     }
