@@ -17,8 +17,8 @@ public class PantallaDespacho {
         Scanner in = new Scanner(System.in);
 
         //Producto para pruebas
-        //Producto prod1=new Producto(UUID.randomUUID(),"Papas",25000,1200,"Jumbo");
-        //Pantalla.centralDespacho.getGestionProductos().getListaProductos().add(prod1);
+        Producto prod1=new Producto(UUID.randomUUID(),"Papas",25000,1200,"Jumbo");
+        Pantalla.centralDespacho.getGestionProductos().getListaProductos().add(prod1);
 
         do {
             System.out.println("\n\t______Oficina de una agencia de reparto de Productos______\n");
@@ -40,14 +40,13 @@ public class PantallaDespacho {
             opcion = in.nextInt();
 
             switch (opcion) {
-                
+
                 case 1:
-                    if(Pantalla.centralDespacho.getGestionProductos().VerListadoDeProductos().size() != 0){
+                    if (Pantalla.centralDespacho.getGestionProductos().VerListadoDeProductos().size() != 0) {
                         System.out.println("\n\tLista de productos: \n");
                         Pantalla.centralDespacho.getGestionProductos().VerListadoDeProductos();
                         System.out.println(Pantalla.centralDespacho.getGestionProductos().VerListadoDeProductos().toString());
-                    }
-                    else
+                    } else
                         System.out.println("\tNo hay productos disponibles para mostrar");
                     break;
 
@@ -67,10 +66,20 @@ public class PantallaDespacho {
                     break;
 
                 case 3:
-                    System.out.println("Digite el ID del producto que desea modificar: ");
+                    System.out.println("\tDigite el ID del producto que desea modificar: ");
                     UUID productId;
-                    productId= UUID.fromString(in.next());
+                    productId = UUID.fromString(in.next());
                     Pantalla.centralDespacho.getGestionProductos().modificarProducto(productId);
+                    break;
+                case 4:
+                    System.out.println("\tDigite el Id del producto que desea eliminar: ");
+                    UUID deleteCode;
+                    deleteCode = UUID.fromString(in.next());
+                    if (Pantalla.centralDespacho.Pedido_Producto(deleteCode)) {
+                        System.out.println("\tEL PRODUCTO PERTENCE A UN ENVIO");
+                    } else {
+                        Pantalla.centralDespacho.getGestionProductos().eliminarProduct(deleteCode);
+                    }
                     break;
             }
         } while (opcion != 0);
