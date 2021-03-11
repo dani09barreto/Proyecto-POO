@@ -9,6 +9,8 @@ public class Producto {
     private double iva;
     private String tienda;
 
+    public Producto(){}
+
     public Producto(UUID prodId, String nombreComercial, double precio, double iva, String tienda) {
         this.prodId = prodId;
         this.nombreComercial = nombreComercial;
