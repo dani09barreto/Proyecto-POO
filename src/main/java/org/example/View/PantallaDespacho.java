@@ -93,7 +93,6 @@ public class PantallaDespacho {
                     break;
 
                 case 5:
-
                     Pantalla.centralDespacho.getGestionCliente().verListadoClientes();
                     break;
 
