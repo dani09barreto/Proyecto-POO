@@ -95,7 +95,12 @@ public class PantallaDespacho {
                 case 5:
                     Pantalla.centralDespacho.getGestionCliente().verListadoClientes();
                     break;
-
+                case 7:
+                    System.out.println("\n\tDigite la Identificacion del Cliente que desea modificar: ");
+                    long cedula;
+                    cedula = in.nextLong();
+                    Pantalla.centralDespacho.getGestionCliente().modificarDatosCliente(cedula);
+                    break;
                 case 8:
                     System.out.println(cl.getCedula());
                     System.out.println("\n\tDigite la Identificacion del Cliente que desea eliminar: ");
