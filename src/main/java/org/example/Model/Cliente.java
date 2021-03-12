@@ -15,6 +15,8 @@ public class Cliente {
         this.direccion = direccion;
     }
 
+    public Cliente(){}
+
     public long getCedula() {
         return cedula;
     }

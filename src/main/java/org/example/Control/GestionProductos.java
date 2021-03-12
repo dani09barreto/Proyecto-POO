@@ -86,6 +86,8 @@ public class GestionProductos {
                         break;
                 }
             }while(opcion!=0);
+        }else{
+            System.out.println("El producto no fue encontrado");
         }
     }
 
