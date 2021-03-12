@@ -109,4 +109,19 @@ public class GestionCliente {
         }
     }
 
+    public void insertarCliente(Cliente clt){
+        boolean verificacion = true;
+        for(Cliente c: listaClientes){
+            if(c.getCedula() == clt.getCedula()){
+                System.out.println("\t[!] Error , ya existe un cliente con el mismo numero de cedula");
+                verificacion = false;
+                break;
+            }
+        }
+        if(verificacion){
+            listaClientes.add(clt);
+            System.out.println("\tCLIENTE AGREGADO CON EXITO!!");
+        }
+    }
+
 }
