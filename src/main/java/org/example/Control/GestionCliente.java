@@ -27,13 +27,13 @@ public class GestionCliente {
         char confirmacion = 0;
         for (Cliente cli : listaClientes) {
             ver = false;
-            System.out.println("\t Desea eliminar el cliente? \nS = si \nN = no");
+            System.out.println("\t Desea eliminar el cliente? \n\tS = si \n\tN = no");
             Scanner in = new Scanner(System.in);
             confirmacion = in.next().charAt(0);
 
             if (confirmacion == 'S') {
                 listaClientes.remove(cli);
-                System.out.println("\tEl documento del cliente elimado es: " + cli.getCedula());
+                System.out.println("\tEl documento del cliente eliminado es: "+ cli.getCedula());
                 System.out.println("\tCLIENTE ELIMINADO CON EXITO");
                 break;
             }
