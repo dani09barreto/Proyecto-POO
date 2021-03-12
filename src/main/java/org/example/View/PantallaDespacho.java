@@ -97,8 +97,6 @@ public class PantallaDespacho {
                     break;
 
                 case 8:
-                    Cliente cl = new Cliente(1010,"daniel",121212,"calle 6c");
-                    Pantalla.centralDespacho.getGestionCliente().getListaClientes().add(cl);
                     System.out.println(cl.getCedula());
                     System.out.println("\n\tDigite la Identificacion del Cliente que desea eliminar: ");
                     long deleteIdentification;
