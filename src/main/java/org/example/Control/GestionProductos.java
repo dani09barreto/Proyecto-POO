@@ -95,7 +95,7 @@ public class GestionProductos {
         for(Producto p: listaProductos){
             if (p.getProdId().equals(codigo)) {
                 ver = false;
-                System.out.println("\t Desea eliminar el producto? \nS = si\nN = no");
+                System.out.println("\t Desea eliminar el producto? \n\tS = si\n\tN = no");
                 Scanner s = new Scanner(System.in);
                 confi = s.next().charAt(0);
                 if(confi=='S'){
@@ -115,7 +115,7 @@ public class GestionProductos {
         for (Producto prod : this.listaProductos){
             if (prod.getProdId() == nuevoProducto.getProdId()){
                 agregar = false;
-                System.out.println("[!] Error al agregar producto: Ya existe un producto con este ID.");
+                System.out.println("\t[!] Error al agregar producto: Ya existe un producto con este ID.");
                 break;
             }
 
