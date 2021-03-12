@@ -39,16 +39,17 @@ public class GestionCliente {
             }
         }
         if (ver && confirmacion != 'N')
-            System.out.println("\t PRODUCTO NO ENCONTRADO");
+            System.out.println("\tPRODUCTO NO ENCONTRADO");
     }
 
     public void verListadoClientes() {
         if (this.listaClientes.size() != 0) {
-            System.out.println("[!] Listado de clientes. Cantidad de clientes: " + this.listaClientes.size());
+            System.out.println("\n\t[!] Listado de clientes. Cantidad de clientes: " + this.listaClientes.size());
             for (int i=0; i<this.listaClientes.size(); i++) {
-                System.out.println("CLiente [" + i + "]");
+                System.out.println("\tCLiente [" + i + "]");
                 System.out.println(listaClientes.get(i).toString());
             }
-        } else System.out.println("No hay clientes registrados en el sistema.");
+        }
+        else System.out.println("\tNo hay clientes registrados en el sistema.");
     }
 }

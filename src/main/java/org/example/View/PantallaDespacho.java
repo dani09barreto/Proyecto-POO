@@ -16,6 +16,8 @@ public class PantallaDespacho {
         PantallaDespacho Pantalla = new PantallaDespacho();
         int opcion = 0;
         Scanner in = new Scanner(System.in);
+        Cliente cl = new Cliente(1010,"daniel",121212,"calle 6c");
+        Pantalla.centralDespacho.getGestionCliente().getListaClientes().add(cl);
 
         do {
             System.out.println("\n\t______Oficina de una agencia de reparto de Productos______\n");
@@ -78,7 +80,7 @@ public class PantallaDespacho {
                     deleteCode = UUID.fromString(in.next());
 
                     if (Pantalla.centralDespacho.getGestionProductos().existeProducto(deleteCode) == null){
-                        System.out.println("\t Producto no puede ser eliminado por que no existe");
+                        System.out.println("\tProducto no puede ser eliminado por que no existe");
                     }
                     else{
                         if (Pantalla.centralDespacho.Pedido_Producto(deleteCode)) {
@@ -89,9 +91,11 @@ public class PantallaDespacho {
                         }
                     }
                     break;
+
                 case 5:
                     Pantalla.centralDespacho.getGestionCliente().verListadoClientes();
                     break;
+
                 case 8:
                     Cliente cl = new Cliente(1010,"daniel",121212,"calle 6c");
                     Pantalla.centralDespacho.getGestionCliente().getListaClientes().add(cl);
@@ -101,19 +105,19 @@ public class PantallaDespacho {
                     deleteIdentification = in.nextLong();
 
                     if (Pantalla.centralDespacho.getGestionCliente().existeCliente(deleteIdentification) == null) {
-                        System.out.println("\t Cliente no puede ser eliminado por que no existe");
+                        System.out.println("\tCliente no puede ser eliminado por que no existe");
                     }
                     else {
 
                         if (Pantalla.centralDespacho.Pedido_cliente(deleteIdentification)) {
-                            System.out.println("\tEL CLIENTE PERTENCE A UN PEDIDO");
-                        } else {
+                            System.out.println("\tEL CLIENTE PERTENCE A UN PEDIDO!");
+                        }
+                        else {
                             Pantalla.centralDespacho.getGestionCliente().eliminarCliente(deleteIdentification);
                         }
                     }
                     break;
             }
-            System.out.println("Fin");
         } while (opcion != 0);
     }
 }
