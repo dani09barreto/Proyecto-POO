@@ -8,6 +8,8 @@ public class Cliente {
     private long telefonoContacto;
     private String direccion;
 
+    public Cliente(){}
+
     public Cliente(long cedula, String nombreCompleto, long telefonoContacto, String direccion) {
         this.cedula = cedula;
         this.nombreCompleto = nombreCompleto;
