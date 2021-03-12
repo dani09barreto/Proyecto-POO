@@ -106,12 +106,12 @@ public class PantallaDespacho {
                     deleteIdentification = in.nextLong();
 
                     if (Pantalla.centralDespacho.getGestionCliente().existeCliente(deleteIdentification) == null) {
-                        System.out.println("\t Cliente no puede ser eliminado por que no existe");
+                        System.out.println("\tCliente no puede ser eliminado por que no existe");
                     }
                     else {
 
                         if (Pantalla.centralDespacho.Pedido_cliente(deleteIdentification)) {
-                            System.out.println("\tEL CLIENTE PERTENCE A UN PEDIDO");
+                            System.out.println("\tEL CLIENTE PERTENCE A UN PEDIDO!");
                         }
                         else {
                             Pantalla.centralDespacho.getGestionCliente().eliminarCliente(deleteIdentification);
