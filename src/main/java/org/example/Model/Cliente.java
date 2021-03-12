@@ -50,8 +50,8 @@ public class Cliente {
     @Override
     public String toString() {
         return  "\tCedula: " + cedula +
-                "\n\tNombre: " + nombreCompleto + '\'' +
+                "\n\tNombre: " + nombreCompleto +
                 "\n\tTelefono: " + telefonoContacto +
-                "\n\tDireccion: " + direccion + '\'';
+                "\n\tDireccion: " + direccion;
     }
 }
