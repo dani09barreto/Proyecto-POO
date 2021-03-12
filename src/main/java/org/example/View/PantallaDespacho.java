@@ -95,6 +95,19 @@ public class PantallaDespacho {
                 case 5:
                     Pantalla.centralDespacho.getGestionCliente().verListadoClientes();
                     break;
+                case 6:
+                    Cliente nuevoCliente = new Cliente();
+                    System.out.println("\n\tDigite los datos del Nuevo Cliente: ");
+                    System.out.println("\tNombre Completo: ");
+                    nuevoCliente.setNombreCompleto(in.next());
+                    System.out.println("\tTelefono: ");
+                    nuevoCliente.setTelefonoContacto(in.nextLong());
+                    System.out.println("\tCedula: ");
+                    nuevoCliente.setCedula(in.nextLong());
+                    System.out.println("\tDireccion: ");
+                    nuevoCliente.setDireccion(in.next());
+                    Pantalla.centralDespacho.getGestionCliente().insertarCliente(nuevoCliente);
+                    break;
                 case 7:
                     System.out.println("\n\tDigite la Identificacion del Cliente que desea modificar: ");
                     long cedula;
