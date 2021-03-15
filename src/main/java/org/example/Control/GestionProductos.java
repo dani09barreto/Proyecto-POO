@@ -17,7 +17,7 @@ public class GestionProductos {
 
     public Producto existeProducto (UUID codigo){
         for (Producto protemp: listaProductos){
-            if (protemp.getProdId() == codigo){
+            if (protemp.getProdId().equals(codigo)){
                 return protemp;
             }
         }

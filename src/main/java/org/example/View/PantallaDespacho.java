@@ -133,6 +133,23 @@ public class PantallaDespacho {
                         }
                     }
                     break;
+                case 9:
+
+                    System.out.println("\tInserte el codigo del producto");
+                    UUID id = UUID.fromString(in.next());
+                    System.out.println("\tnserte el documento del cliente");
+                    int cedulaCliente = in.nextInt();
+
+                    if (Pantalla.centralDespacho.getGestionCliente().existeCliente(cedulaCliente) != null && Pantalla.centralDespacho.getGestionProductos().existeProducto(id) != null){
+                        Pantalla.centralDespacho.ReservarPedido(cedulaCliente,id);
+                    }
+                    else{
+                        if(Pantalla.centralDespacho.getGestionCliente().existeCliente(cedulaCliente) == null)
+                            System.out.println("\t[!] El cliente no existe");
+                        if (Pantalla.centralDespacho.getGestionProductos().existeProducto(id) == null)
+                            System.out.println("\t[!] El Producto no existe");
+                    }
+                    break;
                 case 12:
                     Pantalla.centralDespacho.VerPedido();
             }
