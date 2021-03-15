@@ -133,6 +133,8 @@ public class PantallaDespacho {
                         }
                     }
                     break;
+                case 12:
+                    Pantalla.centralDespacho.VerPedido();
             }
         } while (opcion != 0);
     }

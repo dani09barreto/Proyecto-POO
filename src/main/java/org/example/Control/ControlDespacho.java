@@ -50,5 +50,8 @@ public class ControlDespacho {
         }
         return false;
     }
+    public void VerPedido(){
+        System.out.println(pedidos.toString());
+    }
 
 }

@@ -13,6 +13,15 @@ public class Pedido {
     private ArrayList<ServicioAdicional> serviciosAdicionales = new ArrayList<>();
     private Producto productoSolicitado;
 
+    public Pedido(String nombreRepartidor, Cliente solicitante, Producto productoSolicitado) {
+        this.numPedido = UUID.randomUUID();
+        this.fechaRecibido = Calendar.getInstance();
+        this.pagado = false;
+        this.nombreRepartidor = nombreRepartidor;
+        this.Solicitante = solicitante;
+        this.productoSolicitado = productoSolicitado;
+    }
+
     public Producto getProductoSolicitado() {
         return productoSolicitado;
     }
@@ -63,5 +72,18 @@ public class Pedido {
 
     public void setSolicitante(Cliente solicitante) {
         Solicitante = solicitante;
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "numPedido=" + numPedido +
+                ", fechaRecibido=" + fechaRecibido +
+                ", pagado=" + pagado +
+                ", nombreRepartidor='" + nombreRepartidor + '\'' +
+                ", Solicitante=" + Solicitante +
+                ", serviciosAdicionales=" + serviciosAdicionales +
+                ", productoSolicitado=" + productoSolicitado +
+                '}';
     }
 }
