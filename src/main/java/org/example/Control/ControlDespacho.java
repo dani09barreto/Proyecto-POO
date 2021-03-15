@@ -4,6 +4,7 @@ import org.example.Model.Cliente;
 import org.example.Model.Pedido;
 import org.example.Model.Producto;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -51,6 +52,9 @@ public class ControlDespacho {
         return false;
     }
     public void VerPedido(){
+        if(pedidos.isEmpty())
+            System.out.println("[!] NO EXISTEN PEDIDOS");
+        else
         System.out.println(pedidos.toString());
     }
 
