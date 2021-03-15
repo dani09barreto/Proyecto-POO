@@ -13,12 +13,12 @@ public class Pedido {
     private ArrayList<ServicioAdicional> serviciosAdicionales = new ArrayList<>();
     private Producto productoSolicitado;
 
-    public Pedido(String nombreRepartidor, Cliente solicitante, Producto productoSolicitado) {
+    public Pedido(Calendar fechaRecibido, String nombreRepartidor, Cliente solicitante, Producto productoSolicitado) {
         this.numPedido = UUID.randomUUID();
-        this.fechaRecibido = Calendar.getInstance();
+        this.fechaRecibido = fechaRecibido;
         this.pagado = false;
         this.nombreRepartidor = nombreRepartidor;
-        this.Solicitante = solicitante;
+        Solicitante = solicitante;
         this.productoSolicitado = productoSolicitado;
     }
 
