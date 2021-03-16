@@ -22,6 +22,9 @@ public class Pedido {
         this.productoSolicitado = productoSolicitado;
     }
 
+    public Pedido() {
+    }
+
     public Producto getProductoSolicitado() {
         return productoSolicitado;
     }
