@@ -47,11 +47,11 @@ public class GestionProductos {
             Scanner in = new Scanner(System.in);
             do{
                 System.out.println("¿Qué aspecto desea modificar del producto? Digite la opción deseada");
-                System.out.println("1. Nombre Comercial");
-                System.out.println("2. Precio");
-                System.out.println("3. IVA");
-                System.out.println("4. Tienda");
-                System.out.println("0. No modificar datos");
+                System.out.println("\t1. Nombre Comercial");
+                System.out.println("\t2. Precio");
+                System.out.println("\t3. IVA");
+                System.out.println("\t4. Tienda");
+                System.out.println("\t0. No modificar datos");
                 opcion = in.nextInt();
                 in.useDelimiter("\n");
                 switch (opcion){
@@ -87,7 +87,7 @@ public class GestionProductos {
                 }
             }while(opcion!=0);
         }else{
-            System.out.println("El producto no fue encontrado");
+            System.out.println("\tEl producto no fue encontrado");
         }
     }
 
