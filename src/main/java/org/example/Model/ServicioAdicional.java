@@ -28,4 +28,11 @@ public class ServicioAdicional {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+
+    @Override
+    public String toString() {
+        return "\tCodigo Servicio:" + codigoServicio +
+                "\n\tNombre del servicio:" + nombreServicio +
+                "\n\tPrecio: " + precio;
+    }
 }
