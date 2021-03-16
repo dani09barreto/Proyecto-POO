@@ -2,6 +2,7 @@ package org.example.View;
 
 import org.example.Control.ControlDespacho;
 import org.example.Model.Cliente;
+import org.example.Model.Pedido;
 import org.example.Model.Producto;
 
 import java.util.Calendar;
@@ -150,6 +151,9 @@ public class PantallaDespacho {
                         if (Pantalla.centralDespacho.getGestionProductos().existeProducto(idProd1) == null)
                             System.out.println("\t[!] El Producto no existe");
                     }
+                    break;
+                case 10:
+                    Pantalla.centralDespacho.modificarPedido();
                     break;
                 case 12:
                     Pantalla.centralDespacho.VerPedido();
