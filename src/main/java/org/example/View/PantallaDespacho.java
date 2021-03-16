@@ -138,17 +138,17 @@ public class PantallaDespacho {
                 case 9:
 
                     System.out.println("\tInserte el codigo del producto");
-                    UUID id = UUID.fromString(in.next());
-                    System.out.println("\tnserte el documento del cliente");
+                    UUID idProd1 = UUID.fromString(in.next());
+                    System.out.println("\tInserte el documento del cliente");
                     int cedulaCliente = in.nextInt();
 
-                    if (Pantalla.centralDespacho.getGestionCliente().existeCliente(cedulaCliente) != null && Pantalla.centralDespacho.getGestionProductos().existeProducto(id) != null){
-                        Pantalla.centralDespacho.ReservarPedido(cedulaCliente,id);
+                    if (Pantalla.centralDespacho.getGestionCliente().existeCliente(cedulaCliente) != null && Pantalla.centralDespacho.getGestionProductos().existeProducto(idProd1) != null){
+                        Pantalla.centralDespacho.ReservarPedido(cedulaCliente,idProd1);
                     }
                     else{
                         if(Pantalla.centralDespacho.getGestionCliente().existeCliente(cedulaCliente) == null)
                             System.out.println("\t[!] El cliente no existe");
-                        if (Pantalla.centralDespacho.getGestionProductos().existeProducto(id) == null)
+                        if (Pantalla.centralDespacho.getGestionProductos().existeProducto(idProd1) == null)
                             System.out.println("\t[!] El Producto no existe");
                     }
                     break;
@@ -157,6 +157,24 @@ public class PantallaDespacho {
                     break;
                 case 12:
                     Pantalla.centralDespacho.VerPedido();
+                    break;
+                case 13:
+                    System.out.println("\tInserte el codigo del producto");
+                    UUID idProd2 = UUID.fromString(in.next());
+                    if (Pantalla.centralDespacho.getGestionProductos().existeProducto(idProd2) == null){
+                        System.out.println("\t[!] El Producto no existe");
+                    }else {
+                        System.out.println("\tInserte el año de la fecha específica (AAAA)");
+                        int anio = in.nextInt();
+                        System.out.println("\tInserte el mes de la fecha específica (MM)");
+                        int mes = in.nextInt();
+                        System.out.println("\tInserte el dia de la fecha específica (DD)");
+                        int dia = in.nextInt();
+                        Calendar fecha = Calendar.getInstance();
+                        fecha.set(anio, mes-1, dia);
+                        System.out.println(Pantalla.centralDespacho.verListadoDePedidosDeProductoYFechaEspecífica(idProd2, fecha).toString());
+                    }
+                    break;
             }
         } while (opcion != 0);
     }

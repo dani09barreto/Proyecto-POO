@@ -208,4 +208,16 @@ public class ControlDespacho {
         }
 
     }
+
+    public ArrayList<Pedido> verListadoDePedidosDeProductoYFechaEspecífica(UUID prodId, Calendar fechaRecibido){
+        ArrayList<Pedido> pedidosProductoFecha=new ArrayList<>();
+        for(Pedido auxPedido: pedidos){
+            if(auxPedido.getProductoSolicitado().getProdId().equals(prodId)&&auxPedido.getFechaRecibido().equals(fechaRecibido)){
+                pedidosProductoFecha.add(auxPedido);
+            }
+        }
+        return pedidosProductoFecha;
+    }
+
+
 }

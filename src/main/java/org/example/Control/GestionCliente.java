@@ -72,10 +72,10 @@ public class GestionCliente {
             Scanner in = new Scanner(System.in);
             do{
                 System.out.println("¿Qué aspecto desea modificar del cliente? Digite la opción deseada");
-                System.out.println("1. Nombre Completo");
-                System.out.println("2. Teléfono Contacto");
-                System.out.println("3. Dirección ");
-                System.out.println("0. No modificar datos");
+                System.out.println("\t1. Nombre Completo");
+                System.out.println("\t2. Teléfono Contacto");
+                System.out.println("\t3. Dirección ");
+                System.out.println("\t0. No modificar datos");
                 opcion = in.nextInt();
                 in.useDelimiter("\n");
                 switch (opcion){
@@ -105,7 +105,7 @@ public class GestionCliente {
                 }
             }while(opcion!=0);
         }else{
-            System.out.println("El cliente no fue encontrado");
+            System.out.println("\tEl cliente no fue encontrado");
         }
     }
 
