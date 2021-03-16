@@ -175,6 +175,9 @@ public class PantallaDespacho {
                         System.out.println(Pantalla.centralDespacho.verListadoDePedidosDeProductoYFechaEspecífica(idProd2, fecha).toString());
                     }
                     break;
+                default:
+                    System.out.println("Digite una opción válida y vuelva a intentarlo");
+                    break;
             }
         } while (opcion != 0);
     }
