@@ -108,12 +108,12 @@ public class ControlDespacho {
 
     public void modificarPedido(){
         Pedido pedidoModificar = new Pedido();
-        Calendar nuevaFecha = new GregorianCalendar();
+        Calendar nuevaFecha = Calendar.getInstance();
         SimpleDateFormat formato = new SimpleDateFormat("yyyy MM dd HH:mm:ss");
         ServicioAdicional nuevoServicio = new ServicioAdicional();
-        boolean encontrado = false;
+        boolean encontrado = false, modificarFecha = true;
         UUID numeroPedido;
-        int opt, opt2, nuevoPrecio = 0;
+        int opt, opt2, nuevoPrecio = 0, anio, mes, dia;
         Scanner in = new Scanner (System.in);
         System.out.println("\t- Modificar un pedido.");
         System.out.print("\tIngrese el número de pedido: ");
@@ -131,19 +131,36 @@ public class ControlDespacho {
             return;
         }
         System.out.println("\t[-] Modificar pedido [" + numeroPedido + "]");
-        System.out.println("\t 1] Cambiar fecha del pedido (" + pedidoModificar.getFechaRecibido() + ")");
+        System.out.println("\t 1] Cambiar fecha del pedido (" +
+                pedidoModificar.getFechaRecibido().get(Calendar.YEAR) + "/" +
+                pedidoModificar.getFechaRecibido().get(Calendar.MONTH) + "/" +
+                pedidoModificar.getFechaRecibido().get(Calendar.DATE) + ")");
         System.out.println("\t 2] Cambiar nombre del repartidor (" + pedidoModificar.getNombreRepartidor() + ")");
         System.out.println("\t 3] Cambiar servicios adicionales seleccionados.");
         System.out.print("Ingrese una opción: ");
         switch (in.nextInt()){
             case 1:
-              /*  System.out.print("\t - Escriba la nueva fecha para el pedido (aaaa/mm/dd): ");
-                Date fecha = formato.parse(in.nextLine());
+                System.out.print("\t - Escriba la nueva fecha para el pedido");
+                System.out.print("\tAño: ");
+                anio = in.nextInt();
+                System.out.print("\tMes (ej: 05): ");
+                mes = in.nextInt();
+                System.out.print("\tDia: ");
+                dia = in.nextInt();
+                nuevaFecha.set(anio, mes-1, dia);
+
                 for (Pedido ped : pedidos) {
                     if (ped.getSolicitante().equals(pedidoModificar.getSolicitante()) && ped.getFechaRecibido().equals(nuevaFecha)){
-
+                        // Arreglar el .equals
+                        System.out.println("[!] Ya tiene un pedido para esta fecha.");
+                        modificarFecha = false;
+                        break;
                     }
-                }*/
+                }
+                if (modificarFecha){
+                    pedidoModificar.setFechaRecibido(nuevaFecha);
+                    System.out.println("\tFecha modificada.");
+                }
                 break;
             case 2:
                 in.nextLine();
@@ -151,7 +168,7 @@ public class ControlDespacho {
                 pedidoModificar.setNombreRepartidor(in.nextLine());
                 break;
             case 3:
-                System.out.println("\t[1] Eliminar un servicio solicitado para el pedido. Hay " + pedidoModificar.getServiciosAdicionales().size() + " servicios para este pedido.");
+                System.out.println("\t[1] Eliminar o modificar un servicio solicitado para el pedido. Hay " + pedidoModificar.getServiciosAdicionales().size() + " servicios para este pedido.");
                 System.out.println("\t[2] Agregar un nuevo servicio al pedido.");
                 System.out.print("\t - Seleccione la opción que desea realizar: ");
                 switch (in.nextInt()){
@@ -160,12 +177,41 @@ public class ControlDespacho {
                             for (int i = 0; i < pedidoModificar.getServiciosAdicionales().size(); ++i){
                                 System.out.println("\tServicio " + i + ": " + pedidoModificar.getServiciosAdicionales().get(i).getNombreServicio());
                             }
-                            System.out.print("\t- Ingrese el número del servicio que desea eliminar: ");
+                            System.out.print("\t- Ingrese el número del servicio que desea modificar: ");
                             opt = in.nextInt();
-                            if (opt < pedidoModificar.getServiciosAdicionales().size()){
-                                pedidoModificar.getServiciosAdicionales().remove(pedidoModificar.getServiciosAdicionales().get(opt));
+                            if (opt > pedidoModificar.getServiciosAdicionales().size()){
+                                System.out.println("\t[!] Opción no válida.");
                             }
-                            else System.out.println("\t[!] Opción no válida.");
+                            else {
+                                System.out.println("\tServicio " + opt + ": " + pedidoModificar.getServiciosAdicionales().get(opt).getNombreServicio());
+                                System.out.println("\t[1] Modificar servicio - [2] Eliminar servicio");
+                                switch (in.nextInt()){
+                                    case 1:
+                                        System.out.println("\t- [1] Modificar nombre (" + pedidoModificar.getServiciosAdicionales().get(opt).getNombreServicio());
+                                        System.out.println("\t- [2] Modificar precio (" + pedidoModificar.getServiciosAdicionales().get(opt).getPrecio());
+                                        switch (in.nextInt()){
+                                            case 1:
+                                                System.out.print("\t- Ingrese el nuevo nombre del servicio: ");
+                                                in.nextLine();
+                                                pedidoModificar.getServiciosAdicionales().get(opt).setNombreServicio(in.nextLine());
+                                                System.out.println("[!] Nombre actualizado: " + pedidoModificar.getServiciosAdicionales().get(opt).getNombreServicio());
+                                                break;
+                                            case 2:
+                                                System.out.println("\t- Ingrese el nuevo precio del servicio: ");
+                                                pedidoModificar.getServiciosAdicionales().get(opt).setPrecio(in.nextDouble());
+                                                System.out.println("[!] Precio actualizado: " + pedidoModificar.getServiciosAdicionales().get(opt).getPrecio());
+                                                break;
+                                        }
+                                        break;
+                                    case 2:
+                                        pedidoModificar.getServiciosAdicionales().remove(pedidoModificar.getServiciosAdicionales().get(opt));
+                                        System.out.println("\t[!] Servicio eliminado.");
+                                        break;
+                                    default:
+                                        System.out.println("\t[!] Opción no válida.");
+                                        break;
+                                }
+                            }
                         }
                         else System.out.println("\t[!] No hay servicios adicionales para este pedido.");
                         break;
