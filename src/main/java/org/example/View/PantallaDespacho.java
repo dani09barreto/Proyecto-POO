@@ -155,6 +155,12 @@ public class PantallaDespacho {
                 case 10:
                     Pantalla.centralDespacho.modificarPedido();
                     break;
+                case 11:
+                    System.out.println("\tEliminar Pedido");
+                    System.out.print("\tDigite el numero del pedido que desea eliminar: ");
+                    UUID EliminarPed;
+                    EliminarPed = UUID.fromString(in.next());
+                    Pantalla.centralDespacho.EliminarPedido(EliminarPed);
                 case 12:
                     Pantalla.centralDespacho.VerPedido();
                     break;
