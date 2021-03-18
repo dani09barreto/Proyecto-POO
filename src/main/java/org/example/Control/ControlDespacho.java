@@ -6,6 +6,7 @@ import org.example.Model.Producto;
 import org.example.Model.ServicioAdicional;
 
 
+
 import javax.swing.*;
 import java.net.SocketTimeoutException;
 import java.sql.SQLOutput;
@@ -77,32 +78,204 @@ public class ControlDespacho {
     public void ReservarPedido(int cedula, UUID idProducto){
 
         Scanner in = new Scanner(System.in);
-        System.out.println("\tInformacion Pedido\n");
+        SimpleDateFormat Fecha = new SimpleDateFormat("dd/MM/yyyy");
+        System.out.println("\t______Informacion Pedido________\n");
         System.out.println("\tDigite el nombre el repartidor");
         String repartidor = in.next();
+        System.out.println("\tDigite la fecha en la cual desea despachar el pedido en formato dd/MM/yyyy");
+        String fechain = in.next();
         Cliente clientePedido = this.gestionCliente.existeCliente(cedula);
         Producto ProductoPedido = this.gestionProductos.existeProducto(idProducto);
-        Calendar fechapedido = Calendar.getInstance();
-        SimpleDateFormat Fecha = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        System.out.println(Fecha.format(fechapedido.getTime()));
+        Calendar fechaDespacho = Calendar.getInstance();
 
-        if (ExisteProducto(clientePedido, ProductoPedido, fechapedido) == null){
+        try {
+            Date fechaDate = Fecha.parse(fechain);
+            fechaDespacho.setTime(fechaDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
-            Pedido nuevopedido = new Pedido(fechapedido,repartidor,clientePedido,ProductoPedido);
-            this.pedidos.add(nuevopedido);
+        //resta de la fecha actual con la fecha de despacho
+
+        Calendar fechanow = Calendar.getInstance();
+        long finMs = fechanow.getTimeInMillis();
+        long inicioMs = fechaDespacho.getTimeInMillis();
+        int dias = (int) (Math.abs(finMs-inicioMs)/ (1000*60*60*24));
+
+        System.out.println(dias);
+        if (dias < 2){
+            System.out.println("\t [!] Ups.. el pedido lo debes hacer 2 dias antes de la fecha de entrega");
         }
         else{
-            System.out.println("El pedido ya existe en esta fecha");
-            System.out.println("Desea crear el mismo pedido con una nueva fecha ?");
-            System.out.println("S. si");
-            System.out.println("N. NO");
-            char opcion = in.next().charAt(0);
+            if (ExisteProducto(clientePedido, ProductoPedido, fechaDespacho) == null){
+                char opcion;
+                ArrayList<ServicioAdicional> servicios = new ArrayList<>();
+                do{
+                    System.out.println("\tDesea incluir servicion adicionales ?");
+                    System.out.println("\tS. si");
+                    System.out.println("\tN. NO");
+                    opcion = in.next().charAt(0);
 
-            if (opcion == 'S') {
-                Pedido nuevopedido = new Pedido(Calendar.getInstance(), repartidor, clientePedido, ProductoPedido);
+                    if (opcion == 'S'){
+                        long idproducto;
+                        String nombre;
+                        long precio;
+                        System.out.println("\tIngrese el id del servicio");
+                        idproducto = in.nextLong();
+                        System.out.println("\tIngrese el nombre del servicio");
+                        nombre = in.next();
+                        System.out.println("\tIngrese el precio del servicio");
+                        precio = in.nextLong();
+                        ServicioAdicional serviciotemp = new ServicioAdicional(idproducto, nombre, precio);
+                        servicios.add(serviciotemp);
+
+                    }
+                }while (opcion != 'N');
+                Pedido nuevopedido;
+
+                if (servicios.size() != 0){
+                    nuevopedido = new Pedido(fechaDespacho, repartidor, clientePedido, ProductoPedido, servicios);
+                    long costoPedido = 0;
+                    costoPedido += ProductoPedido.getPrecio() + ProductoPedido.getIva();
+
+                    for (ServicioAdicional servtemp: nuevopedido.getServiciosAdicionales()){
+                        costoPedido += servtemp.getPrecio();
+                    }
+                    costoPedido += costoPedido * 0.10;
+
+                    if (ProductoPedido.getIva() > 50000){
+                        costoPedido += 8000;
+                    }
+                    nuevopedido.setPagado(true);
+                    System.out.println("\n\t___Costo de Pedido___\n");
+                    System.out.println("\tPrecio Producto: $" + ProductoPedido.getPrecio());
+                    System.out.println("\tPrecio Iva producto: $" + ProductoPedido.getIva());
+                    for (ServicioAdicional servtemp: nuevopedido.getServiciosAdicionales()){
+                        System.out.println("\tPrecio servicio adicional: $" + servtemp.getPrecio());
+                    }
+                    System.out.println("\tCosto de despacho: $"+ costoPedido*0.10);
+                    System.out.println("\tCosto total: $" + costoPedido);
+                }
+                else{
+                    nuevopedido = new Pedido(fechaDespacho, repartidor, clientePedido, ProductoPedido, null);
+                    long costoPedido = 0;
+                    costoPedido += ProductoPedido.getPrecio() + ProductoPedido.getIva();
+
+                    for (ServicioAdicional servtemp: nuevopedido.getServiciosAdicionales()){
+                        costoPedido += servtemp.getPrecio();
+                    }
+                    costoPedido += costoPedido * 0.10;
+
+                    if (ProductoPedido.getIva() > 50000){
+                        costoPedido += 8000;
+                    }
+                    nuevopedido.setPagado(true);
+                    System.out.println("\n\t___Costo de Pedido___\n");
+                    System.out.println("\tPrecio Producto: $" + ProductoPedido.getPrecio());
+                    System.out.println("\tPrecio Iva producto: $" + ProductoPedido.getIva());
+                    for (ServicioAdicional servtemp: nuevopedido.getServiciosAdicionales()){
+                        System.out.println("\tPrecio servicio adicional: $" + servtemp.getPrecio());
+                    }
+                    System.out.println("\tCosto de despacho: $"+ costoPedido*0.10);
+                    System.out.println("\tCosto total: $" + costoPedido);
+                }
                 this.pedidos.add(nuevopedido);
             }
+            else{
 
+                System.out.println("\t [!] El pedido ya existe en esta fecha");
+                System.out.println("\tDesea crear el mismo pedido con una nueva fecha ?");
+                System.out.println("\tS. si");
+                System.out.println("\tN. NO");
+                char opcion = in.next().charAt(0);
+
+                if (opcion == 'S') {
+                    System.out.println("\tDigite la fecha en la cual desea despachar el pedido en formato dd/MM/yyyy");
+                    fechain = in.next();
+                    try {
+                        Date fechaDate = Fecha.parse(fechain);
+                        fechaDespacho.setTime(fechaDate);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if (dias < 2){
+                        System.out.println("\t [!] Ups.. el pedido lo debes hacer 2 dias antes de la fecha de entrega");
+                    }
+                    else{
+                        ArrayList<ServicioAdicional> servicios = new ArrayList<>();
+                        do{
+                            System.out.println("\tDesea incluir servicion adicionales ?");
+                            System.out.println("\tS. si");
+                            System.out.println("\tN. NO");
+                            opcion = in.next().charAt(0);
+
+                            if (opcion == 'S'){
+                                long idproducto;
+                                String nombre;
+                                long precio;
+                                System.out.println("\tIngrese el id del servicio");
+                                idproducto = in.nextLong();
+                                System.out.println("\tIngrese el nombre del servicio");
+                                nombre = in.next();
+                                System.out.println("\tIngrese el precio del servicio");
+                                precio = in.nextLong();
+                                ServicioAdicional serviciotemp = new ServicioAdicional(idproducto, nombre, precio);
+                                servicios.add(serviciotemp);
+
+                            }
+                        }while (opcion != 'N');
+
+                        Pedido nuevopedido;
+                        if (servicios.size() != 0){
+                            nuevopedido = new Pedido(fechaDespacho, repartidor, clientePedido, ProductoPedido, servicios);
+                            long costoPedido = 0;
+                            costoPedido += ProductoPedido.getPrecio() + ProductoPedido.getIva();
+
+                            for (ServicioAdicional servtemp: nuevopedido.getServiciosAdicionales()){
+                                costoPedido += servtemp.getPrecio();
+                            }
+                            costoPedido += costoPedido * 0.10;
+
+                            if (ProductoPedido.getIva() > 50000){
+                                costoPedido += 8000;
+                            }
+                            nuevopedido.setPagado(true);
+                            System.out.println("\n\t___Costo de Pedido___\n");
+                            System.out.println("\tPrecio Producto: $" + ProductoPedido.getPrecio());
+                            System.out.println("\tPrecio Iva producto: $" + ProductoPedido.getIva());
+                            for (ServicioAdicional servtemp: nuevopedido.getServiciosAdicionales()){
+                                System.out.println("\tPrecio servicio adicional: $" + servtemp.getPrecio());
+                            }
+                            System.out.println("\tCosto de despacho: $"+ costoPedido*0.10);
+                            System.out.println("\tCosto total: $" + costoPedido);
+                        }
+                        else{ 
+                            nuevopedido = new Pedido(fechaDespacho, repartidor, clientePedido, ProductoPedido, null);
+                            long costoPedido = 0;
+                            costoPedido += ProductoPedido.getPrecio() + ProductoPedido.getIva();
+
+                            for (ServicioAdicional servtemp: nuevopedido.getServiciosAdicionales()){
+                                costoPedido += servtemp.getPrecio();
+                            }
+                            costoPedido += costoPedido * 0.10;
+
+                            if (ProductoPedido.getIva() > 50000){
+                                costoPedido += 8000;
+                            }
+                            nuevopedido.setPagado(true);
+                            System.out.println("\n\t___Costo de Pedido___\n");
+                            System.out.println("\tPrecio Producto: $" + ProductoPedido.getPrecio());
+                            System.out.println("\tPrecio Iva producto: $" + ProductoPedido.getIva());
+                            for (ServicioAdicional servtemp: nuevopedido.getServiciosAdicionales()){
+                                System.out.println("\tPrecio servicio adicional: $" + servtemp.getPrecio());
+                            }
+                            System.out.println("\tCosto de despacho: $"+ costoPedido*0.10);
+                            System.out.println("\tCosto total: $" + costoPedido);
+                        }
+                        this.pedidos.add(nuevopedido);
+                    }
+                }
+            }
         }
     }
 

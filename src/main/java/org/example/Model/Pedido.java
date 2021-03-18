@@ -1,10 +1,12 @@
 package org.example.Model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.UUID;
 
 public class Pedido {
+
     private UUID numPedido;
     private Calendar fechaRecibido;
     private boolean pagado;
@@ -13,12 +15,13 @@ public class Pedido {
     private ArrayList<ServicioAdicional> serviciosAdicionales = new ArrayList<>();
     private Producto productoSolicitado;
 
-    public Pedido(Calendar fechaRecibido, String nombreRepartidor, Cliente solicitante, Producto productoSolicitado) {
+    public Pedido(Calendar fechaRecibido, String nombreRepartidor, Cliente solicitante, Producto productoSolicitado,  ArrayList<ServicioAdicional> serviciosAdicionales) {
         this.numPedido = UUID.randomUUID();
         this.fechaRecibido = fechaRecibido;
         this.pagado = false;
         this.nombreRepartidor = nombreRepartidor;
         Solicitante = solicitante;
+        this.serviciosAdicionales = serviciosAdicionales;
         this.productoSolicitado = productoSolicitado;
     }
 
@@ -79,14 +82,14 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" +
-                "numPedido=" + numPedido +
-                ", fechaRecibido=" + fechaRecibido +
-                ", pagado=" + pagado +
-                ", nombreRepartidor='" + nombreRepartidor + '\'' +
-                ", Solicitante=" + Solicitante +
-                ", serviciosAdicionales=" + serviciosAdicionales +
-                ", productoSolicitado=" + productoSolicitado +
-                '}';
+
+        SimpleDateFormat Fecha = new SimpleDateFormat("dd/MM/yyyy");
+        return "\tNumero de Pedido: " + numPedido +
+                "\n\tfechaRecibido: " + Fecha.format(this.fechaRecibido.getTime()) +
+                "\n\tpagado: " + pagado +
+                "\n\tnombreRepartidor: " + nombreRepartidor +
+                "\n\tSolicitante: " + Solicitante +
+                "\n\tserviciosAdicionales: " + serviciosAdicionales +
+                "\n\tproductoSolicitado: " + productoSolicitado + "\n";
     }
 }
