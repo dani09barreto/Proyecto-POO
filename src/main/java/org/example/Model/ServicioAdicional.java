@@ -5,6 +5,16 @@ public class ServicioAdicional {
     private String nombreServicio;
     private double precio;
 
+    public ServicioAdicional(long codigoServicio, String nombreServicio, double precio) {
+        this.codigoServicio = codigoServicio;
+        this.nombreServicio = nombreServicio;
+        this.precio = precio;
+    }
+
+    public ServicioAdicional() {
+
+    }
+
     public long getCodigoServicio() {
         return codigoServicio;
     }

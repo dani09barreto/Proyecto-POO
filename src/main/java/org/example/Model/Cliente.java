@@ -54,6 +54,6 @@ public class Cliente {
         return  "\tCedula: " + cedula +
                 "\n\tNombre: " + nombreCompleto +
                 "\n\tTelefono: " + telefonoContacto +
-                "\n\tDireccion: " + direccion;
+                "\n\tDireccion: " + direccion + "\n";
     }
 }

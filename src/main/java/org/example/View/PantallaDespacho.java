@@ -18,6 +18,8 @@ public class PantallaDespacho {
         PantallaDespacho Pantalla = new PantallaDespacho();
         int opcion = 0;
         Scanner in = new Scanner(System.in);
+        Producto pd = new Producto(UUID.randomUUID(), "papa", 2000, 200, "casa");
+        Pantalla.centralDespacho.getGestionProductos().getListaProductos().add(pd);
         Cliente cl = new Cliente(1010,"daniel",121212,"calle 6c");
         Pantalla.centralDespacho.getGestionCliente().getListaClientes().add(cl);
 
@@ -137,7 +139,7 @@ public class PantallaDespacho {
                     break;
                 case 9:
 
-                    System.out.println("\tInserte el codigo del producto");
+                    System.out.println("\n\tInserte el codigo del producto");
                     UUID idProd1 = UUID.fromString(in.next());
                     System.out.println("\tInserte el documento del cliente");
                     int cedulaCliente = in.nextInt();
