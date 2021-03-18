@@ -255,6 +255,28 @@ public class ControlDespacho {
 
     }
 
+    public void EliminarPedido(UUID eliminar){
+        boolean ver = true;
+        char Confi = 'j';
+        Scanner c = new Scanner(System.in);
+        for(Pedido p: pedidos){
+            if(p.getNumPedido() == eliminar){
+                ver = false;
+                System.out.println("Esta seguro que desea elimianr el pedido : "+p.toString());
+                System.out.println("S = si, N = no");
+                Confi = c.next().charAt(0);
+                if(Confi == 'S'){
+                    pedidos.remove(p);
+                    System.out.println("\tPEDIDO ELIMINADO CON EXITO");
+                }
+                break;
+
+            }
+        }
+        if(ver && Confi!='N')
+            System.out.println("\t[!] EL PEDIDO QUE DESEA ELIMINAR NO EXISTE ");
+    }
+
     public ArrayList<Pedido> verListadoDePedidosDeProductoYFechaEspecífica(UUID prodId, Calendar fechaRecibido){
         ArrayList<Pedido> pedidosProductoFecha=new ArrayList<>();
         for(Pedido auxPedido: pedidos){
