@@ -82,14 +82,22 @@ public class Pedido {
 
     @Override
     public String toString() {
-
+        String informacion;
         SimpleDateFormat Fecha = new SimpleDateFormat("dd/MM/yyyy");
-        return "\tNumero de Pedido: " + numPedido +
-                "\n\tfechaRecibido: " + Fecha.format(this.fechaRecibido.getTime()) +
-                "\n\tpagado: " + pagado +
-                "\n\tnombreRepartidor: " + nombreRepartidor +
-                "\n\tSolicitante: " + Solicitante +
-                "\n\tserviciosAdicionales: " + serviciosAdicionales +
-                "\n\tproductoSolicitado: " + productoSolicitado + "\n";
+        informacion =     "\tNumero de Pedido: \t\t" + numPedido +
+                        "\n\tFecha Recibido: \t\t" + Fecha.format(this.fechaRecibido.getTime()) +
+                        "\n\tPagado: \t\t\t\t";
+        if (pagado) informacion += "Sí";
+        else informacion += "No";
+        informacion +=  "\n\tNombre del repartidor: \t" + nombreRepartidor +
+                        "\n\tSolicitante: \t\t\t" + Solicitante.getNombreCompleto() + " (Cedula: " + Solicitante.getCedula() + ")";
+        if (serviciosAdicionales.size() > 0){
+            informacion +=  "\n\t- Servicios adicionales: \n";
+            informacion += serviciosAdicionales.toString();
+        }
+        else informacion += "\n\t[!] El pedido no tiene servicios adicionales.";
+        informacion +=  "\n\t[-] Producto solicitado: \n" + productoSolicitado + "\n";
+
+        return informacion;
     }
 }
