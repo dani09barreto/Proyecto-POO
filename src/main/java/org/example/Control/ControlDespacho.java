@@ -153,6 +153,9 @@ public class ControlDespacho {
                     for (ServicioAdicional servtemp: nuevopedido.getServiciosAdicionales()){
                         System.out.println("\tPrecio servicio adicional: $" + servtemp.getPrecio());
                     }
+                    if (ProductoPedido.getIva() > 50000){
+                        System.out.println("\tPrecio Iva Adicional: $ 8000");
+                    }
                     System.out.println("\tCosto de despacho: $"+ costoPedido*0.10);
                     System.out.println("\tCosto total: $" + costoPedido);
                 }
@@ -175,6 +178,9 @@ public class ControlDespacho {
                     System.out.println("\tPrecio Iva producto: $" + ProductoPedido.getIva());
                     for (ServicioAdicional servtemp: nuevopedido.getServiciosAdicionales()){
                         System.out.println("\tPrecio servicio adicional: $" + servtemp.getPrecio());
+                    }
+                    if (ProductoPedido.getIva() > 50000){
+                        System.out.println("\tPrecio Iva Adicional: $ 8000");
                     }
                     System.out.println("\tCosto de despacho: $"+ costoPedido*0.10);
                     System.out.println("\tCosto total: $" + costoPedido);
@@ -246,10 +252,13 @@ public class ControlDespacho {
                             for (ServicioAdicional servtemp: nuevopedido.getServiciosAdicionales()){
                                 System.out.println("\tPrecio servicio adicional: $" + servtemp.getPrecio());
                             }
+                            if (ProductoPedido.getIva() > 50000){
+                                System.out.println("\tPrecio Iva Adicional: $ 8000");
+                            }
                             System.out.println("\tCosto de despacho: $"+ costoPedido*0.10);
                             System.out.println("\tCosto total: $" + costoPedido);
                         }
-                        else{ 
+                        else{
                             nuevopedido = new Pedido(fechaDespacho, repartidor, clientePedido, ProductoPedido, servicios);
                             long costoPedido = 0;
                             costoPedido += ProductoPedido.getPrecio() + ProductoPedido.getIva();
@@ -268,6 +277,9 @@ public class ControlDespacho {
                             System.out.println("\tPrecio Iva producto: $" + ProductoPedido.getIva());
                             for (ServicioAdicional servtemp: nuevopedido.getServiciosAdicionales()){
                                 System.out.println("\tPrecio servicio adicional: $" + servtemp.getPrecio());
+                            }
+                            if (ProductoPedido.getIva() > 50000){
+                                System.out.println("\tPrecio Iva Adicional: $ 8000");
                             }
                             System.out.println("\tCosto de despacho: $"+ costoPedido*0.10);
                             System.out.println("\tCosto total: $" + costoPedido);
