@@ -315,7 +315,7 @@ public class ControlDespacho {
             System.out.println("\t[!] No se encontró ningún pedido con el número " + numeroPedido + ".");
             return;
         }
-        System.out.println("\t[-] Modificar pedido [" + numeroPedido + "]");
+        System.out.println("\t[-] Modificar pedido [" + pedidoModificar.getProductoSolicitado().getNombreComercial() + " por " + pedidoModificar.getSolicitante().getNombreCompleto() + "]");
         System.out.println("\t 1] Cambiar fecha del pedido (" +
                 pedidoModificar.getFechaRecibido().get(Calendar.YEAR) + "/" +
                 pedidoModificar.getFechaRecibido().get(Calendar.MONTH) + "/" +
@@ -327,14 +327,14 @@ public class ControlDespacho {
             case 1:
                 System.out.print("\t - Escriba la nueva fecha para el pedido (dd/MM/yyyy)");
                 try {
+                    in.nextLine();
                     nuevaFecha.setTime(formato.parse(in.nextLine()));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
                 for (Pedido ped : pedidos) {
                     if (ped.getSolicitante().equals(pedidoModificar.getSolicitante()) && ped.getFechaRecibido().equals(nuevaFecha)){
-                        // Arreglar el .equals
-                        System.out.println("[!] Ya tiene un pedido para esta fecha.");
+                        System.out.println("\t[!] Ya tiene un pedido para esta fecha.");
                         modificarFecha = false;
                         break;
                     }
