@@ -103,7 +103,7 @@ public class ControlDespacho {
         int dias = (int) (Math.abs(finMs-inicioMs)/ (1000*60*60*24));
 
         System.out.println(dias);
-        if (dias < 2){
+        if (dias <= 2){
             System.out.println("\t [!] Ups.. el pedido lo debes hacer 2 dias antes de la fecha de entrega");
         }
         else{
@@ -157,7 +157,7 @@ public class ControlDespacho {
                     System.out.println("\tCosto total: $" + costoPedido);
                 }
                 else{
-                    nuevopedido = new Pedido(fechaDespacho, repartidor, clientePedido, ProductoPedido, null);
+                    nuevopedido = new Pedido(fechaDespacho, repartidor, clientePedido, ProductoPedido, servicios);
                     long costoPedido = 0;
                     costoPedido += ProductoPedido.getPrecio() + ProductoPedido.getIva();
 
@@ -198,7 +198,7 @@ public class ControlDespacho {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    if (dias < 2){
+                    if (dias <= 2){
                         System.out.println("\t [!] Ups.. el pedido lo debes hacer 2 dias antes de la fecha de entrega");
                     }
                     else{
@@ -250,7 +250,7 @@ public class ControlDespacho {
                             System.out.println("\tCosto total: $" + costoPedido);
                         }
                         else{ 
-                            nuevopedido = new Pedido(fechaDespacho, repartidor, clientePedido, ProductoPedido, null);
+                            nuevopedido = new Pedido(fechaDespacho, repartidor, clientePedido, ProductoPedido, servicios);
                             long costoPedido = 0;
                             costoPedido += ProductoPedido.getPrecio() + ProductoPedido.getIva();
 
