@@ -280,14 +280,14 @@ public class ControlDespacho {
     }
 
     public void modificarPedido(){
+        Scanner in = new Scanner (System.in);
         Pedido pedidoModificar = new Pedido();
         Calendar nuevaFecha = Calendar.getInstance();
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy MM dd HH:mm:ss");
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         ServicioAdicional nuevoServicio = new ServicioAdicional();
         boolean encontrado = false, modificarFecha = true;
         UUID numeroPedido;
         int opt, opt2, nuevoPrecio = 0, anio, mes, dia;
-        Scanner in = new Scanner (System.in);
         System.out.println("\t- Modificar un pedido.");
         System.out.print("\tIngrese el número de pedido: ");
         numeroPedido = UUID.fromString(in.nextLine());
@@ -313,15 +313,12 @@ public class ControlDespacho {
         System.out.print("Ingrese una opción: ");
         switch (in.nextInt()){
             case 1:
-                System.out.print("\t - Escriba la nueva fecha para el pedido");
-                System.out.print("\tAño: ");
-                anio = in.nextInt();
-                System.out.print("\tMes (ej: 05): ");
-                mes = in.nextInt();
-                System.out.print("\tDia: ");
-                dia = in.nextInt();
-                nuevaFecha.set(anio, mes-1, dia);
-
+                System.out.print("\t - Escriba la nueva fecha para el pedido (dd/MM/yyyy)");
+                try {
+                    nuevaFecha.setTime(formato.parse(in.nextLine()));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 for (Pedido ped : pedidos) {
                     if (ped.getSolicitante().equals(pedidoModificar.getSolicitante()) && ped.getFechaRecibido().equals(nuevaFecha)){
                         // Arreglar el .equals
