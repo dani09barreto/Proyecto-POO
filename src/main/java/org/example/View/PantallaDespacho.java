@@ -18,10 +18,24 @@ public class PantallaDespacho {
         PantallaDespacho Pantalla = new PantallaDespacho();
         int opcion = 0;
         Scanner in = new Scanner(System.in);
-        Producto pd = new Producto(UUID.randomUUID(), "papa", 2000, 200, "casa");
-        Pantalla.centralDespacho.getGestionProductos().getListaProductos().add(pd);
-        Cliente cl = new Cliente(1010,"daniel",121212,"calle 6c");
-        Pantalla.centralDespacho.getGestionCliente().getListaClientes().add(cl);
+        //OBJETOS DE PRUEBA
+        Producto pd1 = new Producto(UUID.randomUUID(), "papa", 2000, 200, "casa");
+        Pantalla.centralDespacho.getGestionProductos().getListaProductos().add(pd1);
+        Cliente cl1 = new Cliente(1010,"daniel",121212,"calle 6c");
+        Pantalla.centralDespacho.getGestionCliente().getListaClientes().add(cl1);
+        Producto pd2 = new Producto(UUID.randomUUID(), "Hamburguesa", 20000, 2000, "El Corral");
+        Pantalla.centralDespacho.getGestionProductos().getListaProductos().add(pd2);
+        Cliente cl2 = new Cliente(2020,"Paco",312563,"Carrera 23");
+        Pantalla.centralDespacho.getGestionCliente().getListaClientes().add(cl2);
+        Calendar fecha1= Calendar.getInstance();
+        fecha1.set(2021,Calendar.FEBRUARY,11);
+        Pedido ped1= new Pedido(fecha1,"Juan",cl1,pd1,null);
+        Pantalla.centralDespacho.getPedidos().add(ped1);
+        Calendar fecha2=Calendar.getInstance();
+        fecha2.set(2021,Calendar.JANUARY,15);
+        Pedido ped2= new Pedido(fecha2,"Pepito",cl2,pd2,null);
+        Pantalla.centralDespacho.getPedidos().add(ped2);
+        //FIN OBJETOS DE PRUEBA
 
         do {
             System.out.println("\n\t______Oficina de una agencia de reparto de Productos______\n");
@@ -119,7 +133,7 @@ public class PantallaDespacho {
                     Pantalla.centralDespacho.getGestionCliente().modificarDatosCliente(cedula);
                     break;
                 case 8:
-                    System.out.println(cl.getCedula());
+                    System.out.println(cl1.getCedula());
                     System.out.println("\n\tDigite la Identificacion del Cliente que desea eliminar: ");
                     long deleteIdentification;
                     deleteIdentification = in.nextLong();
@@ -167,21 +181,10 @@ public class PantallaDespacho {
                     Pantalla.centralDespacho.VerPedido();
                     break;
                 case 13:
-                    System.out.println("\tInserte el codigo del producto");
-                    UUID idProd2 = UUID.fromString(in.next());
-                    if (Pantalla.centralDespacho.getGestionProductos().existeProducto(idProd2) == null){
-                        System.out.println("\t[!] El Producto no existe");
-                    }else {
-                        System.out.println("\tInserte el año de la fecha específica (AAAA)");
-                        int anio = in.nextInt();
-                        System.out.println("\tInserte el mes de la fecha específica (MM)");
-                        int mes = in.nextInt();
-                        System.out.println("\tInserte el dia de la fecha específica (DD)");
-                        int dia = in.nextInt();
-                        Calendar fecha = Calendar.getInstance();
-                        fecha.set(anio, mes-1, dia);
-                        System.out.println(Pantalla.centralDespacho.verListadoDePedidosDeProductoYFechaEspecífica(idProd2, fecha).toString());
-                    }
+                    Pantalla.centralDespacho.verListadoDePedidosDeProductoYFechaEspecífica();
+                    break;
+                case 0:
+                    System.out.println("\tGracias por usar nuestro sistema");
                     break;
                 default:
                     System.out.println("Digite una opción válida y vuelva a intentarlo");
