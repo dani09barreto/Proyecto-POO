@@ -104,7 +104,7 @@ public class ControlDespacho {
 
         System.out.println(dias);
         if (dias <= 2){
-            System.out.println("\t [!] Ups.. el pedido lo debes hacer 2 dias antes de la fecha de entrega");
+            System.out.println("\t [!] Ups.. el pedido lo debes hacer 2 dias antes de la fecha de entrega \n\t No se ha realizado tu pedido, vuelve a intentarlo");
         }
         else{
             if (ExisteProducto(clientePedido, ProductoPedido, fechaDespacho) == null){
@@ -442,9 +442,9 @@ public class ControlDespacho {
         char Confi = 'j';
         Scanner c = new Scanner(System.in);
         for(Pedido p: pedidos){
-            if(p.getNumPedido() == eliminar){
+            if(p.getNumPedido().equals(eliminar)){
                 ver = false;
-                System.out.println("Esta seguro que desea elimianr el pedido : "+p.toString());
+                System.out.println("Esta seguro que desea eliminar el pedido? : "+p.toString());
                 System.out.println("S = si, N = no");
                 Confi = c.next().charAt(0);
                 if(Confi == 'S'){
@@ -459,13 +459,35 @@ public class ControlDespacho {
             System.out.println("\t[!] EL PEDIDO QUE DESEA ELIMINAR NO EXISTE ");
     }
 
-    public ArrayList<Pedido> verListadoDePedidosDeProductoYFechaEspecífica(UUID prodId, Calendar fechaRecibido){
-        ArrayList<Pedido> pedidosProductoFecha=new ArrayList<>();
-        for(Pedido auxPedido: pedidos){
-            if(auxPedido.getProductoSolicitado().getProdId().equals(prodId)&&auxPedido.getFechaRecibido().equals(fechaRecibido)){
-                pedidosProductoFecha.add(auxPedido);
+    public boolean verListadoDePedidosDeProductoYFechaEspecífica(){
+        boolean hayPedido=false;
+        System.out.println("\tInserte el codigo del producto");
+        Scanner in=new Scanner(System.in);
+        UUID idProd2 = UUID.fromString(in.next());
+        if (getGestionProductos().existeProducto(idProd2) == null){
+            System.out.println("\t[!] El producto no existe");
+        }else {
+            System.out.println("\tInserte el año de la fecha específica (AAAA)");
+            int anio = in.nextInt();
+            System.out.println("\tInserte el mes de la fecha específica (MM)");
+            int mes = in.nextInt();
+            System.out.println("\tInserte el dia de la fecha específica (DD)");
+            int dia = in.nextInt();
+            Calendar fecha = Calendar.getInstance();
+            fecha.set(anio, mes-1, dia);
+            ArrayList<Pedido> pedidosProductoFecha=new ArrayList<>();
+            for(Pedido auxPedido: pedidos){
+                if(auxPedido.getProductoSolicitado().getProdId().equals(idProd2)&&((auxPedido.getFechaRecibido().get(Calendar.DAY_OF_YEAR))==(fecha.get(Calendar.DAY_OF_YEAR)))&&( (auxPedido.getFechaRecibido().get(Calendar.YEAR))==(fecha.get(Calendar.YEAR)))){
+                    pedidosProductoFecha.add(auxPedido);
+                    hayPedido=true;
+                }
+            }
+            if(!hayPedido){
+                System.out.println("\tNo se encontraron pedidos para el producto especificado en la fecha especificada");
+            }else{
+                System.out.println(pedidosProductoFecha.toString());
             }
         }
-        return pedidosProductoFecha;
+        return hayPedido;
     }
 }

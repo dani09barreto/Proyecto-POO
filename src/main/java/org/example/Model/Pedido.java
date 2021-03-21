@@ -91,12 +91,18 @@ public class Pedido {
         else informacion += "No";
         informacion +=  "\n\tNombre del repartidor: \t" + nombreRepartidor +
                         "\n\tSolicitante: \t\t\t" + Solicitante.getNombreCompleto() + " (Cedula: " + Solicitante.getCedula() + ")";
-        if (serviciosAdicionales.size() > 0){
-            informacion +=  "\n\t- Servicios adicionales: \n";
-            informacion += serviciosAdicionales.toString();
+        if(serviciosAdicionales!=null) {
+            if (serviciosAdicionales.size() > 0) {
+                informacion += "\n\t- Servicios adicionales: \n";
+                informacion += serviciosAdicionales.toString();
+            } else {
+                informacion += "\n\t[!] El pedido no tiene servicios adicionales.";
+                informacion += "\n\t[-] Producto solicitado: \n" + productoSolicitado + "\n";
+            }
+        }else{
+            informacion += "\n\t[!] El pedido no tiene servicios adicionales.";
+            informacion += "\n\t[-] Producto solicitado: \n" + productoSolicitado + "\n";
         }
-        else informacion += "\n\t[!] El pedido no tiene servicios adicionales.";
-        informacion +=  "\n\t[-] Producto solicitado: \n" + productoSolicitado + "\n";
 
         return informacion;
     }
