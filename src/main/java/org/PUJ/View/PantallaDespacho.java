@@ -9,4 +9,8 @@ public class PantallaDespacho {
         PantallaDespacho pantalla = new PantallaDespacho();
         System.out.println( "como fua" );
     }
+
+    public ControlDespacho getCentralDespacho() {
+        return centralDespacho;
+    }
 }

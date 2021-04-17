@@ -7,8 +7,11 @@ public class Fruver extends Producto{
     private Double impuestoLocal;
     private String nombreHacienda;
 
-    public Fruver(String nombreComercial, Double precio, String tienda) {
+    public Fruver(String nombreComercial, Double precio, String tienda, Double impuestoLocal, String nombreHacienda) {
         super(nombreComercial, precio, tienda);
+        this.esOrganico = true;
+        this.impuestoLocal = impuestoLocal;
+        this.nombreHacienda = nombreHacienda;
     }
 
     public Boolean getEsOrganico() {

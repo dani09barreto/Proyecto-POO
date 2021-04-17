@@ -10,19 +10,10 @@ import java.util.Map;
 import java.util.UUID;
 
 public class ControlDespacho {
-    private Map <UUID, Producto> listaProductos = new HashMap<>();
-    private Map <Long, Cliente> listaClientes = new HashMap<>();
+
+    private GestionProductos gestionProductos = new GestionProductos();
     private ArrayList <Pedido> pedidos = new ArrayList<>();
     private GestionCliente gestionCliente = new GestionCliente();
-    private GestionProductos gestionProductos = new GestionProductos();
-
-    public Map<UUID, Producto> getListaProductos() {
-        return listaProductos;
-    }
-
-    public Map<Long, Cliente> getListaClientes() {
-        return listaClientes;
-    }
 
     public ArrayList<Pedido> getPedidos() {
         return pedidos;

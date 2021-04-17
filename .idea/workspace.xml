@@ -5,60 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10d74ec7-bdf7-43a4-8c55-c9793e84c4e0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/ControlDespacho.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/GestionCliente.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/GestionProductos.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Aseo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/BonoRegalo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/EnvioPrime.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Fruver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Pedido.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/ServicioAdicional.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/TipoProducto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/TipoTransporte.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/View/PantallaDespacho.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Control/ControlDespacho.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Control/GestionCliente.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Control/GestionProductos.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Model/Aseo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Model/BonoRegalo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Model/Cliente.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Model/EnvioPrime.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Model/Fruver.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Model/Pedido.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Model/Producto.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Model/ServicioAdicional.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Model/TipoProducto.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Model/TipoTransporte.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/PUJ/View/PantallaDespacho.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/org/PUJ/AppTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Proyecto-POO.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.core.resources.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.jdt.apt.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.m2e.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Control/ControlDespacho.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Control/GestionCliente.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Control/GestionProductos.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Model/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Cliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Model/Pedido.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Model/Producto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Producto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Model/ServicioAdicional.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/View/PantallaDespacho.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/PUJ/AppTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/PUJ/TestDespacho.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/ControlDespacho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/ControlDespacho.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/GestionCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/GestionCliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/GestionProductos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/GestionProductos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Aseo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Aseo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Fruver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Fruver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/View/PantallaDespacho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/View/PantallaDespacho.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/PUJ/AppTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -114,6 +81,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
