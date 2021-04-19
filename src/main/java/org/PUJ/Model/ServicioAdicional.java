@@ -13,5 +13,29 @@ public abstract class ServicioAdicional {
         this.precio = precio;
     }
 
+    public UUID getCodigoServicio() {
+        return codigoServicio;
+    }
+
+    public void setCodigoServicio(UUID codigoServicio) {
+        this.codigoServicio = codigoServicio;
+    }
+
+    public String getNombreServicio() {
+        return nombreServicio;
+    }
+
+    public void setNombreServicio(String nombreServicio) {
+        this.nombreServicio = nombreServicio;
+    }
+
+    public Double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Double precio) {
+        this.precio = precio;
+    }
+
     public abstract Double calcularPrecio ();
 }
