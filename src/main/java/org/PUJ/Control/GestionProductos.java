@@ -12,4 +12,10 @@ public class GestionProductos {
     public Map<UUID, Producto> getListaProductos() {
         return listaProductos;
     }
+    public Producto existeProducto (UUID codigo){
+        if (listaProductos.containsKey(codigo)){
+            return listaProductos.get(codigo);
+        }
+        return null;
+    }
 }
