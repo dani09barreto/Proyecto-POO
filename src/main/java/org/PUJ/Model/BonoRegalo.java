@@ -8,6 +8,7 @@ public class BonoRegalo extends ServicioAdicional{
 
     public BonoRegalo(String nombreServicio, Double precio, String comercioAsociado,String mensaje, Calendar fechaVencimiento) {
         super(nombreServicio, precio);
+        this.comercioAsociado = comercioAsociado;
         this.mensaje = mensaje;
         this.fechaVencimiento = fechaVencimiento;
         this.precio = calcularPrecio();
@@ -39,6 +40,6 @@ public class BonoRegalo extends ServicioAdicional{
 
     @Override
     public Double calcularPrecio() {
-        return null;
+        return super.precio;
     }
 }
