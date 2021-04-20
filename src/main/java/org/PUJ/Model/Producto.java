@@ -9,6 +9,9 @@ public class Producto {
     protected Double iva;
     protected String tienda;
 
+    public Producto() {
+    }
+
     public Producto(String nombreComercial, Double precio, String tienda) {
         this.prodId = UUID.randomUUID();
         this.nombreComercial = nombreComercial;
@@ -44,6 +47,8 @@ public class Producto {
     public Double getIva() {
         return iva;
     }
+
+    public void setIva(Double iva) { this.iva = iva; }
 
     public String getTienda() {
         return tienda;
