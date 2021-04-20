@@ -32,6 +32,17 @@ public class PantallaDespacho {
             opcion = in.nextInt();
 
             switch (opcion){
+                case 3:
+                    System.out.println("\n\tDigite el ID del producto que desea modificar: ");
+                    UUID productId=UUID.fromString(in.next());
+                    pantalla.centralDespacho.getGestionProductos().modificarProducto(productId);
+                    break;
+                case 7:
+                    System.out.println("\n\tDigite la Identificacion del Cliente que desea modificar: ");
+                    long cedula;
+                    cedula = in.nextLong();
+                    pantalla.centralDespacho.getGestionCliente().modificarDatosCliente(cedula);
+                    break;
                 case 9:
                     System.out.println("\n\tInserte el codigo del producto");
                     UUID idProd = UUID.fromString(in.next());
@@ -47,6 +58,12 @@ public class PantallaDespacho {
                         if (pantalla.centralDespacho.getGestionProductos().existeProducto(idProd) == null)
                             System.out.println("\t[!] El Producto no existe");
                     }
+                    break;
+                case 13:
+                    pantalla.centralDespacho.verListadoDePedidosDeProductoYFechaEspecífica();
+                    break;
+                default:
+                    System.out.println("Digite una opción válida y vuelva a intentarlo");
                     break;
             }
         }while (opcion != 0);
