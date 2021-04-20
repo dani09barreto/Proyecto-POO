@@ -9,13 +9,8 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/ControlDespacho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/ControlDespacho.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/GestionCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/GestionCliente.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/GestionProductos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/GestionProductos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/BonoRegalo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/BonoRegalo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/EnvioPrime.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/EnvioPrime.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/ServicioAdicional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/ServicioAdicional.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/TipoProducto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/TipoProducto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/TipoTransporte.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/TipoTransporte.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/View/PantallaDespacho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/View/PantallaDespacho.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/PUJ/TestDespacho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/PUJ/TestDespacho.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Producto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Producto.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +36,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/Proyecto-POO" />
   </component>
   <component name="RunManager">
     <configuration name="PantallaDespacho" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
