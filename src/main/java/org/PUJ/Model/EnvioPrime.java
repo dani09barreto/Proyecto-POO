@@ -43,10 +43,10 @@ public class EnvioPrime extends ServicioAdicional {
             return super.precio + this.numeroCajas*1200;
         }
         if (this.tipo == TipoTransporte.MOTO){
-            return this.precio*0.1 + this.numeroCajas*1200;
+            return (this.precio + this.numeroCajas*1200)*0.1;
         }
         if (this.tipo == TipoTransporte.MINIVAN){
-            return this.precio*0.25 + this.numeroCajas*1200;
+            return (this.precio + this.numeroCajas*1200)*0.25;
         }
         return 0.0;
     }
