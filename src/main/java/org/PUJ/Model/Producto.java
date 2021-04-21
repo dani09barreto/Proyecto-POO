@@ -61,4 +61,14 @@ public class Producto {
     public Double CalcularPrecio(){
         return precio + iva;
     }
+
+    @Override
+    public String toString() {
+        return "\n\tProducto" +
+                "\n\tID: " + prodId +
+                "\n\tNombre: '" + nombreComercial +
+                "\n\tPrecio: $" + precio +
+                "\n\tIVA: $" + iva +
+                "\n\tTienda: " + tienda;
+    }
 }
