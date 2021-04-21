@@ -19,6 +19,35 @@ public class GestionCliente {
         }
         return null;
     }
+    public void VerlistadoClientes(){
+        if(listaClientes.isEmpty()){
+            System.out.println("\t[!] No existen clientes para mostrar \n");
+            return;
+        }
+        for(Long l : listaClientes.keySet()){
+            System.out.println(listaClientes.get(l).toString());
+        }
+    }
+    public void InsertarCliente(Long ced, String nom, Long tel,String dir){
+        Cliente cliNew = new Cliente(ced,nom,tel,dir);
+        for(long l: listaClientes.keySet()){
+            if(listaClientes.get(l).getCedula().equals(ced)){
+                System.out.println("\t[!] El cliente insertado ya existe.");
+                return;
+            }
+        }
+        listaClientes.put(ced,cliNew);
+    }
+    public void EliminarCliente(Long cedEliminar){
+
+            Long temp = cedEliminar;
+            if (listaClientes.remove(cedEliminar) != null) {
+                System.out.println("\t El cliente con cedula " + temp + " fue eliminado con exito!");
+
+            } else {
+                System.out.println("\t[!]No existe un cliente con dicha cedula. ");
+            }
+    }
 
     public void modificarDatosCliente(long cedula){
         boolean clienteEncontrado=false;

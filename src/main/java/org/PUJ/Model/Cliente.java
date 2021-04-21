@@ -47,4 +47,13 @@ public class Cliente {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+
+    @Override
+    public String toString() {
+        return "\tCliente: " +
+                "\n\tCedula: " + cedula +
+                "\n\tNombreCompleto: " + nombreCompleto  +
+                "\n\tTelefonoContacto: " + telefonoContacto +
+                "\n\tDireccion: " + direccion +'\n';
+    }
 }
