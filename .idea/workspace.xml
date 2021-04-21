@@ -5,20 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10d74ec7-bdf7-43a4-8c55-c9793e84c4e0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/out/production/main/org/PUJ/Control/ControlDespacho.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/main/org/PUJ/Control/GestionCliente.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/main/org/PUJ/Control/GestionProductos.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/main/org/PUJ/Model/Aseo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/main/org/PUJ/Model/BonoRegalo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/main/org/PUJ/Model/Cliente.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/main/org/PUJ/Model/EnvioPrime.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/main/org/PUJ/Model/Fruver.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/main/org/PUJ/Model/Pedido.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/main/org/PUJ/Model/Producto.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/main/org/PUJ/Model/ServicioAdicional.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/main/org/PUJ/Model/TipoProducto.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/main/org/PUJ/Model/TipoTransporte.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/main/org/PUJ/View/PantallaDespacho.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/GestionProductos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/GestionProductos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Producto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Producto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/View/PantallaDespacho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/View/PantallaDespacho.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

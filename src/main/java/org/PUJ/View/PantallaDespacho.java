@@ -2,7 +2,9 @@ package org.PUJ.View;
 
 import org.PUJ.Control.ControlDespacho;
 import org.PUJ.Model.Pedido;
+import org.PUJ.Model.Producto;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -34,11 +36,60 @@ public class PantallaDespacho {
             opcion = in.nextInt();
 
             switch (opcion){
+                case 1:
+                    pantalla.centralDespacho.getGestionProductos().verListadoDeProductos();
+                    break;
+                case 2:
+                    System.out.println("\t\t[!] Insertar un producto");
+                    System.out.print("\t-> Inserte el nombre del producto: ");
+                    in.nextLine();
+                    String nombreProducto = in.nextLine();
+                    System.out.print("\t-> Inserte el precio del producto: ");
+                    Double precioProducto = 0d;
+                    boolean valido = false;
+                    do {
+                        try {
+                            precioProducto = in.nextDouble();
+                            valido = true;
+                        }
+                        catch (InputMismatchException e) {
+                            in.nextLine();
+                            System.out.print("\t[!] Ingrese un valor entero: ");
+                        }
+                    } while (!valido);
+                    in.nextLine();
+                    String nombreTienda = "";
+                  //  while (nombreTienda.isBlank()) { // No funciona.
+                        System.out.print("\t-> Inserte el nombre de la tienda: ");
+                        nombreTienda = in.nextLine();
+                  //  }
+                    pantalla.centralDespacho.getGestionProductos().insertarProducto(nombreProducto, precioProducto, nombreTienda);
+                    break;
 
                 case 3:
                     System.out.println("\n\tDigite el ID del producto que desea modificar: ");
                     UUID productId=UUID.fromString(in.next());
                     pantalla.centralDespacho.getGestionProductos().modificarProducto(productId);
+                    break;
+                case 4:
+                    System.out.println("\t\t[!] Eliminar un producto.");
+                    System.out.print("\t-> Digite el ID del producto que desea eliminar: ");
+                    in.nextLine();
+                    UUID keyEliminar = null;
+                    valido = false;
+                    do {
+                        try {
+                            keyEliminar = UUID.fromString(in.nextLine());
+                            valido = true;
+                        } catch (Exception e) {
+                            System.out.print("\t[!] Ingrese un ID válido: ");
+                        }
+                    } while (!valido);
+                    if (!pantalla.validarProductoEnUnPedido(pantalla.centralDespacho.getGestionProductos().getListaProductos().get(keyEliminar))) {
+                        pantalla.centralDespacho.getGestionProductos().eliminarProducto(keyEliminar);
+                    } else {
+                        System.out.println("\t[!] Error. El producto está asociado a un pedido, no se puede eliminar.");
+                    }
                     break;
                 case 5:
                     pantalla.centralDespacho.getGestionCliente().VerlistadoClientes();
@@ -143,5 +194,14 @@ public class PantallaDespacho {
                 return false;
         }
         return true;
+    }
+
+    public boolean validarProductoEnUnPedido(Producto producto) {
+        for (Pedido ped : this.centralDespacho.getPedidos()) {
+            if (ped.getProductoSolicitado().equals(producto)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -74,4 +74,32 @@ public class GestionProductos {
             System.out.println("\tEl producto no fue encontrado");
         }
     }
+    public void verListadoDeProductos () {
+        if (!listaProductos.isEmpty()) {
+            for (UUID key : listaProductos.keySet()) {
+                System.out.println(listaProductos.get(key).toString());
+            }
+        } else {
+            System.out.println("\t[!] No hay productos registrados en el sistema.");
+        }
+    }
+
+    public void insertarProducto(String nombreProducto, Double precioProducto, String nombreTienda) {
+        Producto nuevoProducto = new Producto(nombreProducto, precioProducto, nombreTienda);
+        if (!listaProductos.containsKey(nuevoProducto.getProdId())) {
+            listaProductos.put(nuevoProducto.getProdId(), nuevoProducto);
+            System.out.println("\t[-] El producto " + nuevoProducto.getNombreComercial() + " fue agregado a la tienda " + nuevoProducto.getTienda() + ".");
+        } else {
+            System.out.println("\t[!] Error. Ya existe un producto con este ID.");
+        }
+    }
+
+    public void eliminarProducto(UUID nKey) {
+        if (listaProductos.containsKey(nKey)) {
+            listaProductos.remove(nKey);
+            System.out.println("\t[!] El producto fue eliminado correctamente.");
+        } else {
+            System.out.println("\t[!] No existe un producto con este ID.");
+        }
+    }
 }
