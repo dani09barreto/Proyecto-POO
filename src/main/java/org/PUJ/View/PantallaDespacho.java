@@ -174,6 +174,24 @@ public class PantallaDespacho {
                             System.out.println("\t[!] El Producto no existe");
                     }
                     break;
+                case 10:
+                    System.out.println("\n\tInserte el codigo del producto a modificar");
+                    UUID idmodificar = UUID.fromString(in.next());
+                    if (pantalla.centralDespacho.ExistePedido(idmodificar) != null){
+                        pantalla.centralDespacho.ModificarPedido(idmodificar);
+                    }
+                    else
+                        System.out.println("\t[!] el pedido a modificar no existe");
+                    break;
+                case 11:
+                    System.out.println("\tEliminar Pedido");
+                    System.out.print("\tDigite el numero del pedido que desea eliminar: ");
+                    UUID EliminarPed;
+                    EliminarPed = UUID.fromString(in.next());
+                    pantalla.centralDespacho.EliminarPedido(EliminarPed);
+                case 12:
+                    pantalla.centralDespacho.VerPedido();
+                    break;
                 case 13:
                     pantalla.centralDespacho.verListadoDePedidosDeProductoYFechaEspecífica();
                     break;

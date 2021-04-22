@@ -26,7 +26,7 @@ public class GestionProductos {
         for(Producto auxProd: listaProductos.values()){
             if(auxProd.getProdId().equals(codigoPorducto)){
                 productoEncontrado=true;
-                prod=auxProd;
+                prod = auxProd;
             }
         }
         if(productoEncontrado){
