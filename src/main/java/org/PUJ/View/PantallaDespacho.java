@@ -1,6 +1,7 @@
 package org.PUJ.View;
 
 import org.PUJ.Control.ControlDespacho;
+import org.PUJ.Model.Cliente;
 import org.PUJ.Model.Pedido;
 import org.PUJ.Model.Producto;
 
@@ -146,13 +147,10 @@ public class PantallaDespacho {
                         try{
                             cedulaE = in.nextLong();
                             ver = true;
-
                         }catch (Exception e){
                             in.next();
                             System.out.println("\t[!]Ingrese un valor numerico.");
-
                         }
-
                     }while(!ver);
                     if(pantalla.Validarcliente(cedulaE))
                     pantalla.centralDespacho.getGestionCliente().EliminarCliente(cedulaE);

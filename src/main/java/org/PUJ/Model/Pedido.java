@@ -89,7 +89,7 @@ public class Pedido {
                 "\n\tSolicitante: \t\t\t" + solicitante.getNombreCompleto() + " (Cedula: " + solicitante.getCedula() + ")";
         if(serviciosAdicionales!=null) {
             if (serviciosAdicionales.size() > 0) {
-                informacion += "\n\t- Servicios adicionales: \n";
+                informacion += "\n\t Servicios adicionales: \n";
                 informacion += serviciosAdicionales.toString();
             } else {
                 informacion += "\n\t[!] El pedido no tiene servicios adicionales.";

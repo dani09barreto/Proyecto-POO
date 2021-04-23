@@ -93,14 +93,15 @@ public class ControlDespacho {
                             int precio = in.nextInt();
                             System.out.println("\tDefine su comercio asociado");
                             String comercio = in.nextLine();
+                            in.close();
                             System.out.println("\tDefine tu mensaje personalizado");
                             String mensaje = in.nextLine();
                             Calendar fechaservicio = fechaDespacho;
                             fechaservicio.set(Calendar.MONTH, fechaservicio.get(Calendar.MONTH) + 6);
-                            System.out.println(fechaservicio.getTime());
                             BonoRegalo bonotemp = new BonoRegalo("Bono regalo", (double) precio, comercio, mensaje, fechaservicio);
                             servicios.add(bonotemp);
-                        } else {
+                        }
+                        else {
                             System.out.println("\tDefine el Precio");
                             int precio = in.nextInt();
                             System.out.println("\tInserte la distancia de su envio");

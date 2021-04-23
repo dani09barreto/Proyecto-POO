@@ -1,4 +1,5 @@
 package org.PUJ.Model;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class BonoRegalo extends ServicioAdicional{
@@ -41,5 +42,17 @@ public class BonoRegalo extends ServicioAdicional{
     @Override
     public Double calcularPrecio() {
         return super.precio;
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat Fecha = new SimpleDateFormat("dd/MM/yyyy");
+        return "\n\tBonoRegalo: " +
+                "\n\tcomercioAsociado: " + comercioAsociado +
+                "\n\tmensaje: " + mensaje +
+                "\n\tfechaVencimiento: " + Fecha.format(this.fechaVencimiento.getTime()) +
+                "\n\tcodigoServicio: " + codigoServicio +
+                "\n\tnombreServicio: " + nombreServicio +
+                "\n\tprecio: " + precio;
     }
 }
