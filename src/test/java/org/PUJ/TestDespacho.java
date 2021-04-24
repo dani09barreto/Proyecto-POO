@@ -5,6 +5,8 @@ import org.PUJ.Model.*;
 import org.PUJ.View.PantallaDespacho;
 import org.junit.Before;
 
+import java.util.Calendar;
+
 public class TestDespacho {
     private PantallaDespacho pantalla = new PantallaDespacho();
 
@@ -28,22 +30,21 @@ public class TestDespacho {
         Producto producto2 = new Producto("Yogurt con fresa", 3500d, "La esquina");
         Producto producto3 = new Producto("Doritos", 4000d, "La otra esquina");
 
-        Aseo productoAseo1 = new Aseo();
-        Aseo productoAseo2 = new Aseo();
-        Aseo productoAseo3 = new Aseo();
+        Aseo productoAseo1 = new Aseo("Escoba", 4500D, "la esquina","Dersa", TipoProducto.HOGAR,true);
+        Aseo productoAseo2 = new Aseo("Trapero", 7000D, "la esquina", "Dersa", TipoProducto.HOGAR,false);
+        Aseo productoAseo3 = new Aseo("Desengrasante", 12000d, "los arboles","Wd-40",TipoProducto.INDUSTRIAL,true);
 
-        Fruver productoFruver1 = new Fruver();
-        Fruver productoFruver2 = new Fruver();
-        Fruver productoFruver3 = new Fruver();
+        Fruver productoFruver1 = new Fruver("Manzana",400D, "los arboles",0d,"Napoles");
+        Fruver productoFruver2 = new Fruver("Huevos", 1800D, "Justo y bueno",0d,"Napoles");
+        Fruver productoFruver3 = new Fruver("Arverja", 3000D, "los arboles", 0d, "Quintana");
 
-        Pedido pedido1 = new Pedido();
+        Pedido pedido1 = new Pedido(Calendar.getInstance(),"Camilo",cliente2,producto1 );
 
-        Pedido pedido2 = new Pedido();
-        Pedido pedido3 = new Pedido();
-        Pedido pedido4 = new Pedido();
-        Pedido pedido5 = new Pedido();
-        Pedido pedido6 = new Pedido();
-
+        Pedido pedido2 = new Pedido(Calendar.getInstance(),"Juan",cliente1,producto1);
+        Pedido pedido3 = new Pedido(Calendar.getInstance(),"Miguel",cliente3,producto3);
+        Pedido pedido4 = new Pedido(Calendar.getInstance(), "Nicolas",cliente5,productoAseo1);
+        Pedido pedido5 = new Pedido(Calendar.getInstance(),"Sofia",cliente5,productoFruver1);
+        Pedido pedido6 = new Pedido(Calendar.getInstance(),"Sara",cliente4,productoAseo3);
 
 
 
