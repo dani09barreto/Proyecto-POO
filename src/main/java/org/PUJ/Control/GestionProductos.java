@@ -86,8 +86,7 @@ public class GestionProductos {
         }
     }
 
-    public void insertarProducto(String nombreProducto, Double precioProducto, String nombreTienda) {
-        Producto nuevoProducto = new Producto(nombreProducto, precioProducto, nombreTienda);
+    public void insertarProducto(Producto nuevoProducto) {
         if (!listaProductos.containsKey(nuevoProducto.getProdId())) {
             listaProductos.put(nuevoProducto.getProdId(), nuevoProducto);
             System.out.println("\t[-] El producto " + nuevoProducto.getNombreComercial() + " fue agregado a la tienda " + nuevoProducto.getTienda() + ".");

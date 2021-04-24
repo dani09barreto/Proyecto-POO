@@ -1,10 +1,7 @@
 package org.PUJ.View;
 
 import org.PUJ.Control.ControlDespacho;
-import org.PUJ.Model.Cliente;
-import org.PUJ.Model.Pedido;
-import org.PUJ.Model.Producto;
-import org.PUJ.Model.TipoTransporte;
+import org.PUJ.Model.*;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -37,6 +34,7 @@ public class PantallaDespacho {
             System.out.println("\t0. Salir");
             System.out.print("\tOpcion: ");
             opcion = in.nextInt();
+            boolean valido = false;
 
             switch (opcion){
                 case 1:
@@ -44,29 +42,64 @@ public class PantallaDespacho {
                     break;
                 case 2:
                     System.out.println("\t\t[!] Insertar un producto");
-                    System.out.print("\t-> Inserte el nombre del producto: ");
-                    in.nextLine();
-                    String nombreProducto = in.nextLine();
-                    System.out.print("\t-> Inserte el precio del producto: ");
-                    Double precioProducto = 0d;
-                    boolean valido = false;
-                    do {
-                        try {
-                            precioProducto = in.nextDouble();
-                            valido = true;
-                        }
-                        catch (InputMismatchException e) {
-                            in.nextLine();
-                            System.out.print("\t[!] Ingrese un valor entero: ");
-                        }
-                    } while (!valido);
-                    in.nextLine();
-                    String nombreTienda = "";
-                     while (nombreTienda.isBlank()) { // No funciona.
-                        System.out.print("\t-> Inserte el nombre de la tienda: ");
-                        nombreTienda = in.nextLine();
+                    System.out.println("\t -> ¿Qué tipo de producto es?");
+                    System.out.println("\t [1] Aseo\t[2] Fruver\t[3] Otro");
+                    Integer tipoProducto = pantalla.leerEntero();
+                    System.out.print("\t-> Ingrese el nombre del producto: ");
+                    String nombreProducto = pantalla.leerString();
+                    System.out.print("\t-> Ingrese el precio del producto: ");
+                    Double precioProducto = pantalla.leerDouble();
+                    System.out.print("\t-> Ingrese el nombre de la tienda: ");
+                    String nombreTienda = pantalla.leerString();
+                    switch (tipoProducto) {
+                        case 1: // Aseo
+                            System.out.println("\t\t---- Datos de producto de Aseo ----");
+                            System.out.print("\t-> Ingrese el nombre de la empresa del producto: ");
+                            String nombreEmpresa = pantalla.leerString();
+                            System.out.print("\t-> ¿El producto tiene invima? S/N: ");
+                            String tieneInv = "";
+                            Boolean tieneInvima = false;
+                            do {
+                                tieneInv = in.next();
+                                if ((tieneInv).toUpperCase().equals("S")) {
+                                    tieneInvima = true;
+                                    valido = true;
+                                } else if ((tieneInv).toUpperCase().equals("N")) {
+                                    valido = true;
+                                }
+                            } while (!valido);
+                            System.out.println("\t-> ¿Qué tipo de producto de aseo es?");
+                            System.out.println("\t-> [1] Hogar \t[2] Industrial \t[3] Hospitalario");
+                            Integer tipoProductoAseoSc= pantalla.leerEntero();
+                            TipoProducto tipoProductoAseo = null;
+                            switch (tipoProductoAseoSc) {
+                                case 1:
+                                    tipoProductoAseo = TipoProducto.HOGAR;
+                                    break;
+                                case 2:
+                                    tipoProductoAseo = TipoProducto.INDUSTRIAL;
+                                    break;
+                                case 3:
+                                    tipoProductoAseo = TipoProducto.HOSPITALARIO;
+                                    break;
+                            }
+                            Aseo nuevoProductoAseo = new Aseo (nombreProducto, precioProducto, nombreTienda, nombreEmpresa, tipoProductoAseo, tieneInvima);
+                            pantalla.centralDespacho.getGestionProductos().insertarProducto(nuevoProductoAseo);
+                            break;
+                        case 2: // Fruver
+                            System.out.println("\t\t---- Datos de producto de Fruver ----");
+                            System.out.print("\t-> Ingrese el impuesto local del producto: ");
+                            Double impuestoLocal = pantalla.leerDouble();
+                            System.out.print("\t-> Ingrese el nombre de la hacienda del producto: ");
+                            String nombreHacienda = pantalla.leerString();
+                            Fruver nuevoProductoFruver = new Fruver(nombreProducto, precioProducto, nombreTienda, impuestoLocal, nombreHacienda);
+                            pantalla.centralDespacho.getGestionProductos().insertarProducto(nuevoProductoFruver);
+                            break;
+                        case 3: // Otro
+                            Producto nuevoProducto = new Producto(nombreProducto, precioProducto, nombreTienda);
+                            pantalla.centralDespacho.getGestionProductos().insertarProducto(nuevoProducto);
+                            break;
                     }
-                    pantalla.centralDespacho.getGestionProductos().insertarProducto(nombreProducto, precioProducto, nombreTienda);
                     break;
 
                 case 3:
@@ -80,14 +113,6 @@ public class PantallaDespacho {
                     in.nextLine();
                     UUID keyEliminar = null;
                     valido = false;
-                    do {
-                        try {
-                            keyEliminar = UUID.fromString(in.nextLine());
-                            valido = true;
-                        } catch (Exception e) {
-                            System.out.print("\t[!] Ingrese un ID válido: ");
-                        }
-                    } while (!valido);
                     if (!pantalla.centralDespacho.ValidarProducto(pantalla.centralDespacho.getGestionProductos().getListaProductos().get(keyEliminar))) {
                         pantalla.centralDespacho.getGestionProductos().eliminarProducto(keyEliminar);
                     } else {
@@ -231,5 +256,61 @@ public class PantallaDespacho {
     }
     public ControlDespacho getCentralDespacho() {
         return centralDespacho;
+    }
+
+    public Integer leerEntero() {
+        int numeroEntero = 0;
+        Scanner sc = new Scanner(System.in);
+        boolean valido = false;
+        do {
+            try {
+                numeroEntero = sc.nextInt();
+                valido = true;
+            } catch (InputMismatchException e) {
+                sc.nextLine();
+                System.out.print("\t[!] Ingrese un valor entero: ");
+            }
+        } while (!valido);
+        return numeroEntero;
+    }
+
+    public Double leerDouble() {
+        Scanner sc = new Scanner(System.in);
+        Double numeroDouble = 0d;
+        boolean valido = false;
+        do {
+            try {
+                numeroDouble = sc.nextDouble();
+                valido = true;
+            } catch (InputMismatchException e) {
+                sc.nextLine();
+                System.out.print("\t[!] Ingrese un valor entero: ");
+            }
+        } while (!valido);
+        return numeroDouble;
+    }
+
+    public String leerString() {
+        String str = "";
+        Scanner sc = new Scanner(System.in);
+        do {
+            str = sc.nextLine();
+        } while (str.isBlank());
+        return str;
+    }
+
+    public UUID leerUUID() {
+        Scanner sc = new Scanner(System.in);
+        boolean valido = false;
+        UUID key = null;
+        do {
+            try {
+                key = UUID.fromString(sc.nextLine());
+                valido = true;
+            } catch (Exception e) {
+                System.out.print("\t[!] Ingrese un ID válido: ");
+            }
+        } while (!valido);
+        return key;
     }
 }

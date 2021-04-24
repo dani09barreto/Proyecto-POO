@@ -63,7 +63,7 @@ public class Producto {
     public String toString() {
         return "\n\tProducto" +
                 "\n\tID: " + prodId +
-                "\n\tNombre: '" + nombreComercial +
+                "\n\tNombre: " + nombreComercial +
                 "\n\tPrecio: $" + precio +
                 "\n\tIVA: $" + iva +
                 "\n\tTienda: " + tienda;

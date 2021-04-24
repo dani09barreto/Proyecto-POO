@@ -38,9 +38,16 @@ public class Fruver extends Producto {
         this.nombreHacienda = nombreHacienda;
     }
 
-    @Override
     public Double calcularPrecio() {
         return this.esOrganico ? (super.precio+this.impuestoLocal + super.iva) * 1.2d : super.precio + this.impuestoLocal + super.iva;
     }
 
+    @Override
+    public String toString() {
+        String organico = this.esOrganico ? "Si" : "No";
+        return super.toString() +
+                "\n\tEs orgánico: " + organico +
+                "\n\tImpuesto local: $" + impuestoLocal +
+                "\n\tNombre Hacienda: " + nombreHacienda;
+    }
 }

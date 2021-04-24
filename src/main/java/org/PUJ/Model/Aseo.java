@@ -38,12 +38,20 @@ public class Aseo extends Producto {
         this.tipo = tipo;
     }
 
-    @Override
     public Double calcularPrecio (){
         if (this.tipo == TipoProducto.HOGAR || this.tipo == TipoProducto.INDUSTRIAL) {
             return (super.precio + super.iva)*0.9d;
         } else {
             return (super.precio + super.iva)*0.7d;
         }
+    }
+
+    @Override
+    public String toString() {
+        String invima = this.tieneInvima ? "Sí tiene" : "No tiene";
+         return super.toString() +
+                "\n\tNombre Empresa: " + nombreEmpresa +
+                "\n\tInvima: " + invima +
+                "\n\tTipo: " + tipo;
     }
 }
