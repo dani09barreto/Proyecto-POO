@@ -62,10 +62,10 @@ public class PantallaDespacho {
                     } while (!valido);
                     in.nextLine();
                     String nombreTienda = "";
-                  //  while (nombreTienda.isBlank()) { // No funciona.
+                     while (nombreTienda.isBlank()) { // No funciona.
                         System.out.print("\t-> Inserte el nombre de la tienda: ");
                         nombreTienda = in.nextLine();
-                  //  }
+                    }
                     pantalla.centralDespacho.getGestionProductos().insertarProducto(nombreProducto, precioProducto, nombreTienda);
                     break;
 
