@@ -34,8 +34,8 @@ public class ControlDespacho {
     }
 
     public Pedido ExistePedido(UUID id) {
-        for (Pedido pedidotemp : pedidos) {
-            if (pedidotemp.getNumeroPedido() == id) {
+        for (Pedido pedidotemp : this.pedidos) {
+            if (pedidotemp.getNumeroPedido().equals(id)){
                 return pedidotemp;
             }
         }
@@ -47,7 +47,7 @@ public class ControlDespacho {
         Scanner in = new Scanner(System.in);
 
         SimpleDateFormat Fecha = new SimpleDateFormat("dd/MM/yyyy");
-        System.out.println("\t______Informacion Pedido________\n");
+        System.out.println("\t______Informacion Pedido________");
         System.out.println("\tDigite el nombre el repartidor");
         String repartidor = in.nextLine();
         System.out.println("\tDigite la fecha en la cual desea despachar el pedido en formato dd/MM/yyyy");

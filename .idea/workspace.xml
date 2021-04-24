@@ -109,6 +109,7 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/PUJ/View/PantallaDespacho.java</url>
           <line>241</line>
+
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
