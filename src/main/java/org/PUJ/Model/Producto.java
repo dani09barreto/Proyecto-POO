@@ -3,6 +3,7 @@ package org.PUJ.Model;
 import java.util.UUID;
 
 public class Producto {
+
     protected UUID prodId;
     protected String nombreComercial;
     protected Double precio;
@@ -58,10 +59,6 @@ public class Producto {
         this.tienda = tienda;
     }
 
-    public Double CalcularPrecio(){
-        return precio + iva;
-    }
-
     @Override
     public String toString() {
         return "\n\tProducto" +
@@ -70,5 +67,9 @@ public class Producto {
                 "\n\tPrecio: $" + precio +
                 "\n\tIVA: $" + iva +
                 "\n\tTienda: " + tienda;
+    }
+
+    public Double calcularPrecio() {
+        return this.precio + this.iva;
     }
 }

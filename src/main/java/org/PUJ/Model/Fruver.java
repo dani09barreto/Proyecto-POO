@@ -2,7 +2,7 @@ package org.PUJ.Model;
 
 import java.util.UUID;
 
-public class Fruver extends Producto{
+public class Fruver extends Producto {
     private Boolean esOrganico;
     private Double impuestoLocal;
     private String nombreHacienda;
@@ -38,8 +38,9 @@ public class Fruver extends Producto{
         this.nombreHacienda = nombreHacienda;
     }
 
-    public Double CalcularPrecio(){
-        return precio + iva;
+    @Override
+    public Double calcularPrecio() {
+        return this.esOrganico ? (super.precio+this.impuestoLocal + super.iva) * 1.2d : super.precio + this.impuestoLocal + super.iva;
     }
 
 }
