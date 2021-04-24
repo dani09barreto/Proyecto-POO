@@ -1,5 +1,6 @@
 package org.PUJ.Control;
 
+import com.sun.jdi.ArrayReference;
 import org.PUJ.Model.*;
 
 import java.text.ParseException;
@@ -504,4 +505,24 @@ public class ControlDespacho {
         }
         return false;
     }
+    public Map<UUID,Producto> verProductosTipoFruver() {
+        Map<UUID, Producto> productosFruver = new HashMap<>();
+        for (Producto prod : this.getGestionProductos().getListaProductos().values()) {
+            if (prod instanceof Fruver) {
+                productosFruver.put(prod.getProdId(), prod);
+            }
+        }
+        return productosFruver;
+    }
+
+    public ArrayList<Pedido> verPedidosAsociadosAProductosAseo(){
+        ArrayList<Pedido> pedidosProductosAseo=new ArrayList<>();
+        for(Pedido ped: this.getPedidos()){
+            if(ped.getProductoSolicitado() instanceof Aseo){
+                pedidosProductosAseo.add(ped);
+            }
+        }
+        return pedidosProductosAseo;
+    }
+
 }
