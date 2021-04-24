@@ -45,10 +45,11 @@ public class ControlDespacho {
     public void ReservarPedido(Long cedula, UUID idProducto) {
 
         Scanner in = new Scanner(System.in);
+
         SimpleDateFormat Fecha = new SimpleDateFormat("dd/MM/yyyy");
         System.out.println("\t______Informacion Pedido________\n");
         System.out.println("\tDigite el nombre el repartidor");
-        String repartidor = in.next();
+        String repartidor = in.nextLine();
         System.out.println("\tDigite la fecha en la cual desea despachar el pedido en formato dd/MM/yyyy");
         String fechain = in.next();
         Cliente clientePedido = this.gestionCliente.existeCliente(cedula);
@@ -69,7 +70,6 @@ public class ControlDespacho {
         long inicioMs = fechaDespacho.getTimeInMillis();
         int dias = (int) (Math.abs(finMs - inicioMs) / (1000 * 60 * 60 * 24));
 
-        System.out.println(dias);
         if (dias <= 2) {
             System.out.println("\t [!] Ups.. el pedido lo debes hacer 2 dias antes de la fecha de entrega \n\t No se ha realizado tu pedido, vuelve a intentarlo");
         } else {
@@ -92,7 +92,8 @@ public class ControlDespacho {
                             System.out.println("\tDefine el Precio");
                             int precio = in.nextInt();
                             System.out.println("\tDefine su comercio asociado");
-                            String comercio = in.next();
+                            String comercio = in.nextLine();
+                            in.nextLine();
                             System.out.println("\tDefine tu mensaje personalizado");
                             String mensaje = in.nextLine();
                             Calendar fechaservicio = fechaDespacho;
@@ -224,6 +225,7 @@ public class ControlDespacho {
                                     int precio = in.nextInt();
                                     System.out.println("\tDefine su comercio asociado");
                                     String comercio = in.nextLine();
+                                    in.nextLine();
                                     System.out.println("\tDefine tu mensaje personalizado");
                                     String mensaje = in.nextLine();
                                     Calendar fechaservicio = fechaDespacho;
@@ -487,5 +489,19 @@ public class ControlDespacho {
         Pedido pedidover = this.ExistePedido(idpedido);
         ArrayList<ServicioAdicional> listatemp = pedidover.enviosPrimePorTipo(tipo);
         return listatemp;
+    }
+    public boolean validarCliente(Long ced){
+        for(Pedido p: this.pedidos){
+            if(p.getSolicitante().getCedula().equals(ced))
+                return false;
+        }
+        return true;
+    }
+    public boolean ValidarProducto(Producto product){
+        for(Pedido ped: this.pedidos){
+            if(ped.getProductoSolicitado().equals(product))
+                return true;
+        }
+        return false;
     }
 }
