@@ -52,4 +52,15 @@ public class EnvioPrime extends ServicioAdicional {
         }
         return 0.0;
     }
+
+    @Override
+    public String toString() {
+        return "\n\tEnvioPrime: " +
+                "\n\tdistancia: " + distancia +
+                "\n\ttipo: " + tipo +
+                "\n\tnumeroCajas: " + numeroCajas +
+                "\n\tcodigoServicio: " + codigoServicio +
+                "\n\tnombreServicio: " + nombreServicio +
+                "\n\tprecio: " + precio;
+    }
 }

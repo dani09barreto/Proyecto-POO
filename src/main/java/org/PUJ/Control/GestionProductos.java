@@ -1,6 +1,8 @@
 package org.PUJ.Control;
 
+
 import org.PUJ.Model.Producto;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +28,7 @@ public class GestionProductos {
         for(Producto auxProd: listaProductos.values()){
             if(auxProd.getProdId().equals(codigoPorducto)){
                 productoEncontrado=true;
-                prod=auxProd;
+                prod = auxProd;
             }
         }
         if(productoEncontrado){

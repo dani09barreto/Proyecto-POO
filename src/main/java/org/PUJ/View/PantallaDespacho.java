@@ -1,8 +1,10 @@
 package org.PUJ.View;
 
 import org.PUJ.Control.ControlDespacho;
+import org.PUJ.Model.Cliente;
 import org.PUJ.Model.Pedido;
 import org.PUJ.Model.Producto;
+import org.PUJ.Model.TipoTransporte;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -31,6 +33,7 @@ public class PantallaDespacho {
             System.out.println("\t11. Eliminar un Pedido de un Producto");
             System.out.println("\t12. Ver listado de Pedidos existentes");
             System.out.println("\t13. Ver listado de Pedidos existentes de Producto y fecha específica");
+            System.out.println("\t14. Ver listado de envios prime y tipo de un pedido");
             System.out.println("\t0. Salir");
             System.out.print("\tOpcion: ");
             opcion = in.nextInt();
@@ -146,13 +149,10 @@ public class PantallaDespacho {
                         try{
                             cedulaE = in.nextLong();
                             ver = true;
-
                         }catch (Exception e){
                             in.next();
                             System.out.println("\t[!]Ingrese un valor numerico.");
-
                         }
-
                     }while(!ver);
                     if(pantalla.centralDespacho.validarCliente(cedulaE))
                     pantalla.centralDespacho.getGestionCliente().EliminarCliente(cedulaE);
@@ -174,8 +174,39 @@ public class PantallaDespacho {
                             System.out.println("\t[!] El Producto no existe");
                     }
                     break;
+                case 10:
+                    System.out.println("\n\tInserte el codigo del producto a modificar");
+                    UUID idmodificar = UUID.fromString(in.next());
+                    if (pantalla.centralDespacho.ExistePedido(idmodificar) != null){
+                        pantalla.centralDespacho.ModificarPedido(idmodificar);
+                    }
+                    else
+                        System.out.println("\t[!] el pedido a modificar no existe");
+                    break;
+                case 11:
+                    System.out.println("\tEliminar Pedido");
+                    System.out.print("\tDigite el numero del pedido que desea eliminar: ");
+                    UUID EliminarPed;
+                    EliminarPed = UUID.fromString(in.next());
+                    pantalla.centralDespacho.EliminarPedido(EliminarPed);
+                case 12:
+                    pantalla.centralDespacho.VerPedido();
+                    break;
                 case 13:
                     pantalla.centralDespacho.verListadoDePedidosDeProductoYFechaEspecífica();
+                    break;
+                case 14:
+                    System.out.print("\tDigite el numero del pedido del que quiere ver sus envios prime: ");
+                    UUID idped;
+                    idped = UUID.fromString(in.next());
+                    System.out.println("\t Digite el tipo de envio que quiere filtrar     bicicleta, moto o minivan");
+                    String tipo = in.nextLine();
+                    if (tipo == "bicicleta")
+                        System.out.println(pantalla.centralDespacho.VerEnvioPrimeConTipoEnPedido(idped, TipoTransporte.BICICLETA).toString());
+                    if (tipo == "moto")
+                        System.out.println(pantalla.centralDespacho.VerEnvioPrimeConTipoEnPedido(idped, TipoTransporte.MOTO).toString());
+                    if (tipo == "minivan")
+                        System.out.println(pantalla.centralDespacho.VerEnvioPrimeConTipoEnPedido(idped, TipoTransporte.MINIVAN).toString());
                     break;
                 default:
                     System.out.println("Digite una opción válida y vuelva a intentarlo");
