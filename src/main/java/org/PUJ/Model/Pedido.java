@@ -101,4 +101,15 @@ public class Pedido {
         }
         return informacion;
     }
+    public ArrayList <ServicioAdicional> enviosPrimePorTipo (TipoTransporte tipobuscar){
+        ArrayList <ServicioAdicional> listtemp = new ArrayList<>();
+        for (ServicioAdicional servtemp : serviciosAdicionales){
+            if (servtemp instanceof EnvioPrime){
+                if (((EnvioPrime) servtemp).getTipo() == tipobuscar){
+                    listtemp.add(servtemp);
+                }
+            }
+        }
+        return listtemp;
+    }
 }

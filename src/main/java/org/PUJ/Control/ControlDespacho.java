@@ -92,8 +92,7 @@ public class ControlDespacho {
                             System.out.println("\tDefine el Precio");
                             int precio = in.nextInt();
                             System.out.println("\tDefine su comercio asociado");
-                            String comercio = in.nextLine();
-                            in.close();
+                            String comercio = in.next();
                             System.out.println("\tDefine tu mensaje personalizado");
                             String mensaje = in.nextLine();
                             Calendar fechaservicio = fechaDespacho;
@@ -433,12 +432,14 @@ public class ControlDespacho {
         if(ver && Confi!='N')
             System.out.println("\t[!] EL PEDIDO QUE DESEA ELIMINAR NO EXISTE ");
     }
+
     public void VerPedido(){
         if(pedidos.isEmpty())
             System.out.println("[!] NO EXISTEN PEDIDOS");
         else
             System.out.println(pedidos.toString());
     }
+
     public boolean verListadoDePedidosDeProductoYFechaEspecífica() {
         boolean hayPedido = false;
         System.out.println("\tInserte el codigo del producto");
@@ -469,5 +470,22 @@ public class ControlDespacho {
             }
         }
         return hayPedido;
+    }
+
+    public double precioPedidosDeAseoPorTipo(TipoProducto tipoABuscar){
+        Double precio = 0.0;
+        for (Pedido pedtemp : this.pedidos){
+            if (pedtemp.getProductoSolicitado() instanceof Aseo){
+                if (((Aseo) pedtemp.getProductoSolicitado()).getTipo() == tipoABuscar){
+                    precio += ((Aseo) pedtemp.getProductoSolicitado()).calcularPrecio();
+                }
+            }
+        }
+        return precio;
+    }
+    public ArrayList <ServicioAdicional> VerEnvioPrimeConTipoEnPedido (UUID idpedido, TipoTransporte tipo){
+        Pedido pedidover = this.ExistePedido(idpedido);
+        ArrayList<ServicioAdicional> listatemp = pedidover.enviosPrimePorTipo(tipo);
+        return listatemp;
     }
 }
