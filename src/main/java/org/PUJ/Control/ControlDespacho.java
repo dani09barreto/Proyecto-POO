@@ -24,6 +24,7 @@ public class ControlDespacho {
         return gestionProductos;
     }
 
+
     public Pedido ExisteProducto (Cliente cliente, Producto producto, Calendar fecha){
         for (Pedido pedidotemp : this.pedidos){
             if (pedidotemp.getProductoSolicitado().equals(producto) && pedidotemp.getSolicitante().equals(cliente) && pedidotemp.getFechaRecibido().equals(fecha)){
@@ -348,5 +349,19 @@ public class ControlDespacho {
             }
         }
         return hayPedido;
+    }
+    public boolean validarCliente(Long ced){
+        for(Pedido p: this.pedidos){
+            if(p.getSolicitante().getCedula().equals(ced))
+                return false;
+        }
+        return true;
+    }
+    public boolean ValidarProducto(Producto product){
+        for(Pedido ped: this.pedidos){
+            if(ped.getProductoSolicitado().equals(product))
+                return true;
+        }
+        return false;
     }
 }
