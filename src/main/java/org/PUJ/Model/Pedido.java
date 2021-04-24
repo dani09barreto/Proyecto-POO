@@ -14,18 +14,22 @@ public class Pedido {
     private ArrayList <ServicioAdicional> serviciosAdicionales;
     private Producto productoSolicitado;
 
-    public Pedido(Calendar fechaRecibido, String nombreRepartidor, Cliente solicitante, Producto productoSolicitado,  ArrayList<ServicioAdicional> serviciosAdicionales) {
+    public Pedido(Calendar fechaRecibido, String nombreRepartidor, Cliente solicitante, Producto productoSolicitado) {
         this.numeroPedido = UUID.randomUUID();
         this.fechaRecibido = fechaRecibido;
         this.pagado = false;
         this.solicitante = solicitante;
         this.nombreRepartidor = nombreRepartidor;
-        this.serviciosAdicionales = serviciosAdicionales;
+        this.serviciosAdicionales = new ArrayList<>();
         this.productoSolicitado = productoSolicitado;
     }
 
     public UUID getNumeroPedido() {
         return numeroPedido;
+    }
+
+    public void setServiciosAdicionales(ArrayList<ServicioAdicional> serviciosAdicionales) {
+        this.serviciosAdicionales = serviciosAdicionales;
     }
 
     public void setNumeroPedido(UUID numeroPedido) {

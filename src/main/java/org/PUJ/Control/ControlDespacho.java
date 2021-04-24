@@ -135,7 +135,8 @@ public class ControlDespacho {
                 Pedido nuevopedido;
 
                 if (servicios.size() != 0) {
-                    nuevopedido = new Pedido(fechaDespacho, repartidor, clientePedido, ProductoPedido, servicios);
+                    nuevopedido = new Pedido(fechaDespacho, repartidor, clientePedido, ProductoPedido);
+                    nuevopedido.setServiciosAdicionales(servicios);
                     long costoPedido = 0;
                     costoPedido += ProductoPedido.getPrecio() + ProductoPedido.getIva();
 
@@ -160,7 +161,8 @@ public class ControlDespacho {
                     System.out.println("\tCosto de despacho: $" + costoPedido * 0.10);
                     System.out.println("\tCosto total: $" + costoPedido);
                 } else {
-                    nuevopedido = new Pedido(fechaDespacho, repartidor, clientePedido, ProductoPedido, servicios);
+                    nuevopedido = new Pedido(fechaDespacho, repartidor, clientePedido, ProductoPedido);
+                    nuevopedido.setServiciosAdicionales(servicios);
                     long costoPedido = 0;
                     costoPedido += ProductoPedido.getPrecio() + ProductoPedido.getIva();
 
@@ -267,7 +269,8 @@ public class ControlDespacho {
 
                         Pedido nuevopedido;
                         if (servicios.size() != 0) {
-                            nuevopedido = new Pedido(fechaDespacho, repartidor, clientePedido, ProductoPedido, servicios);
+                            nuevopedido = new Pedido(fechaDespacho, repartidor, clientePedido, ProductoPedido);
+                            nuevopedido.setServiciosAdicionales(servicios);
                             long costoPedido = 0;
                             costoPedido += ProductoPedido.getPrecio() + ProductoPedido.getIva();
 
@@ -292,7 +295,8 @@ public class ControlDespacho {
                             System.out.println("\tCosto de despacho: $" + costoPedido * 0.10);
                             System.out.println("\tCosto total: $" + costoPedido);
                         } else {
-                            nuevopedido = new Pedido(fechaDespacho, repartidor, clientePedido, ProductoPedido, servicios);
+                            nuevopedido = new Pedido(fechaDespacho, repartidor, clientePedido, ProductoPedido);
+                            nuevopedido.setServiciosAdicionales(servicios);
                             long costoPedido = 0;
                             costoPedido += ProductoPedido.getPrecio() + ProductoPedido.getIva();
 
