@@ -3,9 +3,7 @@ package org.PUJ.View;
 import org.PUJ.Control.ControlDespacho;
 import org.PUJ.Model.*;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-import java.util.UUID;
+import java.util.*;
 
 public class PantallaDespacho {
     private ControlDespacho centralDespacho = new ControlDespacho();
@@ -31,6 +29,8 @@ public class PantallaDespacho {
             System.out.println("\t12. Ver listado de Pedidos existentes");
             System.out.println("\t13. Ver listado de Pedidos existentes de Producto y fecha específica");
             System.out.println("\t14. Ver listado de envios prime y tipo de un pedido");
+            System.out.println("\t15. Ver listado de productos de tipo Fruver");
+            System.out.println("\t16. Ver listado de pedidos asociados a productos de aseo");
             System.out.println("\t0. Salir");
             System.out.print("\tOpcion: ");
             opcion = in.nextInt();
@@ -247,6 +247,23 @@ public class PantallaDespacho {
                     }
                     System.out.println(pd.enviosPrimePorTipo(tipo).toString());
                     break;
+                case 15:
+                    Map<UUID,Producto> productosFruver=pantalla.getCentralDespacho().verProductosTipoFruver();
+                    if(productosFruver.size()!=0){
+                        System.out.println(productosFruver.toString());
+                    }else{
+                        System.out.println("\tNo hay productos de tipo fruver");
+                    }
+                    break;
+                case 16:
+                    ArrayList<Pedido> pedidosAseo=pantalla.getCentralDespacho().verPedidosAsociadosAProductosAseo();
+                    if(pedidosAseo.size()!=0){
+                        System.out.println(pedidosAseo.toString());
+                    }else{
+                        System.out.println("\tNo hay productos de tipo fruver");
+                    }
+                    break;
+
                 default:
                     System.out.println("Digite una opción válida y vuelva a intentarlo");
                     break;
