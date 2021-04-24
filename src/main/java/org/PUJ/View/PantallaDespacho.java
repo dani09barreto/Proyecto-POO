@@ -62,7 +62,7 @@ public class PantallaDespacho {
                     } while (!valido);
                     in.nextLine();
                     String nombreTienda = "";
-                  //9  while (nombreTienda.isBlank()) { // No funciona.
+                  //  while (nombreTienda.isBlank()) { // No funciona.
                         System.out.print("\t-> Inserte el nombre de la tienda: ");
                         nombreTienda = in.nextLine();
                   //  }
@@ -88,7 +88,7 @@ public class PantallaDespacho {
                             System.out.print("\t[!] Ingrese un ID válido: ");
                         }
                     } while (!valido);
-                    if (!pantalla.centralDespacho.ValidarProducto(pantalla.centralDespacho.getGestionProductos().getListaProductos().get(keyEliminar))){
+                    if (!pantalla.validarProductoEnUnPedido(pantalla.centralDespacho.getGestionProductos().getListaProductos().get(keyEliminar))) {
                         pantalla.centralDespacho.getGestionProductos().eliminarProducto(keyEliminar);
                     } else {
                         System.out.println("\t[!] Error. El producto está asociado a un pedido, no se puede eliminar.");
@@ -154,7 +154,7 @@ public class PantallaDespacho {
                             System.out.println("\t[!]Ingrese un valor numerico.");
                         }
                     }while(!ver);
-                    if(pantalla.centralDespacho.validarCliente(cedulaE))
+                    if(pantalla.Validarcliente(cedulaE))
                     pantalla.centralDespacho.getGestionCliente().EliminarCliente(cedulaE);
                     else System.out.println("\t[!]El cliente esta asociado a un Pedido");
                     break;
@@ -219,4 +219,20 @@ public class PantallaDespacho {
         return centralDespacho;
     }
 
+    public Boolean Validarcliente(Long cedula){
+        for(Pedido p:this.centralDespacho.getPedidos()){
+            if(p.getSolicitante().getCedula().equals(cedula))
+                return false;
+        }
+        return true;
+    }
+
+    public boolean validarProductoEnUnPedido(Producto producto) {
+        for (Pedido ped : this.centralDespacho.getPedidos()) {
+            if (ped.getProductoSolicitado().equals(producto)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
