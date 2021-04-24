@@ -4,6 +4,7 @@ import org.PUJ.Control.ControlDespacho;
 import org.PUJ.Model.Cliente;
 import org.PUJ.Model.Pedido;
 import org.PUJ.Model.Producto;
+import org.PUJ.Model.TipoTransporte;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -32,6 +33,7 @@ public class PantallaDespacho {
             System.out.println("\t11. Eliminar un Pedido de un Producto");
             System.out.println("\t12. Ver listado de Pedidos existentes");
             System.out.println("\t13. Ver listado de Pedidos existentes de Producto y fecha específica");
+            System.out.println("\t14. Ver listado de envios prime y tipo de un pedido");
             System.out.println("\t0. Salir");
             System.out.print("\tOpcion: ");
             opcion = in.nextInt();
@@ -192,6 +194,19 @@ public class PantallaDespacho {
                     break;
                 case 13:
                     pantalla.centralDespacho.verListadoDePedidosDeProductoYFechaEspecífica();
+                    break;
+                case 14:
+                    System.out.print("\tDigite el numero del pedido del que quiere ver sus envios prime: ");
+                    UUID idped;
+                    idped = UUID.fromString(in.next());
+                    System.out.println("\t Digite el tipo de envio que quiere filtrar     bicicleta, moto o minivan");
+                    String tipo = in.nextLine();
+                    if (tipo == "bicicleta")
+                        System.out.println(pantalla.centralDespacho.VerEnvioPrimeConTipoEnPedido(idped, TipoTransporte.BICICLETA).toString());
+                    if (tipo == "moto")
+                        System.out.println(pantalla.centralDespacho.VerEnvioPrimeConTipoEnPedido(idped, TipoTransporte.MOTO).toString());
+                    if (tipo == "minivan")
+                        System.out.println(pantalla.centralDespacho.VerEnvioPrimeConTipoEnPedido(idped, TipoTransporte.MINIVAN).toString());
                     break;
                 default:
                     System.out.println("Digite una opción válida y vuelva a intentarlo");
