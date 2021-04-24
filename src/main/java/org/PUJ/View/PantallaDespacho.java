@@ -196,18 +196,31 @@ public class PantallaDespacho {
                     pantalla.centralDespacho.verListadoDePedidosDeProductoYFechaEspecífica();
                     break;
                 case 14:
-                    System.out.print("\tDigite el numero del pedido del que quiere ver sus envios prime: ");
+                    System.out.println("\tDigite el numero del pedido del que quiere ver sus envios prime: ");
                     UUID idped;
                     idped = UUID.fromString(in.next());
-                    in.next();
-                    System.out.println("\t Digite el tipo de envio que quiere filtrar     bicicleta, moto o minivan");
-                    String tipo = in.nextLine();
-                    if (tipo == "bicicleta")
-                        System.out.println(pantalla.centralDespacho.VerEnvioPrimeConTipoEnPedido(idped, TipoTransporte.BICICLETA).toString());
-                    if (tipo == "moto")
-                        System.out.println(pantalla.centralDespacho.VerEnvioPrimeConTipoEnPedido(idped, TipoTransporte.MOTO).toString());
-                    if (tipo == "minivan")
-                        System.out.println(pantalla.centralDespacho.VerEnvioPrimeConTipoEnPedido(idped, TipoTransporte.MINIVAN).toString());
+                    Pedido pd = pantalla.centralDespacho.ExistePedido(idped);
+                    System.out.println(pd.getNombreRepartidor());
+                    System.out.println("\tElige el tipo de envio a filtrar");
+                    System.out.println("\t1. Bicicleta");
+                    System.out.println("\t2. Moto");
+                    System.out.println("\t3. Minivan");
+                    int op = in.nextInt();
+                    TipoTransporte tipo;
+                    switch (op) {
+                        case 1:
+                            tipo = TipoTransporte.BICICLETA;
+                            break;
+                        case 2:
+                            tipo = TipoTransporte.MOTO;
+                            break;
+                        case 3:
+                            tipo = TipoTransporte.MINIVAN;
+                            break;
+                        default:
+                            throw new IllegalStateException("Unexpected value: " + op);
+                    }
+                    System.out.println(pd.enviosPrimePorTipo(tipo).toString());
                     break;
                 default:
                     System.out.println("Digite una opción válida y vuelva a intentarlo");
