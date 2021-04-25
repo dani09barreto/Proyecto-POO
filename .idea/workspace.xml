@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="10d74ec7-bdf7-43a4-8c55-c9793e84c4e0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/ControlDespacho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/ControlDespacho.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/View/PantallaDespacho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/View/PantallaDespacho.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/PUJ/TestDespacho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/PUJ/TestDespacho.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +48,7 @@
       <recent name="org.PUJ.Model" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.TestDespacho">
     <configuration name="PantallaDespacho" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.PUJ.View.PantallaDespacho" />
       <module name="Proyecto-POO" />
@@ -63,8 +62,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestDespacho" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Proyecto-POO" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.PUJ.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.PUJ" />
+      <option name="MAIN_CLASS_NAME" value="org.PUJ.TestDespacho" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestDespacho" />
         <item itemvalue="Application.PantallaDespacho" />
       </list>
     </recent_temporary>
@@ -94,21 +109,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/PUJ/View/PantallaDespacho.java</url>
-          <line>410</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/PUJ/View/PantallaDespacho.java</url>
-          <line>442</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
