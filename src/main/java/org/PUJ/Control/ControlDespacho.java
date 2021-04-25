@@ -101,11 +101,9 @@ public class ControlDespacho {
                 System.out.println(dias);
                 if (dias <= 2) {
                     System.out.println("\t [!] Ups.. el pedido lo debes hacer 2 dias antes de la fecha de entrega \n\t No se ha modificado tu pedido, vuelve a intentarlo");
-                } else {
-                    if (ExistePedido(pedidoModificar.getSolicitante(), pedidoModificar.getProductoSolicitado(), fechaDespacho) == null) {
-                        pedidoModificar.setFechaRecibido(fechaDespacho);
-                    }
-                    else {
+                }
+                else {
+                    while (ExistePedido(pedidoModificar.getSolicitante(), pedidoModificar.getProductoSolicitado(), fechaDespacho) != null) {
                         System.out.println("\t [!] El pedido ya existe en esta fecha");
                         System.out.println("\tDesea crear el mismo pedido con una nueva fecha ?");
                         System.out.println("\tS. si");
@@ -123,14 +121,11 @@ public class ControlDespacho {
                             }
                             if (dias <= 2) {
                                 System.out.println("\t [!] Ups.. el pedido lo debes hacer 2 dias antes de la fecha de entrega");
-                            }
-                            else{
-                                if (ExistePedido(pedidoModificar.getSolicitante(), pedidoModificar.getProductoSolicitado(), fechaDespacho) == null) {
-                                    pedidoModificar.setFechaRecibido(fechaDespacho);
-                                }
+                                break;
                             }
                         }
                     }
+                    pedidoModificar.setFechaRecibido(fechaDespacho);
                 }
                 break;
             case 2:
@@ -215,11 +210,6 @@ public class ControlDespacho {
             }
         }
         return precio;
-    }
-    public ArrayList <ServicioAdicional> VerEnvioPrimeConTipoEnPedido (UUID idpedido, TipoTransporte tipo){
-        Pedido pedidover = this.ExistePedido(idpedido);
-        ArrayList<ServicioAdicional> listatemp = pedidover.enviosPrimePorTipo(tipo);
-        return listatemp;
     }
     public boolean validarCliente(Long ced){
         for(Pedido p: this.pedidos){
