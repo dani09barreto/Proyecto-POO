@@ -90,6 +90,18 @@ public class TestDespacho {
         assertEquals(1, control.getGestionProductos().getListaProductos().size());
         assertTrue(control.getGestionProductos().getListaProductos().containsValue(productoAseo1));
     }
+
+    @Test
+    public void testReservarPedido(){
+        control.ReservarPedido(pedido1);
+        control.ReservarPedido(pedido2);
+        assertEquals(2,control.getPedidos().size());
+
+        control.ReservarPedido(pedido3);
+
+        assertEquals(3, control.getPedidos().size());
+        assertNotEquals(1,control.getPedidos().size());
+    }
 }
 
 
