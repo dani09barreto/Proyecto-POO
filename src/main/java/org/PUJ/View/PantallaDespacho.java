@@ -270,10 +270,6 @@ public class PantallaDespacho {
                     Long cedulaCliente = in.nextLong();
 
                     if (pantalla.centralDespacho.getGestionCliente().existeCliente(cedulaCliente) != null && pantalla.centralDespacho.getGestionProductos().existeProducto(idProd) != null) {
-
-                        pantalla.centralDespacho.ReservarPedido(cedulaCliente, idProd);
-                    } else {
-
                         SimpleDateFormat Fecha = new SimpleDateFormat("dd/MM/yyyy");
                         System.out.println("\t______Informacion Pedido________");
                         System.out.println("\tDigite el nombre el repartidor");
@@ -379,14 +375,13 @@ public class PantallaDespacho {
                             nuevopedido.setServiciosAdicionales(servicios);
                             pantalla.centralDespacho.ReservarPedido(nuevopedido);
                         }
+                    } else {
+                        if (pantalla.centralDespacho.getGestionCliente().existeCliente(cedulaCliente) == null)
+                            System.out.println("\t[!] El cliente no existe");
+                        if (pantalla.centralDespacho.getGestionProductos().existeProducto(idProd) == null)
+                            System.out.println("\t[!] El Producto no existe");
                     }
-
-                    if (pantalla.centralDespacho.getGestionCliente().existeCliente(cedulaCliente) == null)
-                        System.out.println("\t[!] El cliente no existe");
-                    if (pantalla.centralDespacho.getGestionProductos().existeProducto(idProd) == null)
-                        System.out.println("\t[!] El Producto no existe");
-
-                break;
+                    break;
                 case 10:
 
                     System.out.println("\n\tInserte el codigo del producto a modificar");
@@ -404,8 +399,8 @@ public class PantallaDespacho {
                     System.out.println("\tEliminar Pedido");
                     System.out.print("\tDigite el numero del pedido que desea eliminar: ");
                     UUID EliminarPed = pantalla.leerUUID();
-                    if (pantalla.centralDespacho.ExistePedido(EliminarPed)!= null) {
-                        System.out.println("Esta seguro que desea eliminar el pedido? : "+ pantalla.centralDespacho.ExistePedido(EliminarPed).toString());
+                    if (pantalla.centralDespacho.ExistePedido(EliminarPed) != null) {
+                        System.out.println("Esta seguro que desea eliminar el pedido? : " + pantalla.centralDespacho.ExistePedido(EliminarPed).toString());
                         System.out.println("S = si, N = no");
                         String verificacion = pantalla.leerString();
                         if (verificacion.equals("S")) {
