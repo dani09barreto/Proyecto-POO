@@ -420,22 +420,13 @@ public class ControlDespacho {
 
     public void EliminarPedido(UUID eliminar){
         boolean ver = true;
-        char Confi = 'j';
-        Scanner c = new Scanner(System.in);
         for(Pedido p: pedidos){
             if(p.getNumeroPedido().equals(eliminar)){
                 ver = false;
-                System.out.println("Esta seguro que desea eliminar el pedido? : "+p.toString());
-                System.out.println("S = si, N = no");
-                Confi = c.next().charAt(0);
-                if(Confi == 'S'){
-                    pedidos.remove(p);
-                    System.out.println("\tPEDIDO ELIMINADO CON EXITO");
-                }
-                break;
+                pedidos.remove(p);
             }
         }
-        if(ver && Confi!='N')
+        if(ver)
             System.out.println("\t[!] EL PEDIDO QUE DESEA ELIMINAR NO EXISTE ");
     }
 

@@ -8,12 +8,12 @@ import java.util.*;
 public class PantallaDespacho {
     private ControlDespacho centralDespacho = new ControlDespacho();
 
-    public static void main( String[] args ) {
+    public static void main(String[] args) {
         PantallaDespacho pantalla = new PantallaDespacho();
         int opcion = 0;
         Scanner in = new Scanner(System.in);
 
-        do{
+        do {
             System.out.println("\n\t______Oficina de una agencia de reparto de Productos______\n");
             System.out.println("\t1.  Ver Lista de Productos");
             System.out.println("\t2.  Insertar Productos");
@@ -36,7 +36,7 @@ public class PantallaDespacho {
             opcion = in.nextInt();
             boolean valido = false;
 
-            switch (opcion){
+            switch (opcion) {
                 case 1:
                     pantalla.centralDespacho.getGestionProductos().verListadoDeProductos();
                     break;
@@ -70,7 +70,7 @@ public class PantallaDespacho {
                             } while (!valido);
                             System.out.println("\t-> ¿Qué tipo de producto de aseo es?");
                             System.out.println("\t-> [1] Hogar \t[2] Industrial \t[3] Hospitalario");
-                            Integer tipoProductoAseoSc= pantalla.leerEntero();
+                            Integer tipoProductoAseoSc = pantalla.leerEntero();
                             TipoProducto tipoProductoAseo = null;
                             switch (tipoProductoAseoSc) {
                                 case 1:
@@ -83,7 +83,7 @@ public class PantallaDespacho {
                                     tipoProductoAseo = TipoProducto.HOSPITALARIO;
                                     break;
                             }
-                            Aseo nuevoProductoAseo = new Aseo (nombreProducto, precioProducto, nombreTienda, nombreEmpresa, tipoProductoAseo, tieneInvima);
+                            Aseo nuevoProductoAseo = new Aseo(nombreProducto, precioProducto, nombreTienda, nombreEmpresa, tipoProductoAseo, tieneInvima);
                             pantalla.centralDespacho.getGestionProductos().insertarProducto(nuevoProductoAseo);
                             break;
                         case 2: // Fruver
@@ -104,7 +104,7 @@ public class PantallaDespacho {
 
                 case 3:
                     System.out.println("\n\tDigite el ID del producto que desea modificar: ");
-                    UUID productId=UUID.fromString(in.next());
+                    UUID productId = UUID.fromString(in.next());
                     pantalla.centralDespacho.getGestionProductos().modificarProducto(productId);
                     break;
                 case 4:
@@ -128,37 +128,35 @@ public class PantallaDespacho {
                     System.out.print("\tIngrese el Nombre completo del nuevo cliente: ");
                     in.nextLine();
                     String nombre = in.nextLine();
-                    System.out.print("\tIngrese la cedula de "+nombre+" :");
-                    Long ced=0l;
-                    do{
-                        try{
-                            ced=in.nextLong();
+                    System.out.print("\tIngrese la cedula de " + nombre + " :");
+                    Long ced = 0l;
+                    do {
+                        try {
+                            ced = in.nextLong();
                             ver = true;
-                        }
-                        catch (Exception e){
+                        } catch (Exception e) {
                             in.next();
                             System.out.println("\t[!] Ingrese un valor numerico.");
 
                         }
-                    }while(!ver);
-                    System.out.print("\tIngrese el telefono de contacto de "+nombre+" :");
-                    Long tel=0l;
+                    } while (!ver);
+                    System.out.print("\tIngrese el telefono de contacto de " + nombre + " :");
+                    Long tel = 0l;
                     ver = false;
-                    do{
-                        try{
-                            tel=in.nextLong();
+                    do {
+                        try {
+                            tel = in.nextLong();
                             ver = true;
-                        }
-                        catch (Exception e){
+                        } catch (Exception e) {
                             in.next();
                             System.out.println("\t[!] Ingrese un valor numerico.");
 
                         }
-                    }while(!ver);
+                    } while (!ver);
                     in.nextLine();
-                    System.out.print("\tIngrese la direccion de "+nombre+" :");
-                    String dir= in.nextLine();
-                    pantalla.centralDespacho.getGestionCliente().InsertarCliente(ced,nombre,tel,dir);
+                    System.out.print("\tIngrese la direccion de " + nombre + " :");
+                    String dir = in.nextLine();
+                    pantalla.centralDespacho.getGestionCliente().InsertarCliente(ced, nombre, tel, dir);
                     break;
                 case 7:
                     System.out.println("\n\tDigite la Identificacion del Cliente que desea modificar: ");
@@ -168,19 +166,19 @@ public class PantallaDespacho {
                     break;
                 case 8:
                     System.out.println("\tIngrese el numero de cedula del cliente que deseas eliminar.");
-                    Long cedulaE=0l;
-                    ver=false;
-                    do{
-                        try{
+                    Long cedulaE = 0l;
+                    ver = false;
+                    do {
+                        try {
                             cedulaE = in.nextLong();
                             ver = true;
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             in.next();
                             System.out.println("\t[!]Ingrese un valor numerico.");
                         }
-                    }while(!ver);
-                    if(pantalla.centralDespacho.validarCliente(cedulaE))
-                    pantalla.centralDespacho.getGestionCliente().EliminarCliente(cedulaE);
+                    } while (!ver);
+                    if (pantalla.centralDespacho.validarCliente(cedulaE))
+                        pantalla.centralDespacho.getGestionCliente().EliminarCliente(cedulaE);
                     else System.out.println("\t[!]El cliente esta asociado a un Pedido");
                     break;
                 case 9:
@@ -189,11 +187,10 @@ public class PantallaDespacho {
                     System.out.println("\tInserte el documento del cliente");
                     Long cedulaCliente = in.nextLong();
 
-                    if (pantalla.centralDespacho.getGestionCliente().existeCliente(cedulaCliente) != null && pantalla.centralDespacho.getGestionProductos().existeProducto(idProd) != null){
-                        pantalla.centralDespacho.ReservarPedido(cedulaCliente,idProd);
-                    }
-                    else{
-                        if(pantalla.centralDespacho.getGestionCliente().existeCliente(cedulaCliente) == null)
+                    if (pantalla.centralDespacho.getGestionCliente().existeCliente(cedulaCliente) != null && pantalla.centralDespacho.getGestionProductos().existeProducto(idProd) != null) {
+                        pantalla.centralDespacho.ReservarPedido(cedulaCliente, idProd);
+                    } else {
+                        if (pantalla.centralDespacho.getGestionCliente().existeCliente(cedulaCliente) == null)
                             System.out.println("\t[!] El cliente no existe");
                         if (pantalla.centralDespacho.getGestionProductos().existeProducto(idProd) == null)
                             System.out.println("\t[!] El Producto no existe");
@@ -202,10 +199,9 @@ public class PantallaDespacho {
                 case 10:
                     System.out.println("\n\tInserte el codigo del producto a modificar");
                     UUID idmodificar = UUID.fromString(in.next());
-                    if (pantalla.centralDespacho.ExistePedido(idmodificar) != null){
+                    if (pantalla.centralDespacho.ExistePedido(idmodificar) != null) {
                         pantalla.centralDespacho.ModificarPedido(idmodificar);
-                    }
-                    else
+                    } else
                         System.out.println("\t[!] el pedido a modificar no existe");
                     break;
                 case 11:
@@ -213,7 +209,13 @@ public class PantallaDespacho {
                     System.out.print("\tDigite el numero del pedido que desea eliminar: ");
                     UUID EliminarPed;
                     EliminarPed = UUID.fromString(in.next());
-                    pantalla.centralDespacho.EliminarPedido(EliminarPed);
+                    System.out.println("Esta seguro que desea eliminar el pedido? : ");
+                    System.out.println("S = si, N = no");
+                    String verificacion = pantalla.leerString();
+                    if (verificacion.equals("S")) {
+                        pantalla.centralDespacho.EliminarPedido(EliminarPed);
+                        System.out.println("\tPEDIDO ELIMINADO CON EXITO");
+                    }
                 case 12:
                     pantalla.centralDespacho.VerPedido();
                     break;
@@ -248,18 +250,18 @@ public class PantallaDespacho {
                     System.out.println(pd.enviosPrimePorTipo(tipo).toString());
                     break;
                 case 15:
-                    Map<UUID,Producto> productosFruver=pantalla.getCentralDespacho().verProductosTipoFruver();
-                    if(productosFruver.size()!=0){
+                    Map<UUID, Producto> productosFruver = pantalla.getCentralDespacho().verProductosTipoFruver();
+                    if (productosFruver.size() != 0) {
                         System.out.println(productosFruver.toString());
-                    }else{
+                    } else {
                         System.out.println("\tNo hay productos de tipo fruver");
                     }
                     break;
                 case 16:
-                    ArrayList<Pedido> pedidosAseo=pantalla.getCentralDespacho().verPedidosAsociadosAProductosAseo();
-                    if(pedidosAseo.size()!=0){
+                    ArrayList<Pedido> pedidosAseo = pantalla.getCentralDespacho().verPedidosAsociadosAProductosAseo();
+                    if (pedidosAseo.size() != 0) {
                         System.out.println(pedidosAseo.toString());
-                    }else{
+                    } else {
                         System.out.println("\tNo hay productos de tipo fruver");
                     }
                     break;
@@ -268,9 +270,10 @@ public class PantallaDespacho {
                     System.out.println("Digite una opción válida y vuelva a intentarlo");
                     break;
             }
-        }while (opcion != 0);
+        } while (opcion != 0);
         System.out.println("fin");
     }
+
     public ControlDespacho getCentralDespacho() {
         return centralDespacho;
     }
