@@ -68,6 +68,7 @@ public class ControlDespacho {
         }
         System.out.println("\tCosto de despacho: $" + costoPedido * 0.10);
         System.out.println("\tCosto total: $" + costoPedido);
+        pedidos.add(nuevopedido);
     }
 
     public void ModificarPedido(UUID id) {
