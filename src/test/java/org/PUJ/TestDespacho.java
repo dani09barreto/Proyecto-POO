@@ -87,6 +87,18 @@ public class TestDespacho {
     }
 
     @Test
+    public void testReservarPedido(){
+        control.ReservarPedido(pedido1);
+        control.ReservarPedido(pedido2);
+        assertEquals(2,control.getPedidos().size());
+
+        control.ReservarPedido(pedido3);
+
+        assertEquals(3, control.getPedidos().size());
+        assertNotEquals(1,control.getPedidos().size());
+    }
+  
+  @Test
     public void testExistePedido () {
         control.getGestionProductos().insertarProducto(productoFruver1);
         control.getGestionProductos().insertarProducto(producto3);
@@ -110,6 +122,7 @@ public class TestDespacho {
         assertFalse(control.getPedidos().contains(pedido1));
         assertFalse(control.getPedidos().contains(pedido3));
         assertTrue(control.getPedidos().contains(pedido2));
+
     }
 }
 
