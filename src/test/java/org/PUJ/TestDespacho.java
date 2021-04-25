@@ -42,7 +42,7 @@ public class TestDespacho {
     private Pedido pedido6 = new Pedido(Calendar.getInstance(), "Sara", cliente4, productoAseo3);
 
     //pantalla.getCentralDespacho().
-    
+
 
     @Test
     public void TestInsertarcliente() {
@@ -63,6 +63,32 @@ public class TestDespacho {
         assertEquals(1,control.getGestionCliente().getListaClientes().size());
         assertNotEquals(2,control.getGestionCliente().getListaClientes().size());
 
+    }
+
+    @Test
+    public void testInsertarProducto() {
+        control.getGestionProductos().insertarProducto(productoAseo3);
+        control.getGestionProductos().insertarProducto(producto2);
+        assertEquals(productoAseo3, control.getGestionProductos().existeProducto(productoAseo3.getProdId()));
+        assertEquals(producto2, control.getGestionProductos().existeProducto(producto2.getProdId()));
+        assertEquals(2, control.getGestionProductos().getListaProductos().size());
+        assertTrue(control.getGestionProductos().getListaProductos().containsKey(productoAseo3.getProdId()));
+        assertTrue(control.getGestionProductos().getListaProductos().containsKey(producto2.getProdId()));
+    }
+
+    @Test
+    public void testModificarProducto() {
+        // Falta que hagan la corrección los scanner.
+    }
+
+    @Test
+    public void testEliminarProducto() {
+        control.getGestionProductos().insertarProducto(productoAseo1);
+        control.getGestionProductos().insertarProducto(productoFruver2);
+        control.getGestionProductos().eliminarProducto(productoFruver2.getProdId());
+        assertFalse(control.getGestionProductos().getListaProductos().containsKey(productoFruver2.getProdId()));
+        assertEquals(1, control.getGestionProductos().getListaProductos().size());
+        assertTrue(control.getGestionProductos().getListaProductos().containsValue(productoAseo1));
     }
 }
 
