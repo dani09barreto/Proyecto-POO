@@ -77,11 +77,6 @@ public class TestDespacho {
     }
 
     @Test
-    public void testModificarProducto() {
-        // Falta que hagan la corrección los scanner.
-    }
-
-    @Test
     public void testEliminarProducto() {
         control.getGestionProductos().insertarProducto(productoAseo1);
         control.getGestionProductos().insertarProducto(productoFruver2);
@@ -89,6 +84,32 @@ public class TestDespacho {
         assertFalse(control.getGestionProductos().getListaProductos().containsKey(productoFruver2.getProdId()));
         assertEquals(1, control.getGestionProductos().getListaProductos().size());
         assertTrue(control.getGestionProductos().getListaProductos().containsValue(productoAseo1));
+    }
+
+    @Test
+    public void testExistePedido () {
+        control.getGestionProductos().insertarProducto(productoFruver1);
+        control.getGestionProductos().insertarProducto(producto3);
+        control.getGestionProductos().insertarProducto(producto2);
+
+        assertEquals(productoFruver1, control.getGestionProductos().existeProducto(productoFruver1.getProdId()));
+        assertEquals(producto3, control.getGestionProductos().existeProducto(producto3.getProdId()));
+        assertEquals(producto2, control.getGestionProductos().existeProducto(producto2.getProdId()));
+    }
+
+    @Test
+    public void testEliminarPedido () {
+        control.ReservarPedido(pedido1);
+        control.ReservarPedido(pedido2);
+        control.ReservarPedido(pedido3);
+
+        control.EliminarPedido(pedido1.getNumeroPedido());
+        control.EliminarPedido(pedido3.getNumeroPedido());
+        
+        assertEquals(1, control.getPedidos().size());
+        assertFalse(control.getPedidos().contains(pedido1));
+        assertFalse(control.getPedidos().contains(pedido3));
+        assertTrue(control.getPedidos().contains(pedido2));
     }
 }
 
