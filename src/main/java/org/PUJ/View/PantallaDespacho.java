@@ -324,7 +324,21 @@ public class PantallaDespacho {
                     pantalla.centralDespacho.VerPedido();
                     break;
                 case 13:
-                    pantalla.centralDespacho.verListadoDePedidosDeProductoYFechaEspecífica();
+                    System.out.println("\tInserte el codigo del producto");
+                    UUID idProd2 = pantalla.leerUUID();
+                    if (pantalla.centralDespacho.getGestionProductos().existeProducto(idProd2) == null) {
+                        System.out.println("\t[!] El producto no existe");
+                    } else {
+                        System.out.println("\tInserte el año de la fecha específica (AAAA)");
+                        int anio = pantalla.leerEntero();
+                        System.out.println("\tInserte el mes de la fecha específica (MM)");
+                        int mes = pantalla.leerEntero();
+                        System.out.println("\tInserte el dia de la fecha específica (DD)");
+                        int dia = pantalla.leerEntero();
+                        Calendar fecha = Calendar.getInstance();
+                        fecha.set(anio, mes - 1, dia);
+                        pantalla.getCentralDespacho().verListadoDePedidosDeProductoYFechaEspecífica(idProd2,fecha);
+                    }
                     break;
                 case 14:
                     System.out.println("\tDigite el numero del pedido del que quiere ver sus envios prime: ");

@@ -188,22 +188,8 @@ public class ControlDespacho {
             System.out.println(pedidos.toString());
     }
 
-    public boolean verListadoDePedidosDeProductoYFechaEspecífica() {
+    public boolean verListadoDePedidosDeProductoYFechaEspecífica(UUID idProd2,Calendar fecha) {
         boolean hayPedido = false;
-        System.out.println("\tInserte el codigo del producto");
-        Scanner in = new Scanner(System.in);
-        UUID idProd2 = UUID.fromString(in.next());
-        if (getGestionProductos().existeProducto(idProd2) == null) {
-            System.out.println("\t[!] El producto no existe");
-        } else {
-            System.out.println("\tInserte el año de la fecha específica (AAAA)");
-            int anio = in.nextInt();
-            System.out.println("\tInserte el mes de la fecha específica (MM)");
-            int mes = in.nextInt();
-            System.out.println("\tInserte el dia de la fecha específica (DD)");
-            int dia = in.nextInt();
-            Calendar fecha = Calendar.getInstance();
-            fecha.set(anio, mes - 1, dia);
             ArrayList<Pedido> pedidosProductoFecha = new ArrayList<>();
             for (Pedido auxPedido : pedidos) {
                 if (auxPedido.getProductoSolicitado().getProdId().equals(idProd2) && fecha.after(auxPedido.getFechaRecibido())) {
@@ -216,7 +202,6 @@ public class ControlDespacho {
             } else {
                 System.out.println(pedidosProductoFecha.toString());
             }
-        }
         return hayPedido;
     }
 
