@@ -1,0 +1,19 @@
+<changelist name="Uncommitted_changes_before_Update_at_25_04_2021_6_18_p__m__[Default_Changelist]1" date="1619392720824" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_04_2021_6_18_p__m__[Default_Changelist]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 25/04/2021 6:18 p. m. [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/org/PUJ/Control/ControlDespacho.class" />
+    <option name="AFTER_PATH" value="target/classes/org/PUJ/Control/ControlDespacho.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_04_2021_6_18_p__m__[Default_Changelist]1/ControlDespacho.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/org/PUJ/View/PantallaDespacho.class" />
+    <option name="AFTER_PATH" value="target/classes/org/PUJ/View/PantallaDespacho.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_04_2021_6_18_p__m__[Default_Changelist]1/PantallaDespacho.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/test-classes/org/PUJ/TestDespacho.class" />
+    <option name="AFTER_PATH" value="target/test-classes/org/PUJ/TestDespacho.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_04_2021_6_18_p__m__[Default_Changelist]1/TestDespacho.class" />
+  </binary>
+</changelist>
