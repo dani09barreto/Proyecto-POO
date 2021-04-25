@@ -66,21 +66,21 @@ public class PantallaDespacho {
         pedido4.setServiciosAdicionales(serv4pd4);
         pedido5.setServiciosAdicionales(serv5pd5);
 
-        pantalla.getCentralDespacho().getGestionCliente().getListaClientes().put(cliente1.getCedula(),cliente1);
-        pantalla.getCentralDespacho().getGestionCliente().getListaClientes().put(cliente2.getCedula(),cliente2);
-        pantalla.getCentralDespacho().getGestionCliente().getListaClientes().put(cliente3.getCedula(),cliente3);
-        pantalla.getCentralDespacho().getGestionCliente().getListaClientes().put(cliente4.getCedula(),cliente4);
-        pantalla.getCentralDespacho().getGestionCliente().getListaClientes().put(cliente5.getCedula(),cliente5);
+        pantalla.getCentralDespacho().getGestionCliente().getListaClientes().put(cliente1.getCedula(), cliente1);
+        pantalla.getCentralDespacho().getGestionCliente().getListaClientes().put(cliente2.getCedula(), cliente2);
+        pantalla.getCentralDespacho().getGestionCliente().getListaClientes().put(cliente3.getCedula(), cliente3);
+        pantalla.getCentralDespacho().getGestionCliente().getListaClientes().put(cliente4.getCedula(), cliente4);
+        pantalla.getCentralDespacho().getGestionCliente().getListaClientes().put(cliente5.getCedula(), cliente5);
 
-        pantalla.getCentralDespacho().getGestionProductos().getListaProductos().put(producto1.getProdId(),producto1);
-        pantalla.getCentralDespacho().getGestionProductos().getListaProductos().put(producto2.getProdId(),producto2);
-        pantalla.getCentralDespacho().getGestionProductos().getListaProductos().put(producto3.getProdId(),producto3);
-        pantalla.getCentralDespacho().getGestionProductos().getListaProductos().put(productoAseo1.getProdId(),productoAseo1);
-        pantalla.getCentralDespacho().getGestionProductos().getListaProductos().put(productoAseo2.getProdId(),productoAseo2);
-        pantalla.getCentralDespacho().getGestionProductos().getListaProductos().put(productoAseo3.getProdId(),productoAseo3);
-        pantalla.getCentralDespacho().getGestionProductos().getListaProductos().put(productoFruver1.getProdId(),productoFruver1);
-        pantalla.getCentralDespacho().getGestionProductos().getListaProductos().put(productoFruver2.getProdId(),productoFruver2);
-        pantalla.getCentralDespacho().getGestionProductos().getListaProductos().put(productoFruver3.getProdId(),productoFruver3);
+        pantalla.getCentralDespacho().getGestionProductos().getListaProductos().put(producto1.getProdId(), producto1);
+        pantalla.getCentralDespacho().getGestionProductos().getListaProductos().put(producto2.getProdId(), producto2);
+        pantalla.getCentralDespacho().getGestionProductos().getListaProductos().put(producto3.getProdId(), producto3);
+        pantalla.getCentralDespacho().getGestionProductos().getListaProductos().put(productoAseo1.getProdId(), productoAseo1);
+        pantalla.getCentralDespacho().getGestionProductos().getListaProductos().put(productoAseo2.getProdId(), productoAseo2);
+        pantalla.getCentralDespacho().getGestionProductos().getListaProductos().put(productoAseo3.getProdId(), productoAseo3);
+        pantalla.getCentralDespacho().getGestionProductos().getListaProductos().put(productoFruver1.getProdId(), productoFruver1);
+        pantalla.getCentralDespacho().getGestionProductos().getListaProductos().put(productoFruver2.getProdId(), productoFruver2);
+        pantalla.getCentralDespacho().getGestionProductos().getListaProductos().put(productoFruver3.getProdId(), productoFruver3);
 
         pantalla.getCentralDespacho().getPedidos().add(pedido1);
         pantalla.getCentralDespacho().getPedidos().add(pedido2);
@@ -297,8 +297,7 @@ public class PantallaDespacho {
                         int dias = (int) (Math.abs(finMs - inicioMs) / (1000 * 60 * 60 * 24));
                         if (dias <= 2) {
                             System.out.println("\t [!] Ups.. el pedido lo debes hacer 2 dias antes de la fecha de entrega \n\t No se ha realizado tu pedido, vuelve a intentarlo");
-                        }
-                        else {
+                        } else {
                             while (pantalla.centralDespacho.ExistePedido(clientePedido, ProductoPedido, fechaDespacho) != null) {
                                 System.out.println("\t [!] El pedido ya existe en esta fecha");
                                 System.out.println("\tDesea crear el mismo pedido con una nueva fecha ?");
@@ -344,8 +343,7 @@ public class PantallaDespacho {
                                         fechaservicio.set(Calendar.MONTH, fechaservicio.get(Calendar.MONTH) + 6);
                                         BonoRegalo bonotemp = new BonoRegalo("Bono regalo", (double) precio, comercio, mensaje, fechaservicio);
                                         servicios.add(bonotemp);
-                                    }
-                                    else {
+                                    } else {
                                         System.out.println("\tDefine el Precio");
                                         int precio = in.nextInt();
                                         System.out.println("\tInserte la distancia de su envio");
@@ -382,18 +380,17 @@ public class PantallaDespacho {
                             pantalla.centralDespacho.ReservarPedido(nuevopedido);
                         }
                     }
-                    else {
 
-                        if (pantalla.centralDespacho.getGestionCliente().existeCliente(cedulaCliente) == null)
-                            System.out.println("\t[!] El cliente no existe");
-                        if (pantalla.centralDespacho.getGestionProductos().existeProducto(idProd) == null)
-                            System.out.println("\t[!] El Producto no existe");
-                    }
-                    break;
+                    if (pantalla.centralDespacho.getGestionCliente().existeCliente(cedulaCliente) == null)
+                        System.out.println("\t[!] El cliente no existe");
+                    if (pantalla.centralDespacho.getGestionProductos().existeProducto(idProd) == null)
+                        System.out.println("\t[!] El Producto no existe");
+
+                break;
                 case 10:
 
                     System.out.println("\n\tInserte el codigo del producto a modificar");
-                    UUID idmodificar = UUID.fromString(in.next());
+                    UUID idProductmodificar = pantalla.leerUUID();
 
                     System.out.println("\n\tInserte el codigo del Pedido a modificar");
                     UUID idmodificar = pantalla.leerUUID();
@@ -406,19 +403,16 @@ public class PantallaDespacho {
                 case 11:
                     System.out.println("\tEliminar Pedido");
                     System.out.print("\tDigite el numero del pedido que desea eliminar: ");
-                    UUID EliminarPed;
-
-                    EliminarPed = UUID.fromString(in.next());
-                    System.out.println("Esta seguro que desea eliminar el pedido? : ");
-                    System.out.println("S = si, N = no");
-                    String verificacion = pantalla.leerString();
-                    if (verificacion.equals("S")) {
-                        pantalla.centralDespacho.EliminarPedido(EliminarPed);
-                        System.out.println("\tPEDIDO ELIMINADO CON EXITO");
+                    UUID EliminarPed = pantalla.leerUUID();
+                    if (pantalla.centralDespacho.ExistePedido(EliminarPed)!= null) {
+                        System.out.println("Esta seguro que desea eliminar el pedido? : "+ pantalla.centralDespacho.ExistePedido(EliminarPed).toString());
+                        System.out.println("S = si, N = no");
+                        String verificacion = pantalla.leerString();
+                        if (verificacion.equals("S")) {
+                            pantalla.centralDespacho.EliminarPedido(EliminarPed);
+                            System.out.println("\tPEDIDO ELIMINADO CON EXITO");
+                        }
                     }
-
-                    EliminarPed = pantalla.leerUUID();
-                    pantalla.centralDespacho.EliminarPedido(EliminarPed);
 
                 case 12:
                     pantalla.centralDespacho.VerPedido();
@@ -437,7 +431,7 @@ public class PantallaDespacho {
                         int dia = pantalla.leerEntero();
                         Calendar fecha = Calendar.getInstance();
                         fecha.set(anio, mes - 1, dia);
-                        pantalla.getCentralDespacho().verListadoDePedidosDeProductoYFechaEspecífica(idProd2,fecha);
+                        pantalla.getCentralDespacho().verListadoDePedidosDeProductoYFechaEspecífica(idProd2, fecha);
                     }
                     break;
                 case 14:
