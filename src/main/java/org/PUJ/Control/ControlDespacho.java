@@ -239,6 +239,15 @@ public class ControlDespacho {
 
     public void EliminarPedido(UUID eliminar) {
         boolean ver = true;
+
+        for(Pedido p: pedidos){
+            if(p.getNumeroPedido().equals(eliminar)){
+                ver = false;
+                pedidos.remove(p);
+            }
+        }
+        if(ver)
+
         char Confi = 'j';
         Scanner c = new Scanner(System.in);
         for (Pedido p : pedidos) {
@@ -255,6 +264,7 @@ public class ControlDespacho {
             }
         }
         if (ver && Confi != 'N')
+
             System.out.println("\t[!] EL PEDIDO QUE DESEA ELIMINAR NO EXISTE ");
     }
 
