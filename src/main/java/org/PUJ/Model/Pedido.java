@@ -84,7 +84,7 @@ public class Pedido {
     public String toString() {
         String informacion;
         SimpleDateFormat Fecha = new SimpleDateFormat("dd/MM/yyyy");
-        informacion =     "\tNumero de Pedido: \t\t" + numeroPedido +
+        informacion =     "\n\tNumero de Pedido: \t\t" + numeroPedido +
                 "\n\tFecha Recibido: \t\t" + Fecha.format(this.fechaRecibido.getTime()) +
                 "\n\tPagado: \t\t\t\t";
         if (pagado) informacion += "Sí";

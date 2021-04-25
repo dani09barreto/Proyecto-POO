@@ -35,7 +35,7 @@ public class ControlDespacho {
 
     public Pedido ExistePedido(UUID id) {
         for (Pedido pedidotemp : this.pedidos) {
-            if (pedidotemp.getNumeroPedido().equals(id)){
+            if (pedidotemp.getNumeroPedido().equals(id)) {
                 return pedidotemp;
             }
         }
@@ -77,6 +77,7 @@ public class ControlDespacho {
         System.out.println("\t1. Fecha de pedido");
         System.out.println("\t2. Pago de pedido");
         System.out.println("\t3. Nombre del repartidor");
+        System.out.println("\t4. Servicios adicionales");
         int opcion = in.nextInt();
         switch (opcion) {
             case 1:
@@ -101,8 +102,7 @@ public class ControlDespacho {
                 System.out.println(dias);
                 if (dias <= 2) {
                     System.out.println("\t [!] Ups.. el pedido lo debes hacer 2 dias antes de la fecha de entrega \n\t No se ha modificado tu pedido, vuelve a intentarlo");
-                }
-                else {
+                } else {
                     while (ExistePedido(pedidoModificar.getSolicitante(), pedidoModificar.getProductoSolicitado(), fechaDespacho) != null) {
                         System.out.println("\t [!] El pedido ya existe en esta fecha");
                         System.out.println("\tDesea crear el mismo pedido con una nueva fecha ?");
@@ -126,6 +126,12 @@ public class ControlDespacho {
                         }
                     }
                     pedidoModificar.setFechaRecibido(fechaDespacho);
+                    for (ServicioAdicional servver : pedidoModificar.getServiciosAdicionales()) {
+                        if (servver instanceof BonoRegalo) {
+                            Calendar fechaVencimiento = (Calendar) fechaDespacho.clone();
+                            fechaVencimiento.set(Calendar.MONTH, fechaVencimiento.get(Calendar.MONTH) + 6);
+                        }
+                    }
                 }
                 break;
             case 2:
@@ -152,81 +158,159 @@ public class ControlDespacho {
                 String repartidor = in.next();
                 pedidoModificar.setNombreRepartidor(repartidor);
                 break;
+            case 4:
+                int conta = 0;
+                System.out.println("\tTenemos los siguientes servicios adicionales para el pedido id:" + pedidoModificar.getNumeroPedido());
+                for (ServicioAdicional servver : pedidoModificar.getServiciosAdicionales()) {
+                    conta++;
+                    System.out.println(conta + "." + servver.getNombreServicio());
+                }
+                System.out.println("\tInserte el numero del servicio adicional");
+                int opc = in.nextInt();
+                opc --;
+                if (pedidoModificar.getServiciosAdicionales().get(opc) instanceof BonoRegalo) {
+                    System.out.println("\tSeleccione el aspecto a modificar del servicio adicional");
+                    System.out.println("\t1. Precio");
+                    System.out.println("\t2. Comercio asociado");
+                    System.out.println("\t3. Mensaje");
+                    int srv = in.nextInt();
+                    switch (srv) {
+                        case 1:
+                            System.out.println("\tIngrese el nuevo precio");
+                            pedidoModificar.getServiciosAdicionales().get(opc).setPrecio(in.nextDouble());
+                            break;
+                        case 2:
+                            System.out.println("\tIngrese el nuevo Comercio asociado");
+                            ((BonoRegalo) pedidoModificar.getServiciosAdicionales().get(opc)).setComercioAsociado(leerString());
+                            break;
+                        case 3:
+                            System.out.println("\tIngrese el nuevo mensaje");
+                            ((BonoRegalo) pedidoModificar.getServiciosAdicionales().get(opc)).setMensaje(leerString());
+                            break;
+                    }
+                    System.out.println("\tServicio modificado Correctamente");
+                }
+                if (pedidoModificar.getServiciosAdicionales().get(opc) instanceof EnvioPrime) {
+                    System.out.println("\tSeleccione el aspecto a modificar del servicio adicional");
+                    System.out.println("\t1. Precio");
+                    System.out.println("\t2. Distancia");
+                    System.out.println("\t3. Tipo de transporte");
+                    System.out.println("\t4. numero de cajas");
+                    int srv = in.nextInt();
+                    switch (srv) {
+                        case 1:
+                            pedidoModificar.getServiciosAdicionales().get(opc).setPrecio(in.nextDouble());
+                            break;
+                        case 2:
+                            ((EnvioPrime) pedidoModificar.getServiciosAdicionales().get(opc)).setDistancia(in.nextDouble());
+                            break;
+                        case 3:
+                            System.out.println("\tTenemos varios tipos de transporte elige el que mas prefieras");
+                            System.out.println("\t1. Bicicleta");
+                            System.out.println("\t2. Moto");
+                            System.out.println("\t3. Minivan");
+                            int op = in.nextInt();
+                            TipoTransporte tipo;
+                            switch (op) {
+                                case 1:
+                                    tipo = TipoTransporte.BICICLETA;
+                                    break;
+                                case 2:
+                                    tipo = TipoTransporte.MOTO;
+                                    break;
+                                case 3:
+                                    tipo = TipoTransporte.MINIVAN;
+                                    break;
+                                default:
+                                    throw new IllegalStateException("Unexpected value: " + op);
+                            }
+                            ((EnvioPrime) pedidoModificar.getServiciosAdicionales().get(opc)).setTipo(tipo);
+                            break;
+                        case 4:
+                            ((EnvioPrime) pedidoModificar.getServiciosAdicionales().get(opc)).setNumeroCajas(in.nextInt());
+                            break;
+                    }
+                    System.out.println("\tServicio modificado Correctamente");
+                }
+                break;
         }
+        System.out.println("\tPedido modificado Correctamente");
     }
 
-    public void EliminarPedido(UUID eliminar){
+    public void EliminarPedido(UUID eliminar) {
         boolean ver = true;
         char Confi = 'j';
         Scanner c = new Scanner(System.in);
-        for(Pedido p: pedidos){
-            if(p.getNumeroPedido().equals(eliminar)){
+        for (Pedido p : pedidos) {
+            if (p.getNumeroPedido().equals(eliminar)) {
                 ver = false;
-                System.out.println("Esta seguro que desea eliminar el pedido? : "+p.toString());
+                System.out.println("Esta seguro que desea eliminar el pedido? : " + p.toString());
                 System.out.println("S = si, N = no");
                 Confi = c.next().charAt(0);
-                if(Confi == 'S'){
+                if (Confi == 'S') {
                     pedidos.remove(p);
                     System.out.println("\tPEDIDO ELIMINADO CON EXITO");
                 }
                 break;
             }
         }
-        if(ver && Confi!='N')
+        if (ver && Confi != 'N')
             System.out.println("\t[!] EL PEDIDO QUE DESEA ELIMINAR NO EXISTE ");
     }
 
-    public void VerPedido(){
-        if(pedidos.isEmpty())
+    public void VerPedido() {
+        if (pedidos.isEmpty())
             System.out.println("[!] NO EXISTEN PEDIDOS");
         else
             System.out.println(pedidos.toString());
     }
 
-    public boolean verListadoDePedidosDeProductoYFechaEspecífica(UUID idProd2,Calendar fecha) {
+    public boolean verListadoDePedidosDeProductoYFechaEspecífica(UUID idProd2, Calendar fecha) {
         boolean hayPedido = false;
-            ArrayList<Pedido> pedidosProductoFecha = new ArrayList<>();
-            for (Pedido auxPedido : pedidos) {
-                if (auxPedido.getProductoSolicitado().getProdId().equals(idProd2) && fecha.after(auxPedido.getFechaRecibido())) {
-                    pedidosProductoFecha.add(auxPedido);
-                    hayPedido = true;
-                }
+        ArrayList<Pedido> pedidosProductoFecha = new ArrayList<>();
+        for (Pedido auxPedido : pedidos) {
+            if (auxPedido.getProductoSolicitado().getProdId().equals(idProd2) && fecha.after(auxPedido.getFechaRecibido())) {
+                pedidosProductoFecha.add(auxPedido);
+                hayPedido = true;
             }
-            if (!hayPedido) {
-                System.out.println("\tNo se encontraron pedidos para el producto especificado posteriores la fecha especificada");
-            } else {
-                System.out.println(pedidosProductoFecha.toString());
-            }
+        }
+        if (!hayPedido) {
+            System.out.println("\tNo se encontraron pedidos para el producto especificado posteriores la fecha especificada");
+        } else {
+            System.out.println(pedidosProductoFecha.toString());
+        }
         return hayPedido;
     }
 
-    public double precioPedidosDeAseoPorTipo(TipoProducto tipoABuscar){
+    public double precioPedidosDeAseoPorTipo(TipoProducto tipoABuscar) {
         Double precio = 0.0;
-        for (Pedido pedtemp : this.pedidos){
-            if (pedtemp.getProductoSolicitado() instanceof Aseo){
-                if (((Aseo) pedtemp.getProductoSolicitado()).getTipo() == tipoABuscar){
+        for (Pedido pedtemp : this.pedidos) {
+            if (pedtemp.getProductoSolicitado() instanceof Aseo) {
+                if (((Aseo) pedtemp.getProductoSolicitado()).getTipo() == tipoABuscar) {
                     precio += ((Aseo) pedtemp.getProductoSolicitado()).calcularPrecio();
                 }
             }
         }
         return precio;
     }
-    public boolean validarCliente(Long ced){
-        for(Pedido p: this.pedidos){
-            if(p.getSolicitante().getCedula().equals(ced))
+
+    public boolean validarCliente(Long ced) {
+        for (Pedido p : this.pedidos) {
+            if (p.getSolicitante().getCedula().equals(ced))
                 return false;
         }
         return true;
     }
-    public boolean ValidarProducto(Producto product){
-        for(Pedido ped: this.pedidos){
-            if(ped.getProductoSolicitado().equals(product))
+
+    public boolean ValidarProducto(Producto product) {
+        for (Pedido ped : this.pedidos) {
+            if (ped.getProductoSolicitado().equals(product))
                 return true;
         }
         return false;
     }
 
-    public Map<UUID,Producto> verProductosTipoFruver() {
+    public Map<UUID, Producto> verProductosTipoFruver() {
         Map<UUID, Producto> productosFruver = new HashMap<>();
         for (Producto prod : this.getGestionProductos().getListaProductos().values()) {
             if (prod instanceof Fruver) {
@@ -236,14 +320,21 @@ public class ControlDespacho {
         return productosFruver;
     }
 
-    public ArrayList<Pedido> verPedidosAsociadosAProductosAseo(){
-        ArrayList<Pedido> pedidosProductosAseo=new ArrayList<>();
-        for(Pedido ped: this.getPedidos()){
-            if(ped.getProductoSolicitado() instanceof Aseo){
+    public ArrayList<Pedido> verPedidosAsociadosAProductosAseo() {
+        ArrayList<Pedido> pedidosProductosAseo = new ArrayList<>();
+        for (Pedido ped : this.getPedidos()) {
+            if (ped.getProductoSolicitado() instanceof Aseo) {
                 pedidosProductosAseo.add(ped);
             }
         }
         return pedidosProductosAseo;
     }
-
+    public String leerString() {
+        String str = "";
+        Scanner sc = new Scanner(System.in);
+        do {
+            str = sc.nextLine();
+        } while (str.isBlank());
+        return str;
+    }
 }

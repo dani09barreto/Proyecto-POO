@@ -41,6 +41,31 @@ public class PantallaDespacho {
         Pedido pedido5 = new Pedido(Calendar.getInstance(), "Sofia", cliente5, productoFruver1);
         Pedido pedido6 = new Pedido(Calendar.getInstance(), "Sara", cliente4, productoAseo3);
 
+        //servicios adicionales
+        ServicioAdicional serv1 = new BonoRegalo("Bono regalo", 2000.0, "viva ya", "para el men re aspero", Calendar.getInstance());
+        ServicioAdicional serv2 = new BonoRegalo("Bono regalo", 2000.0, "la tula", "buenos dias alegria", Calendar.getInstance());
+        ServicioAdicional serv3 = new BonoRegalo("Bono regalo", 3000.0, "casa ya", "buenos dias señor sol", Calendar.getInstance());
+        ServicioAdicional serv4 = new EnvioPrime("Envio prime", 20000.0, 200.0, TipoTransporte.BICICLETA, 3);
+        ServicioAdicional serv5 = new EnvioPrime("Envio prime", 3000.0, 500.0, TipoTransporte.MINIVAN, 20);
+
+        //colecion de servicios
+        ArrayList<ServicioAdicional> serv1pd1 = new ArrayList<>();
+        serv1pd1.add(serv1);
+        ArrayList<ServicioAdicional> serv2pd2 = new ArrayList<>();
+        serv2pd2.add(serv2);
+        ArrayList<ServicioAdicional> serv3pd3 = new ArrayList<>();
+        serv3pd3.add(serv3);
+        ArrayList<ServicioAdicional> serv4pd4 = new ArrayList<>();
+        serv4pd4.add(serv4);
+        ArrayList<ServicioAdicional> serv5pd5 = new ArrayList<>();
+        serv5pd5.add(serv5);
+
+        pedido1.setServiciosAdicionales(serv1pd1);
+        pedido2.setServiciosAdicionales(serv2pd2);
+        pedido3.setServiciosAdicionales(serv3pd3);
+        pedido4.setServiciosAdicionales(serv4pd4);
+        pedido5.setServiciosAdicionales(serv5pd5);
+
         pantalla.getCentralDespacho().getGestionCliente().getListaClientes().put(cliente1.getCedula(),cliente1);
         pantalla.getCentralDespacho().getGestionCliente().getListaClientes().put(cliente2.getCedula(),cliente2);
         pantalla.getCentralDespacho().getGestionCliente().getListaClientes().put(cliente3.getCedula(),cliente3);
@@ -361,7 +386,7 @@ public class PantallaDespacho {
                     }
                     break;
                 case 10:
-                    System.out.println("\n\tInserte el codigo del producto a modificar");
+                    System.out.println("\n\tInserte el codigo del Pedido a modificar");
                     UUID idmodificar = pantalla.leerUUID();
                     if (pantalla.centralDespacho.ExistePedido(idmodificar) != null) {
                         pantalla.centralDespacho.ModificarPedido(idmodificar);
