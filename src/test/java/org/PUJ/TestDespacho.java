@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import java.util.Calendar;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class TestDespacho {
     private ControlDespacho control = new ControlDespacho();
@@ -48,20 +48,20 @@ public class TestDespacho {
     public void TestInsertarcliente() {
         control.getGestionCliente().InsertarCliente(cliente1.getCedula(), cliente1.getNombreCompleto(), cliente1.getTelefonoContacto(), cliente1.getDireccion());
         assertEquals(1, control.getGestionCliente().getListaClientes().size());
-    }
-    @Test
-    public void TestVerlistadoclientes() {
-        control.getGestionCliente().InsertarCliente(cliente2.getCedula(),cliente2.getNombreCompleto(),cliente2.getTelefonoContacto(),cliente2.getDireccion());
-        assertEquals(cliente2.toString(),control.
+        assertFalse(control.getGestionCliente().getListaClientes().containsKey(cliente2.getCedula()));
 
     }
     @Test
     public void TestModificarcliente() {
 
-
     }
     @Test
     public void TestEliminarProducto() {
+        control.getGestionCliente().InsertarCliente(cliente3.getCedula(),cliente3.getNombreCompleto(),cliente3.getTelefonoContacto(),cliente3.getDireccion());
+        control.getGestionCliente().InsertarCliente(cliente4.getCedula(),cliente4.getNombreCompleto(),cliente4.getTelefonoContacto(),cliente4.getDireccion());
+        control.getGestionCliente().EliminarCliente(cliente3.getCedula());
+        assertEquals(1,control.getGestionCliente().getListaClientes().size());
+        assertNotEquals(2,control.getGestionCliente().getListaClientes().size());
 
     }
 }
