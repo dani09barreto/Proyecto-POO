@@ -418,17 +418,20 @@ public class PantallaDespacho {
                     if (pantalla.centralDespacho.getGestionProductos().existeProducto(idProd2) == null) {
                         System.out.println("\t[!] El producto no existe");
                     } else {
-                        System.out.println("\tInserte el año de la fecha específica (AAAA)");
-                        int anio = pantalla.leerEntero();
-                        System.out.println("\tInserte el mes de la fecha específica (MM)");
-                        int mes = pantalla.leerEntero();
-                        System.out.println("\tInserte el dia de la fecha específica (DD)");
-                        int dia = pantalla.leerEntero();
+                        SimpleDateFormat Fecha = new SimpleDateFormat("dd/MM/yyyy");
+                        System.out.println("\tDigite la fecha específica en formato dd/MM/yyyy");
+                        String fechain = in.next();
                         Calendar fecha = Calendar.getInstance();
-                        fecha.set(anio, mes - 1, dia);
+                        try {
+                            Date fechaDate = Fecha.parse(fechain);
+                            fecha.setTime(fechaDate);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                         pantalla.getCentralDespacho().verListadoDePedidosDeProductoYFechaEspecífica(idProd2, fecha);
                     }
                     break;
+
                 case 14:
                     System.out.println("\tDigite el numero del pedido del que quiere ver sus envios prime: ");
                     UUID idped;
