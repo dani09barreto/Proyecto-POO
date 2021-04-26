@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10d74ec7-bdf7-43a4-8c55-c9793e84c4e0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/ControlDespacho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/ControlDespacho.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Cliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Producto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Producto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/org/PUJ/TestDespacho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/PUJ/TestDespacho.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/Control/ControlDespacho.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Control/ControlDespacho.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/Model/Cliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Model/Cliente.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/View/PantallaDespacho.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/PUJ/View/PantallaDespacho.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/org/PUJ/TestDespacho.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/org/PUJ/TestDespacho.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,7 +181,7 @@
     <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho_verPedidosAsociadosAseo.ic" NAME="TestDespacho.verPedidosAsociadosAseo Coverage Results" MODIFIED="1619407016080" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.PUJ.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho.ic" NAME="TestDespacho Coverage Results" MODIFIED="1619407664065" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho.ic" NAME="TestDespacho Coverage Results" MODIFIED="1619407769490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.PUJ.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho_testVerListadoPedidosFechaEspecifica.ic" NAME="TestDespacho.testVerListadoPedidosFechaEspecifica Coverage Results" MODIFIED="1619406209729" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

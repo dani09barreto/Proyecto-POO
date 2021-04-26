@@ -231,6 +231,15 @@ public class TestDespacho {
         assertFalse(control.verPedidosAsociadosAProductosAseo().contains(pedido2));
     }
 
+    /*      Los métodos que no fueron testeados (como los de modificarPedido y modificarCliente)
+            fueron porque tienen scanners y esto hace fallar los test. Al igual que aquellos
+            métodos que únicamente imprimen o hacen llamados a toString de algunos objetos.
+
+            Igualmente, cada @Test tiene su prueba exitosa y su prueba no exitosa.
+            -> Por no exitosa comprendimos el testeo mediante assertFalse, assertNotEquals
+            o similares.
+     */
+
 }
 
 
