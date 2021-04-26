@@ -249,12 +249,12 @@ public class ControlDespacho {
         }
         if (ver)
 
-            System.out.println("\t[!] EL PEDIDO QUE DESEA ELIMINAR NO EXISTE ");
+            System.out.println("\t[!] El pedido que desea eliminar, no existe.");
     }
 
     public void VerPedido() {
         if (pedidos.isEmpty())
-            System.out.println("[!] NO EXISTEN PEDIDOS");
+            System.out.println("[!] No existen pedidos.");
         else
             System.out.println(pedidos.toString());
     }

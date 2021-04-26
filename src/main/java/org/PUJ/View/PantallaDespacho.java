@@ -125,8 +125,11 @@ public class PantallaDespacho {
                 case 2:
                     System.out.println("\t\t[!] Insertar un producto");
                     System.out.println("\t -> ¿Qué tipo de producto es?");
-                    System.out.println("\t [1] Aseo\t[2] Fruver\t[3] Otro");
-                    Integer tipoProducto = pantalla.leerEntero();
+                    Integer tipoProducto = 1;
+                    do {
+                        System.out.println("\t [1] Aseo\t[2] Fruver\t[3] Otro");
+                        tipoProducto = pantalla.leerEntero();
+                    } while (tipoProducto > 3 || tipoProducto < 1);
                     System.out.print("\t-> Ingrese el nombre del producto: ");
                     String nombreProducto = pantalla.leerString();
                     System.out.print("\t-> Ingrese el precio del producto: ");
@@ -438,12 +441,15 @@ public class PantallaDespacho {
                     idped = pantalla.leerUUID();
                     Pedido pd = pantalla.centralDespacho.ExistePedido(idped);
                     System.out.println(pd.getNombreRepartidor());
-                    System.out.println("\tElige el tipo de envio a filtrar");
-                    System.out.println("\t1. Bicicleta");
-                    System.out.println("\t2. Moto");
-                    System.out.println("\t3. Minivan");
-                    int op = pantalla.leerEntero();
-                    TipoTransporte tipo;
+                    int op;
+                    do {
+                        System.out.println("\tElige el tipo de envio a filtrar");
+                        System.out.println("\t1. Bicicleta");
+                        System.out.println("\t2. Moto");
+                        System.out.println("\t3. Minivan");
+                        op = pantalla.leerEntero();
+                    } while (op < 1 || op > 3);
+                    TipoTransporte tipo = null;
                     switch (op) {
                         case 1:
                             tipo = TipoTransporte.BICICLETA;
@@ -454,17 +460,19 @@ public class PantallaDespacho {
                         case 3:
                             tipo = TipoTransporte.MINIVAN;
                             break;
-                        default:
-                            throw new IllegalStateException("Unexpected value: " + op);
                     }
-                    System.out.println(pd.enviosPrimePorTipo(tipo).toString());
+                    if (pd.enviosPrimePorTipo(tipo).size() > 0) {
+                        System.out.println(pd.enviosPrimePorTipo(tipo).toString());
+                    } else {
+                        System.out.println("\t[!] No existen datos para este filtro.");
+                    }
                     break;
                 case 15:
                     Map<UUID, Producto> productosFruver = pantalla.getCentralDespacho().verProductosTipoFruver();
                     if (productosFruver.size() != 0) {
                         System.out.println(productosFruver.toString());
                     } else {
-                        System.out.println("\tNo hay productos de tipo fruver");
+                        System.out.println("\t[!] No hay productos de tipo fruver");
                     }
                     break;
                 case 16:
@@ -472,16 +480,19 @@ public class PantallaDespacho {
                     if (pedidosAseo.size() != 0) {
                         System.out.println(pedidosAseo.toString());
                     } else {
-                        System.out.println("\tNo hay productos de tipo fruver");
+                        System.out.println("\t[!] No hay productos de tipo fruver");
                     }
                     break;
                 case 17:
-                    System.out.println("\tElige el tipo de producto a filtrar");
-                    System.out.println("\t1. Hogar");
-                    System.out.println("\t2. Industrial");
-                    System.out.println("\t3. Hopitalario");
-                    int opc = pantalla.leerEntero();
-                    TipoProducto tipo1;
+                    int opc;
+                    do {
+                        System.out.println("\tElige el tipo de producto a filtrar");
+                        System.out.println("\t1. Hogar");
+                        System.out.println("\t2. Industrial");
+                        System.out.println("\t3. Hopitalario");
+                        opc = pantalla.leerEntero();
+                    } while (opc < 1 || opc > 3);
+                    TipoProducto tipo1 = null;
                     switch (opc) {
                         case 1:
                             tipo1 = TipoProducto.HOGAR;
@@ -492,17 +503,15 @@ public class PantallaDespacho {
                         case 3:
                             tipo1 = TipoProducto.HOSPITALARIO;
                             break;
-                        default:
-                            throw new IllegalStateException("Unexpected value: " + opc);
                     }
                     if (pantalla.centralDespacho.precioPedidosDeAseoPorTipo(tipo1) != 0) {
-                        System.out.println("\tEl precio de productos aseo de: " + tipo1 + "es:" + pantalla.centralDespacho.precioPedidosDeAseoPorTipo(tipo1));
+                        System.out.println("\tEl precio de productos aseo de " + tipo1.toString().toLowerCase() + " es $" + pantalla.centralDespacho.precioPedidosDeAseoPorTipo(tipo1));
                     } else {
-                        System.out.println("\tNo existen producto de aseo de tipo: " + tipo1);
+                        System.out.println("\t[!] No existen producto de aseo de tipo " + tipo1.toString().toLowerCase() + ".");
                     }
                     break;
                 default:
-                    System.out.println("\tDigite una opción válida y vuelva a intentarlo");
+                    System.out.println("\tDigite una opción válida y vuelva a intentarlo.");
                     break;
             }
         } while (opcion != 0);
