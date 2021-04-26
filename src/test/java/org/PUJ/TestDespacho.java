@@ -49,6 +49,8 @@ public class TestDespacho {
         control.getGestionCliente().InsertarCliente(cliente1.getCedula(), cliente1.getNombreCompleto(), cliente1.getTelefonoContacto(), cliente1.getDireccion());
         assertEquals(1, control.getGestionCliente().getListaClientes().size());
         assertFalse(control.getGestionCliente().getListaClientes().containsKey(cliente2.getCedula()));
+        control.getGestionCliente().InsertarCliente(cliente1.getCedula(),cliente1.getNombreCompleto(),cliente1.getTelefonoContacto(),cliente1.getDireccion());
+        assertEquals(1,control.getGestionCliente().getListaClientes().size());
 
     }
 
@@ -64,7 +66,7 @@ public class TestDespacho {
     public void testexisteCliente(){
         control.getGestionCliente().InsertarCliente(cliente1.getCedula(),cliente1.getNombreCompleto(),cliente1.getTelefonoContacto(),cliente1.getDireccion());
 
-        //assertEquals(cliente1,control.getGestionCliente().existeCliente(cliente1.getCedula()));
+       // assertEquals(cliente1,control.getGestionCliente().existeCliente(cliente1.getCedula()));
         System.out.println();
     }
 
@@ -76,6 +78,8 @@ public class TestDespacho {
         control.getGestionCliente().EliminarCliente(cliente3.getCedula());
         assertEquals(1, control.getGestionCliente().getListaClientes().size());
         assertNotEquals(2, control.getGestionCliente().getListaClientes().size());
+        control.getGestionCliente().EliminarCliente(cliente1.getCedula());
+        assertEquals(1,control.getGestionCliente().getListaClientes().size());
 
     }
 
@@ -88,6 +92,8 @@ public class TestDespacho {
         assertEquals(2, control.getGestionProductos().getListaProductos().size());
         assertTrue(control.getGestionProductos().getListaProductos().containsKey(productoAseo3.getProdId()));
         assertTrue(control.getGestionProductos().getListaProductos().containsKey(producto2.getProdId()));
+        control.getGestionProductos().insertarProducto(producto2);
+        assertEquals(2,control.getGestionProductos().getListaProductos().size());
     }
 
     @Test
@@ -98,6 +104,8 @@ public class TestDespacho {
         assertFalse(control.getGestionProductos().getListaProductos().containsKey(productoFruver2.getProdId()));
         assertEquals(1, control.getGestionProductos().getListaProductos().size());
         assertTrue(control.getGestionProductos().getListaProductos().containsValue(productoAseo1));
+        control.getGestionProductos().eliminarProducto(productoAseo2.getProdId());
+        assertEquals(1,control.getGestionProductos().getListaProductos().size());
     }
     @Test
     public void testValidarProducto(){
@@ -158,6 +166,7 @@ public class TestDespacho {
         assertEquals(productoFruver1, control.getGestionProductos().existeProducto(productoFruver1.getProdId()));
         assertEquals(producto3, control.getGestionProductos().existeProducto(producto3.getProdId()));
         assertEquals(producto2, control.getGestionProductos().existeProducto(producto2.getProdId()));
+        assertNull(control.getGestionProductos().existeProducto(producto1.getProdId()));
     }
 
     @Test
@@ -173,8 +182,16 @@ public class TestDespacho {
         assertFalse(control.getPedidos().contains(pedido1));
         assertFalse(control.getPedidos().contains(pedido3));
         assertTrue(control.getPedidos().contains(pedido2));
+        control.EliminarPedido(pedido4.getNumeroPedido());
+        assertEquals(1,control.getPedidos().size());
 
     }
+    @Test
+    public void testPrecioaseo(){
+                control.ReservarPedido(pedido4);
+                //assertEquals(5355,control.precioPedidosDeAseoPorTipo(TipoProducto.HOGAR));
+    }
+
 }
 
 
