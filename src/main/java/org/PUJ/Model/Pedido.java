@@ -93,6 +93,8 @@ public class Pedido {
                         "\n\tSolicitante: \t\t\t" + solicitante.getNombreCompleto() + " (Cedula: " + solicitante.getCedula() + ")";
         if (this.serviciosAdicionales.size() == 1) {
             informacion += "\n\t-> El producto cuenta con 1 servicio adicional.\n";
+            for (ServicioAdicional serv : this.serviciosAdicionales)
+                informacion += serv.toString();
         }
         else if (this.serviciosAdicionales.size() > 1) {
             informacion += "\n\t-> El producto cuenta con " + this.serviciosAdicionales.size() + " servicios adicionales.\n";

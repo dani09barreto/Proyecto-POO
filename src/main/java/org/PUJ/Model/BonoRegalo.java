@@ -47,12 +47,9 @@ public class BonoRegalo extends ServicioAdicional{
     @Override
     public String toString() {
         SimpleDateFormat Fecha = new SimpleDateFormat("dd/MM/yyyy");
-        return "\n\tBonoRegalo: " +
-                "\n\tcomercioAsociado: " + comercioAsociado +
-                "\n\tmensaje: " + mensaje +
-                "\n\tfechaVencimiento: " + Fecha.format(this.fechaVencimiento.getTime()) +
-                "\n\tcodigoServicio: " + codigoServicio +
-                "\n\tnombreServicio: " + nombreServicio +
-                "\n\tprecio: " + precio;
+        return  super.toString() +
+                "\n\tComercio Asociado:" + comercioAsociado +
+                "\n\tMensaje: " + mensaje +
+                "\n\tFecha de Vencimiento: " + Fecha.format(fechaVencimiento.getTime()) + "\n";
     }
 }
