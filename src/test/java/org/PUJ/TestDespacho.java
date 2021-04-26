@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import static org.junit.Assert.*;
@@ -26,7 +27,7 @@ public class TestDespacho {
 
     private Aseo productoAseo1 = new Aseo("Escoba", 4500D, "la esquina", "Dersa", TipoProducto.HOGAR, true);
     private Aseo productoAseo2 = new Aseo("Trapero", 7000D, "la esquina", "Dersa", TipoProducto.HOGAR, false);
-    private Aseo productoAseo3 = new Aseo("Desengrasante", 12000d, "los arboles", "Wd-40", TipoProducto.INDUSTRIAL, true);
+    private Aseo productoAseo3 = new Aseo("Desengrasante", 5000d, "los arboles", "Wd-40", TipoProducto.INDUSTRIAL, true);
 
     private Fruver productoFruver1 = new Fruver("Manzana", 400D, "los arboles", 0d, "Napoles");
     private Fruver productoFruver2 = new Fruver("Huevos", 1800D, "Justo y bueno", 0d, "Napoles");
@@ -40,7 +41,6 @@ public class TestDespacho {
     private Pedido pedido4 = new Pedido(Calendar.getInstance(), "Nicolas", cliente5, productoAseo1);
     private Pedido pedido5 = new Pedido(Calendar.getInstance(), "Sofia", cliente5, productoFruver1);
     private Pedido pedido6 = new Pedido(Calendar.getInstance(), "Sara", cliente4, productoAseo3);
-
     //pantalla.getCentralDespacho().
 
 
@@ -51,17 +51,31 @@ public class TestDespacho {
         assertFalse(control.getGestionCliente().getListaClientes().containsKey(cliente2.getCedula()));
 
     }
-    @Test
-    public void TestModificarcliente() {
 
+    @Test
+    public void testValidarCliente(){
+        control.getGestionCliente().InsertarCliente(cliente1.getCedula(),cliente1.getNombreCompleto(),cliente1.getTelefonoContacto(),cliente1.getDireccion());
+        assertTrue(control.validarCliente(cliente1.getCedula()));
+        control.ReservarPedido(pedido2);
+        assertFalse(control.validarCliente(cliente1.getCedula()));
     }
+
+    @Test
+    public void testexisteCliente(){
+        control.getGestionCliente().InsertarCliente(cliente1.getCedula(),cliente1.getNombreCompleto(),cliente1.getTelefonoContacto(),cliente1.getDireccion());
+
+        //assertEquals(cliente1,control.getGestionCliente().existeCliente(cliente1.getCedula()));
+        System.out.println();
+    }
+
+
     @Test
     public void TestEliminarProducto() {
-        control.getGestionCliente().InsertarCliente(cliente3.getCedula(),cliente3.getNombreCompleto(),cliente3.getTelefonoContacto(),cliente3.getDireccion());
-        control.getGestionCliente().InsertarCliente(cliente4.getCedula(),cliente4.getNombreCompleto(),cliente4.getTelefonoContacto(),cliente4.getDireccion());
+        control.getGestionCliente().InsertarCliente(cliente3.getCedula(), cliente3.getNombreCompleto(), cliente3.getTelefonoContacto(), cliente3.getDireccion());
+        control.getGestionCliente().InsertarCliente(cliente4.getCedula(), cliente4.getNombreCompleto(), cliente4.getTelefonoContacto(), cliente4.getDireccion());
         control.getGestionCliente().EliminarCliente(cliente3.getCedula());
-        assertEquals(1,control.getGestionCliente().getListaClientes().size());
-        assertNotEquals(2,control.getGestionCliente().getListaClientes().size());
+        assertEquals(1, control.getGestionCliente().getListaClientes().size());
+        assertNotEquals(2, control.getGestionCliente().getListaClientes().size());
 
     }
 
@@ -85,21 +99,58 @@ public class TestDespacho {
         assertEquals(1, control.getGestionProductos().getListaProductos().size());
         assertTrue(control.getGestionProductos().getListaProductos().containsValue(productoAseo1));
     }
-
     @Test
-    public void testReservarPedido(){
+    public void testValidarProducto(){
+        control.getGestionProductos().insertarProducto(producto2);
+        assertFalse(control.ValidarProducto(producto2));
+        control.ReservarPedido(pedido1);
+        //assertTrue(control.ValidarProducto(producto2));
+    }
+    @Test
+    public void testReservarPedido() {
+        ArrayList<ServicioAdicional> servicioAdicional1 = new ArrayList<>();
+        ArrayList<ServicioAdicional> servicioAdicional2 = new ArrayList<>();
+        ArrayList<ServicioAdicional> servicioAdicional3 = new ArrayList<>();
+
         control.ReservarPedido(pedido1);
         control.ReservarPedido(pedido2);
-        assertEquals(2,control.getPedidos().size());
+        assertEquals(2, control.getPedidos().size());
+        servicioAdicional1.add(new BonoRegalo("Servicio adicional 1", 3500d, "Justo y bueno", "Mensaje", Calendar.getInstance()));
+        pedido2.setServiciosAdicionales(servicioAdicional1);
+        servicioAdicional2.add(new EnvioPrime("Envio prime", 60000d, 5d, TipoTransporte.MOTO, 3));
+        pedido6.setServiciosAdicionales(servicioAdicional2);
+        servicioAdicional3.add(new EnvioPrime("Servicio envio", 6000d, 6d, TipoTransporte.MOTO, 4));
+        pedido4.setServiciosAdicionales(servicioAdicional3);
+        control.ReservarPedido(pedido6);
+        control.ReservarPedido(pedido4);
+        assertEquals(4, control.getPedidos().size());
+        assertNotEquals(1, control.getPedidos().size());
+        control.ReservarPedido(pedido4);
+        assertEquals(pedido2.getServiciosAdicionales(), servicioAdicional1);
+        assertEquals(pedido6.getServiciosAdicionales(), servicioAdicional2);
+        assertEquals(pedido4.getServiciosAdicionales(), servicioAdicional3);
+        assertNotEquals(pedido2.getServiciosAdicionales(), servicioAdicional2);
 
-        control.ReservarPedido(pedido3);
-
-        assertEquals(3, control.getPedidos().size());
-        assertNotEquals(1,control.getPedidos().size());
     }
-  
-  @Test
-    public void testExistePedido () {
+
+    @Test
+    public void testExistePedido() {
+        control.ReservarPedido(pedido1);
+        control.ReservarPedido(pedido3);
+        control.ReservarPedido(pedido5);
+        assertEquals(pedido1, control.ExistePedido(pedido1.getNumeroPedido()));
+        assertEquals(pedido3, control.ExistePedido(pedido3.getNumeroPedido()));
+        assertNull( control.ExistePedido(pedido6.getNumeroPedido()));
+        assertEquals(pedido1,control.ExistePedido(cliente2,producto1,pedido1.getFechaRecibido()));
+        assertEquals(pedido3,control.ExistePedido(cliente3,producto3,pedido3.getFechaRecibido()));
+        assertEquals(pedido5,control.ExistePedido(cliente5,productoFruver1,pedido5.getFechaRecibido()));
+        assertNotEquals(pedido5,control.ExistePedido(cliente2,productoAseo2,Calendar.getInstance()));
+        assertNotEquals(pedido2,control.ExistePedido(pedido2.getNumeroPedido()));
+
+    }
+
+    @Test
+    public void testExisteProducto() {
         control.getGestionProductos().insertarProducto(productoFruver1);
         control.getGestionProductos().insertarProducto(producto3);
         control.getGestionProductos().insertarProducto(producto2);
@@ -110,22 +161,20 @@ public class TestDespacho {
     }
 
     @Test
-    public void testEliminarPedido () {
+    public void testEliminarPedido() {
         control.ReservarPedido(pedido1);
         control.ReservarPedido(pedido2);
         control.ReservarPedido(pedido3);
 
         control.EliminarPedido(pedido1.getNumeroPedido());
         control.EliminarPedido(pedido3.getNumeroPedido());
-        
+
         assertEquals(1, control.getPedidos().size());
         assertFalse(control.getPedidos().contains(pedido1));
         assertFalse(control.getPedidos().contains(pedido3));
         assertTrue(control.getPedidos().contains(pedido2));
-        System.out.println();
 
     }
 }
-
 
 
