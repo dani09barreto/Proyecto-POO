@@ -7,8 +7,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.lang.reflect.Array;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -27,7 +27,7 @@ public class TestDespacho {
 
     private Aseo productoAseo1 = new Aseo("Escoba", 4500D, "la esquina", "Dersa", TipoProducto.HOGAR, true);
     private Aseo productoAseo2 = new Aseo("Trapero", 7000D, "la esquina", "Dersa", TipoProducto.HOGAR, false);
-    private Aseo productoAseo3 = new Aseo("Desengrasante", 5000d, "los arboles", "Wd-40", TipoProducto.INDUSTRIAL, true);
+    private Aseo productoAseo3 = new Aseo("Desengrasante", 500500d, "los arboles", "Wd-40", TipoProducto.INDUSTRIAL, true);
 
     private Fruver productoFruver1 = new Fruver("Manzana", 400D, "los arboles", 0d, "Napoles");
     private Fruver productoFruver2 = new Fruver("Huevos", 1800D, "Justo y bueno", 0d, "Napoles");
@@ -63,11 +63,9 @@ public class TestDespacho {
     }
 
     @Test
-    public void testexisteCliente(){
+    public void testExisteCliente(){
         control.getGestionCliente().InsertarCliente(cliente1.getCedula(),cliente1.getNombreCompleto(),cliente1.getTelefonoContacto(),cliente1.getDireccion());
-
-       // assertEquals(cliente1,control.getGestionCliente().existeCliente(cliente1.getCedula()));
-        System.out.println();
+        assertEquals(cliente1, control.getGestionCliente().existeCliente(cliente1.getCedula()));
     }
 
 
@@ -109,10 +107,10 @@ public class TestDespacho {
     }
     @Test
     public void testValidarProducto(){
-        control.getGestionProductos().insertarProducto(producto2);
-        assertFalse(control.ValidarProducto(producto2));
+        control.getGestionProductos().insertarProducto(producto1);
+        assertFalse(control.ValidarProducto(producto1));
         control.ReservarPedido(pedido1);
-        //assertTrue(control.ValidarProducto(producto2));
+        assertTrue(control.ValidarProducto(producto1));
     }
     @Test
     public void testReservarPedido() {
@@ -121,6 +119,7 @@ public class TestDespacho {
         ArrayList<ServicioAdicional> servicioAdicional3 = new ArrayList<>();
 
         control.ReservarPedido(pedido1);
+
         control.ReservarPedido(pedido2);
         assertEquals(2, control.getPedidos().size());
         servicioAdicional1.add(new BonoRegalo("Servicio adicional 1", 3500d, "Justo y bueno", "Mensaje", Calendar.getInstance()));
@@ -187,9 +186,49 @@ public class TestDespacho {
 
     }
     @Test
-    public void testPrecioaseo(){
-                control.ReservarPedido(pedido4);
-                //assertEquals(5355,control.precioPedidosDeAseoPorTipo(TipoProducto.HOGAR));
+    public void testPrecioAseo(){
+        control.ReservarPedido(pedido4);
+        assertEquals(new Double (4819.5d),control.precioPedidosDeAseoPorTipo(TipoProducto.HOGAR));
+    }
+
+    @Test
+    public void testVerListadoPedidosFechaEspecifica() {
+        control.ReservarPedido(pedido2);
+        control.ReservarPedido(pedido4);
+        control.ReservarPedido(pedido6);
+
+        assertFalse(control.verListadoDePedidosDeProductoYFechaEspecífica(pedido4.getNumeroPedido(), pedido4.getFechaRecibido()));
+        //assertTrue(control.verListadoDePedidosDeProductoYFechaEspecífica(pedido6.getNumeroPedido(), pedido4.getFechaRecibido()));
+
+    }
+
+    @Test
+    public void testVerProductosTipoFruver () {
+        control.getGestionProductos().insertarProducto(productoFruver1);
+        control.getGestionProductos().insertarProducto(productoFruver2);
+        control.getGestionProductos().insertarProducto(producto1);
+        control.getGestionProductos().insertarProducto(producto3);
+
+        Map<UUID, Producto> resultadoEsperado = new HashMap<>();
+        resultadoEsperado.put(productoFruver1.getProdId(), productoFruver1);
+        resultadoEsperado.put(productoFruver2.getProdId(), productoFruver2);
+
+        assertEquals(resultadoEsperado, control.verProductosTipoFruver());
+    }
+
+    @Test
+    public void verPedidosAsociadosAseo() {
+        control.ReservarPedido(pedido1);
+        control.ReservarPedido(pedido2);
+        control.ReservarPedido(pedido6);
+        control.ReservarPedido(pedido4);
+
+        ArrayList<Pedido> resultadoEsperado = new ArrayList<>();
+        resultadoEsperado.add(pedido6);
+        resultadoEsperado.add(pedido4);
+
+        assertEquals(resultadoEsperado, control.verPedidosAsociadosAProductosAseo());
+        assertFalse(control.verPedidosAsociadosAProductosAseo().contains(pedido2));
     }
 
 }

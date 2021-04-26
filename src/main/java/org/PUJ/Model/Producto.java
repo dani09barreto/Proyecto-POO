@@ -1,5 +1,6 @@
 package org.PUJ.Model;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class Producto {

@@ -52,7 +52,7 @@ public class ControlDespacho {
         }
         costoPedido += costoPedido * 0.10;
 
-        if (nuevopedido.getProductoSolicitado().getIva() > 50000) {
+        if (nuevopedido.getProductoSolicitado().getIva() > 50000d) {
             costoPedido += 8000;
         }
         nuevopedido.setPagado(true);
@@ -63,7 +63,7 @@ public class ControlDespacho {
             System.out.println("\tServicio adicional: " + servtemp.getNombreServicio());
             System.out.println("\tPrecio servicio adicional: $" + servtemp.calcularPrecio());
         }
-        if (nuevopedido.getProductoSolicitado().getIva() > 50000) {
+        if (nuevopedido.getProductoSolicitado().getIva() > 50000d) {
             System.out.println("\tPrecio Iva Adicional: $ 8000");
         }
         System.out.println("\tCosto de despacho: $" + costoPedido * 0.10);
@@ -277,7 +277,7 @@ public class ControlDespacho {
     }
 
 
-    public double precioPedidosDeAseoPorTipo(TipoProducto tipoABuscar) {
+    public Double precioPedidosDeAseoPorTipo(TipoProducto tipoABuscar) {
         Double precio = 0.0;
         for (Pedido pedtemp : this.pedidos) {
             if (pedtemp.getProductoSolicitado() instanceof Aseo) {
