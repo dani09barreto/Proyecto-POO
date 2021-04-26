@@ -84,25 +84,22 @@ public class Pedido {
     public String toString() {
         String informacion;
         SimpleDateFormat Fecha = new SimpleDateFormat("dd/MM/yyyy");
-        informacion =     "\n\tNumero de Pedido: \t\t" + numeroPedido +
+        informacion =     "\n\tPedido #" + numeroPedido + ": " +
                 "\n\tFecha Recibido: \t\t" + Fecha.format(this.fechaRecibido.getTime()) +
                 "\n\tPagado: \t\t\t\t";
         if (pagado) informacion += "Sí";
         else informacion += "No";
         informacion +=  "\n\tNombre del repartidor: \t" + nombreRepartidor +
-                "\n\tSolicitante: \t\t\t" + solicitante.getNombreCompleto() + " (Cedula: " + solicitante.getCedula() + ")";
-        if(serviciosAdicionales!=null) {
-            if (serviciosAdicionales.size() > 0) {
-                informacion += "\n\t Servicios adicionales: \n";
-                informacion += serviciosAdicionales.toString();
-            } else {
-                informacion += "\n\t[!] El pedido no tiene servicios adicionales.";
-                informacion += "\n\t[-] Producto solicitado: \n" + productoSolicitado + "\n";
-            }
-        }else{
-            informacion += "\n\t[!] El pedido no tiene servicios adicionales.";
-            informacion += "\n\t[-] Producto solicitado: \n" + productoSolicitado + "\n";
+                        "\n\tSolicitante: \t\t\t" + solicitante.getNombreCompleto() + " (Cedula: " + solicitante.getCedula() + ")";
+        if (this.serviciosAdicionales.size() == 1) {
+            informacion += "\n\t-> El producto cuenta con 1 servicio adicional.\n";
         }
+        else if (this.serviciosAdicionales.size() > 1) {
+            informacion += "\n\t-> El producto cuenta con " + this.serviciosAdicionales.size() + " servicios adicionales.\n";
+        } else {
+            informacion += "\n\t[!] Producto sin servicios adicionales.\n";
+        }
+
         return informacion;
     }
     public ArrayList <ServicioAdicional> enviosPrimePorTipo (TipoTransporte tipobuscar){
