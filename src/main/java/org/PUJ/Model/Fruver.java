@@ -48,6 +48,6 @@ public class Fruver extends Producto {
         return super.toString() +
                 "\n\tEs orgánico: " + organico +
                 "\n\tImpuesto local: $" + impuestoLocal +
-                "\n\tNombre Hacienda: " + nombreHacienda;
+                "\n\tNombre Hacienda: " + nombreHacienda + "\n";
     }
 }

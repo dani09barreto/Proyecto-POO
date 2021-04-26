@@ -52,6 +52,6 @@ public class Aseo extends Producto {
          return super.toString() +
                 "\n\tNombre Empresa: " + nombreEmpresa +
                 "\n\tInvima: " + invima +
-                "\n\tTipo: " + tipo;
+                "\n\tTipo: " + tipo + "\n";
     }
 }
