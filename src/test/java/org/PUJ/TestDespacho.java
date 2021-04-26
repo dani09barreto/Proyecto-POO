@@ -122,6 +122,7 @@ public class TestDespacho {
         assertFalse(control.getPedidos().contains(pedido1));
         assertFalse(control.getPedidos().contains(pedido3));
         assertTrue(control.getPedidos().contains(pedido2));
+        System.out.println();
 
     }
 }
