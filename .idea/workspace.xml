@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10d74ec7-bdf7-43a4-8c55-c9793e84c4e0" name="Default Changelist" comment="" />
+    <list default="true" id="10d74ec7-bdf7-43a4-8c55-c9793e84c4e0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,7 +52,7 @@
       <recent name="org.PUJ.Model" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.PantallaDespacho">
+  <component name="RunManager" selected="JUnit.TestDespacho">
     <configuration name="PantallaDespacho" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.PUJ.View.PantallaDespacho" />
       <module name="Proyecto-POO" />
@@ -113,10 +115,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestDespacho" />
         <item itemvalue="Application.PantallaDespacho" />
         <item itemvalue="JUnit.TestDespacho.testEliminarPedido" />
         <item itemvalue="JUnit.TestDespacho.testExistePedido" />
-        <item itemvalue="JUnit.TestDespacho" />
       </list>
     </recent_temporary>
   </component>
@@ -147,7 +149,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho.ic" NAME="TestDespacho Coverage Results" MODIFIED="1619387344380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho.ic" NAME="TestDespacho Coverage Results" MODIFIED="1619400152025" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>org.PUJ.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho_testReservarPedido.ic" NAME="TestDespacho.testReservarPedido Coverage Results" MODIFIED="1619398081218" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.PUJ.*</FILTER>
     </SUITE>
   </component>
