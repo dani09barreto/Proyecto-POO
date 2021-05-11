@@ -5,11 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10d74ec7-bdf7-43a4-8c55-c9793e84c4e0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/View/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/View/Controller/ControllerFX.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/View/Launcher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/PUJ/View/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_04_2021_12_52_p__m__[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_04_2021_12_52_p__m___Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/BonoRegalo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/BonoRegalo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/EnvioPrime.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/EnvioPrime.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Pedido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Pedido.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/ServicioAdicional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/ServicioAdicional.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/ControlDespacho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Controller/ControlDespacho.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/GestionCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Controller/GestionCliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/GestionProductos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Controller/GestionProductos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/View/PantallaDespacho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/View/PantallaDespacho.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/PUJ/TestDespacho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/PUJ/TestDespacho.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/Control/ControlDespacho.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/Control/GestionCliente.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/Control/GestionProductos.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/Model/Pedido.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Model/Pedido.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/View/PantallaDespacho.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/PUJ/View/PantallaDespacho.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/org/PUJ/TestDespacho.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/org/PUJ/TestDespacho.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +60,9 @@
     </file-type-list>
   </component>
   <component name="ProjectId" id="1rGGbNEKFgSvgyAxjHP5Ym9xP4X" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -59,7 +79,20 @@
       <recent name="org.PUJ.Model" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.PantallaDespacho">
+  <component name="RunManager" selected="Application.Launcher">
+    <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.PUJ.View.Launcher" />
+      <module name="Proyecto-POO" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.PUJ.View.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PantallaDespacho" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.PUJ.View.PantallaDespacho" />
       <module name="Proyecto-POO" />
@@ -120,29 +153,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestDespacho.verPedidosAsociadosAseo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Proyecto-POO" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.PUJ.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.PUJ" />
-      <option name="MAIN_CLASS_NAME" value="org.PUJ.TestDespacho" />
-      <option name="METHOD_NAME" value="verPedidosAsociadosAseo" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Launcher" />
         <item itemvalue="Application.PantallaDespacho" />
         <item itemvalue="JUnit.TestDespacho" />
         <item itemvalue="JUnit.TestDespacho.testValidarProducto" />
         <item itemvalue="JUnit.TestDespacho.testExisteCliente" />
-        <item itemvalue="JUnit.TestDespacho.verPedidosAsociadosAseo" />
       </list>
     </recent_temporary>
   </component>
@@ -173,22 +190,22 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho_testReservarPedido.ic" NAME="TestDespacho.testReservarPedido Coverage Results" MODIFIED="1619398081218" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>org.PUJ.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho_testExistePedido.ic" NAME="TestDespacho.testExistePedido Coverage Results" MODIFIED="1619393693520" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>org.PUJ.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho_verPedidosAsociadosAseo.ic" NAME="TestDespacho.verPedidosAsociadosAseo Coverage Results" MODIFIED="1619407016080" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>org.PUJ.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho.ic" NAME="TestDespacho Coverage Results" MODIFIED="1619407769490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.PUJ.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho_testVerListadoPedidosFechaEspecifica.ic" NAME="TestDespacho.testVerListadoPedidosFechaEspecifica Coverage Results" MODIFIED="1619406209729" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.PUJ.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho_testExisteCliente.ic" NAME="TestDespacho.testExisteCliente Coverage Results" MODIFIED="1619407385411" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>org.PUJ.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho_testExistePedido.ic" NAME="TestDespacho.testExistePedido Coverage Results" MODIFIED="1619393693520" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>org.PUJ.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho_testReservarPedido.ic" NAME="TestDespacho.testReservarPedido Coverage Results" MODIFIED="1619398081218" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>org.PUJ.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho.ic" NAME="TestDespacho Coverage Results" MODIFIED="1619407664065" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.PUJ.*</FILTER>
     </SUITE>
   </component>

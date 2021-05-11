@@ -1,4 +1,4 @@
-package org.PUJ.Control;
+package org.PUJ.Controller;
 
 
 import org.PUJ.Model.Producto;

@@ -7,7 +7,7 @@ public class Cliente {
     private String nombreCompleto;
     private Long telefonoContacto;
     private String direccion;
-
+    
     public Cliente() {
     }
 

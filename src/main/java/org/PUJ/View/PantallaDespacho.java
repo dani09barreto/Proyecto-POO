@@ -1,6 +1,6 @@
 package org.PUJ.View;
 
-import org.PUJ.Control.ControlDespacho;
+import org.PUJ.Controller.ControlDespacho;
 import org.PUJ.Model.*;
 
 import java.text.ParseException;
@@ -47,6 +47,7 @@ public class PantallaDespacho {
         ServicioAdicional serv3 = new BonoRegalo("Bono regalo", 3000.0, "casa ya", "buenos dias señor sol", Calendar.getInstance());
         ServicioAdicional serv4 = new EnvioPrime("Envio prime", 20000.0, 200.0, TipoTransporte.BICICLETA, 3);
         ServicioAdicional serv5 = new EnvioPrime("Envio prime", 3000.0, 500.0, TipoTransporte.MINIVAN, 20);
+        ServicioAdicional serv6 = new EnvioPrime("Envio prime", 5000.0, 500.0, TipoTransporte.MOTO, 5);
 
         //colecion de servicios
         ArrayList<ServicioAdicional> serv1pd1 = new ArrayList<>();
@@ -59,12 +60,15 @@ public class PantallaDespacho {
         serv4pd4.add(serv4);
         ArrayList<ServicioAdicional> serv5pd5 = new ArrayList<>();
         serv5pd5.add(serv5);
+        ArrayList<ServicioAdicional> serv6pd6 = new ArrayList<>();
+        serv6pd6.add(serv6);
 
         pedido1.setServiciosAdicionales(serv1pd1);
         pedido2.setServiciosAdicionales(serv2pd2);
         pedido3.setServiciosAdicionales(serv3pd3);
         pedido4.setServiciosAdicionales(serv4pd4);
         pedido5.setServiciosAdicionales(serv5pd5);
+        pedido6.setServiciosAdicionales(serv6pd6);
 
         pantalla.getCentralDespacho().getGestionCliente().getListaClientes().put(cliente1.getCedula(), cliente1);
         pantalla.getCentralDespacho().getGestionCliente().getListaClientes().put(cliente2.getCedula(), cliente2);

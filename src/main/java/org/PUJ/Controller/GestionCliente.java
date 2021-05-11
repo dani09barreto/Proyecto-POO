@@ -1,7 +1,6 @@
-package org.PUJ.Control;
+package org.PUJ.Controller;
 
 import org.PUJ.Model.Cliente;
-import org.PUJ.Model.Producto;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,13 +1,9 @@
 package org.PUJ;
 
-import org.PUJ.Control.ControlDespacho;
+import org.PUJ.Controller.ControlDespacho;
 import org.PUJ.Model.*;
-import org.PUJ.View.PantallaDespacho;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 import static org.junit.Assert.*;
