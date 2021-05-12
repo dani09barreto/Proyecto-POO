@@ -9,10 +9,9 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-
 public class App extends Application {
-    private final static String ICON_NAME = "entrega.png";
-    private final static String MAIN_FXML_NAME = "SendJaviGUI.fxml";
+    private final static String ICON_NAME = "camion-de-reparto.png";
+    private final static String MAIN_FXML_NAME = "SendJaviGUIFX.fxml";
     private final static String STYLE_SHEET_NAME = "styles.css";
     private final static String WINDOW_NAME = "SendJavi";
 

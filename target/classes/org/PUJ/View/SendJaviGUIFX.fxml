@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="-1.0" prefHeight="638.0" prefWidth="955.0">
+         <children>
+            <TabPane layoutX="-1.0" prefHeight="638.0" prefWidth="955.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab style="-fx-font-size: 15;" text="Cliente">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <AnchorPane layoutY="-2.0" prefHeight="611.0" prefWidth="955.0">
+                                 <children>
+                                    <VBox layoutX="-1.0" layoutY="1.0" prefHeight="608.0" prefWidth="955.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.2750556792873051, 0.7171492204899778" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+                                             <items>
+                                                <AnchorPane prefHeight="611.0" prefWidth="263.0" style="-fx-background-color: #39;">
+                                                   <children>
+                                                      <Pane layoutX="-82.0" layoutY="329.0" prefHeight="219.0" prefWidth="139.0" style="-fx-background-color: #00CED1; -fx-background-radius: 70;" />
+                                                      <Pane layoutX="-120.0" layoutY="-92.0" prefHeight="210.0" prefWidth="208.0" style="-fx-background-color: #00CED1; -fx-background-radius: 70;" />
+                                                      <Label alignment="CENTER" layoutX="1.0" layoutY="25.0" minWidth="60.0" prefHeight="37.0" prefWidth="267.0" style="-fx-background-color: #FFFFFF; -fx-padding: 5; -fx-background-radius: 20;" text="Nuevo Cliente" textAlignment="CENTER" wrapText="false">
+                                                         <font>
+                                                            <Font size="18.0" fx:id="x111" />
+                                                         </font>
+                                                         <effect>
+                                                            <DropShadow>
+                                                               <color>
+                                                                  <Color green="0.8823529481887817" blue="1.0" />
+                                                               </color>
+                                                            </DropShadow>
+                                                         </effect>
+                                                      </Label>
+                                                      <TextField layoutX="49.0" layoutY="82.0" promptText="Nombre Completo" style="-fx-background-radius: 20;" />
+                                                      <TextField layoutX="49.0" layoutY="114.0" promptText="Cedula" style="-fx-background-radius: 20;" />
+                                                      <TextField layoutX="49.0" layoutY="147.0" promptText="Telefono" style="-fx-background-radius: 20;" />
+                                                      <TextField layoutX="49.0" layoutY="179.0" promptText="Dirección" style="-fx-background-radius: 20;" />
+                                                      <Button layoutX="25.0" layoutY="220.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" style="-fx-background-radius: 20; -fx-background-color: #00CED1; -fx-border-radius: 20;" textFill="#fff9f9">
+                                                         <graphic>
+                                                            <ImageView fitHeight="21.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@img/computacion-en-la-nube.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                      <Button layoutX="153.0" layoutY="220.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="74.0" style="-fx-background-radius: 20; -fx-background-color: #00CED1; -fx-border-radius: 20;" text="Agregar" textFill="#fff9f9" />
+                                                      <Separator layoutX="14.0" layoutY="277.0" prefHeight="3.0" prefWidth="250.0" />
+                                                      <Label layoutX="23.0" layoutY="301.0" prefHeight="16.0" prefWidth="214.0" text="Selecciona un Cliente">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                         <effect>
+                                                            <DropShadow>
+                                                               <color>
+                                                                  <Color green="0.8823529481887817" blue="1.0" />
+                                                               </color>
+                                                            </DropShadow>
+                                                         </effect>
+                                                      </Label>
+                                                      <ListView layoutX="24.0" layoutY="346.0" prefHeight="185.0" prefWidth="200.0" style="-fx-background-radius: 30;" />
+                                                      <Button layoutX="163.0" layoutY="544.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" style="-fx-background-radius: 20; -fx-background-color: #00CED1; -fx-border-radius: 20;" text="Eliminar" textFill="#fff9f9" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <ScrollPane prefHeight="548.0" prefWidth="401.0">
+                                                   <content>
+                                                      <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="537.0" prefWidth="478.0">
+                                                         <children>
+                                                            <Pane layoutX="179.0" layoutY="-147.0" prefHeight="190.0" prefWidth="297.0" style="-fx-background-color: #00CED1; -fx-background-radius: 70;" />
+                                                            <Label alignment="CENTER" font="$x111" layoutX="-3.0" layoutY="25.0" prefHeight="37.0" prefWidth="482.0" style="-fx-background-color: #FFFFFF; -fx-padding: 5; -fx-background-radius: 20;" text="Registro de Clientes" textAlignment="CENTER" wrapText="false">
+                                                               <effect>
+                                                                  <DropShadow>
+                                                                     <color>
+                                                                        <Color green="0.8823529481887817" blue="1.0" />
+                                                                     </color>
+                                                                  </DropShadow>
+                                                               </effect></Label>
+                                                            <TableView layoutY="81.0" prefHeight="491.0" prefWidth="482.0">
+                                                              <columns>
+                                                                <TableColumn prefWidth="75.0" style="-fx-background-radius: 20; -fx-background-color: #D4E7EC; -fx-border-color: #B9BABA; -fx-border-radius: 20;" text="ID" />
+                                                                <TableColumn prefWidth="82.0" style="-fx-background-radius: 20; -fx-background-color: #D4E7EC; -fx-border-color: #B9BABA; -fx-border-radius: 20;" text="Nombre" />
+                                                                  <TableColumn prefWidth="91.0" style="-fx-background-radius: 20; -fx-background-color: #D4E7EC; -fx-border-color: #B9BABA; -fx-border-radius: 20;" text="Cedula" />
+                                                                  <TableColumn prefWidth="123.0" style="-fx-background-radius: 20; -fx-background-color: #D4E7EC; -fx-border-color: #B9BABA; -fx-border-radius: 20;" text="Telefono" />
+                                                                  <TableColumn prefWidth="110.0" style="-fx-background-radius: 20; -fx-background-color: #D4E7EC; -fx-border-color: #B9BABA; -fx-border-radius: 20;" text="Dirección" />
+                                                              </columns>
+                                                            </TableView>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </content>
+                                                </ScrollPane>
+                                                <AnchorPane prefHeight="577.0" prefWidth="277.0">
+                                                   <children>
+                                                      <Pane layoutX="76.0" layoutY="-184.0" prefHeight="219.0" prefWidth="175.0" style="-fx-background-color: #00CED1; -fx-background-radius: 70;" />
+                                                      <Label alignment="CENTER" font="$x111" layoutX="-2.0" layoutY="25.0" prefHeight="37.0" prefWidth="265.0" style="-fx-background-color: #FFFFFF; -fx-padding: 5; -fx-background-radius: 20;" text="Cliente" textAlignment="CENTER" wrapText="false">
+                                                         <effect>
+                                                            <DropShadow>
+                                                               <color>
+                                                                  <Color green="0.8823529481887817" blue="1.0" />
+                                                               </color>
+                                                            </DropShadow>
+                                                         </effect>
+                                                      </Label>
+                                                      <Label layoutX="22.0" layoutY="84.0" prefHeight="389.0" prefWidth="210.0" style="-fx-background-color: #D4E7EC; -fx-background-radius: 20; -fx-border-color: #B9BABA; -fx-border-radius: 20;" />
+                                                      <ImageView fitHeight="71.0" fitWidth="97.0" layoutX="89.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@img/user.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label layoutX="44.0" layoutY="200.0" text="Daniel Felipe Barreto Rojas">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField disable="true" layoutX="44.0" layoutY="234.0" promptText="Nombre Completo" style="-fx-background-radius: 20;" />
+                                                      <TextField disable="true" layoutX="44.0" layoutY="266.0" promptText="Cedula" style="-fx-background-radius: 20;" />
+                                                      <TextField disable="true" layoutX="44.0" layoutY="299.0" promptText="Telefono" style="-fx-background-radius: 20;" />
+                                                      <TextField disable="true" layoutX="44.0" layoutY="331.0" promptText="Dirección" style="-fx-background-radius: 20;" />
+                                                      <CheckBox layoutX="48.0" layoutY="376.0" mnemonicParsing="false" text="¿Modificar?">
+                                                         <font>
+                                                            <Font size="13.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                      <Button disable="true" layoutX="92.0" layoutY="428.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="72.0" style="-fx-background-radius: 20; -fx-background-color: #00CED1; -fx-border-radius: 20;" text="Modificar" textFill="#fff9f9" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </items>
+                                          </SplitPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab style="-fx-font-size: 15;" text="Producto">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <AnchorPane layoutY="-1.0" prefHeight="610.0" prefWidth="950.0">
+                                 <children>
+                                    <VBox prefHeight="612.0" prefWidth="955.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.3273871983210913, 0.7555089192025184" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+                                             <items>
+                                                <AnchorPane prefHeight="559.0" prefWidth="261.0">
+                                                   <children>
+                                                      <Pane layoutX="-143.0" layoutY="388.0" prefHeight="211.0" prefWidth="174.0" style="-fx-background-color: #FA2C56; -fx-background-radius: 70;" />
+                                                      <Pane layoutX="-120.0" layoutY="-112.0" prefHeight="219.0" prefWidth="198.0" style="-fx-background-color: #FA2C56; -fx-background-radius: 70;" />
+                                                      <Label alignment="CENTER" layoutY="31.0" minWidth="60.0" prefHeight="37.0" prefWidth="309.0" style="-fx-background-color: #FFFFFF; -fx-padding: 5; -fx-background-radius: 20;" text="Nuevo Producto" textAlignment="CENTER" wrapText="false">
+                                                         <font>
+                                                            <Font size="18.0" fx:id="x1111" />
+                                                         </font>
+                                                         <effect>
+                                                            <DropShadow>
+                                                               <color>
+                                                                  <Color red="0.9803921580314636" green="0.1725490242242813" blue="0.33725491166114807" />
+                                                               </color>
+                                                            </DropShadow>
+                                                         </effect>
+                                                      </Label>
+                                                      <RadioButton layoutX="49.0" layoutY="189.0" mnemonicParsing="false" text="Aseo">
+                                                         <toggleGroup>
+                                                            <ToggleGroup fx:id="tipoProducto" />
+                                                         </toggleGroup>
+                                                      </RadioButton>
+                                                      <RadioButton layoutX="127.0" layoutY="189.0" mnemonicParsing="false" text="Fruver" toggleGroup="$tipoProducto" />
+                                                      <RadioButton layoutX="209.0" layoutY="189.0" mnemonicParsing="false" selected="true" text="Otro" toggleGroup="$tipoProducto" />
+                                                      <TextField layoutX="46.0" layoutY="82.0" promptText="Nombre Producto" style="-fx-background-radius: 20;" />
+                                                      <TextField layoutX="46.0" layoutY="114.0" promptText="Precio" style="-fx-background-radius: 20;" />
+                                                      <TextField layoutX="46.0" layoutY="146.0" promptText="Tienda" style="-fx-background-radius: 20;" />
+                                                      <Button layoutX="218.0" layoutY="92.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="74.0" style="-fx-background-radius: 20; -fx-background-color: #FA2C56; -fx-border-radius: 20;" text="Agregar" textFill="#fff9f9" />
+                                                      <Separator layoutX="3.0" layoutY="364.0" prefHeight="4.0" prefWidth="309.0" />
+                                                      <Label layoutX="31.0" layoutY="372.0" prefHeight="16.0" prefWidth="214.0" text="Selecciona un Producto">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                         <effect>
+                                                            <DropShadow>
+                                                               <color>
+                                                                  <Color red="0.9803921580314636" green="0.1725490242242813" blue="0.33725491166114807" />
+                                                               </color>
+                                                            </DropShadow>
+                                                         </effect>
+                                                      </Label>
+                                                      <Separator layoutX="4.0" layoutY="223.0" prefHeight="3.0" prefWidth="305.0" />
+                                                      <Button layoutX="220.0" layoutY="144.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" style="-fx-background-radius: 20; -fx-background-color: #FA2C56; -fx-border-radius: 20;" textFill="#fff9f9">
+                                                         <graphic>
+                                                            <ImageView fitHeight="21.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@img/computacion-en-la-nube.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                      <Separator layoutX="157.0" layoutY="222.0" orientation="VERTICAL" prefHeight="142.0" prefWidth="3.0" />
+                                                      <ListView layoutX="40.0" layoutY="405.0" prefHeight="157.0" prefWidth="233.0" style="-fx-background-radius: 30;" />
+                                                      <Button layoutX="195.0" layoutY="568.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="74.0" style="-fx-background-radius: 20; -fx-background-color: #FA2C56; -fx-border-radius: 20;" text="Eliminar" textFill="#fff9f9" />
+                                                      <Label alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="53.0" layoutY="234.0" prefHeight="21.0" prefWidth="51.0" text="Fruver">
+                                                         <font>
+                                                            <Font size="13.0" />
+                                                         </font>
+                                                         <effect>
+                                                            <DropShadow>
+                                                               <color>
+                                                                  <Color red="0.9803921580314636" green="0.1725490242242813" blue="0.33725491166114807" />
+                                                               </color>
+                                                            </DropShadow>
+                                                         </effect>
+                                                      </Label>
+                                                      <Label alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="207.0" layoutY="234.0" prefHeight="21.0" prefWidth="51.0" text="Aseo">
+                                                         <font>
+                                                            <Font size="13.0" />
+                                                         </font>
+                                                         <effect>
+                                                            <DropShadow>
+                                                               <color>
+                                                                  <Color red="0.9803921580314636" green="0.1725490242242813" blue="0.33725491166114807" />
+                                                               </color>
+                                                            </DropShadow>
+                                                         </effect>
+                                                      </Label>
+                                                      <TextField disable="true" layoutX="13.0" layoutY="268.0" prefHeight="25.0" prefWidth="132.0" promptText="Nombre Empresa" style="-fx-background-radius: 20;" />
+                                                      <TextField disable="true" layoutX="167.0" layoutY="268.0" prefHeight="25.0" prefWidth="132.0" promptText="Impuesto Local" style="-fx-background-radius: 20;" />
+                                                      <TextField disable="true" layoutX="166.0" layoutY="302.0" prefHeight="25.0" prefWidth="132.0" promptText="Nombre Hacienda" style="-fx-background-radius: 20;" />
+                                                      <CheckBox disable="true" layoutX="18.0" layoutY="297.0" mnemonicParsing="false" text="¿INVIMA?" />
+                                                      <ComboBox disable="true" layoutX="15.0" layoutY="324.0" prefHeight="25.0" prefWidth="128.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
+                                                   <content>
+                                                      <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="610.0" prefWidth="477.0">
+                                                         <children>
+                                                            <Pane layoutX="192.0" layoutY="-129.0" prefHeight="178.0" prefWidth="291.0" style="-fx-background-color: #FA2C56; -fx-background-radius: 70;" />
+                                                            <Label alignment="CENTER" layoutY="30.0" prefHeight="37.0" prefWidth="484.0" style="-fx-padding: 5; -fx-background-color: #FFFFFF; -fx-background-radius: 20;" text="Registro de Productos" textAlignment="CENTER" wrapText="false">
+                                                               <font>
+                                                                  <Font size="18.0" fx:id="x11" />
+                                                               </font>
+                                                               <effect>
+                                                                  <DropShadow>
+                                                                     <color>
+                                                                        <Color red="0.9803921580314636" green="0.1725490242242813" blue="0.33725491166114807" />
+                                                                     </color>
+                                                                  </DropShadow>
+                                                               </effect></Label>
+                                                            <TableView layoutY="84.0" prefHeight="526.0" prefWidth="484.0">
+                                                               <columns>
+                                                                  <TableColumn prefWidth="91.0" style="-fx-background-radius: 20; -fx-background-color: #D4E7EC; -fx-border-color: #B9BABA; -fx-border-radius: 20;" text="ID" />
+                                                                  <TableColumn prefWidth="93.0" style="-fx-background-radius: 20; -fx-background-color: #D4E7EC; -fx-border-color: #B9BABA; -fx-border-radius: 20;" text="Nombre" />
+                                                                  <TableColumn prefWidth="84.0" style="-fx-background-radius: 20; -fx-background-color: #D4E7EC; -fx-border-color: #B9BABA; -fx-border-radius: 20;" text="Precio" />
+                                                                  <TableColumn prefWidth="103.0" style="-fx-background-radius: 20; -fx-background-color: #D4E7EC; -fx-border-color: #B9BABA; -fx-border-radius: 20;" text="Tienda" />
+                                                                  <TableColumn prefWidth="110.0" style="-fx-background-radius: 20; -fx-background-color: #D4E7EC; -fx-border-color: #B9BABA; -fx-border-radius: 20;" text="Tipo" />
+                                                               </columns>
+                                                            </TableView>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </content>
+                                                </ScrollPane>
+                                                <AnchorPane prefHeight="610.0" prefWidth="248.0">
+                                                   <children>
+                                                      <Pane layoutX="117.0" layoutY="-51.0" prefHeight="86.0" prefWidth="152.0" style="-fx-background-color: #FA2C56; -fx-background-radius: 70;" />
+                                                      <Label alignment="CENTER" font="$x11" layoutX="-1.0" layoutY="30.0" prefHeight="37.0" prefWidth="269.0" style="-fx-padding: 5; -fx-background-color: #FFFFFF; -fx-background-radius: 20;" text="Producto" textAlignment="CENTER" wrapText="false">
+                                                         <effect>
+                                                            <DropShadow>
+                                                               <color>
+                                                                  <Color red="0.9803921580314636" green="0.1725490242242813" blue="0.33725491166114807" />
+                                                               </color>
+                                                            </DropShadow>
+                                                         </effect></Label>
+                                                      <Label layoutX="17.0" layoutY="110.0" prefHeight="390.0" prefWidth="235.0" style="-fx-background-color: #ff9fb4; -fx-background-radius: 20; -fx-border-color: #B9BABA; -fx-border-radius: 20;" />
+                                                      <ImageView fitHeight="76.0" fitWidth="81.0" layoutX="98.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@img/estar.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <TextField disable="true" layoutX="57.0" layoutY="227.0" promptText="Nombre Producto" style="-fx-background-radius: 20;" />
+                                                      <TextField disable="true" layoutX="57.0" layoutY="262.0" promptText="Precio" style="-fx-background-radius: 20;" />
+                                                      <TextField disable="true" layoutX="57.0" layoutY="298.0" promptText="Tienda" style="-fx-background-radius: 20;" />
+                                                      <RadioButton disable="true" layoutX="33.0" layoutY="339.0" mnemonicParsing="false" text="Aseo">
+                                                         <toggleGroup>
+                                                            <ToggleGroup fx:id="tipoProductoModificar" />
+                                                         </toggleGroup>
+                                                      </RadioButton>
+                                                      <RadioButton disable="true" layoutX="111.0" layoutY="339.0" mnemonicParsing="false" text="Fruver" toggleGroup="$tipoProductoModificar" />
+                                                      <RadioButton disable="true" layoutX="193.0" layoutY="339.0" mnemonicParsing="false" selected="true" text="Otro" toggleGroup="$tipoProductoModificar" />
+                                                      <CheckBox layoutX="86.0" layoutY="384.0" mnemonicParsing="false" text="¿Modificar?">
+                                                         <font>
+                                                            <Font size="13.0" />
+                                                         </font>
+                                                      </CheckBox>
+                                                      <Button disable="true" layoutX="103.0" layoutY="430.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="72.0" style="-fx-background-radius: 20; -fx-background-color: #FA2C56; -fx-border-radius: 20;" text="Modificar" textFill="#fff9f9" />
+                                                      <Pane layoutX="-71.0" layoutY="493.0" prefHeight="127.0" prefWidth="100.0" style="-fx-background-color: #FA2C56; -fx-background-radius: 70;" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </items>
+                                          </SplitPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab style="-fx-font-size: 15;" text="Pedido">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <AnchorPane prefHeight="610.0" prefWidth="955.0">
+                                 <children>
+                                    <VBox prefHeight="611.0" prefWidth="955.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.3126967471143757, 0.7135362014690452" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+                                             <items>
+                                                <AnchorPane prefHeight="533.0" prefWidth="256.0">
+                                                   <children>
+                                                      <Pane layoutX="-110.0" layoutY="-102.0" prefHeight="245.0" prefWidth="181.0" style="-fx-background-color: #EEC51A; -fx-background-radius: 70;" />
+                                                      <Label alignment="CENTER" layoutX="-2.0" layoutY="21.0" minWidth="60.0" prefHeight="37.0" prefWidth="297.0" style="-fx-background-color: #FFFFFF; -fx-padding: 5; -fx-background-radius: 20;" text="Nuevo Pedido" textAlignment="CENTER" wrapText="false">
+                                                         <font>
+                                                            <Font size="18.0" fx:id="x11111" />
+                                                         </font>
+                                                         <effect>
+                                                            <DropShadow>
+                                                               <color>
+                                                                  <Color red="0.9333333373069763" green="0.772549033164978" blue="0.10196078568696976" />
+                                                               </color>
+                                                            </DropShadow>
+                                                         </effect>
+                                                      </Label>
+                                                      <ComboBox layoutX="28.0" layoutY="76.0" prefWidth="150.0" promptText="Cliente" style="-fx-background-radius: 20;" />
+                                                      <ComboBox layoutX="27.0" layoutY="107.0" prefWidth="150.0" promptText="Producto" style="-fx-background-radius: 20;" />
+                                                      <DatePicker layoutX="28.0" layoutY="137.0" prefHeight="25.0" prefWidth="149.0" promptText="Fecha Entrega" style="-fx-background-radius: 20;" />
+                                                      <TextField layoutX="28.0" layoutY="170.0" promptText="Repartidor" style="-fx-background-radius: 20;" />
+                                                      <Button layoutX="206.0" layoutY="91.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="74.0" style="-fx-background-radius: 20; -fx-background-color: #EEC51A; -fx-border-radius: 20;" text="Agregar" textFill="#fff9f9" />
+                                                      <Button layoutX="208.0" layoutY="138.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" style="-fx-background-radius: 20; -fx-background-color: #EEC51A; -fx-border-radius: 20;" textFill="#fff9f9">
+                                                         <graphic>
+                                                            <ImageView fitHeight="21.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@img/computacion-en-la-nube.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                      <Separator layoutX="-1.0" layoutY="235.0" prefHeight="3.0" prefWidth="295.0" />
+                                                      <RadioButton layoutX="37.0" layoutY="206.0" mnemonicParsing="false" selected="true" text="Envio Prime">
+                                                         <toggleGroup>
+                                                            <ToggleGroup fx:id="tipoServicio" />
+                                                         </toggleGroup>
+                                                      </RadioButton>
+                                                      <RadioButton layoutX="149.0" layoutY="206.0" mnemonicParsing="false" text="Bono Regalo" toggleGroup="$tipoServicio" />
+                                                      <Separator layoutX="-3.0" layoutY="434.0" prefHeight="3.0" prefWidth="295.0" />
+                                                      <Label layoutX="40.0" layoutY="247.0" text="Envio Prime">
+                                                         <effect>
+                                                            <DropShadow>
+                                                               <color>
+                                                                  <Color red="0.9333333373069763" green="0.772549033164978" blue="0.10196078568696976" />
+                                                               </color>
+                                                            </DropShadow>
+                                                         </effect></Label>
+                                                      <Label disable="true" layoutX="185.0" layoutY="247.0" text="Bono Regalo">
+                                                         <effect>
+                                                            <DropShadow>
+                                                               <color>
+                                                                  <Color red="0.9333333373069763" green="0.772549033164978" blue="0.10196078568696976" />
+                                                               </color>
+                                                            </DropShadow>
+                                                         </effect></Label>
+                                                      <Separator layoutX="144.0" layoutY="235.0" orientation="VERTICAL" prefHeight="199.0" prefWidth="2.0" />
+                                                      <TextField layoutX="14.0" layoutY="270.0" prefHeight="25.0" prefWidth="119.0" promptText="Precio" style="-fx-background-radius: 20;" />
+                                                      <TextField layoutX="14.0" layoutY="303.0" prefHeight="25.0" prefWidth="119.0" promptText="Distancia" style="-fx-background-radius: 20;" />
+                                                      <ComboBox layoutX="14.0" layoutY="335.0" prefHeight="25.0" prefWidth="120.0" promptText="Transporte" style="-fx-background-radius: 20;" />
+                                                      <Spinner layoutX="14.0" layoutY="367.0" prefHeight="25.0" prefWidth="121.0" style="-fx-background-radius: 20;" />
+                                                      <Button layoutX="45.0" layoutY="401.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="57.0" style="-fx-background-radius: 20; -fx-background-color: #EEC51A; -fx-border-radius: 20;" text="+" textFill="#fff9f9" />
+                                                      <TextField disable="true" layoutX="162.0" layoutY="303.0" prefHeight="25.0" prefWidth="119.0" promptText="Precio" style="-fx-background-radius: 20;" />
+                                                      <TextField disable="true" layoutX="162.0" layoutY="270.0" prefHeight="25.0" prefWidth="119.0" promptText="Comercio Asociado" style="-fx-background-radius: 20;" />
+                                                      <TextField disable="true" layoutX="162.0" layoutY="335.0" prefHeight="25.0" prefWidth="119.0" promptText="Mensaje" style="-fx-background-radius: 20;" />
+                                                      <Button disable="true" layoutX="193.0" layoutY="372.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="57.0" style="-fx-background-radius: 20; -fx-background-color: #EEC51A; -fx-border-radius: 20;" text="+" textFill="#fff9f9" />
+                                                      <Pane layoutX="-85.0" layoutY="434.0" prefHeight="167.0" prefWidth="111.0" style="-fx-background-color: #EEC51A; -fx-background-radius: 70;" />
+                                                      <Label layoutX="28.0" layoutY="439.0" prefHeight="16.0" prefWidth="214.0" text="Selecciona un Pedido">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                         <effect>
+                                                            <DropShadow>
+                                                               <color>
+                                                                  <Color red="0.9333333373069763" green="0.772549033164978" blue="0.10196078568696976" />
+                                                               </color>
+                                                            </DropShadow>
+                                                         </effect>
+                                                      </Label>
+                                                      <ListView layoutX="31.0" layoutY="469.0" prefHeight="129.0" prefWidth="179.0" style="-fx-background-radius: 30;" />
+                                                      <Button layoutX="216.0" layoutY="502.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="74.0" style="-fx-background-radius: 20; -fx-background-color: #EEC51A; -fx-border-radius: 20;" text="Eliminar" textFill="#fff9f9" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
+                                                   <content>
+                                                      <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="613.0" prefWidth="556.0">
+                                                         <children>
+                                                            <Label alignment="CENTER" layoutX="-4.0" layoutY="22.0" prefHeight="37.0" prefWidth="563.0" style="-fx-padding: 5; -fx-background-color: #FFFFFF; -fx-background-radius: 20;" text="Registro de Pedidos" textAlignment="CENTER" wrapText="false">
+                                                               <font>
+                                                                  <Font size="18.0" fx:id="x112" />
+                                                               </font>
+                                                               <effect>
+                                                                  <DropShadow>
+                                                                     <color>
+                                                                        <Color red="0.9333333373069763" green="0.772549033164978" blue="0.10196078568696976" />
+                                                                     </color>
+                                                                  </DropShadow>
+                                                               </effect></Label>
+                                                            <TableView layoutY="79.0" prefHeight="222.0" prefWidth="559.0">
+                                                               <columns>
+                                                                  <TableColumn prefWidth="119.0" style="-fx-background-radius: 20; -fx-background-color: #D4E7EC; -fx-border-color: #B9BABA; -fx-border-radius: 20;" text="ID" />
+                                                                  <TableColumn prefWidth="131.0" style="-fx-background-radius: 20; -fx-background-color: #D4E7EC; -fx-border-color: #B9BABA; -fx-border-radius: 20;" text="Fecha" />
+                                                                  <TableColumn minWidth="0.0" prefWidth="126.0" style="-fx-background-radius: 20; -fx-background-color: #D4E7EC; -fx-border-color: #B9BABA; -fx-border-radius: 20;" text="Repartidor" />
+                                                                  <TableColumn prefWidth="107.0" style="-fx-background-radius: 20; -fx-background-color: #D4E7EC; -fx-border-color: #B9BABA; -fx-border-radius: 20;" text="Numero Servicios" />
+                                                               </columns>
+                                                            </TableView>
+                                                            <Label alignment="CENTER" layoutX="4.0" layoutY="322.0" prefHeight="37.0" prefWidth="477.0" style="-fx-padding: 5; -fx-background-color: #FFFFFF; -fx-background-radius: 20;" text="Servicios Adicionales" textAlignment="CENTER" wrapText="false">
+                                                               <font>
+                                                                  <Font size="18.0" fx:id="x1121" />
+                                                               </font>
+                                                               <effect>
+                                                                  <DropShadow>
+                                                                     <color>
+                                                                        <Color red="0.9333333373069763" green="0.772549033164978" blue="0.10196078568696976" />
+                                                                     </color>
+                                                                  </DropShadow>
+                                                               </effect>
+                                                            </Label>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </content>
+                                                </ScrollPane>
+                                                <AnchorPane prefHeight="609.0" prefWidth="228.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" font="$x112" layoutX="-2.0" layoutY="22.0" prefHeight="37.0" prefWidth="272.0" style="-fx-background-color: #FFFFFF; -fx-padding: 5; -fx-background-radius: 20;" text="Pedido" textAlignment="CENTER" wrapText="false">
+                                                         <effect>
+                                                            <DropShadow>
+                                                               <color>
+                                                                  <Color red="0.9333333373069763" green="0.772549033164978" blue="0.10196078568696976" />
+                                                               </color>
+                                                            </DropShadow>
+                                                         </effect></Label>
+                                                   </children>
+                                                </AnchorPane>
+                                             </items>
+                                          </SplitPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>

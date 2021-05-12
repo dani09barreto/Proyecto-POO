@@ -5,28 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10d74ec7-bdf7-43a4-8c55-c9793e84c4e0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/View/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/View/Controller/ControllerFX.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/View/Launcher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/PUJ/View/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_04_2021_12_52_p__m__[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_04_2021_12_52_p__m___Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/ControlDespacho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Controller/ControlDespacho.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/GestionCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Controller/GestionCliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Control/GestionProductos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Controller/GestionProductos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Cliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/View/PantallaDespacho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/View/PantallaDespacho.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/PUJ/TestDespacho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/PUJ/TestDespacho.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/Control/ControlDespacho.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/Control/GestionCliente.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/Control/GestionProductos.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/Model/Pedido.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Model/Pedido.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/View/PantallaDespacho.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/PUJ/View/PantallaDespacho.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/org/PUJ/TestDespacho.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/org/PUJ/TestDespacho.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/View/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/View/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/PUJ/View/SendJaviGUI.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/PUJ/View/entrega.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/View/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/PUJ/View/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/View/SendJaviGUI.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/View/entrega.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,6 +161,9 @@
       <updated>1618595086740</updated>
     </task>
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.css" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
