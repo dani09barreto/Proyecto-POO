@@ -7,11 +7,8 @@
     <list default="true" id="10d74ec7-bdf7-43a4-8c55-c9793e84c4e0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/View/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/View/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/PUJ/View/SendJaviGUI.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/PUJ/View/entrega.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/PUJ/View/SendJaviGUIFX.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/PUJ/View/SendJaviGUIFX.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/View/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/PUJ/View/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/View/SendJaviGUI.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/View/entrega.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
