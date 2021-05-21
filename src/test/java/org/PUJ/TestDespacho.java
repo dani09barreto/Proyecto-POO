@@ -9,6 +9,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class TestDespacho {
+    /*
     private ControlDespacho control = new ControlDespacho();
     // 5 Clientes
     private Cliente cliente1 = new Cliente(1000077617L, "Nicolas David", 316009L, "BG 6447");
@@ -101,6 +102,7 @@ public class TestDespacho {
         control.getGestionProductos().eliminarProducto(productoAseo2.getProdId());
         assertEquals(1,control.getGestionProductos().getListaProductos().size());
     }
+
     @Test
     public void testValidarProducto(){
         control.getGestionProductos().insertarProducto(producto1);
@@ -108,6 +110,7 @@ public class TestDespacho {
         control.ReservarPedido(pedido1);
         assertTrue(control.ValidarProducto(producto1));
     }
+
     @Test
     public void testReservarPedido() {
         ArrayList<ServicioAdicional> servicioAdicional1 = new ArrayList<>();

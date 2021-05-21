@@ -35,6 +35,11 @@ public class BonoRegalo extends ServicioAdicional{
         return fechaVencimiento;
     }
 
+    public String getFechaVencimientostring(){
+        SimpleDateFormat Fecha = new SimpleDateFormat("dd/MM/yyyy");
+        return Fecha.format(fechaVencimiento.getTime());
+    }
+
     public void setFechaVencimiento(Calendar fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }

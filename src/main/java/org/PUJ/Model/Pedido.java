@@ -40,6 +40,11 @@ public class Pedido {
         return fechaRecibido;
     }
 
+    public String getFechaRecibidostring(){
+        SimpleDateFormat Fecha = new SimpleDateFormat("dd/MM/yyyy");
+        return Fecha.format(fechaRecibido.getTime());
+    }
+
     public void setFechaRecibido(Calendar fechaRecibido) {
         this.fechaRecibido = fechaRecibido;
     }
@@ -80,30 +85,6 @@ public class Pedido {
         this.productoSolicitado = productoSolicitado;
     }
 
-    @Override
-    public String toString() {
-        String informacion;
-        SimpleDateFormat Fecha = new SimpleDateFormat("dd/MM/yyyy");
-        informacion =     "\n\tPedido #" + numeroPedido + ": " +
-                "\n\tFecha Recibido: \t\t" + Fecha.format(this.fechaRecibido.getTime()) +
-                "\n\tPagado: \t\t\t\t";
-        if (pagado) informacion += "Sí";
-        else informacion += "No";
-        informacion +=  "\n\tNombre del repartidor: \t" + nombreRepartidor +
-                        "\n\tSolicitante: \t\t\t" + solicitante.getNombreCompleto() + " (Cedula: " + solicitante.getCedula() + ")";
-        if (this.serviciosAdicionales.size() == 1) {
-            informacion += "\n\t-> El producto cuenta con 1 servicio adicional.\n";
-            for (ServicioAdicional serv : this.serviciosAdicionales)
-                informacion += serv.toString();
-        }
-        else if (this.serviciosAdicionales.size() > 1) {
-            informacion += "\n\t-> El producto cuenta con " + this.serviciosAdicionales.size() + " servicios adicionales.\n";
-        } else {
-            informacion += "\n\t[!] Producto sin servicios adicionales.\n";
-        }
-
-        return informacion;
-    }
     public ArrayList <ServicioAdicional> enviosPrimePorTipo (TipoTransporte tipobuscar){
         ArrayList <ServicioAdicional> listtemp = new ArrayList<>();
         for (ServicioAdicional servtemp : serviciosAdicionales){
