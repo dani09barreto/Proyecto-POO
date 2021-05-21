@@ -3,6 +3,7 @@ package org.PUJ.Controller;
 import org.PUJ.Model.*;
 import org.PUJ.utils.AlertUtils;
 import org.PUJ.utils.Fechaerror;
+import org.PUJ.utils.PedidoFechaIgual;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,7 +45,7 @@ public class ControlDespacho {
         return null;
     }
 
-    public void ReservarPedido(Producto producto, Cliente cliente, Calendar fecha, String repartidor, ArrayList<ServicioAdicional> servicios) throws Fechaerror {
+    public void ReservarPedido(Producto producto, Cliente cliente, Calendar fecha, String repartidor, ArrayList<ServicioAdicional> servicios) throws Fechaerror, PedidoFechaIgual{
         Pedido nuevopedido = new Pedido(fecha, repartidor, cliente, producto);
         nuevopedido.setServiciosAdicionales(servicios);
 
@@ -56,6 +57,9 @@ public class ControlDespacho {
 
         if (dias <= 2){
             throw new Fechaerror("fecha error");
+        }
+        if (ExistePedido(cliente, producto, fecha) != null){
+            throw new PedidoFechaIgual("Fecha igual");
         }
         else {
             for (ServicioAdicional serv: nuevopedido.getServiciosAdicionales()){
