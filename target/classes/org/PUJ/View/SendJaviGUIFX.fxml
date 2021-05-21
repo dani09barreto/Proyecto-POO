@@ -96,16 +96,7 @@
                                                       <TextField layoutX="49.0" layoutY="114.0" promptText="Cedula" style="-fx-background-radius: 20;" />
                                                       <TextField layoutX="49.0" layoutY="147.0" promptText="Telefono" style="-fx-background-radius: 20;" />
                                                       <TextField layoutX="49.0" layoutY="179.0" promptText="Dirección" style="-fx-background-radius: 20;" />
-                                                      <Button layoutX="25.0" layoutY="220.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" style="-fx-background-radius: 20; -fx-background-color: #00CED1; -fx-border-radius: 20;" textFill="#fff9f9">
-                                                         <graphic>
-                                                            <ImageView fitHeight="21.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                               <image>
-                                                                  <Image url="@img/computacion-en-la-nube.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                         </graphic>
-                                                      </Button>
-                                                      <Button layoutX="153.0" layoutY="220.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="74.0" style="-fx-background-radius: 20; -fx-background-color: #00CED1; -fx-border-radius: 20;" text="Agregar" textFill="#fff9f9" />
+                                                      <Button layoutX="93.0" layoutY="219.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="74.0" style="-fx-background-radius: 20; -fx-background-color: #00CED1; -fx-border-radius: 20;" text="Agregar" textFill="#fff9f9" />
                                                       <Separator layoutX="14.0" layoutY="277.0" prefHeight="3.0" prefWidth="250.0" />
                                                       <Label layoutX="23.0" layoutY="301.0" prefHeight="16.0" prefWidth="214.0" text="Selecciona un Cliente">
                                                          <font>
@@ -226,7 +217,7 @@
                                                       <TextField layoutX="46.0" layoutY="82.0" promptText="Nombre Producto" style="-fx-background-radius: 20;" />
                                                       <TextField layoutX="46.0" layoutY="114.0" promptText="Precio" style="-fx-background-radius: 20;" />
                                                       <TextField layoutX="46.0" layoutY="146.0" promptText="Tienda" style="-fx-background-radius: 20;" />
-                                                      <Button layoutX="218.0" layoutY="92.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="74.0" style="-fx-background-radius: 20; -fx-background-color: #FA2C56; -fx-border-radius: 20;" text="Agregar" textFill="#fff9f9" />
+                                                      <Button layoutX="221.0" layoutY="124.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="74.0" style="-fx-background-radius: 20; -fx-background-color: #FA2C56; -fx-border-radius: 20;" text="Agregar" textFill="#fff9f9" />
                                                       <Separator layoutX="3.0" layoutY="364.0" prefHeight="4.0" prefWidth="309.0" />
                                                       <Label layoutX="31.0" layoutY="372.0" prefHeight="16.0" prefWidth="214.0" text="Selecciona un Producto">
                                                          <font>
@@ -241,15 +232,6 @@
                                                          </effect>
                                                       </Label>
                                                       <Separator layoutX="4.0" layoutY="223.0" prefHeight="3.0" prefWidth="305.0" />
-                                                      <Button layoutX="220.0" layoutY="144.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" style="-fx-background-radius: 20; -fx-background-color: #FA2C56; -fx-border-radius: 20;" textFill="#fff9f9">
-                                                         <graphic>
-                                                            <ImageView fitHeight="21.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                               <image>
-                                                                  <Image url="@img/computacion-en-la-nube.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                         </graphic>
-                                                      </Button>
                                                       <Separator layoutX="157.0" layoutY="222.0" orientation="VERTICAL" prefHeight="142.0" prefWidth="3.0" />
                                                       <ListView layoutX="40.0" layoutY="405.0" prefHeight="157.0" prefWidth="233.0" style="-fx-background-radius: 30;" />
                                                       <Button layoutX="195.0" layoutY="568.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="74.0" style="-fx-background-radius: 20; -fx-background-color: #FA2C56; -fx-border-radius: 20;" text="Eliminar" textFill="#fff9f9" />
@@ -281,7 +263,7 @@
                                                       <TextField disable="true" layoutX="166.0" layoutY="256.0" prefHeight="25.0" prefWidth="132.0" promptText="Impuesto Local" style="-fx-background-radius: 20;" />
                                                       <TextField disable="true" layoutX="166.0" layoutY="293.0" prefHeight="25.0" prefWidth="132.0" promptText="Nombre Hacienda" style="-fx-background-radius: 20;" />
                                                       <CheckBox disable="true" layoutX="16.0" layoutY="297.0" mnemonicParsing="false" text="¿INVIMA?" />
-                                                      <ComboBox disable="true" layoutX="15.0" layoutY="324.0" prefHeight="25.0" prefWidth="128.0" promptText="Tipo Producto" />
+                                                      <ComboBox fx:id="listTipoProducto" layoutX="15.0" layoutY="324.0" prefHeight="25.0" prefWidth="128.0" promptText="Tipo Producto" />
                                                       <CheckBox disable="true" layoutX="172.0" layoutY="328.0" mnemonicParsing="false" text="¿Organico?" />
                                                    </children>
                                                 </AnchorPane>
@@ -390,16 +372,7 @@
                                                       <ComboBox fx:id="productosList" layoutX="27.0" layoutY="107.0" prefWidth="150.0" promptText="Producto" style="-fx-background-radius: 20;" />
                                                       <DatePicker fx:id="fechaEntrega" layoutX="28.0" layoutY="137.0" prefHeight="25.0" prefWidth="149.0" promptText="Fecha Entrega" style="-fx-background-radius: 20;" />
                                                       <TextField fx:id="nameReparidor" layoutX="28.0" layoutY="170.0" promptText="Repartidor" style="-fx-background-radius: 20;" />
-                                                      <Button fx:id="btnAgregar" layoutX="206.0" layoutY="91.0" mnemonicParsing="false" onAction="#AgregarPedido" prefHeight="31.0" prefWidth="74.0" style="-fx-background-radius: 20; -fx-background-color: #EEC51A; -fx-border-radius: 20;" text="Agregar" textFill="#fff9f9" />
-                                                      <Button layoutX="208.0" layoutY="138.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" style="-fx-background-radius: 20; -fx-background-color: #EEC51A; -fx-border-radius: 20;" textFill="#fff9f9">
-                                                         <graphic>
-                                                            <ImageView fitHeight="21.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                               <image>
-                                                                  <Image url="@img/computacion-en-la-nube.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                         </graphic>
-                                                      </Button>
+                                                      <Button fx:id="btnAgregar" layoutX="194.0" layoutY="122.0" mnemonicParsing="false" onAction="#AgregarPedido" prefHeight="31.0" prefWidth="74.0" style="-fx-background-radius: 20; -fx-background-color: #EEC51A; -fx-border-radius: 20;" text="Agregar" textFill="#fff9f9" />
                                                       <Separator layoutX="-1.0" layoutY="236.0" prefHeight="2.0" prefWidth="281.0" />
                                                       <RadioButton fx:id="bonoRegaloAgregar" layoutX="149.0" layoutY="206.0" mnemonicParsing="false" onAction="#activarBono" text="Bono Regalo">
                                                          <toggleGroup>
@@ -499,7 +472,7 @@
                                                                   </TableColumn>
                                                                </columns>
                                                             </TableView>
-                                                            <TableView fx:id="listaServicioAdicional" layoutY="371.0" prefHeight="228.0" prefWidth="889.0" style="-fx-background-radius: 20;">
+                                                            <TableView fx:id="listaServicioAdicional" disable="true" layoutY="371.0" prefHeight="228.0" prefWidth="889.0" style="-fx-background-radius: 20;">
                                                                <columns>
                                                                   <TableColumn fx:id="colidSA" prefWidth="69.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="ID">
                                                                      <cellValueFactory>
@@ -557,26 +530,26 @@
                                                       <Pane layoutX="-67.0" layoutY="409.0" prefHeight="201.0" prefWidth="103.0" style="-fx-background-color: #EEC51A; -fx-background-radius: 70;" />
                                                       <Pane layoutX="72.0" layoutY="-41.0" prefHeight="83.0" prefWidth="214.0" style="-fx-background-color: #EEC51A; -fx-background-radius: 70;" />
                                                       <Label layoutX="21.0" layoutY="82.0" prefHeight="515.0" prefWidth="254.0" style="-fx-background-color: C9C9C9; -fx-background-radius: 20; -fx-border-color: #B9BABA; -fx-border-radius: 20;" />
-                                                      <ComboBox disable="true" layoutX="45.0" layoutY="226.0" prefWidth="150.0" promptText="Pedidos" style="-fx-background-radius: 20;" />
-                                                      <DatePicker disable="true" layoutX="45.0" layoutY="258.0" prefHeight="25.0" prefWidth="149.0" promptText="Fecha Entrega" style="-fx-background-radius: 20;" />
-                                                      <TextField disable="true" layoutX="45.0" layoutY="293.0" promptText="Repartidor" style="-fx-background-radius: 20;" />
-                                                      <RadioButton disable="true" layoutX="52.0" layoutY="341.0" mnemonicParsing="false" selected="true" text="Envio Prime">
+                                                      <ComboBox fx:id="listPedidosModificar" disable="true" layoutX="45.0" layoutY="226.0" prefWidth="150.0" promptText="Pedidos" style="-fx-background-radius: 20;" />
+                                                      <DatePicker fx:id="FechaModificar" disable="true" layoutX="45.0" layoutY="258.0" prefHeight="25.0" prefWidth="149.0" promptText="Fecha Entrega" style="-fx-background-radius: 20;" />
+                                                      <TextField fx:id="repartidorModificar" disable="true" layoutX="45.0" layoutY="293.0" promptText="Repartidor" style="-fx-background-radius: 20;" />
+                                                      <RadioButton fx:id="envioPrimeModificar" disable="true" layoutX="52.0" layoutY="341.0" mnemonicParsing="false" onAction="#activarPrimeModificar" selected="true" text="Envio Prime">
                                                          <toggleGroup>
                                                             <ToggleGroup fx:id="tipoServicioModificar" />
                                                          </toggleGroup></RadioButton>
-                                                      <RadioButton disable="true" layoutX="162.0" layoutY="341.0" mnemonicParsing="false" text="Bono Regalo" toggleGroup="$tipoServicioModificar">
+                                                      <RadioButton fx:id="BonoModificar" disable="true" layoutX="162.0" layoutY="341.0" mnemonicParsing="false" onAction="#activarBonoModificar" text="Bono Regalo" toggleGroup="$tipoServicioModificar">
                                                       </RadioButton>
                                                       <ImageView fitHeight="86.0" fitWidth="90.0" layoutX="102.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@img/orden.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <CheckBox layoutX="45.0" layoutY="454.0" mnemonicParsing="false" text="¿Modificar?">
+                                                      <CheckBox fx:id="checkModificar" layoutX="45.0" layoutY="454.0" mnemonicParsing="false" onAction="#mostrarModificar" text="¿Modificar?">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
                                                       </CheckBox>
-                                                      <Button disable="true" layoutX="152.0" layoutY="449.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="114.0" style="-fx-background-radius: 20; -fx-background-color: #EEC51A; -fx-border-radius: 20;" text="Modificar Pedido" textFill="#fff9f9" />
+                                                      <Button fx:id="btnModificarPedido" disable="true" layoutX="152.0" layoutY="449.0" mnemonicParsing="false" onAction="#modificarPedido" prefHeight="29.0" prefWidth="114.0" style="-fx-background-radius: 20; -fx-background-color: #EEC51A; -fx-border-radius: 20;" text="Modificar Pedido" textFill="#fff9f9" />
                                                       <Label alignment="CENTER" layoutX="1.0" layoutY="22.0" prefHeight="37.0" prefWidth="285.0" style="-fx-padding: 5; -fx-background-color: #FFFFFF; -fx-background-radius: 20;" text="Pedido" textAlignment="CENTER" wrapText="false">
                                                          <font>
                                                             <Font size="18.0" fx:id="x11211" />
@@ -593,11 +566,10 @@
                                                       <Button fx:id="btnVerServicios" layoutX="99.0" layoutY="549.0" mnemonicParsing="false" onAction="#verservicios" prefHeight="33.0" prefWidth="104.0" style="-fx-background-radius: 20; -fx-background-color: #EEC51A; -fx-border-radius: 20;" text="Ver servicios" textFill="#fff9f9" />
                                                       <ComboBox fx:id="listPedidos" layoutX="89.0" layoutY="510.0" prefHeight="25.0" prefWidth="124.0" promptText="Pedidos" style="-fx-background-radius: 20;" />
                                                       <Separator layoutX="23.0" layoutY="498.0" prefHeight="0.0" prefWidth="250.0" />
-                                                      <ComboBox fx:id="listPedidos1" disable="true" layoutX="37.0" layoutY="372.0" prefHeight="25.0" prefWidth="104.0" promptText="Envios" style="-fx-background-radius: 20;" />
-                                                      <ComboBox fx:id="listPedidos11" disable="true" layoutX="156.0" layoutY="372.0" prefHeight="25.0" prefWidth="102.0" promptText="Bonos" style="-fx-background-radius: 20;" />
-                                                      <Button disable="true" layoutX="70.0" layoutY="404.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="38.0" style="-fx-background-radius: 20; -fx-background-color: #EEC51A; -fx-border-radius: 20;" text="+" textFill="#fff9f9" />
-                                                      <Button disable="true" layoutX="184.0" layoutY="404.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="38.0" style="-fx-background-radius: 20; -fx-background-color: #EEC51A; -fx-border-radius: 20;" text="+" textFill="#fff9f9" />
-                                                      <Button disable="true" layoutX="207.0" layoutY="226.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="54.0" style="-fx-background-radius: 20; -fx-background-color: #EEC51A; -fx-border-radius: 20;" text="Cargar" textFill="#fff9f9" />
+                                                      <ComboBox fx:id="listEnviosModificar" disable="true" layoutX="37.0" layoutY="372.0" prefHeight="25.0" prefWidth="104.0" promptText="Envios" style="-fx-background-radius: 20;" />
+                                                      <ComboBox fx:id="listBonosModificar" disable="true" layoutX="156.0" layoutY="372.0" prefHeight="25.0" prefWidth="102.0" promptText="Bonos" style="-fx-background-radius: 20;" />
+                                                      <Button fx:id="btnAgregarModServicio" disable="true" layoutX="96.0" layoutY="409.0" mnemonicParsing="false" onAction="#modificarServicio" prefHeight="25.0" prefWidth="116.0" style="-fx-background-radius: 20; -fx-background-color: #EEC51A; -fx-border-radius: 20;" text="Modificar Servicio" textFill="#fff9f9" />
+                                                      <Button fx:id="btnCargarPedido" disable="true" layoutX="207.0" layoutY="226.0" mnemonicParsing="false" onAction="#cargarServicios" prefHeight="25.0" prefWidth="54.0" style="-fx-background-radius: 20; -fx-background-color: #EEC51A; -fx-border-radius: 20;" text="Cargar" textFill="#fff9f9" />
                                                    </children>
                                                 </AnchorPane>
                                              </items>

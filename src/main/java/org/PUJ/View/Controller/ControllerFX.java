@@ -8,6 +8,7 @@ import org.PUJ.Controller.ControlDespacho;
 import org.PUJ.Model.*;
 import org.PUJ.utils.AlertUtils;
 import org.PUJ.utils.Fechaerror;
+import org.PUJ.utils.PedidoFechaIgual;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -17,11 +18,13 @@ import java.net.URL;
 
 public class ControllerFX implements Initializable {
     private ControlDespacho controlDespacho = new ControlDespacho();
-    private ArrayList<ServicioAdicional> servicios = new ArrayList<>();
 
-    //-------variables pedido--------//
+    //-------variables producto------//
+    @FXML private ComboBox<TipoProducto> listTipoProducto;
     @FXML private ToggleGroup tipoProducto;
     @FXML private ToggleGroup tipoProductoModificar;
+    //-------variables pedido--------//
+    private ArrayList<ServicioAdicional> servicios = new ArrayList<>();
     @FXML private ComboBox<Long> clientesList;
     @FXML private ComboBox<UUID> productosList;
     @FXML private DatePicker fechaEntrega;
@@ -52,31 +55,38 @@ public class ControllerFX implements Initializable {
     @FXML private TableColumn<ServicioAdicional, UUID> colidSA = new TableColumn<ServicioAdicional,UUID>("CodigoServicio");
     @FXML private TableColumn<ServicioAdicional, String> colNombreSA = new TableColumn<ServicioAdicional,String>("NombreServicio");
     @FXML private TableColumn<ServicioAdicional, Double> colPrecioSA = new TableColumn<ServicioAdicional, Double>("Precio");
-    /*
     @FXML private TableColumn<EnvioPrime, Double> colDistanciaSA = new TableColumn<EnvioPrime, Double>("Distancia");
     @FXML private TableColumn<EnvioPrime, TipoTransporte> colTransporteSA = new TableColumn<EnvioPrime, TipoTransporte>("Tipo");
     @FXML private TableColumn<EnvioPrime, Integer> colCajasSA = new TableColumn<EnvioPrime, Integer>("NumeroCajas");
     @FXML private TableColumn<BonoRegalo, String> colComercioSA = new TableColumn<BonoRegalo, String>("ComercioAsociado");
     @FXML private TableColumn<BonoRegalo, String> colMensajeSA = new TableColumn<BonoRegalo, String>("Mensaje");
     @FXML private TableColumn<BonoRegalo, String> colFechaSA = new TableColumn<BonoRegalo, String>("FechaVencimientostring");
-     */
     @FXML private ToggleGroup tipoServicioModificar;
     @FXML private Button btnVerServicios;
+    @FXML private ComboBox<UUID> listPedidosModificar;
+    @FXML private DatePicker FechaModificar;
+    @FXML private TextField repartidorModificar;
+    @FXML private RadioButton envioPrimeModificar;
+    @FXML private RadioButton BonoModificar;
+    @FXML private CheckBox checkModificar;
+    @FXML private Button btnModificarPedido;
     @FXML private ComboBox<UUID> listPedidos;
+    @FXML private ComboBox<UUID> listEnviosModificar;
+    @FXML private ComboBox<UUID> listBonosModificar;
+    @FXML private Button btnAgregarModServicio;
+    @FXML private Button btnCargarPedido;
+
 
     //----------iniciador-------funciona para dar valores al programa sin acciones como los tipos de transporte o tipo de aseo//
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Cliente cliente1 = new Cliente(1000077617L, "Nicolas David", 316009L, "BG 6447");
-        Producto producto1 = new Producto("Papas fritas", 2500d, "La esquina");
-        controlDespacho.getGestionCliente().getListaClientes().put(cliente1.getCedula(),cliente1);
-        controlDespacho.getGestionProductos().getListaProductos().put(producto1.getProdId(),producto1);
-        renderWindoPedido();
+        renderWindowPedido();
+        listTipoProducto.getItems().setAll(TipoProducto.values());
         tipoTransporte.getItems().setAll(TipoTransporte.values());
         fechaEntrega.setValue(LocalDate.now());
     }
     //---------Funciones Pedido-----------//
-    public void renderWindoPedido (){
+    public void renderWindowPedido (){
         clearWindowPedido();
         listaPedidos.getItems().addAll(controlDespacho.getPedidos());
         for (Cliente cli : controlDespacho.getGestionCliente().getListaClientes().values()){
@@ -88,12 +98,14 @@ public class ControllerFX implements Initializable {
         for (Pedido pedtemp : controlDespacho.getPedidos()){
             listPedidos.getItems().add(pedtemp.getNumeroPedido());
             listaEliminar.getItems().add(pedtemp.getNumeroPedido());
+            listPedidosModificar.getItems().add(pedtemp.getNumeroPedido());
         }
     }
     public void clearWindowPedido (){
         listaPedidos.getItems().clear();
         listaEliminar.getItems().clear();
         listPedidos.getItems().clear();
+        listPedidosModificar.getItems().clear();
     }
     @FXML
     void activarBono(ActionEvent event) {
@@ -141,16 +153,20 @@ public class ControllerFX implements Initializable {
         } catch (Fechaerror e){
             e.getMessage();
             AlertUtils.alertError("Error Fecha", "La fecha digitada no es mayor a dos dias", "Intentalo nuevamente");
+        } catch (PedidoFechaIgual ex){
+            ex.printStackTrace();
+            AlertUtils.alertError("Error Fecha", "La fecha ya pertenece a un pedido con mismo producto y cliente", "Intentalo nuevamente");
         } catch (Exception ex){
             ex.printStackTrace();
             AlertUtils.alertError("ERROR", "No se pudo agregar el pedido", "Por favor, intente de nuevo");
         }
-        renderWindoPedido();
+        renderWindowPedido();
     }
 
     @FXML
     void agregarSA(ActionEvent event) {
         try {
+            listaServicioAdicional.setDisable(true);
             if (tipoServicio.getSelectedToggle().equals(envioPrimeAgregar)){
                 ServicioAdicional servtemp = new EnvioPrime("Envio Prime", Double.valueOf(precioEnvio.getText()), Double.valueOf(distanciaEnvio.getText()), tipoTransporte.getSelectionModel().getSelectedItem(), cantidadCajas.getValue());
                 this.servicios.add(servtemp);
@@ -175,15 +191,164 @@ public class ControllerFX implements Initializable {
                     AlertUtils.alertConfirmation("Pedido Elimando", "El pedido seleccionado a sido eliminado correctamente", "");
                 }
             }
-            renderWindoPedido();
+            renderWindowPedido();
         }catch (Exception e){
             e.printStackTrace();
             AlertUtils.alertError("ERROR", "No se pudo Eliminar el pedido", "Por favor, intente de nuevo");
         }
     }
+
+    @FXML
+    void mostrarModificar(ActionEvent event) {
+        if (checkModificar.isSelected()){
+            listPedidosModificar.setDisable(false);
+            btnCargarPedido.setDisable(false);
+            FechaModificar.setDisable(false);
+            repartidorModificar.setDisable(false);
+            envioPrimeModificar.setDisable(false);
+            BonoModificar.setDisable(false);
+            listEnviosModificar.setDisable(false);
+            listBonosModificar.setDisable(false);
+            btnAgregarModServicio.setDisable(false);
+            btnModificarPedido.setDisable(false);
+            envioPrimeAgregar.setDisable(true);
+            bonoRegaloAgregar.setDisable(true);
+        }
+        else{
+            listPedidosModificar.setDisable(true);
+            btnCargarPedido.setDisable(true);
+            FechaModificar.setDisable(true);
+            repartidorModificar.setDisable(true);
+            envioPrimeModificar.setDisable(true);
+            BonoModificar.setDisable(true);
+            listEnviosModificar.setDisable(true);
+            listBonosModificar.setDisable(true);
+            btnAgregarModServicio.setDisable(true);
+            btnModificarPedido.setDisable(true);
+            envioPrimeAgregar.setDisable(false);
+            bonoRegaloAgregar.setDisable(false);
+        }
+    }
+    @FXML
+    void cargarServicios(ActionEvent event) {
+        UUID idpedido = listPedidosModificar.getSelectionModel().getSelectedItem();
+        Pedido pedido = controlDespacho.ExistePedido(idpedido);
+        for (ServicioAdicional serv : pedido.getServiciosAdicionales()){
+            if (serv instanceof EnvioPrime){
+                listEnviosModificar.getItems().add(serv.getCodigoServicio());
+            }
+            if (serv instanceof BonoRegalo){
+                listBonosModificar.getItems().add(serv.getCodigoServicio());
+            }
+        }
+    }
+    @FXML
+    void modificarServicio(ActionEvent event) {
+        try{
+            if (tipoServicioModificar.getSelectedToggle().equals(envioPrimeModificar)){
+                UUID idped = listPedidosModificar.getSelectionModel().getSelectedItem();
+                Pedido pedido = controlDespacho.ExistePedido(idped);
+                for (ServicioAdicional serv : pedido.getServiciosAdicionales()){
+                    if (serv.getCodigoServicio().equals(listEnviosModificar.getSelectionModel().getSelectedItem())){
+                        serv.setPrecio(Double.valueOf(precioEnvio.getText()));
+                        ((EnvioPrime) serv).setDistancia(Double.valueOf(distanciaEnvio.getText()));
+                        ((EnvioPrime) serv).setTipo(tipoTransporte.getSelectionModel().getSelectedItem());
+                        ((EnvioPrime) serv).setNumeroCajas(cantidadCajas.getValue());
+                    }
+                }
+            }else if (tipoServicioModificar.getSelectedToggle().equals(BonoModificar)){
+                UUID idped = listPedidosModificar.getSelectionModel().getSelectedItem();
+                Pedido pedido = controlDespacho.ExistePedido(idped);
+                for (ServicioAdicional serv : pedido.getServiciosAdicionales()){
+                    if (serv.getCodigoServicio().equals(listBonosModificar.getSelectionModel().getSelectedItem())){
+                        serv.setPrecio(Double.valueOf(precioBono.getText()));
+                        ((BonoRegalo) serv).setComercioAsociado(comercioBono.getText());
+                        ((BonoRegalo) serv).setMensaje(mensajeBono.getText());
+                    }
+                }
+            }
+            AlertUtils.alertConfirmation("Modificar Servicio Adicional", "Se ha modificado el servicio adicional seleccionado", "");
+        }catch (Exception e){
+            e.printStackTrace();
+            AlertUtils.alertError("ERROR", "No se pudo Modificar el servicio Adicional", "Por favor, intente de nuevo");
+        }
+    }
+    @FXML
+    void modificarPedido(ActionEvent event) throws Fechaerror, PedidoFechaIgual {
+        try{
+            UUID idped = listPedidosModificar.getSelectionModel().getSelectedItem();
+            Pedido pedido = controlDespacho.ExistePedido(idped);
+            ZoneId defaultZoneId = ZoneId.systemDefault();
+            LocalDate localDate = FechaModificar.getValue();
+            Date date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+            Calendar fecha = Calendar.getInstance();
+            fecha.setTime(date);
+
+            //resta de la fecha actual con la fecha de despacho
+            Calendar fechanow = Calendar.getInstance();
+            long finMs = fechanow.getTimeInMillis();
+            long inicioMs = fecha.getTimeInMillis();
+            int dias = (int) (Math.abs(finMs - inicioMs) / (1000 * 60 * 60 * 24));
+
+            if (dias <= 2){
+                throw new Fechaerror("fecha error");
+            }
+            if (controlDespacho.ExistePedido(pedido.getSolicitante(), pedido.getProductoSolicitado(), fecha) != null){
+                throw new PedidoFechaIgual("Fecha igual");
+            }
+            pedido.setFechaRecibido(fecha);
+            pedido.setNombreRepartidor(repartidorModificar.getText());
+            for (ServicioAdicional serv: pedido.getServiciosAdicionales()){
+                if (serv instanceof BonoRegalo){
+                    Calendar fechaservicio = (Calendar) fecha.clone();
+                    fechaservicio.set(Calendar.MONTH, fechaservicio.get(Calendar.MONTH) + 6);
+                    ((BonoRegalo) serv).setFechaVencimiento(fechaservicio);
+                }
+            }
+            AlertUtils.alertConfirmation("Modificar Pedido", "Se ha modificado Pedido seleccionado", "");
+            renderWindowPedido();
+        }catch (Fechaerror e){
+            e.printStackTrace();
+            AlertUtils.alertError("Error Fecha", "La fecha digitada no es mayor a dos dias", "Intentalo nuevamente");
+        }catch (PedidoFechaIgual ex){
+            ex.printStackTrace();
+            AlertUtils.alertError("Error Fecha", "La fecha ya pertenece a un pedido con mismo producto y cliente", "Intentalo nuevamente");
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
+    @FXML
+    void activarPrimeModificar(ActionEvent event) {
+        if (tipoServicioModificar.getSelectedToggle().equals(envioPrimeModificar)){
+            textEnvio.setDisable(false);
+            precioEnvio.setDisable(false);
+            distanciaEnvio.setDisable(false);
+            tipoTransporte.setDisable(false);
+            cantidadCajas.setDisable(false);
+            textBono.setDisable(true);
+            comercioBono.setDisable(true);
+            precioBono.setDisable(true);
+            mensajeBono.setDisable(true);
+        }
+    }
+    @FXML
+    void activarBonoModificar(ActionEvent event) {
+        if (tipoServicioModificar.getSelectedToggle().equals(BonoModificar)){
+            textBono.setDisable(false);
+            comercioBono.setDisable(false);
+            precioBono.setDisable(false);
+            mensajeBono.setDisable(false);
+            textEnvio.setDisable(true);
+            precioEnvio.setDisable(true);
+            distanciaEnvio.setDisable(true);
+            tipoTransporte.setDisable(true);
+            cantidadCajas.setDisable(true);
+        }
+    }
     @FXML
     void verservicios(ActionEvent event) {
         listaServicioAdicional.getItems().clear();
+        listaServicioAdicional.setDisable(false);
         try{
             UUID idped = listPedidos.getSelectionModel().getSelectedItem();
             Pedido pedido = controlDespacho.ExistePedido(idped);
