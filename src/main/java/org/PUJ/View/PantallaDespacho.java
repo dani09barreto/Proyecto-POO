@@ -271,6 +271,7 @@ public class PantallaDespacho {
                     else System.out.println("\t[!]El cliente esta asociado a un Pedido");
                     break;
                 case 9:
+                    /*
                     System.out.println("\n\tInserte el codigo del producto");
                     UUID idProd = pantalla.leerUUID();
                     System.out.println("\tInserte el documento del cliente");
@@ -389,6 +390,8 @@ public class PantallaDespacho {
                             System.out.println("\t[!] El Producto no existe");
                     }
                     break;
+
+                     */
                 case 10:
 
                     System.out.println("\n\tInserte el codigo del producto a modificar");

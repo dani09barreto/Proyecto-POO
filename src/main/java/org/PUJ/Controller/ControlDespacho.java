@@ -1,6 +1,8 @@
 package org.PUJ.Controller;
 
 import org.PUJ.Model.*;
+import org.PUJ.utils.AlertUtils;
+import org.PUJ.utils.Fechaerror;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -42,33 +44,55 @@ public class ControlDespacho {
         return null;
     }
 
-    public void ReservarPedido(Pedido nuevopedido) {
+    public void ReservarPedido(Producto producto, Cliente cliente, Calendar fecha, String repartidor, ArrayList<ServicioAdicional> servicios) throws Fechaerror {
+        Pedido nuevopedido = new Pedido(fecha, repartidor, cliente, producto);
+        nuevopedido.setServiciosAdicionales(servicios);
 
-        long costoPedido = 0;
-        costoPedido += nuevopedido.getProductoSolicitado().calcularPrecio() + nuevopedido.getProductoSolicitado().getIva();
+        //resta de la fecha actual con la fecha de despacho
+        Calendar fechanow = Calendar.getInstance();
+        long finMs = fechanow.getTimeInMillis();
+        long inicioMs = fecha.getTimeInMillis();
+        int dias = (int) (Math.abs(finMs - inicioMs) / (1000 * 60 * 60 * 24));
 
-        for (ServicioAdicional servtemp : nuevopedido.getServiciosAdicionales()) {
-            costoPedido += servtemp.calcularPrecio();
+        if (dias <= 2){
+            throw new Fechaerror("fecha error");
         }
-        costoPedido += costoPedido * 0.10;
+        else {
+            for (ServicioAdicional serv: nuevopedido.getServiciosAdicionales()){
+                if (serv instanceof BonoRegalo){
+                    Calendar fechaservicio = (Calendar) fecha.clone();
+                    fechaservicio.set(Calendar.MONTH, fechaservicio.get(Calendar.MONTH) + 6);
+                    ((BonoRegalo) serv).setFechaVencimiento(fechaservicio);
+                }
+            }
+            long costoPedido = 0;
+            long PrecioSA = 0;
+            long ivaAdicional = 0;
+            costoPedido += nuevopedido.getProductoSolicitado().calcularPrecio() + nuevopedido.getProductoSolicitado().getIva();
+            for (ServicioAdicional servtemp : nuevopedido.getServiciosAdicionales()) {
+                costoPedido += servtemp.calcularPrecio();
+            }
+            costoPedido += costoPedido * 0.10;
 
-        if (nuevopedido.getProductoSolicitado().getIva() > 50000d) {
-            costoPedido += 8000;
+            if (nuevopedido.getProductoSolicitado().getIva() > 50000d) {
+                costoPedido += 8000;
+            }
+            nuevopedido.setPagado(true);
+            for (ServicioAdicional sev: nuevopedido.getServiciosAdicionales()){
+                PrecioSA += sev.calcularPrecio();
+            }
+            if (nuevopedido.getProductoSolicitado().getIva() > 50000d) {
+                ivaAdicional = 8000;
+            }
+            AlertUtils.alertInformation("Informacion Pedido",
+                                        "Precio Producto: $" + nuevopedido.getProductoSolicitado().calcularPrecio()+"\n"+
+                                                "Precio Iva producto: $"+ nuevopedido.getProductoSolicitado().getIva()+"\n"+
+                                                "Precio Servicios Adicionales: $"+ PrecioSA +"\n"+
+                                                "Precio Iva Adicional: $"+ ivaAdicional+"\n"+
+                                                "Costo Despacho: $"+costoPedido*0.10+"\n"+
+                                                "Costo Total: $"+ (costoPedido + costoPedido*0.10), "Pedido Almacenado");
+            pedidos.add(nuevopedido);
         }
-        nuevopedido.setPagado(true);
-        System.out.println("\n\t___Costo de Pedido___\n");
-        System.out.println("\tPrecio Producto: $" + nuevopedido.getProductoSolicitado().calcularPrecio());
-        System.out.println("\tPrecio Iva producto: $" + nuevopedido.getProductoSolicitado().getIva());
-        for (ServicioAdicional servtemp : nuevopedido.getServiciosAdicionales()) {
-            System.out.println("\tServicio adicional: " + servtemp.getNombreServicio());
-            System.out.println("\tPrecio servicio adicional: $" + servtemp.calcularPrecio());
-        }
-        if (nuevopedido.getProductoSolicitado().getIva() > 50000d) {
-            System.out.println("\tPrecio Iva Adicional: $ 8000");
-        }
-        System.out.println("\tCosto de despacho: $" + costoPedido * 0.10);
-        System.out.println("\tCosto total: $" + costoPedido);
-        pedidos.add(nuevopedido);
     }
 
     public void ModificarPedido(UUID id) {
@@ -238,18 +262,14 @@ public class ControlDespacho {
         System.out.println("\tPedido modificado Correctamente");
     }
 
-    public void EliminarPedido(UUID eliminar) {
-        boolean ver = true;
+    public boolean EliminarPedido(UUID eliminar) {
         for (Pedido p : pedidos) {
             if (p.getNumeroPedido().equals(eliminar)) {
-                ver = false;
                 pedidos.remove(p);
-                break;
+                return true;
             }
         }
-        if (ver)
-
-            System.out.println("\t[!] El pedido que desea eliminar, no existe.");
+        return false;
     }
 
     public void VerPedido() {
