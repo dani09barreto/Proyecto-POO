@@ -92,11 +92,11 @@
                                                             </DropShadow>
                                                          </effect>
                                                       </Label>
-                                                      <TextField layoutX="49.0" layoutY="82.0" promptText="Nombre Completo" style="-fx-background-radius: 20;" />
-                                                      <TextField layoutX="49.0" layoutY="114.0" promptText="Cedula" style="-fx-background-radius: 20;" />
-                                                      <TextField layoutX="49.0" layoutY="147.0" promptText="Telefono" style="-fx-background-radius: 20;" />
-                                                      <TextField layoutX="49.0" layoutY="179.0" promptText="Dirección" style="-fx-background-radius: 20;" />
-                                                      <Button layoutX="93.0" layoutY="219.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="74.0" style="-fx-background-radius: 20; -fx-background-color: #00CED1; -fx-border-radius: 20;" text="Agregar" textFill="#fff9f9" />
+                                                      <TextField fx:id="Entrada_Nombre_clientes" layoutX="49.0" layoutY="82.0" promptText="Nombre Completo" style="-fx-background-radius: 20;" />
+                                                      <TextField fx:id="entrada_cedula_clientes" layoutX="49.0" layoutY="114.0" promptText="Cedula" style="-fx-background-radius: 20;" />
+                                                      <TextField fx:id="entrada_tel_clientes" layoutX="49.0" layoutY="147.0" promptText="Telefono" style="-fx-background-radius: 20;" />
+                                                      <TextField fx:id="entrada_dir_clientes" layoutX="49.0" layoutY="179.0" promptText="Dirección" style="-fx-background-radius: 20;" />
+                                                      <Button fx:id="Agregar_cliente" layoutX="93.0" layoutY="219.0" mnemonicParsing="false" onAction="#Agregar_cliente_accion" prefHeight="31.0" prefWidth="74.0" style="-fx-background-radius: 20; -fx-background-color: #00CED1; -fx-border-radius: 20;" text="Agregar" textFill="#fff9f9" />
                                                       <Separator layoutX="14.0" layoutY="277.0" prefHeight="3.0" prefWidth="250.0" />
                                                       <Label layoutX="23.0" layoutY="301.0" prefHeight="16.0" prefWidth="214.0" text="Selecciona un Cliente">
                                                          <font>
@@ -110,8 +110,8 @@
                                                             </DropShadow>
                                                          </effect>
                                                       </Label>
-                                                      <ListView layoutX="35.0" layoutY="346.0" prefHeight="185.0" prefWidth="200.0" style="-fx-background-radius: 30;" />
-                                                      <Button layoutX="95.0" layoutY="548.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" style="-fx-background-radius: 20; -fx-background-color: #00CED1; -fx-border-radius: 20;" text="Eliminar" textFill="#fff9f9" />
+                                                      <ListView fx:id="Lista_eliminar_clientes" layoutX="35.0" layoutY="346.0" prefHeight="185.0" prefWidth="200.0" style="-fx-background-radius: 30;" />
+                                                      <Button fx:id="boton_eliminar_clientes" layoutX="95.0" layoutY="548.0" mnemonicParsing="false" onAction="#Eliminar_Cliente_accion" prefHeight="26.0" prefWidth="71.0" style="-fx-background-radius: 20; -fx-background-color: #00CED1; -fx-border-radius: 20;" text="Eliminar" textFill="#fff9f9" />
                                                    </children>
                                                 </AnchorPane>
                                                 <ScrollPane prefHeight="548.0" prefWidth="401.0">
@@ -127,13 +127,28 @@
                                                                      </color>
                                                                   </DropShadow>
                                                                </effect></Label>
-                                                            <TableView layoutY="81.0" prefHeight="524.0" prefWidth="623.0" style="-fx-background-radius: 20;">
+                                                            <TableView fx:id="Tabla_clientes" layoutY="81.0" prefHeight="524.0" prefWidth="623.0" style="-fx-background-radius: 20;">
                                                               <columns>
-                                                                <TableColumn prefWidth="89.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="ID" />
-                                                                <TableColumn prefWidth="127.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="Nombre" />
-                                                                  <TableColumn prefWidth="108.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="Cedula" />
-                                                                  <TableColumn prefWidth="144.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="Telefono" />
-                                                                  <TableColumn prefWidth="154.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="Dirección" />
+                                                                 <TableColumn fx:id="tabla_nombre_clientes" prefWidth="155.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="Nombre">
+                                                                    <cellValueFactory>
+                                                                       <javafx.scene.control.cell.PropertyValueFactory property="NombreCompleto" />
+                                                                    </cellValueFactory>
+                                                                 </TableColumn>
+                                                                  <TableColumn fx:id="tabla_cedula_clientes" prefWidth="155.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="Cedula">
+                                                                     <cellValueFactory>
+                                                                        <javafx.scene.control.cell.PropertyValueFactory property="Cedula" />
+                                                                     </cellValueFactory>
+                                                                  </TableColumn>
+                                                                  <TableColumn fx:id="tabla_tel_clientes" prefWidth="155.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="Telefono">
+                                                                     <cellValueFactory>
+                                                                        <javafx.scene.control.cell.PropertyValueFactory property="TelefonoContacto" />
+                                                                     </cellValueFactory>
+                                                                  </TableColumn>
+                                                                  <TableColumn fx:id="tabal_dir_clientes" prefWidth="155.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="Dirección">
+                                                                     <cellValueFactory>
+                                                                        <javafx.scene.control.cell.PropertyValueFactory property="Direccion" />
+                                                                     </cellValueFactory>
+                                                                  </TableColumn>
                                                               </columns>
                                                             </TableView>
                                                          </children>
@@ -158,17 +173,16 @@
                                                             <Image url="@img/user.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <TextField disable="true" layoutX="72.0" layoutY="232.0" promptText="Nombre Completo" style="-fx-background-radius: 20;" />
-                                                      <TextField disable="true" layoutX="72.0" layoutY="264.0" promptText="Cedula" style="-fx-background-radius: 20;" />
-                                                      <TextField disable="true" layoutX="72.0" layoutY="297.0" promptText="Telefono" style="-fx-background-radius: 20;" />
-                                                      <TextField disable="true" layoutX="72.0" layoutY="329.0" promptText="Dirección" style="-fx-background-radius: 20;" />
-                                                      <CheckBox layoutX="93.0" layoutY="374.0" mnemonicParsing="false" text="¿Modificar?">
+                                                      <TextField fx:id="Entrada_Mod_nombre_cliente" disable="true" layoutX="72.0" layoutY="232.0" promptText="Nombre Completo" style="-fx-background-radius: 20;" />
+                                                      <TextField fx:id="Entrada_Mod_telefono_cliente" disable="true" layoutX="69.0" layoutY="267.0" promptText="Telefono" style="-fx-background-radius: 20;" />
+                                                      <TextField fx:id="Entrada_Mod_dir_cliente" disable="true" layoutX="72.0" layoutY="303.0" promptText="Dirección" style="-fx-background-radius: 20;" />
+                                                      <CheckBox fx:id="Ver_mod_clientes" layoutX="97.0" layoutY="361.0" mnemonicParsing="false" onAction="#VerModificar" text="¿Modificar?">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
                                                       </CheckBox>
-                                                      <Button disable="true" layoutX="107.0" layoutY="417.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="72.0" style="-fx-background-radius: 20; -fx-background-color: #00CED1; -fx-border-radius: 20;" text="Modificar" textFill="#fff9f9" />
-                                                      <ComboBox disable="true" layoutX="72.0" layoutY="199.0" prefWidth="150.0" promptText="Cliente" style="-fx-background-radius: 20;" />
+                                                      <Button fx:id="boton_modi_clientes" disable="true" layoutX="107.0" layoutY="417.0" mnemonicParsing="false" onAction="#ModificarCliente" prefHeight="33.0" prefWidth="72.0" style="-fx-background-radius: 20; -fx-background-color: #00CED1; -fx-border-radius: 20;" text="Modificar" textFill="#fff9f9" />
+                                                      <ComboBox fx:id="Selecion_clientes" disable="true" layoutX="72.0" layoutY="199.0" prefWidth="150.0" promptText="Cliente" style="-fx-background-radius: 20;" />
                                                    </children>
                                                 </AnchorPane>
                                              </items>
@@ -263,7 +277,7 @@
                                                       <TextField disable="true" layoutX="166.0" layoutY="256.0" prefHeight="25.0" prefWidth="132.0" promptText="Impuesto Local" style="-fx-background-radius: 20;" />
                                                       <TextField disable="true" layoutX="166.0" layoutY="293.0" prefHeight="25.0" prefWidth="132.0" promptText="Nombre Hacienda" style="-fx-background-radius: 20;" />
                                                       <CheckBox disable="true" layoutX="16.0" layoutY="297.0" mnemonicParsing="false" text="¿INVIMA?" />
-                                                      <ComboBox fx:id="listTipoProducto" layoutX="15.0" layoutY="324.0" prefHeight="25.0" prefWidth="128.0" promptText="Tipo Producto" />
+                                                      <ComboBox fx:id="listTipoProducto" disable="true" layoutX="15.0" layoutY="324.0" prefHeight="25.0" prefWidth="128.0" promptText="Tipo Producto" />
                                                       <CheckBox disable="true" layoutX="172.0" layoutY="328.0" mnemonicParsing="false" text="¿Organico?" />
                                                    </children>
                                                 </AnchorPane>
