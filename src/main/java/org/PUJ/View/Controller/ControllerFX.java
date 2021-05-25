@@ -180,19 +180,30 @@ public class ControllerFX implements Initializable {
     //---------Funciones Clientes----------//
     @FXML
     void Agregar_cliente_accion(ActionEvent event) {
+
         try {
             Cliente temp = new Cliente(Long.valueOf(entrada_cedula_clientes.getText()), Entrada_Nombre_clientes.getText(), Long.valueOf(entrada_tel_clientes.getText()), entrada_dir_clientes.getText());
             this.controlDespacho.getGestionCliente().InsertarCliente(temp.getCedula(), temp.getNombreCompleto(), temp.getTelefonoContacto(), temp.getDireccion());
-
+            AlertUtils.alertInformation("Agregar Cliente", "El cliente se ha agregado correctamente", "");
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         renderWindowCliente();
     }
 
     @FXML
     void Eliminar_Cliente_accion(ActionEvent event) {
-        this.controlDespacho.getGestionCliente().EliminarCliente(Lista_eliminar_clientes.getSelectionModel().getSelectedItem());
+        Optional<ButtonType> opcion = AlertUtils.alertConfirmation(" Eliminar Cliente", "Se eliminara el cliente con cedula:  " + Lista_eliminar_clientes.getSelectionModel().getSelectedItem().toString(), "¿Esta seguro?");
+        try {
+            if (opcion.get().equals(ButtonType.OK)) {
+                this.controlDespacho.getGestionCliente().EliminarCliente(Lista_eliminar_clientes.getSelectionModel().getSelectedItem());
+                AlertUtils.alertInformation("Eliminar Cliente", "El cliente se ha Eliminado correctamente", "");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         renderWindowCliente();
     }
 
@@ -217,20 +228,22 @@ public class ControllerFX implements Initializable {
 
     @FXML
     void ModificarCliente(ActionEvent event) {
-        try {
-            Long cedulaMod = Selecion_clientes.getValue();
-            for (Long c : this.controlDespacho.getGestionCliente().getListaClientes().keySet()) {
-                if (this.controlDespacho.getGestionCliente().getListaClientes().get(c).getCedula().equals(cedulaMod)) {
-                    this.controlDespacho.getGestionCliente().getListaClientes().get(c).setTelefonoContacto(Long.valueOf(Entrada_Mod_telefono_cliente.getText()));
-                    this.controlDespacho.getGestionCliente().getListaClientes().get(c).setNombreCompleto(Entrada_Mod_nombre_cliente.getText());
-                    this.controlDespacho.getGestionCliente().getListaClientes().get(c).setDireccion(Entrada_Mod_dir_cliente.getText());
+        Optional<ButtonType> opcion = AlertUtils.alertConfirmation("Modificar Cliente", "Se modificara el cliente de cedula: "+Selecion_clientes.getValue().toString(), "¿Esta seguro?");
 
+        try {
+            if (opcion.get().equals(ButtonType.OK)) {
+                Long cedulaMod = Selecion_clientes.getValue();
+                for (Long c : this.controlDespacho.getGestionCliente().getListaClientes().keySet()) {
+                    if (this.controlDespacho.getGestionCliente().getListaClientes().get(c).getCedula().equals(cedulaMod)) {
+                        this.controlDespacho.getGestionCliente().getListaClientes().get(c).setTelefonoContacto(Long.valueOf(Entrada_Mod_telefono_cliente.getText()));
+                        this.controlDespacho.getGestionCliente().getListaClientes().get(c).setNombreCompleto(Entrada_Mod_nombre_cliente.getText());
+                        this.controlDespacho.getGestionCliente().getListaClientes().get(c).setDireccion(Entrada_Mod_dir_cliente.getText());
+                    }
                 }
             }
-            AlertUtils.alertConfirmation("Agregar Cliente","El cliente se ha agregado correctamente","");
         } catch (Exception e) {
             e.printStackTrace();
-            AlertUtils.alertError("z","<","s");
+            AlertUtils.alertError("z", "<", "s");
         }
 
         renderWindowCliente();
