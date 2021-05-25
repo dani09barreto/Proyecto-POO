@@ -224,6 +224,7 @@ public class ControllerFX implements Initializable {
                     this.controlDespacho.getGestionCliente().getListaClientes().get(c).setTelefonoContacto(Long.valueOf(Entrada_Mod_telefono_cliente.getText()));
                     this.controlDespacho.getGestionCliente().getListaClientes().get(c).setNombreCompleto(Entrada_Mod_nombre_cliente.getText());
                     this.controlDespacho.getGestionCliente().getListaClientes().get(c).setDireccion(Entrada_Mod_dir_cliente.getText());
+
                 }
             }
             AlertUtils.alertConfirmation("Agregar Cliente","El cliente se ha agregado correctamente","");
