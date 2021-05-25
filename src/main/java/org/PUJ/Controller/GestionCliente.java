@@ -40,7 +40,8 @@ public class GestionCliente {
     public void EliminarCliente(Long cedEliminar){
 
             Long temp = cedEliminar;
-            if (listaClientes.remove(cedEliminar) != null) {
+            if (listaClientes.containsKey(cedEliminar)) {
+                listaClientes.remove(cedEliminar);
                 System.out.println("\t El cliente con cedula " + temp + " fue eliminado con exito!");
 
             } else {
