@@ -8,9 +8,7 @@ import java.util.UUID;
 public class Fruver extends Producto {
 
     private Boolean esOrganico;
-
     private Double impuestoLocal;
-
     private String nombreHacienda;
 
     public Fruver() {
@@ -55,8 +53,8 @@ public class Fruver extends Producto {
     public String toString() {
         String organico = this.esOrganico ? "Si" : "No";
         return super.toString() +
-                "\n\tEs orgánico: " + organico +
-                "\n\tImpuesto local: $" + impuestoLocal +
-                "\n\tNombre Hacienda: " + nombreHacienda + "\n";
+                "\nEs orgánico: " + organico +
+                "\nImpuesto local: $" + impuestoLocal +
+                "\nNombre Hacienda: " + nombreHacienda + "\n";
     }
 }

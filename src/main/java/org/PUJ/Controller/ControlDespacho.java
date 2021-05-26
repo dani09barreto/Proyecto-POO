@@ -149,9 +149,9 @@ public class ControlDespacho {
     public boolean validarCliente(Long ced) {
         for (Pedido p : this.pedidos) {
             if (p.getSolicitante().getCedula().equals(ced))
-                return false;
+                return true;
         }
-        return true;
+        return false;
     }
 
     public boolean ValidarProducto(Producto product) {

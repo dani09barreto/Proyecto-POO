@@ -50,8 +50,8 @@ public class Aseo extends Producto {
     public String toString() {
         String invima = this.tieneInvima ? "Sí tiene" : "No tiene";
          return super.toString() +
-                "\n\tNombre Empresa: " + nombreEmpresa +
-                "\n\tInvima: " + invima +
-                "\n\tTipo: " + tipo + "\n";
+                "\nNombre Empresa: " + nombreEmpresa +
+                "\nInvima: " + invima +
+                "\nTipo: " + tipo + "\n";
     }
 }
