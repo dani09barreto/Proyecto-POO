@@ -221,19 +221,19 @@
                                                             </DropShadow>
                                                          </effect>
                                                       </Label>
-                                                      <RadioButton layoutX="49.0" layoutY="189.0" mnemonicParsing="false" text="Aseo">
+                                                      <RadioButton fx:id="tipoAseo" layoutX="49.0" layoutY="189.0" mnemonicParsing="false" onAction="#switchTipoProducto" text="Aseo">
                                                          <toggleGroup>
                                                             <ToggleGroup fx:id="tipoProducto" />
                                                          </toggleGroup>
                                                       </RadioButton>
-                                                      <RadioButton layoutX="127.0" layoutY="189.0" mnemonicParsing="false" text="Fruver" toggleGroup="$tipoProducto" />
-                                                      <RadioButton layoutX="209.0" layoutY="189.0" mnemonicParsing="false" selected="true" text="Otro" toggleGroup="$tipoProducto" />
-                                                      <TextField layoutX="46.0" layoutY="82.0" promptText="Nombre Producto" style="-fx-background-radius: 20;" />
-                                                      <TextField layoutX="46.0" layoutY="114.0" promptText="Precio" style="-fx-background-radius: 20;" />
-                                                      <TextField layoutX="46.0" layoutY="146.0" promptText="Tienda" style="-fx-background-radius: 20;" />
-                                                      <Button layoutX="221.0" layoutY="124.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="74.0" style="-fx-background-radius: 20; -fx-background-color: #FA2C56; -fx-border-radius: 20;" text="Agregar" textFill="#fff9f9" />
+                                                      <RadioButton fx:id="tipoFruver" layoutX="127.0" layoutY="189.0" mnemonicParsing="false" onAction="#switchTipoProducto" text="Fruver" toggleGroup="$tipoProducto" />
+                                                      <RadioButton fx:id="tipoOtro" layoutX="209.0" layoutY="189.0" mnemonicParsing="false" onAction="#switchTipoProducto" selected="true" text="Otro" toggleGroup="$tipoProducto" />
+                                                      <TextField fx:id="insertarNombreProducto" layoutX="46.0" layoutY="82.0" promptText="Nombre Producto" style="-fx-background-radius: 20;" />
+                                                      <TextField fx:id="insertarPrecioProducto" layoutX="46.0" layoutY="114.0" promptText="Precio" style="-fx-background-radius: 20;" />
+                                                      <TextField fx:id="insertarTiendaProducto" layoutX="46.0" layoutY="146.0" promptText="Tienda" style="-fx-background-radius: 20;" />
+                                                      <Button fx:id="btnAgregarProducto" layoutX="221.0" layoutY="124.0" mnemonicParsing="false" onAction="#agregarProducto" prefHeight="31.0" prefWidth="74.0" style="-fx-background-radius: 20; -fx-background-color: #FA2C56; -fx-border-radius: 20;" text="Agregar" textFill="#fff9f9" />
                                                       <Separator layoutX="3.0" layoutY="364.0" prefHeight="4.0" prefWidth="309.0" />
-                                                      <Label layoutX="31.0" layoutY="372.0" prefHeight="16.0" prefWidth="214.0" text="Selecciona un Producto">
+                                                      <Label layoutX="83.0" layoutY="378.0" prefHeight="21.0" prefWidth="161.0" text="Selecciona un Producto">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -247,9 +247,9 @@
                                                       </Label>
                                                       <Separator layoutX="4.0" layoutY="223.0" prefHeight="3.0" prefWidth="305.0" />
                                                       <Separator layoutX="157.0" layoutY="222.0" orientation="VERTICAL" prefHeight="142.0" prefWidth="3.0" />
-                                                      <ListView layoutX="40.0" layoutY="405.0" prefHeight="157.0" prefWidth="233.0" style="-fx-background-radius: 30;" />
-                                                      <Button layoutX="195.0" layoutY="568.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="74.0" style="-fx-background-radius: 20; -fx-background-color: #FA2C56; -fx-border-radius: 20;" text="Eliminar" textFill="#fff9f9" />
-                                                      <Label alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="207.0" layoutY="232.0" prefHeight="21.0" prefWidth="51.0" text="Fruver">
+                                                      <ListView fx:id="tablaEliminarProductos" layoutX="40.0" layoutY="405.0" prefHeight="157.0" prefWidth="233.0" style="-fx-background-radius: 30;" />
+                                                      <Button fx:id="btnEliminarProducto" layoutX="123.0" layoutY="568.0" mnemonicParsing="false" onAction="#eliminarProducto" prefHeight="31.0" prefWidth="74.0" style="-fx-background-radius: 20; -fx-background-color: #FA2C56; -fx-border-radius: 20;" text="Eliminar" textFill="#fff9f9" />
+                                                      <Label fx:id="textFruver" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="207.0" layoutY="232.0" prefHeight="21.0" prefWidth="51.0" text="Fruver">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
@@ -261,7 +261,7 @@
                                                             </DropShadow>
                                                          </effect>
                                                       </Label>
-                                                      <Label alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="53.0" layoutY="232.0" prefHeight="21.0" prefWidth="51.0" text="Aseo">
+                                                      <Label fx:id="textAseo" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="53.0" layoutY="232.0" prefHeight="21.0" prefWidth="51.0" text="Aseo">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
@@ -273,12 +273,12 @@
                                                             </DropShadow>
                                                          </effect>
                                                       </Label>
-                                                      <TextField disable="true" layoutX="12.0" layoutY="256.0" prefHeight="25.0" prefWidth="132.0" promptText="Nombre Empresa" style="-fx-background-radius: 20;" />
-                                                      <TextField disable="true" layoutX="166.0" layoutY="256.0" prefHeight="25.0" prefWidth="132.0" promptText="Impuesto Local" style="-fx-background-radius: 20;" />
-                                                      <TextField disable="true" layoutX="166.0" layoutY="293.0" prefHeight="25.0" prefWidth="132.0" promptText="Nombre Hacienda" style="-fx-background-radius: 20;" />
-                                                      <CheckBox disable="true" layoutX="16.0" layoutY="297.0" mnemonicParsing="false" text="¿INVIMA?" />
+                                                      <TextField fx:id="insertarNombreEmpresa" disable="true" layoutX="12.0" layoutY="256.0" prefHeight="25.0" prefWidth="132.0" promptText="Nombre Empresa" style="-fx-background-radius: 20;" />
+                                                      <TextField fx:id="insertarImpuestoLocal" disable="true" layoutX="166.0" layoutY="256.0" prefHeight="25.0" prefWidth="132.0" promptText="Impuesto Local" style="-fx-background-radius: 20;" />
+                                                      <TextField fx:id="insertarNombreHacienda" disable="true" layoutX="166.0" layoutY="293.0" prefHeight="25.0" prefWidth="132.0" promptText="Nombre Hacienda" style="-fx-background-radius: 20;" />
+                                                      <CheckBox fx:id="checkInvima" disable="true" layoutX="16.0" layoutY="297.0" mnemonicParsing="false" text="¿INVIMA?" />
                                                       <ComboBox fx:id="listTipoProducto" disable="true" layoutX="15.0" layoutY="324.0" prefHeight="25.0" prefWidth="128.0" promptText="Tipo Producto" />
-                                                      <CheckBox disable="true" layoutX="172.0" layoutY="328.0" mnemonicParsing="false" text="¿Organico?" />
+                                                      <CheckBox fx:id="checkOrganico" disable="true" layoutX="172.0" layoutY="328.0" mnemonicParsing="false" text="¿Organico?" />
                                                    </children>
                                                 </AnchorPane>
                                                 <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
@@ -297,13 +297,33 @@
                                                                      </color>
                                                                   </DropShadow>
                                                                </effect></Label>
-                                                            <TableView layoutY="83.0" prefHeight="527.0" prefWidth="587.0" style="-fx-background-radius: 20;">
+                                                            <TableView fx:id="tablaProductos" layoutY="83.0" prefHeight="527.0" prefWidth="587.0" style="-fx-background-radius: 20;">
                                                                <columns>
-                                                                  <TableColumn prefWidth="91.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="ID" />
-                                                                  <TableColumn prefWidth="108.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="Nombre" />
-                                                                  <TableColumn prefWidth="108.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="Precio" />
-                                                                  <TableColumn prefWidth="123.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="Tienda" />
-                                                                  <TableColumn prefWidth="155.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="Tipo" />
+                                                                  <TableColumn fx:id="C_ID_PROD" prefWidth="91.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="ID">
+                                                                     <cellValueFactory>
+                                                                        <javafx.scene.control.cell.PropertyValueFactory property="ProdId" />
+                                                                     </cellValueFactory>
+                                                                  </TableColumn>
+                                                                  <TableColumn fx:id="C_NOMBRE_PROD" prefWidth="108.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="Nombre">
+                                                                     <cellValueFactory>
+                                                                        <javafx.scene.control.cell.PropertyValueFactory property="NombreComercial" />
+                                                                     </cellValueFactory>
+                                                                  </TableColumn>
+                                                                  <TableColumn fx:id="C_PRECIO_PROD" prefWidth="108.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="Precio">
+                                                                  <cellValueFactory>
+                                                                     <javafx.scene.control.cell.PropertyValueFactory property="Precio" />
+                                                                  </cellValueFactory>
+                                                                  </TableColumn>
+                                                                  <TableColumn fx:id="C_TIENDA_PROD" prefWidth="123.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="Tienda">
+                                                                  <cellValueFactory>
+                                                                     <javafx.scene.control.cell.PropertyValueFactory property="Tienda" />
+                                                                  </cellValueFactory>
+                                                                  </TableColumn>
+                                                                  <TableColumn fx:id="C_TIPO_PROD" prefWidth="155.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="TipoProducto">
+                                                                     <cellValueFactory>
+                                                                        <javafx.scene.control.cell.PropertyValueFactory property="TipoProducto" />
+                                                                     </cellValueFactory>
+                                                                  </TableColumn>
                                                                </columns>
                                                             </TableView>
                                                          </children>
@@ -321,30 +341,59 @@
                                                                </color>
                                                             </DropShadow>
                                                          </effect></Label>
-                                                      <Label layoutX="26.0" layoutY="110.0" prefHeight="432.0" prefWidth="235.0" style="-fx-background-color: C9C9C9; -fx-background-radius: 20; -fx-border-color: #B9BABA; -fx-border-radius: 20;" />
-                                                      <ImageView fitHeight="76.0" fitWidth="81.0" layoutX="108.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
+                                                      <Label layoutX="26.0" layoutY="84.0" prefHeight="520.0" prefWidth="235.0" style="-fx-background-color: C9C9C9; -fx-background-radius: 20; -fx-border-color: #B9BABA; -fx-border-radius: 20;" />
+                                                      <ImageView fitHeight="76.0" fitWidth="81.0" layoutX="108.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@img/estar.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <TextField disable="true" layoutX="71.0" layoutY="278.0" promptText="Nombre Producto" style="-fx-background-radius: 20;" />
-                                                      <TextField disable="true" layoutX="71.0" layoutY="313.0" promptText="Precio" style="-fx-background-radius: 20;" />
-                                                      <TextField disable="true" layoutX="71.0" layoutY="349.0" promptText="Tienda" style="-fx-background-radius: 20;" />
-                                                      <RadioButton disable="true" layoutX="42.0" layoutY="398.0" mnemonicParsing="false" text="Aseo">
+                                                      <TextField fx:id="insertarNombreModProd" disable="true" layoutX="71.0" layoutY="248.0" promptText="Nombre Producto" style="-fx-background-radius: 20;" />
+                                                      <TextField fx:id="insertarPrecioModProd" disable="true" layoutX="71.0" layoutY="283.0" promptText="Precio" style="-fx-background-radius: 20;" />
+                                                      <TextField fx:id="insertarTiendaModProd" disable="true" layoutX="71.0" layoutY="319.0" promptText="Tienda" style="-fx-background-radius: 20;" />
+                                                      <RadioButton fx:id="tipoFruverModificar" disable="true" layoutX="120.0" layoutY="367.0" mnemonicParsing="false" onAction="#actualizarTipoProdMod" text="Fruver">
                                                          <toggleGroup>
                                                             <ToggleGroup fx:id="tipoProductoModificar" />
-                                                         </toggleGroup>
-                                                      </RadioButton>
-                                                      <RadioButton disable="true" layoutX="120.0" layoutY="398.0" mnemonicParsing="false" text="Fruver" toggleGroup="$tipoProductoModificar" />
-                                                      <RadioButton disable="true" layoutX="202.0" layoutY="398.0" mnemonicParsing="false" selected="true" text="Otro" toggleGroup="$tipoProductoModificar" />
-                                                      <CheckBox layoutX="95.0" layoutY="442.0" mnemonicParsing="false" text="¿Modificar?">
+                                                         </toggleGroup></RadioButton>
+                                                      <RadioButton fx:id="tipoAseoModificar" disable="true" layoutX="42.0" layoutY="367.0" mnemonicParsing="false" onAction="#actualizarTipoProdMod" text="Aseo" toggleGroup="$tipoProductoModificar" />
+                                                      <RadioButton fx:id="tipoOtroModificar" disable="true" layoutX="202.0" layoutY="367.0" mnemonicParsing="false" onAction="#actualizarTipoProdMod" selected="true" text="Otro" toggleGroup="$tipoProductoModificar" />
+                                                      <ComboBox fx:id="listaProductosModificar" disable="true" layoutX="71.0" layoutY="211.0" onAction="#actualizarInformacionModificar" prefWidth="150.0" promptText="Producto" style="-fx-background-radius: 20;" />
+                                                      <CheckBox fx:id="actModificarProducto" disable="true" layoutX="98.0" layoutY="530.0" mnemonicParsing="false" onAction="#switchModificarProducto" text="¿Modificar?">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
                                                       </CheckBox>
-                                                      <Button disable="true" layoutX="108.0" layoutY="483.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="72.0" style="-fx-background-radius: 20; -fx-background-color: #FA2C56; -fx-border-radius: 20;" text="Modificar" textFill="#fff9f9" />
+                                                      <Button fx:id="btnModificarProducto" disable="true" layoutX="109.0" layoutY="561.0" mnemonicParsing="false" onAction="#modificarProducto" prefHeight="33.0" prefWidth="72.0" style="-fx-background-radius: 20; -fx-background-color: #FA2C56; -fx-border-radius: 20;" text="Modificar" textFill="#fff9f9" />
                                                       <Pane layoutX="-71.0" layoutY="493.0" prefHeight="127.0" prefWidth="100.0" style="-fx-background-color: #FA2C56; -fx-background-radius: 70;" />
-                                                      <ComboBox disable="true" layoutX="71.0" layoutY="241.0" prefWidth="150.0" promptText="Producto" style="-fx-background-radius: 20;" />
+                                                      <Label fx:id="textAseoMod" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="124.0" layoutY="396.0" prefHeight="21.0" prefWidth="51.0" text="Aseo">
+                                                         <font>
+                                                            <Font size="13.0" />
+                                                         </font>
+                                                         <effect>
+                                                            <DropShadow>
+                                                               <color>
+                                                                  <Color red="0.9803921580314636" green="0.1725490242242813" blue="0.33725491166114807" />
+                                                               </color>
+                                                            </DropShadow>
+                                                         </effect>
+                                                      </Label>
+                                                      <TextField fx:id="insertarNombreAseoMod" disable="true" layoutX="83.0" layoutY="420.0" prefHeight="25.0" prefWidth="132.0" promptText="Nombre Empresa" style="-fx-background-radius: 20;" />
+                                                      <CheckBox fx:id="checkInvimaMod" disable="true" layoutX="87.0" layoutY="459.0" mnemonicParsing="false" text="¿INVIMA?" />
+                                                      <ComboBox fx:id="listTipoProductoMod" disable="true" layoutX="86.0" layoutY="488.0" prefHeight="25.0" prefWidth="128.0" promptText="Tipo Producto" />
+                                                      <Label fx:id="textFruverMod" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="127.0" layoutY="397.0" prefHeight="21.0" prefWidth="51.0" text="Fruver" visible="false">
+                                                         <font>
+                                                            <Font size="13.0" />
+                                                         </font>
+                                                         <effect>
+                                                            <DropShadow>
+                                                               <color>
+                                                                  <Color red="0.9803921580314636" green="0.1725490242242813" blue="0.33725491166114807" />
+                                                               </color>
+                                                            </DropShadow>
+                                                         </effect>
+                                                      </Label>
+                                                      <TextField fx:id="insertarImpuestoLocalMod" disable="true" layoutX="86.0" layoutY="421.0" prefHeight="25.0" prefWidth="132.0" promptText="Impuesto Local" style="-fx-background-radius: 20;" visible="false" />
+                                                      <TextField fx:id="insertarNombreHaciendaMod" disable="true" layoutX="86.0" layoutY="458.0" prefHeight="25.0" prefWidth="132.0" promptText="Nombre Hacienda" style="-fx-background-radius: 20;" visible="false" />
+                                                      <CheckBox fx:id="checkOrganicoMod" disable="true" layoutX="92.0" layoutY="493.0" mnemonicParsing="false" text="¿Organico?" visible="false" />
                                                    </children>
                                                 </AnchorPane>
                                              </items>
