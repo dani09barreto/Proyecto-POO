@@ -15,10 +15,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import org.PUJ.Controller.ControlDespacho;
 import org.PUJ.Model.*;
-import org.PUJ.utils.AlertUtils;
-import org.PUJ.utils.Fechaerror;
-import org.PUJ.utils.FileType;
-import org.PUJ.utils.PedidoFechaIgual;
+import org.PUJ.utils.*;
 
 import java.awt.*;
 import java.io.FileWriter;
@@ -31,13 +28,6 @@ import java.net.URL;
 
 public class ControllerFX implements Initializable {
     private ControlDespacho controlDespacho = new ControlDespacho();
-    //Objetos prueba
-    void guardarObjetos(){
-        Fruver productoFruver1 = new Fruver("Manzana", 400D, "los arboles", 0d, "Napoles");
-        controlDespacho.getGestionProductos().getListaProductos().put(productoFruver1.getProdId(),productoFruver1);
-    }
-
-
 
     //---------variables cliente-------//
     @FXML
@@ -85,68 +75,6 @@ public class ControllerFX implements Initializable {
     private ToggleGroup tipoProductoModificar;
     //-------variables pedido--------//
     private ArrayList<ServicioAdicional> servicios = new ArrayList<>();
-    @FXML private ComboBox<Long> clientesList;
-    @FXML private ComboBox<UUID> productosList;
-    @FXML private DatePicker fechaEntrega;
-    @FXML private TextField nameReparidor;
-    @FXML private Button btnAgregar;
-    @FXML private RadioButton envioPrimeAgregar;
-    @FXML private ToggleGroup tipoServicio;
-    @FXML private RadioButton bonoRegaloAgregar;
-    @FXML private Label textEnvio;
-    @FXML private Label textBono;
-    @FXML private TextField precioEnvio;
-    @FXML private TextField distanciaEnvio;
-    @FXML private ComboBox<TipoTransporte> tipoTransporte;
-    @FXML private Spinner<Integer> cantidadCajas;
-    @FXML private TextField comercioBono;
-    @FXML private TextField precioBono;
-    @FXML private TextField mensajeBono;
-    @FXML private Button btnAgregarSA;
-    @FXML private ListView<UUID> listaEliminar;
-    @FXML private Button btnEliminar;
-    @FXML private TableView<Pedido> listaPedidos;
-    @FXML private TableColumn<Pedido, UUID> colid;
-    @FXML private TableColumn<Pedido, String> colfecha;
-    @FXML private TableColumn<Pedido, String> colRepartidor;
-    @FXML private TableColumn<Cliente, String> colCliente;
-    @FXML private TableColumn<Pedido, String> colPedido;
-    @FXML private TableView<ServicioAdicional> listaServicioAdicional = new TableView<ServicioAdicional>();
-    @FXML private TableColumn<ServicioAdicional, UUID> colidSA = new TableColumn<ServicioAdicional,UUID>("CodigoServicio");
-    @FXML private TableColumn<ServicioAdicional, String> colNombreSA = new TableColumn<ServicioAdicional,String>("NombreServicio");
-    @FXML private TableColumn<ServicioAdicional, Double> colPrecioSA = new TableColumn<ServicioAdicional, Double>("Precio");
-    @FXML private TableColumn<EnvioPrime, Double> colDistanciaSA = new TableColumn<EnvioPrime, Double>("Distancia");
-    @FXML private TableColumn<EnvioPrime, TipoTransporte> colTransporteSA = new TableColumn<EnvioPrime, TipoTransporte>("Tipo");
-    @FXML private TableColumn<EnvioPrime, Integer> colCajasSA = new TableColumn<EnvioPrime, Integer>("NumeroCajas");
-    @FXML private TableColumn<BonoRegalo, String> colComercioSA = new TableColumn<BonoRegalo, String>("ComercioAsociado");
-    @FXML private TableColumn<BonoRegalo, String> colMensajeSA = new TableColumn<BonoRegalo, String>("Mensaje");
-    @FXML private TableColumn<BonoRegalo, String> colFechaSA = new TableColumn<BonoRegalo, String>("FechaVencimientostring");
-    @FXML private ToggleGroup tipoServicioModificar;
-    @FXML private Button btnVerServicios;
-    @FXML private ComboBox<UUID> listPedidosModificar;
-    @FXML private DatePicker FechaModificar;
-    @FXML private TextField repartidorModificar;
-    @FXML private RadioButton envioPrimeModificar;
-    @FXML private RadioButton BonoModificar;
-    @FXML private CheckBox checkModificar;
-    @FXML private Button btnModificarPedido;
-    @FXML private ComboBox<UUID> listPedidos;
-    @FXML private ComboBox<UUID> listEnviosModificar;
-    @FXML private ComboBox<UUID> listBonosModificar;
-    @FXML private Button btnAgregarModServicio;
-    @FXML private Button btnCargarPedido;
-    //Variables pestaña otros
-    @FXML private ComboBox<UUID> productoEspecifico;
-    @FXML private DatePicker fechaEspecifica;
-    @FXML private Button generarListado;
-    @FXML private TableView<Pedido> tablaFechaEspecifica;
-    @FXML private TableColumn<Pedido, String> columnClienteEspecifico;
-    @FXML private TableColumn<Pedido, String> colProdEsspecifico;
-    @FXML private TableColumn<Pedido, Calendar> colFechEspecifica;
-    @FXML private ComboBox<?> tipoProdGuardar;
-    @FXML private DatePicker fechaInicialGuardar;
-    @FXML private DatePicker fechaFinalGuardar;
-    @FXML private ComboBox<?> tipoTransporteguardar;
     @FXML
     private ComboBox<Long> clientesList;
     @FXML
@@ -247,6 +175,29 @@ public class ControllerFX implements Initializable {
     private Button btnAgregarModServicio;
     @FXML
     private Button btnCargarPedido;
+    //Variables pestaña otros
+    @FXML
+    private ComboBox<UUID> productoEspecifico;
+    @FXML
+    private DatePicker fechaEspecifica;
+    @FXML
+    private Button generarListado;
+    @FXML
+    private TableView<Pedido> tablaFechaEspecifica;
+    @FXML
+    private TableColumn<Pedido, String> columnClienteEspecifico;
+    @FXML
+    private TableColumn<Pedido, String> colProdEsspecifico;
+    @FXML
+    private TableColumn<Pedido, Calendar> colFechEspecifica;
+    @FXML
+    private ComboBox<TipoProducto> tipoProdGuardar;
+    @FXML
+    private DatePicker fechaInicialGuardar;
+    @FXML
+    private DatePicker fechaFinalGuardar;
+    @FXML
+    private ComboBox<TipoTransporte> tipoTransporteguardar;
 
     // Variables Producto
 
@@ -333,26 +284,26 @@ public class ControllerFX implements Initializable {
     //----------iniciador-------funciona para dar valores al programa sin acciones como los tipos de transporte o tipo de aseo//
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        renderWindowPedido();
-        renderWindowProducto();
         listTipoProducto.getItems().setAll(TipoProducto.values());
         tipoTransporte.getItems().setAll(TipoTransporte.values());
+        tipoProdGuardar.getItems().setAll(TipoProducto.values());
+        tipoTransporteguardar.getItems().setAll(TipoTransporte.values());
         fechaEntrega.setValue(LocalDate.now());
         listaProductosModificar.getItems().setAll(controlDespacho.getGestionProductos().getListaProductos().keySet());
     }
 
     //---------Funciones Clientes----------//
     @FXML
-    void Agregar_cliente_accion(ActionEvent event) {
+    void Agregar_cliente_accion(ActionEvent event) throws ClienteAsociadoAPedido {
 
         try {
             Cliente temp = new Cliente(Long.valueOf(entrada_cedula_clientes.getText()), Entrada_Nombre_clientes.getText(), Long.valueOf(entrada_tel_clientes.getText()), entrada_dir_clientes.getText());
             this.controlDespacho.getGestionCliente().InsertarCliente(temp.getCedula(), temp.getNombreCompleto(), temp.getTelefonoContacto(), temp.getDireccion());
-            AlertUtils.alertInformation("Agregar Cliente", "El cliente se ha agregado correctamente", "");
+            AlertUtils.alertInformation("Agregar Cliente", "El cliente se ha agregado correctamente", "Hay: " + controlDespacho.getGestionCliente().getListaClientes().size()+ " Clientes en el sistema");
         } catch (Exception e) {
             e.printStackTrace();
+            AlertUtils.alertError("Agregar Cliente", "El cliente no ha sido agregado", "Intentalo nuevamente");
         }
-
         renderWindowCliente();
     }
 
@@ -361,12 +312,22 @@ public class ControllerFX implements Initializable {
         Optional<ButtonType> opcion = AlertUtils.alertConfirmation(" Eliminar Cliente", "Se eliminara el cliente con cedula:  " + Lista_eliminar_clientes.getSelectionModel().getSelectedItem().toString(), "¿Esta seguro?");
         try {
             if (opcion.get().equals(ButtonType.OK)) {
-                this.controlDespacho.getGestionCliente().EliminarCliente(Lista_eliminar_clientes.getSelectionModel().getSelectedItem());
-                AlertUtils.alertInformation("Eliminar Cliente", "El cliente se ha Eliminado correctamente", "");
+                if (controlDespacho.validarCliente(Lista_eliminar_clientes.getSelectionModel().getSelectedItem())){
+                    throw new ClienteAsociadoAPedido("cliente asociado a un pedido");
+                }
+                else{
+                    this.controlDespacho.getGestionCliente().EliminarCliente(Lista_eliminar_clientes.getSelectionModel().getSelectedItem());
+                    AlertUtils.alertInformation("Eliminar Cliente", "El cliente se ha Eliminado correctamente", "");
+                }
             }
 
-        } catch (Exception e) {
+        }catch (ClienteAsociadoAPedido e){
             e.printStackTrace();
+            AlertUtils.alertError("Eliminar Cliente", "El cliente no pudo ser eliminado ya que esta asociado a un pedido", "Intentalo nuevamente");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            AlertUtils.alertError("Eliminar Cliente", "El cliente no ha sido eliminado", "Intentalo nuevamente");
         }
         renderWindowCliente();
     }
@@ -388,11 +349,12 @@ public class ControllerFX implements Initializable {
         Tabla_clientes.getItems().clear();
         Lista_eliminar_clientes.getItems().clear();
         Selecion_clientes.getItems().clear();
+        clientesList.getItems().clear();
     }
 
     @FXML
     void ModificarCliente(ActionEvent event) {
-        Optional<ButtonType> opcion = AlertUtils.alertConfirmation("Modificar Cliente", "Se modificara el cliente de cedula: "+Selecion_clientes.getValue().toString(), "¿Esta seguro?");
+        Optional<ButtonType> opcion = AlertUtils.alertConfirmation("Modificar Cliente", "Se modificara el cliente de cedula: " + Selecion_clientes.getValue().toString(), "¿Esta seguro?");
 
         try {
             if (opcion.get().equals(ButtonType.OK)) {
@@ -405,9 +367,10 @@ public class ControllerFX implements Initializable {
                     }
                 }
             }
+            AlertUtils.alertInformation("Modificar Cliente", "El cliente se ha Modificado correctamente", "");
         } catch (Exception e) {
             e.printStackTrace();
-            AlertUtils.alertError("z", "<", "s");
+            AlertUtils.alertError("Modificar Cliente", "El cliente no se ha Modificado", "Intentalo nuevamente");
         }
 
         renderWindowCliente();
@@ -437,9 +400,6 @@ public class ControllerFX implements Initializable {
         listaPedidos.getItems().addAll(controlDespacho.getPedidos());
         for (Cliente cli : controlDespacho.getGestionCliente().getListaClientes().values()) {
             clientesList.getItems().add(cli.getCedula());
-        }
-        for (Producto prod : controlDespacho.getGestionProductos().getListaProductos().values()) {
-            productosList.getItems().add(prod.getProdId());
         }
         for (Pedido pedtemp : controlDespacho.getPedidos()) {
             listPedidos.getItems().add(pedtemp.getNumeroPedido());
@@ -579,6 +539,8 @@ public class ControllerFX implements Initializable {
 
     @FXML
     void cargarServicios(ActionEvent event) {
+        listEnviosModificar.getItems().clear();
+        listBonosModificar.getItems().clear();
         UUID idpedido = listPedidosModificar.getSelectionModel().getSelectedItem();
         Pedido pedido = controlDespacho.ExistePedido(idpedido);
         for (ServicioAdicional serv : pedido.getServiciosAdicionales()) {
@@ -711,89 +673,88 @@ public class ControllerFX implements Initializable {
             e.printStackTrace();
         }
     }
+
     //Seccion otros
-    @FXML
-    void renderWindowOtros(){
-        clearWindowOtros();
-        for (Producto prod: controlDespacho.getGestionProductos().getListaProductos().values()){
-            productoEspecifico.getItems().add(prod.getProdId());
-        }
+
+    public void renderWindowOtros() {
     }
 
-    void clearWindowOtros(){
-        productoEspecifico.getItems().clear();
+    public void clearWindowOtros() {
+    }
+
+    @FXML
+    void verPedidosProductoYFechaEspecifica(ActionEvent event) {
         tablaFechaEspecifica.getItems().clear();
-    }
-
-    @FXML
-    void verPedidosProductoYFechaEspecifica(ActionEvent event){
         ZoneId defaultZoneId = ZoneId.systemDefault();
         LocalDate localDate = fechaEspecifica.getValue();
         Date date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
         Calendar fecha = Calendar.getInstance();
         fecha.setTime(date);
-        UUID prodID=productoEspecifico.getValue();
+        UUID prodID = productoEspecifico.getValue();
         try {
             ArrayList<Pedido> productosFecha = controlDespacho.verListadoDePedidosDeProductoYFechaEspecífica(prodID, fecha);
             tablaFechaEspecifica.getItems().addAll(productosFecha);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
     @FXML
-    void guardarProductoFruver(ActionEvent event){
-        guardarObjetos();
-        ArrayList<Producto> productosFruver=new ArrayList<>();
-        for(Producto auxProd: controlDespacho.getGestionProductos().getListaProductos().values()){
-            if(auxProd instanceof Fruver){
+    void guardarProductoFruver(ActionEvent event) {
+        ArrayList<Producto> productosFruver = new ArrayList<>();
+        for (Producto auxProd : controlDespacho.getGestionProductos().getListaProductos().values()) {
+            if (auxProd instanceof Fruver) {
                 productosFruver.add(auxProd);
                 FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter(FileType.XML.getFilter(), FileType.XML.getFilter());
-                try(FileWriter out = new FileWriter(AlertUtils.openFileChooserModeWrite(filtro,((Button) event.getSource()).getScene().getWindow()))){
-                    JAXBContext context= JAXBContext.newInstance(Fruver.class);
-                    Marshaller m=context.createMarshaller();
+                try (FileWriter out = new FileWriter(AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow()))) {
+                    JAXBContext context = JAXBContext.newInstance(Fruver.class);
+                    Marshaller m = context.createMarshaller();
                     m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-                    m.marshal(auxProd,out);
-                }catch (IOException ioe){
+                    m.marshal(auxProd, out);
+                } catch (IOException ioe) {
                     ioe.printStackTrace();
-                }catch (JAXBException jex) {
+                } catch (JAXBException jex) {
                     jex.printStackTrace();
                 }
             }
         }
+    }
+
+    @FXML
+    void guardarProductosAseoTipo(ActionEvent event) {
 
     }
 
     @FXML
-    void guardarProductosAseoTipo(ActionEvent event){
+    void guardarRangoFechas(ActionEvent event) {
 
     }
 
     @FXML
-    void guardarRangoFechas(ActionEvent event){
+    void guardarTipoTransporte(ActionEvent event) {
 
     }
 
-    @FXML
-    void guardarTipoTransporte(ActionEvent event){
-
-    }
     // Funciones Producto
-    @FXML
     public void clearWindowProducto() {
         tablaProductos.getItems().clear();
         tablaEliminarProductos.getItems().clear();
         listaProductosModificar.getItems().clear();
+        productosList.getItems().clear();
+        productoEspecifico.getItems().clear();
     }
 
-    @FXML
-    void renderWindowProducto() {
+    public void renderWindowProducto() {
         clearWindowProducto();
         tablaProductos.getItems().addAll(controlDespacho.getGestionProductos().getListaProductos().values());
         tablaEliminarProductos.getItems().addAll(controlDespacho.getGestionProductos().getListaProductos().keySet());
         listaProductosModificar.getItems().addAll(controlDespacho.getGestionProductos().getListaProductos().keySet());
         if (controlDespacho.getGestionProductos().getListaProductos().size() > 0) {
-             actModificarProducto.setDisable(false);
+            actModificarProducto.setDisable(false);
+        }
+        for (Producto prod : controlDespacho.getGestionProductos().getListaProductos().values()) {
+            productosList.getItems().add(prod.getProdId());
+            productoEspecifico.getItems().add(prod.getProdId());
         }
     }
 
@@ -823,15 +784,15 @@ public class ControllerFX implements Initializable {
     }
 
     @FXML
-    void agregarProducto () {
+    void agregarProducto() {
         try {
             Producto nuevoProducto = null;
             if (tipoProducto.getSelectedToggle().equals(tipoAseo)) {
-                nuevoProducto = new Aseo (insertarNombreProducto.getText(), Double.valueOf(insertarPrecioProducto.getText()), insertarTiendaProducto.getText(), insertarNombreEmpresa.getText(), listTipoProducto.getValue(), checkInvima.isSelected());
+                nuevoProducto = new Aseo(insertarNombreProducto.getText(), Double.valueOf(insertarPrecioProducto.getText()), insertarTiendaProducto.getText(), insertarNombreEmpresa.getText(), listTipoProducto.getValue(), checkInvima.isSelected());
             } else if (tipoProducto.getSelectedToggle().equals(tipoFruver)) {
                 nuevoProducto = new Fruver(insertarNombreProducto.getText(), Double.valueOf(insertarPrecioProducto.getText()), insertarTiendaProducto.getText(), Double.valueOf(insertarImpuestoLocal.getText()), insertarNombreHacienda.getText());
             } else {
-                nuevoProducto = new Producto (insertarNombreProducto.getText(), Double.valueOf(insertarPrecioProducto.getText()), insertarTiendaProducto.getText());
+                nuevoProducto = new Producto(insertarNombreProducto.getText(), Double.valueOf(insertarPrecioProducto.getText()), insertarTiendaProducto.getText());
             }
             controlDespacho.getGestionProductos().insertarProducto(nuevoProducto);
             renderWindowProducto();
@@ -844,13 +805,13 @@ public class ControllerFX implements Initializable {
 
     @FXML
     void eliminarProducto() {
-            Optional<ButtonType> confirmacion = AlertUtils.alertConfirmation("Eliminar Producto", "Se eliminará el producto con UUID " + tablaEliminarProductos.getSelectionModel().getSelectedItem().toString(), "¿Está seguro?");
-            try {
-                if (confirmacion.get().equals(ButtonType.OK)) {
-                    controlDespacho.getGestionProductos().eliminarProducto(tablaEliminarProductos.getSelectionModel().getSelectedItem());
-                    AlertUtils.alertInformation("Producto eliminado correctamente", "Se ha eliminado el producto.", "");
-                }
-                renderWindowProducto();
+        Optional<ButtonType> confirmacion = AlertUtils.alertConfirmation("Eliminar Producto", "Se eliminará el producto con UUID " + tablaEliminarProductos.getSelectionModel().getSelectedItem().toString(), "¿Está seguro?");
+        try {
+            if (confirmacion.get().equals(ButtonType.OK)) {
+                controlDespacho.getGestionProductos().eliminarProducto(tablaEliminarProductos.getSelectionModel().getSelectedItem());
+                AlertUtils.alertInformation("Producto eliminado correctamente", "Se ha eliminado el producto.", "");
+            }
+            renderWindowProducto();
         } catch (Exception ex) {
             ex.printStackTrace();
             AlertUtils.alertError("Error", "No se ha podido eliminar este producto.", "Por favor, intente de nuevo.");
@@ -922,7 +883,7 @@ public class ControllerFX implements Initializable {
         textAseoMod.setVisible(aseo);
         insertarNombreAseoMod.setVisible(aseo);
         checkInvimaMod.setVisible(aseo);
-        
+
         listTipoProductoMod.setVisible(aseo);
 
         textFruverMod.setDisable(!fruver);

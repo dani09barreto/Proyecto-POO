@@ -247,29 +247,6 @@ public class PantallaDespacho {
                     String dir = in.nextLine();
                     pantalla.centralDespacho.getGestionCliente().InsertarCliente(ced, nombre, tel, dir);
                     break;
-                case 7:
-                    System.out.println("\n\tDigite la Identificacion del Cliente que desea modificar: ");
-                    long cedula;
-                    cedula = in.nextLong();
-                    pantalla.centralDespacho.getGestionCliente().modificarDatosCliente(cedula);
-                    break;
-                case 8:
-                    System.out.println("\tIngrese el numero de cedula del cliente que deseas eliminar.");
-                    Long cedulaE = 0l;
-                    ver = false;
-                    do {
-                        try {
-                            cedulaE = in.nextLong();
-                            ver = true;
-                        } catch (Exception e) {
-                            in.next();
-                            System.out.println("\t[!]Ingrese un valor numerico.");
-                        }
-                    } while (!ver);
-                    if (pantalla.centralDespacho.validarCliente(cedulaE))
-                        pantalla.centralDespacho.getGestionCliente().EliminarCliente(cedulaE);
-                    else System.out.println("\t[!]El cliente esta asociado a un Pedido");
-                    break;
                 case 11:
                     System.out.println("\tEliminar Pedido");
                     System.out.print("\tDigite el numero del pedido que desea eliminar: ");
