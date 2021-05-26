@@ -7,15 +7,19 @@ public class Cliente {
     private String nombreCompleto;
     private Long telefonoContacto;
     private String direccion;
-    
+
+
+
     public Cliente() {
     }
 
     public Cliente(Long cedula, String nombreCompleto, Long telefonoContacto, String direccion) {
+
         this.cedula = cedula;
         this.nombreCompleto = nombreCompleto;
         this.telefonoContacto = telefonoContacto;
         this.direccion = direccion;
+
     }
 
     public Long getCedula() {

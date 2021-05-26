@@ -75,4 +75,8 @@ public class Producto {
     public Double calcularPrecio() {
         return this.precio + this.iva;
     }
+
+    public String getTipoProducto() {
+        return getClass().getSimpleName();
+    }
 }
