@@ -24,7 +24,7 @@ public class PantallaDespacho {
         Producto producto2 = new Producto("Yogurt con fresa", 3500d, "La esquina");
         Producto producto3 = new Producto("Doritos", 4000d, "La otra esquina");
 
-        Aseo productoAseo1 = new Aseo("Escoba", 4500D, "la esquina", "Dersa", TipoProducto.HOGAR, true);
+        Aseo productoAseo1 = new Aseo("Escoba", 4500D, "la esquina", "Dersa",TipoProducto.HOGAR, true);
         Aseo productoAseo2 = new Aseo("Trapero", 7000D, "la esquina", "Dersa", TipoProducto.HOGAR, false);
         Aseo productoAseo3 = new Aseo("Desengrasante", 12000d, "los arboles", "Wd-40", TipoProducto.INDUSTRIAL, true);
 

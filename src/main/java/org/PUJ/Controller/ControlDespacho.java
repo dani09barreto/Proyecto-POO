@@ -116,7 +116,7 @@ public class ControlDespacho {
             System.out.println(pedidos.toString());
     }
 
-    public boolean verListadoDePedidosDeProductoYFechaEspecífica(UUID idProd2, Calendar fecha) {
+    public ArrayList<Pedido> verListadoDePedidosDeProductoYFechaEspecífica(UUID idProd2, Calendar fecha) {
         boolean hayPedido = false;
         ArrayList<Pedido> pedidosProductoFecha = new ArrayList<>();
         for (Pedido auxPedido : pedidos) {
@@ -126,11 +126,11 @@ public class ControlDespacho {
             }
         }
         if (!hayPedido) {
-            System.out.println("\tNo se encontraron pedidos para el producto especificado posteriores la fecha especificada");
+            return null;
         } else {
             System.out.println(pedidosProductoFecha.toString());
         }
-        return hayPedido;
+        return pedidosProductoFecha;
     }
 
 

@@ -1,11 +1,20 @@
 package org.PUJ.Model;
 
-import java.util.UUID;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
+import java.util.UUID;
+@XmlRootElement
 public class Fruver extends Producto {
+
     private Boolean esOrganico;
+
     private Double impuestoLocal;
+
     private String nombreHacienda;
+
+    public Fruver() {
+    }
 
     public Fruver(String nombreComercial, Double precio, String tienda, Double impuestoLocal, String nombreHacienda) {
         super(nombreComercial, precio, tienda);

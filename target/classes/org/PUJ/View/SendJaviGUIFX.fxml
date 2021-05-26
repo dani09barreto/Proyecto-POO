@@ -263,7 +263,7 @@
                                                       <TextField disable="true" layoutX="166.0" layoutY="256.0" prefHeight="25.0" prefWidth="132.0" promptText="Impuesto Local" style="-fx-background-radius: 20;" />
                                                       <TextField disable="true" layoutX="166.0" layoutY="293.0" prefHeight="25.0" prefWidth="132.0" promptText="Nombre Hacienda" style="-fx-background-radius: 20;" />
                                                       <CheckBox disable="true" layoutX="16.0" layoutY="297.0" mnemonicParsing="false" text="¿INVIMA?" />
-                                                      <ComboBox fx:id="listTipoProducto" layoutX="15.0" layoutY="324.0" prefHeight="25.0" prefWidth="128.0" promptText="Tipo Producto" />
+                                                      <ComboBox fx:id="listTipoProducto" disable="true" layoutX="15.0" layoutY="324.0" prefHeight="25.0" prefWidth="128.0" promptText="Tipo Producto" />
                                                       <CheckBox disable="true" layoutX="172.0" layoutY="328.0" mnemonicParsing="false" text="¿Organico?" />
                                                    </children>
                                                 </AnchorPane>
@@ -582,7 +582,7 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab style="-fx-font-size: 15;" text="Otros">
+                  <Tab onSelectionChanged="#renderWindowOtros" style="-fx-font-size: 15;" text="Otros">
                      <content>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
@@ -606,17 +606,17 @@
                                                 </DropShadow>
                                              </effect>
                                           </Label>
-                                          <ComboBox layoutX="92.0" layoutY="126.0" prefWidth="150.0" promptText="Producto" style="-fx-background-radius: 20;" />
-                                          <DatePicker layoutX="93.0" layoutY="156.0" prefHeight="25.0" prefWidth="149.0" promptText="Fecha Entrega" style="-fx-background-radius: 20;" />
-                                          <Button layoutX="333.0" layoutY="136.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="74.0" style="-fx-background-radius: 20; -fx-background-color: #900C3F; -fx-border-radius: 20;" text="Generar" textFill="#fff9f9" />
+                                          <ComboBox fx:id="productoEspecifico" layoutX="92.0" layoutY="126.0" prefWidth="150.0" promptText="Producto" style="-fx-background-radius: 20;" />
+                                          <DatePicker fx:id="fechaEspecifica" layoutX="93.0" layoutY="156.0" prefHeight="25.0" prefWidth="149.0" promptText="Fecha Entrega" style="-fx-background-radius: 20;" />
+                                          <Button fx:id="generarListado" layoutX="333.0" layoutY="136.0" mnemonicParsing="false" onAction="#verPedidosProductoYFechaEspecifica" prefHeight="31.0" prefWidth="74.0" style="-fx-background-radius: 20; -fx-background-color: #900C3F; -fx-border-radius: 20;" text="Generar" textFill="#fff9f9" />
                                           <AnchorPane layoutX="2.0" layoutY="216.0" prefHeight="413.0" prefWidth="393.0">
                                              <children>
                                                 <Pane layoutX="-98.0" layoutY="197.0" prefHeight="216.0" prefWidth="166.0" style="-fx-background-color: #900C3F; -fx-background-radius: 70;" />
-                                                <TableView layoutX="13.0" prefHeight="371.0" prefWidth="437.0" style="-fx-background-radius: 20;">
+                                                <TableView fx:id="tablaFechaEspecifica" layoutX="13.0" prefHeight="371.0" prefWidth="437.0" style="-fx-background-radius: 20;">
                                                    <columns>
-                                                      <TableColumn prefWidth="126.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="Cliente" />
-                                                      <TableColumn prefWidth="156.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="Producto" />
-                                                      <TableColumn minWidth="0.0" prefWidth="154.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="Fecha" />
+                                                      <TableColumn fx:id="columnClienteEspecifico" prefWidth="126.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="Cliente" />
+                                                      <TableColumn fx:id="colProdEsspecifico" prefWidth="156.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="Producto" />
+                                                      <TableColumn fx:id="colFechEspecifica" minWidth="0.0" prefWidth="154.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="Fecha" />
                                                    </columns>
                                                 </TableView>
                                              </children>
@@ -651,23 +651,23 @@
                                                 <Font size="15.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox layoutX="185.0" layoutY="244.0" prefHeight="25.0" prefWidth="128.0" promptText="Tipo Producto" />
+                                          <ComboBox fx:id="tipoProdGuardar" layoutX="185.0" layoutY="244.0" prefHeight="25.0" prefWidth="128.0" promptText="Tipo Producto" />
                                           <Separator layoutX="157.0" layoutY="280.0" prefHeight="2.0" prefWidth="421.0" />
                                           <Label layoutX="185.0" layoutY="300.0" text="Generar reporte de productos en un rango de fechas">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
                                           </Label>
-                                          <DatePicker layoutX="185.0" layoutY="333.0" prefHeight="25.0" prefWidth="149.0" promptText="Fecha Inicial" style="-fx-background-radius: 20;" />
-                                          <DatePicker layoutX="185.0" layoutY="366.0" prefHeight="25.0" prefWidth="149.0" promptText="Fecha Final" style="-fx-background-radius: 20;" />
+                                          <DatePicker fx:id="fechaInicialGuardar" layoutX="185.0" layoutY="333.0" prefHeight="25.0" prefWidth="149.0" promptText="Fecha Inicial" style="-fx-background-radius: 20;" />
+                                          <DatePicker fx:id="fechaFinalGuardar" layoutX="185.0" layoutY="366.0" prefHeight="25.0" prefWidth="149.0" promptText="Fecha Final" style="-fx-background-radius: 20;" />
                                           <Separator layoutX="153.0" layoutY="402.0" prefHeight="2.0" prefWidth="421.0" />
                                           <Label layoutX="185.0" layoutY="413.0" text="Generar reporte de Servicios Adicionales de un Tipo ">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox layoutX="185.0" layoutY="445.0" prefHeight="25.0" prefWidth="128.0" promptText="Tipo Transporte" />
-                                          <Button layoutX="492.0" layoutY="220.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="27.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" textFill="#fff9f9">
+                                          <ComboBox fx:id="tipoTransporteguardar" layoutX="185.0" layoutY="445.0" prefHeight="25.0" prefWidth="128.0" promptText="Tipo Transporte" />
+                                          <Button layoutX="492.0" layoutY="220.0" mnemonicParsing="false" onAction="#guardarProductosAseoTipo" prefHeight="29.0" prefWidth="27.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" textFill="#fff9f9">
                                              <graphic>
                                                 <ImageView fitHeight="40.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -676,7 +676,7 @@
                                                 </ImageView>
                                              </graphic>
                                           </Button>
-                                          <Button layoutX="492.0" layoutY="334.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="27.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" textFill="#fff9f9">
+                                          <Button layoutX="492.0" layoutY="334.0" mnemonicParsing="false" onAction="#guardarRangoFechas" prefHeight="29.0" prefWidth="27.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" textFill="#fff9f9">
                                              <graphic>
                                                 <ImageView fitHeight="40.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -685,7 +685,7 @@
                                                 </ImageView>
                                              </graphic>
                                           </Button>
-                                          <Button layoutX="492.0" layoutY="136.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="27.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" textFill="#fff9f9">
+                                          <Button layoutX="492.0" layoutY="136.0" mnemonicParsing="false" onAction="#guardarProductoFruver" prefHeight="29.0" prefWidth="27.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" textFill="#fff9f9">
                                              <graphic>
                                                 <ImageView fitHeight="40.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -694,7 +694,7 @@
                                                 </ImageView>
                                              </graphic>
                                           </Button>
-                                          <Button layoutX="492.0" layoutY="446.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="27.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" textFill="#fff9f9">
+                                          <Button layoutX="492.0" layoutY="446.0" mnemonicParsing="false" onAction="#guardarTipoTransporte" prefHeight="29.0" prefWidth="27.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" textFill="#fff9f9">
                                              <graphic>
                                                 <ImageView fitHeight="40.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>

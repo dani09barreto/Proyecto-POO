@@ -1,15 +1,28 @@
 package org.PUJ.View.Controller;
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 import org.PUJ.Controller.ControlDespacho;
 import org.PUJ.Model.*;
 import org.PUJ.utils.AlertUtils;
 import org.PUJ.utils.Fechaerror;
+import org.PUJ.utils.FileType;
 import org.PUJ.utils.PedidoFechaIgual;
 
+import java.awt.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
@@ -18,6 +31,13 @@ import java.net.URL;
 
 public class ControllerFX implements Initializable {
     private ControlDespacho controlDespacho = new ControlDespacho();
+    //Objetos prueba
+    void guardarObjetos(){
+        Fruver productoFruver1 = new Fruver("Manzana", 400D, "los arboles", 0d, "Napoles");
+        controlDespacho.getGestionProductos().getListaProductos().put(productoFruver1.getProdId(),productoFruver1);
+    }
+
+
 
     //-------variables producto------//
     @FXML private ComboBox<TipoProducto> listTipoProducto;
@@ -75,6 +95,18 @@ public class ControllerFX implements Initializable {
     @FXML private ComboBox<UUID> listBonosModificar;
     @FXML private Button btnAgregarModServicio;
     @FXML private Button btnCargarPedido;
+    //Variables pestaña otros
+    @FXML private ComboBox<UUID> productoEspecifico;
+    @FXML private DatePicker fechaEspecifica;
+    @FXML private Button generarListado;
+    @FXML private TableView<Pedido> tablaFechaEspecifica;
+    @FXML private TableColumn<Pedido, String> columnClienteEspecifico;
+    @FXML private TableColumn<Pedido, String> colProdEsspecifico;
+    @FXML private TableColumn<Pedido, Calendar> colFechEspecifica;
+    @FXML private ComboBox<?> tipoProdGuardar;
+    @FXML private DatePicker fechaInicialGuardar;
+    @FXML private DatePicker fechaFinalGuardar;
+    @FXML private ComboBox<?> tipoTransporteguardar;
 
 
     //----------iniciador-------funciona para dar valores al programa sin acciones como los tipos de transporte o tipo de aseo//
@@ -358,5 +390,71 @@ public class ControllerFX implements Initializable {
             e.printStackTrace();
         }
     }
+    //Seccion otros
+    @FXML
+    void renderWindowOtros(){
+        clearWindowOtros();
+        for (Producto prod: controlDespacho.getGestionProductos().getListaProductos().values()){
+            productoEspecifico.getItems().add(prod.getProdId());
+        }
+    }
 
+    void clearWindowOtros(){
+        productoEspecifico.getItems().clear();
+        tablaFechaEspecifica.getItems().clear();
+    }
+
+    @FXML
+    void verPedidosProductoYFechaEspecifica(ActionEvent event){
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+        LocalDate localDate = fechaEspecifica.getValue();
+        Date date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+        Calendar fecha = Calendar.getInstance();
+        fecha.setTime(date);
+        UUID prodID=productoEspecifico.getValue();
+        try {
+            ArrayList<Pedido> productosFecha = controlDespacho.verListadoDePedidosDeProductoYFechaEspecífica(prodID, fecha);
+            tablaFechaEspecifica.getItems().addAll(productosFecha);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void guardarProductoFruver(ActionEvent event){
+        guardarObjetos();
+        ArrayList<Producto> productosFruver=new ArrayList<>();
+        for(Producto auxProd: controlDespacho.getGestionProductos().getListaProductos().values()){
+            if(auxProd instanceof Fruver){
+                productosFruver.add(auxProd);
+                FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter(FileType.XML.getFilter(), FileType.XML.getFilter());
+                try(FileWriter out = new FileWriter(AlertUtils.openFileChooserModeWrite(filtro,((Button) event.getSource()).getScene().getWindow()))){
+                    JAXBContext context= JAXBContext.newInstance(Fruver.class);
+                    Marshaller m=context.createMarshaller();
+                    m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+                    m.marshal(auxProd,out);
+                }catch (IOException ioe){
+                    ioe.printStackTrace();
+                }catch (JAXBException jex) {
+                    jex.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    @FXML
+    void guardarProductosAseoTipo(ActionEvent event){
+
+    }
+
+    @FXML
+    void guardarRangoFechas(ActionEvent event){
+
+    }
+
+    @FXML
+    void guardarTipoTransporte(ActionEvent event){
+
+    }
 }
