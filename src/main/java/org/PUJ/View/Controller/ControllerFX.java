@@ -774,6 +774,7 @@ public class ControllerFX implements Initializable {
         textAseoMod.setVisible(aseo);
         insertarNombreAseoMod.setVisible(aseo);
         checkInvimaMod.setVisible(aseo);
+        
         listTipoProductoMod.setVisible(aseo);
 
         textFruverMod.setDisable(!fruver);
