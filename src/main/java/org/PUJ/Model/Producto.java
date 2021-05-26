@@ -1,14 +1,21 @@
 package org.PUJ.Model;
 
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.util.Objects;
 import java.util.UUID;
 
 public class Producto {
 
     protected UUID prodId;
+
     protected String nombreComercial;
+
     protected Double precio;
+
     protected Double iva;
+
     protected String tienda;
 
     public Producto() {

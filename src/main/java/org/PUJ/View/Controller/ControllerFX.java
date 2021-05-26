@@ -1,15 +1,28 @@
 package org.PUJ.View.Controller;
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 import org.PUJ.Controller.ControlDespacho;
 import org.PUJ.Model.*;
 import org.PUJ.utils.AlertUtils;
 import org.PUJ.utils.Fechaerror;
+import org.PUJ.utils.FileType;
 import org.PUJ.utils.PedidoFechaIgual;
 
+import java.awt.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
@@ -18,6 +31,13 @@ import java.net.URL;
 
 public class ControllerFX implements Initializable {
     private ControlDespacho controlDespacho = new ControlDespacho();
+    //Objetos prueba
+    void guardarObjetos(){
+        Fruver productoFruver1 = new Fruver("Manzana", 400D, "los arboles", 0d, "Napoles");
+        controlDespacho.getGestionProductos().getListaProductos().put(productoFruver1.getProdId(),productoFruver1);
+    }
+
+
 
     //---------variables cliente-------//
     @FXML
@@ -65,6 +85,68 @@ public class ControllerFX implements Initializable {
     private ToggleGroup tipoProductoModificar;
     //-------variables pedido--------//
     private ArrayList<ServicioAdicional> servicios = new ArrayList<>();
+    @FXML private ComboBox<Long> clientesList;
+    @FXML private ComboBox<UUID> productosList;
+    @FXML private DatePicker fechaEntrega;
+    @FXML private TextField nameReparidor;
+    @FXML private Button btnAgregar;
+    @FXML private RadioButton envioPrimeAgregar;
+    @FXML private ToggleGroup tipoServicio;
+    @FXML private RadioButton bonoRegaloAgregar;
+    @FXML private Label textEnvio;
+    @FXML private Label textBono;
+    @FXML private TextField precioEnvio;
+    @FXML private TextField distanciaEnvio;
+    @FXML private ComboBox<TipoTransporte> tipoTransporte;
+    @FXML private Spinner<Integer> cantidadCajas;
+    @FXML private TextField comercioBono;
+    @FXML private TextField precioBono;
+    @FXML private TextField mensajeBono;
+    @FXML private Button btnAgregarSA;
+    @FXML private ListView<UUID> listaEliminar;
+    @FXML private Button btnEliminar;
+    @FXML private TableView<Pedido> listaPedidos;
+    @FXML private TableColumn<Pedido, UUID> colid;
+    @FXML private TableColumn<Pedido, String> colfecha;
+    @FXML private TableColumn<Pedido, String> colRepartidor;
+    @FXML private TableColumn<Cliente, String> colCliente;
+    @FXML private TableColumn<Pedido, String> colPedido;
+    @FXML private TableView<ServicioAdicional> listaServicioAdicional = new TableView<ServicioAdicional>();
+    @FXML private TableColumn<ServicioAdicional, UUID> colidSA = new TableColumn<ServicioAdicional,UUID>("CodigoServicio");
+    @FXML private TableColumn<ServicioAdicional, String> colNombreSA = new TableColumn<ServicioAdicional,String>("NombreServicio");
+    @FXML private TableColumn<ServicioAdicional, Double> colPrecioSA = new TableColumn<ServicioAdicional, Double>("Precio");
+    @FXML private TableColumn<EnvioPrime, Double> colDistanciaSA = new TableColumn<EnvioPrime, Double>("Distancia");
+    @FXML private TableColumn<EnvioPrime, TipoTransporte> colTransporteSA = new TableColumn<EnvioPrime, TipoTransporte>("Tipo");
+    @FXML private TableColumn<EnvioPrime, Integer> colCajasSA = new TableColumn<EnvioPrime, Integer>("NumeroCajas");
+    @FXML private TableColumn<BonoRegalo, String> colComercioSA = new TableColumn<BonoRegalo, String>("ComercioAsociado");
+    @FXML private TableColumn<BonoRegalo, String> colMensajeSA = new TableColumn<BonoRegalo, String>("Mensaje");
+    @FXML private TableColumn<BonoRegalo, String> colFechaSA = new TableColumn<BonoRegalo, String>("FechaVencimientostring");
+    @FXML private ToggleGroup tipoServicioModificar;
+    @FXML private Button btnVerServicios;
+    @FXML private ComboBox<UUID> listPedidosModificar;
+    @FXML private DatePicker FechaModificar;
+    @FXML private TextField repartidorModificar;
+    @FXML private RadioButton envioPrimeModificar;
+    @FXML private RadioButton BonoModificar;
+    @FXML private CheckBox checkModificar;
+    @FXML private Button btnModificarPedido;
+    @FXML private ComboBox<UUID> listPedidos;
+    @FXML private ComboBox<UUID> listEnviosModificar;
+    @FXML private ComboBox<UUID> listBonosModificar;
+    @FXML private Button btnAgregarModServicio;
+    @FXML private Button btnCargarPedido;
+    //Variables pestaña otros
+    @FXML private ComboBox<UUID> productoEspecifico;
+    @FXML private DatePicker fechaEspecifica;
+    @FXML private Button generarListado;
+    @FXML private TableView<Pedido> tablaFechaEspecifica;
+    @FXML private TableColumn<Pedido, String> columnClienteEspecifico;
+    @FXML private TableColumn<Pedido, String> colProdEsspecifico;
+    @FXML private TableColumn<Pedido, Calendar> colFechEspecifica;
+    @FXML private ComboBox<?> tipoProdGuardar;
+    @FXML private DatePicker fechaInicialGuardar;
+    @FXML private DatePicker fechaFinalGuardar;
+    @FXML private ComboBox<?> tipoTransporteguardar;
     @FXML
     private ComboBox<Long> clientesList;
     @FXML
@@ -629,7 +711,73 @@ public class ControllerFX implements Initializable {
             e.printStackTrace();
         }
     }
+    //Seccion otros
+    @FXML
+    void renderWindowOtros(){
+        clearWindowOtros();
+        for (Producto prod: controlDespacho.getGestionProductos().getListaProductos().values()){
+            productoEspecifico.getItems().add(prod.getProdId());
+        }
+    }
 
+    void clearWindowOtros(){
+        productoEspecifico.getItems().clear();
+        tablaFechaEspecifica.getItems().clear();
+    }
+
+    @FXML
+    void verPedidosProductoYFechaEspecifica(ActionEvent event){
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+        LocalDate localDate = fechaEspecifica.getValue();
+        Date date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+        Calendar fecha = Calendar.getInstance();
+        fecha.setTime(date);
+        UUID prodID=productoEspecifico.getValue();
+        try {
+            ArrayList<Pedido> productosFecha = controlDespacho.verListadoDePedidosDeProductoYFechaEspecífica(prodID, fecha);
+            tablaFechaEspecifica.getItems().addAll(productosFecha);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void guardarProductoFruver(ActionEvent event){
+        guardarObjetos();
+        ArrayList<Producto> productosFruver=new ArrayList<>();
+        for(Producto auxProd: controlDespacho.getGestionProductos().getListaProductos().values()){
+            if(auxProd instanceof Fruver){
+                productosFruver.add(auxProd);
+                FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter(FileType.XML.getFilter(), FileType.XML.getFilter());
+                try(FileWriter out = new FileWriter(AlertUtils.openFileChooserModeWrite(filtro,((Button) event.getSource()).getScene().getWindow()))){
+                    JAXBContext context= JAXBContext.newInstance(Fruver.class);
+                    Marshaller m=context.createMarshaller();
+                    m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+                    m.marshal(auxProd,out);
+                }catch (IOException ioe){
+                    ioe.printStackTrace();
+                }catch (JAXBException jex) {
+                    jex.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    @FXML
+    void guardarProductosAseoTipo(ActionEvent event){
+
+    }
+
+    @FXML
+    void guardarRangoFechas(ActionEvent event){
+
+    }
+
+    @FXML
+    void guardarTipoTransporte(ActionEvent event){
+
+    }
     // Funciones Producto
     @FXML
     public void clearWindowProducto() {
