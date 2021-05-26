@@ -166,15 +166,97 @@ public class ControllerFX implements Initializable {
     @FXML
     private Button btnCargarPedido;
 
+    // Variables Producto
+
+    @FXML
+    private RadioButton tipoAseo;
+    @FXML
+    private RadioButton tipoFruver;
+    @FXML
+    private RadioButton tipoOtro;
+    @FXML
+    private TextField insertarNombreProducto;
+    @FXML
+    private TextField insertarPrecioProducto;
+    @FXML
+    private TextField insertarTiendaProducto;
+    @FXML
+    private Button btnAgregarProducto;
+    @FXML
+    private CheckBox actModificarProducto;
+    @FXML
+    private Button btnModificarProducto;
+    @FXML
+    private Button btnEliminarProducto;
+    @FXML
+    private Label textAseo;
+    @FXML
+    private Label textFruver;
+    @FXML
+    private TextField insertarNombreEmpresa;
+    @FXML
+    private TextField insertarImpuestoLocal;
+    @FXML
+    private TextField insertarNombreHacienda;
+    @FXML
+    private CheckBox checkInvima;
+    @FXML
+    private CheckBox checkOrganico;
+    @FXML
+    private ListView<UUID> tablaEliminarProductos;
+    @FXML
+    private TableView<Producto> tablaProductos;
+    @FXML
+    private TableColumn<Producto, UUID> C_ID_PROD;
+    @FXML
+    private TableColumn<Producto, String> C_NOMBRE_PROD;
+    @FXML
+    private TableColumn<Producto, Double> C_PRECIO_PROD;
+    @FXML
+    private TableColumn<Producto, String> C_TIENDA_PROD;
+    @FXML
+    private TableColumn<Producto, TipoProducto> C_TIPO_PROD;
+    @FXML
+    private TextField insertarNombreModProd;
+    @FXML
+    private TextField insertarPrecioModProd;
+    @FXML
+    private TextField insertarTiendaModProd;
+    @FXML
+    private ComboBox<UUID> listaProductosModificar;
+    @FXML
+    private RadioButton tipoFruverModificar;
+    @FXML
+    private RadioButton tipoOtroModificar;
+    @FXML
+    private RadioButton tipoAseoModificar;
+    @FXML
+    private Label textAseoMod;
+    @FXML
+    private TextField insertarNombreAseoMod;
+    @FXML
+    private CheckBox checkInvimaMod;
+    @FXML
+    private ComboBox<?> listTipoProductoMod;
+    @FXML
+    private Label textFruverMod;
+    @FXML
+    private TextField insertarImpuestoLocalMod;
+    @FXML
+    private TextField insertarNombreHaciendaMod;
+    @FXML
+    private CheckBox checkOrganicoMod;
+
 
     //----------iniciador-------funciona para dar valores al programa sin acciones como los tipos de transporte o tipo de aseo//
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         renderWindowPedido();
+        renderWindowProducto();
         listTipoProducto.getItems().setAll(TipoProducto.values());
         tipoTransporte.getItems().setAll(TipoTransporte.values());
         fechaEntrega.setValue(LocalDate.now());
-
+        listaProductosModificar.getItems().setAll(controlDespacho.getGestionProductos().getListaProductos().keySet());
     }
 
     //---------Funciones Clientes----------//
@@ -546,6 +628,164 @@ public class ControllerFX implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    // Funciones Producto
+    @FXML
+    public void clearWindowProducto() {
+        tablaProductos.getItems().clear();
+        tablaEliminarProductos.getItems().clear();
+        listaProductosModificar.getItems().clear();
+    }
+
+    @FXML
+    void renderWindowProducto() {
+        clearWindowProducto();
+        tablaProductos.getItems().addAll(controlDespacho.getGestionProductos().getListaProductos().values());
+        tablaEliminarProductos.getItems().addAll(controlDespacho.getGestionProductos().getListaProductos().keySet());
+        listaProductosModificar.getItems().addAll(controlDespacho.getGestionProductos().getListaProductos().keySet());
+        if (controlDespacho.getGestionProductos().getListaProductos().size() > 0) {
+             actModificarProducto.setDisable(false);
+        }
+    }
+
+    @FXML
+    void switchTipoProducto(ActionEvent event) {
+        boolean aseo = false;
+        boolean fruver = false;
+
+        if (tipoProducto.getSelectedToggle().equals(tipoFruver)) {
+            aseo = true;
+        } else if (tipoProducto.getSelectedToggle().equals(tipoAseo)) {
+            fruver = true;
+        } else if (tipoProducto.getSelectedToggle().equals(tipoOtro)) {
+            aseo = true;
+            fruver = true;
+        }
+
+        textAseo.setDisable(aseo);
+        insertarNombreEmpresa.setDisable(aseo);
+        checkInvima.setDisable(aseo);
+        listTipoProducto.setDisable(aseo);
+
+        textFruver.setDisable(fruver);
+        insertarImpuestoLocal.setDisable(fruver);
+        insertarNombreHacienda.setDisable(fruver);
+        checkOrganico.setDisable(fruver);
+    }
+
+    @FXML
+    void agregarProducto () {
+        try {
+            Producto nuevoProducto = null;
+            if (tipoProducto.getSelectedToggle().equals(tipoAseo)) {
+                nuevoProducto = new Aseo (insertarNombreProducto.getText(), Double.valueOf(insertarPrecioProducto.getText()), insertarTiendaProducto.getText(), insertarNombreEmpresa.getText(), listTipoProducto.getValue(), checkInvima.isSelected());
+            } else if (tipoProducto.getSelectedToggle().equals(tipoFruver)) {
+                nuevoProducto = new Fruver(insertarNombreProducto.getText(), Double.valueOf(insertarPrecioProducto.getText()), insertarTiendaProducto.getText(), Double.valueOf(insertarImpuestoLocal.getText()), insertarNombreHacienda.getText());
+            } else {
+                nuevoProducto = new Producto (insertarNombreProducto.getText(), Double.valueOf(insertarPrecioProducto.getText()), insertarTiendaProducto.getText());
+            }
+            controlDespacho.getGestionProductos().insertarProducto(nuevoProducto);
+            renderWindowProducto();
+            AlertUtils.alertConfirmation("Producto agregado correctamente", "Se ha añadido el nuevo producto.", "Hay " + controlDespacho.getGestionProductos().getListaProductos().size() + " productos en el sistema.");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            AlertUtils.alertError("Error", "No se ha podido agregar este producto.", "Por favor, intente de nuevo.");
+        }
+    }
+
+    @FXML
+    void eliminarProducto() {
+            Optional<ButtonType> confirmacion = AlertUtils.alertConfirmation("Eliminar Producto", "Se eliminará el producto con UUID " + tablaEliminarProductos.getSelectionModel().getSelectedItem().toString(), "¿Está seguro?");
+            try {
+                if (confirmacion.get().equals(ButtonType.OK)) {
+                    controlDespacho.getGestionProductos().eliminarProducto(tablaEliminarProductos.getSelectionModel().getSelectedItem());
+                    AlertUtils.alertInformation("Producto eliminado correctamente", "Se ha eliminado el producto.", "");
+                }
+                renderWindowProducto();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            AlertUtils.alertError("Error", "No se ha podido eliminar este producto.", "Por favor, intente de nuevo.");
+        }
+    }
+
+    @FXML
+    void switchModificarProducto() {
+        boolean accion = false;
+        if (!actModificarProducto.isSelected()) {
+            accion = true;
+        }
+        listaProductosModificar.setDisable(accion);
+        insertarNombreModProd.setDisable(accion);
+        insertarPrecioModProd.setDisable(accion);
+        insertarPrecioModProd.setDisable(accion);
+        insertarTiendaModProd.setDisable(accion);
+        btnModificarProducto.setDisable(accion);
+        tipoAseoModificar.setDisable(accion);
+        tipoFruverModificar.setDisable(accion);
+        tipoOtroModificar.setDisable(accion);
+    }
+
+    @FXML
+    void modificarProducto() {
+        try {
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            AlertUtils.alertError("Error", "No se ha podido modificar este producto.", "Por favor, intente de nuevo.");
+        }
+    }
+
+    @FXML
+    void actualizarInformacionModificar() {
+        try {
+            insertarNombreModProd.setText(controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem()).getNombreComercial());
+            insertarPrecioModProd.setText(controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem()).getPrecio().toString());
+            insertarTiendaModProd.setText(controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem()).getTienda().toString());
+            if (controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem()).getTipoProducto().equals("Aseo")) {
+                tipoAseoModificar.fire();
+            } else if (controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem()).getTipoProducto().equals("Fruver")) {
+                tipoFruverModificar.fire();
+            } else {
+                tipoOtroModificar.fire();
+            }
+            actualizarTipoProdMod();
+
+        } catch (Exception ex) {
+
+        }
+    }
+
+    @FXML
+    void actualizarTipoProdMod() {
+        boolean aseo = false;
+        boolean fruver = false;
+        if (tipoProductoModificar.getSelectedToggle().equals(tipoAseoModificar)) {
+            aseo = true;
+        } else if (tipoProductoModificar.getSelectedToggle().equals(tipoFruverModificar)) {
+            fruver = true;
+        }
+
+        textAseoMod.setDisable(!aseo);
+        insertarNombreAseoMod.setDisable(!aseo);
+        checkInvimaMod.setDisable(!aseo);
+        listTipoProductoMod.setDisable(!aseo);
+
+        textAseoMod.setVisible(aseo);
+        insertarNombreAseoMod.setVisible(aseo);
+        checkInvimaMod.setVisible(aseo);
+        
+        listTipoProductoMod.setVisible(aseo);
+
+        textFruverMod.setDisable(!fruver);
+        insertarImpuestoLocalMod.setDisable(!fruver);
+        insertarNombreHaciendaMod.setDisable(!fruver);
+        checkOrganicoMod.setDisable(!fruver);
+
+        textFruverMod.setVisible(fruver);
+        insertarImpuestoLocalMod.setVisible(fruver);
+        insertarNombreHaciendaMod.setVisible(fruver);
+        checkOrganicoMod.setVisible(fruver);
     }
 
 }
