@@ -196,18 +196,6 @@ public class PantallaDespacho {
                     UUID productId = UUID.fromString(in.next());
                     pantalla.centralDespacho.getGestionProductos().modificarProducto(productId);
                     break;
-                case 4:
-                    System.out.println("\t\t[!] Eliminar un producto.");
-                    System.out.print("\t-> Digite el ID del producto que desea eliminar: ");
-                    in.nextLine();
-                    UUID keyEliminar = null;
-                    valido = false;
-                    if (!pantalla.centralDespacho.ValidarProducto(pantalla.centralDespacho.getGestionProductos().getListaProductos().get(keyEliminar))) {
-                        pantalla.centralDespacho.getGestionProductos().eliminarProducto(keyEliminar);
-                    } else {
-                        System.out.println("\t[!] Error. El producto está asociado a un pedido, no se puede eliminar.");
-                    }
-                    break;
                 case 5:
                     pantalla.centralDespacho.getGestionCliente().VerlistadoClientes();
                     break;

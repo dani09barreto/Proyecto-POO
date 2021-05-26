@@ -154,9 +154,9 @@ public class ControlDespacho {
         return false;
     }
 
-    public boolean ValidarProducto(Producto product) {
+    public boolean ValidarProducto(UUID productid) {
         for (Pedido ped : this.pedidos) {
-            if (ped.getProductoSolicitado().equals(product))
+            if (ped.getProductoSolicitado().getProdId().equals(productid))
                 return true;
         }
         return false;

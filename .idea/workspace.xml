@@ -5,22 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10d74ec7-bdf7-43a4-8c55-c9793e84c4e0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/utils/ClienteAsociadoAPedido.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/utils/FlieUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_04_2021_4_47_p__m___Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_04_2021_4_47_p__m___Default_Changelist_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/utils/ProductoAsociadoAPedido.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Controller/ControlDespacho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Controller/ControlDespacho.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Controller/GestionCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Controller/GestionCliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Aseo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Aseo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Fruver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Fruver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/View/Controller/ControllerFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/View/Controller/ControllerFX.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/View/PantallaDespacho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/View/PantallaDespacho.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/PUJ/View/SendJaviGUIFX.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/PUJ/View/SendJaviGUIFX.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/Controller/ControlDespacho.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Controller/ControlDespacho.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/Controller/GestionCliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Controller/GestionCliente.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/Model/Aseo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Model/Aseo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/Model/Fruver.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Model/Fruver.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/Model/Producto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Model/Producto.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/View/Controller/ControllerFX.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/PUJ/View/Controller/ControllerFX.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/View/PantallaDespacho.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/PUJ/View/PantallaDespacho.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/View/SendJaviGUIFX.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/PUJ/View/SendJaviGUIFX.fxml" afterDir="false" />
