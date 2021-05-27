@@ -174,7 +174,7 @@
                                                          </image>
                                                       </ImageView>
                                                       <TextField fx:id="Entrada_Mod_nombre_cliente" disable="true" layoutX="72.0" layoutY="232.0" promptText="Nombre Completo" style="-fx-background-radius: 20;" />
-                                                      <TextField fx:id="Entrada_Mod_telefono_cliente" disable="true" layoutX="69.0" layoutY="267.0" promptText="Telefono" style="-fx-background-radius: 20;" />
+                                                      <TextField fx:id="Entrada_Mod_telefono_cliente" disable="true" layoutX="73.0" layoutY="267.0" promptText="Telefono" style="-fx-background-radius: 20;" />
                                                       <TextField fx:id="Entrada_Mod_dir_cliente" disable="true" layoutX="72.0" layoutY="303.0" promptText="Dirección" style="-fx-background-radius: 20;" />
                                                       <CheckBox fx:id="Ver_mod_clientes" layoutX="97.0" layoutY="361.0" mnemonicParsing="false" onAction="#VerModificar" text="¿Modificar?">
                                                          <font>
@@ -357,7 +357,7 @@
                                                       <RadioButton fx:id="tipoAseoModificar" disable="true" layoutX="42.0" layoutY="367.0" mnemonicParsing="false" onAction="#actualizarTipoProdMod" text="Aseo" toggleGroup="$tipoProductoModificar" />
                                                       <RadioButton fx:id="tipoOtroModificar" disable="true" layoutX="202.0" layoutY="367.0" mnemonicParsing="false" onAction="#actualizarTipoProdMod" selected="true" text="Otro" toggleGroup="$tipoProductoModificar" />
                                                       <ComboBox fx:id="listaProductosModificar" disable="true" layoutX="71.0" layoutY="211.0" onAction="#actualizarInformacionModificar" prefWidth="150.0" promptText="Producto" style="-fx-background-radius: 20;" />
-                                                      <CheckBox fx:id="actModificarProducto" layoutX="47.0" layoutY="555.0" mnemonicParsing="false" onAction="#switchModificarProducto" text="¿Modificar?">
+                                                      <CheckBox fx:id="actModificarProducto" disable="true" layoutX="47.0" layoutY="555.0" mnemonicParsing="false" onAction="#switchModificarProducto" text="¿Modificar?">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>

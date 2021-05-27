@@ -357,7 +357,7 @@
                                                       <RadioButton fx:id="tipoAseoModificar" disable="true" layoutX="42.0" layoutY="367.0" mnemonicParsing="false" onAction="#actualizarTipoProdMod" text="Aseo" toggleGroup="$tipoProductoModificar" />
                                                       <RadioButton fx:id="tipoOtroModificar" disable="true" layoutX="202.0" layoutY="367.0" mnemonicParsing="false" onAction="#actualizarTipoProdMod" selected="true" text="Otro" toggleGroup="$tipoProductoModificar" />
                                                       <ComboBox fx:id="listaProductosModificar" disable="true" layoutX="71.0" layoutY="211.0" onAction="#actualizarInformacionModificar" prefWidth="150.0" promptText="Producto" style="-fx-background-radius: 20;" />
-                                                      <CheckBox fx:id="actModificarProducto" layoutX="47.0" layoutY="555.0" mnemonicParsing="false" onAction="#switchModificarProducto" text="¿Modificar?">
+                                                      <CheckBox fx:id="actModificarProducto" disable="true" layoutX="47.0" layoutY="555.0" mnemonicParsing="false" onAction="#switchModificarProducto" text="¿Modificar?">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>

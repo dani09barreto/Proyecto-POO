@@ -14,6 +14,14 @@ public class Fruver extends Producto {
     public Fruver() {
     }
 
+    public Fruver(UUID ID, String nombreComercial, Double precio, String tienda, Double impuestoLocal, String nombreHacienda) {
+        super(ID, nombreComercial, precio, tienda);
+        this.esOrganico = true;
+        this.impuestoLocal = impuestoLocal;
+        this.nombreHacienda = nombreHacienda;
+    }
+
+
     public Fruver(String nombreComercial, Double precio, String tienda, Double impuestoLocal, String nombreHacienda) {
         super(nombreComercial, precio, tienda);
         this.esOrganico = true;
