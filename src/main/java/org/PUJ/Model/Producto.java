@@ -21,6 +21,14 @@ public class Producto {
     public Producto() {
     }
 
+    public Producto(UUID ID, String nombreComercial, Double precio, String tienda) {
+        this.prodId = ID;
+        this.nombreComercial = nombreComercial;
+        this.iva = precio*0.19;
+        this.precio = precio;
+        this.tienda = tienda;
+    }
+
     public Producto(String nombreComercial, Double precio, String tienda) {
         this.prodId = UUID.randomUUID();
         this.nombreComercial = nombreComercial;

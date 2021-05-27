@@ -269,7 +269,7 @@ public class ControllerFX implements Initializable {
     @FXML
     private CheckBox checkInvimaMod;
     @FXML
-    private ComboBox<?> listTipoProductoMod;
+    private ComboBox <TipoProducto> listTipoProductoMod;
     @FXML
     private Label textFruverMod;
     @FXML
@@ -289,6 +289,7 @@ public class ControllerFX implements Initializable {
         tipoTransporteguardar.getItems().setAll(TipoTransporte.values());
         fechaEntrega.setValue(LocalDate.now());
         listaProductosModificar.getItems().setAll(controlDespacho.getGestionProductos().getListaProductos().keySet());
+        listTipoProductoMod.getItems().setAll(TipoProducto.values());
     }
 
     //---------Funciones Clientes----------//
@@ -877,11 +878,56 @@ public class ControllerFX implements Initializable {
     @FXML
     void modificarProducto() {
         try {
-
+            if (tipoFruverModificar.isSelected()) {
+                Producto productoAnterior = controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem());
+                Producto modificarProducto = null;
+                if (!(productoAnterior instanceof Fruver)) {
+                    modificarProducto = new Fruver(productoAnterior.getProdId(), productoAnterior.getNombreComercial(), productoAnterior.getPrecio(), productoAnterior.getTienda(), Double.valueOf(insertarImpuestoLocalMod.getText()), insertarNombreHaciendaMod.getText());
+                    controlDespacho.getGestionProductos().eliminarProducto(productoAnterior.getProdId());
+                    controlDespacho.getGestionProductos().insertarProducto(modificarProducto);
+                } else {
+                    productoAnterior.setNombreComercial(insertarNombreModProd.getText());
+                    productoAnterior.setPrecio(Double.valueOf(insertarPrecioModProd.getText()));
+                    productoAnterior.setTienda(insertarTiendaModProd.getText());
+                    ((Fruver)productoAnterior).setImpuestoLocal(Double.valueOf(insertarImpuestoLocalMod.getText()));
+                    ((Fruver)productoAnterior).setNombreHacienda(insertarNombreHaciendaMod.getText());
+                }
+            }
+            else if (tipoAseoModificar.isSelected()) {
+                Producto productoAnterior = controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem());
+                Producto modificarProducto = null;
+                if (!(productoAnterior instanceof Aseo)) {
+                    modificarProducto = new Aseo(productoAnterior.getProdId(), productoAnterior.getNombreComercial(), productoAnterior.getPrecio(), productoAnterior.getTienda(), insertarNombreAseoMod.getText(), listTipoProductoMod.getSelectionModel().getSelectedItem(), checkInvimaMod.isSelected());
+                    controlDespacho.getGestionProductos().eliminarProducto(productoAnterior.getProdId());
+                    controlDespacho.getGestionProductos().insertarProducto(modificarProducto);
+                } else {
+                    productoAnterior.setNombreComercial(insertarNombreModProd.getText());
+                    productoAnterior.setPrecio(Double.valueOf(insertarPrecioModProd.getText()));
+                    productoAnterior.setTienda(insertarTiendaModProd.getText());
+                    ((Aseo) productoAnterior).setNombreEmpresa(insertarNombreAseoMod.getText());
+                    ((Aseo) productoAnterior).setTipo(listTipoProductoMod.getSelectionModel().getSelectedItem());
+                    ((Aseo) productoAnterior).setTieneInvima(checkInvimaMod.isSelected());
+                }
+            }
+             else if (tipoOtroModificar.isSelected()) {
+                    Producto productoAnterior = controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem());
+                    Producto modificarProducto = null;
+                    if (!(productoAnterior.getClass().equals(Producto.class))) {
+                        modificarProducto = new Producto(productoAnterior.getProdId(), productoAnterior.getNombreComercial(), productoAnterior.getPrecio(), productoAnterior.getTienda());
+                        controlDespacho.getGestionProductos().eliminarProducto(productoAnterior.getProdId());
+                        controlDespacho.getGestionProductos().insertarProducto(modificarProducto);
+                    } else {
+                        productoAnterior.setNombreComercial(insertarNombreModProd.getText());
+                        productoAnterior.setPrecio(Double.valueOf(insertarPrecioModProd.getText()));
+                        productoAnterior.setTienda(insertarTiendaModProd.getText());
+                    }
+            }
+            AlertUtils.alertInformation("Producto modificado correctamente", "Se ha modificado el producto.", "");
         } catch (Exception ex) {
             ex.printStackTrace();
             AlertUtils.alertError("ERROR", "No se ha podido modificar este producto.", "Por favor, intente de nuevo.");
         }
+        renderWindowProducto();
     }
 
     @FXML
@@ -890,13 +936,15 @@ public class ControllerFX implements Initializable {
             insertarNombreModProd.setText(controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem()).getNombreComercial());
             insertarPrecioModProd.setText(controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem()).getPrecio().toString());
             insertarTiendaModProd.setText(controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem()).getTienda().toString());
-            if (controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem()).getTipoProducto().equals("Aseo")) {
+
+            if (controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem()) instanceof Aseo) {
                 tipoAseoModificar.fire();
-            } else if (controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem()).getTipoProducto().equals("Fruver")) {
+            } else if (controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem()) instanceof Fruver) {
                 tipoFruverModificar.fire();
             } else {
                 tipoOtroModificar.fire();
             }
+
             actualizarTipoProdMod();
 
         } catch (Exception ex) {
@@ -914,6 +962,20 @@ public class ControllerFX implements Initializable {
             fruver = true;
         }
 
+        if (controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem()) instanceof Aseo) {
+            insertarNombreAseoMod.setText(((Aseo)controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem())).getNombreEmpresa());
+            if (((Aseo)controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem())).getTieneInvima()) {
+                checkInvimaMod.fire();
+            }
+            listTipoProductoMod.getSelectionModel().select(((Aseo) controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem())).getTipo());
+        } else if (controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem()) instanceof Fruver) {
+            insertarImpuestoLocalMod.setText(((Fruver) controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem())).getImpuestoLocal().toString());
+            insertarNombreHaciendaMod.setText(((Fruver) controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem())).getNombreHacienda());
+            if (((Fruver) controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem())).getEsOrganico()) {
+                checkOrganicoMod.fire();
+            }
+        }
+
         textAseoMod.setDisable(!aseo);
         insertarNombreAseoMod.setDisable(!aseo);
         checkInvimaMod.setDisable(!aseo);
@@ -922,7 +984,6 @@ public class ControllerFX implements Initializable {
         textAseoMod.setVisible(aseo);
         insertarNombreAseoMod.setVisible(aseo);
         checkInvimaMod.setVisible(aseo);
-
         listTipoProductoMod.setVisible(aseo);
 
         textFruverMod.setDisable(!fruver);
