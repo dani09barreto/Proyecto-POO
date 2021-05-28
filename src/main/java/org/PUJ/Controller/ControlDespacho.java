@@ -1,14 +1,10 @@
 package org.PUJ.Controller;
 
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
 import org.PUJ.Model.*;
 import org.PUJ.utils.AlertUtils;
 import org.PUJ.utils.Fechaerror;
 import org.PUJ.utils.PedidoFechaIgual;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class  ControlDespacho {
@@ -193,5 +189,18 @@ public class  ControlDespacho {
         }
         return pedidos;
     }
+    public ArrayList <ServicioAdicional> enviosPrimePorTipo (TipoTransporte tipobuscar){
+        ArrayList <ServicioAdicional> listtemp = new ArrayList<>();
 
+        for (Pedido pedido : this.pedidos){
+            for (ServicioAdicional servtemp : pedido.getServiciosAdicionales()){
+                if (servtemp instanceof EnvioPrime){
+                    if (((EnvioPrime) servtemp).getTipo() == tipobuscar){
+                        listtemp.add(servtemp);
+                    }
+                }
+            }
+        }
+        return listtemp;
+    }
 }

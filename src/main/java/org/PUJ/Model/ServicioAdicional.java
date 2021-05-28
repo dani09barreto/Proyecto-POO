@@ -1,8 +1,11 @@
 package org.PUJ.Model;
 
 
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.util.UUID;
 
+@XmlRootElement
 public abstract class ServicioAdicional {
     protected UUID codigoServicio;
     protected String nombreServicio;
@@ -12,6 +15,9 @@ public abstract class ServicioAdicional {
         this.codigoServicio = UUID.randomUUID();
         this.nombreServicio = nombreServicio;
         this.precio = precio;
+    }
+    public ServicioAdicional (){
+
     }
 
     public UUID getCodigoServicio() {

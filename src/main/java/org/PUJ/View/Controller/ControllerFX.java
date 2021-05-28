@@ -410,9 +410,6 @@ public class ControllerFX implements Initializable {
     public void renderWindowPedido() {
         clearWindowPedido();
         listaPedidos.getItems().addAll(controlDespacho.getPedidos());
-        for (Cliente cli : controlDespacho.getGestionCliente().getListaClientes().values()) {
-            clientesList.getItems().add(cli.getCedula());
-        }
         for (Pedido pedtemp : controlDespacho.getPedidos()) {
             listPedidos.getItems().add(pedtemp.getNumeroPedido());
             listaEliminar.getItems().add(pedtemp.getNumeroPedido());
@@ -784,7 +781,30 @@ public class ControllerFX implements Initializable {
 
     @FXML
     void guardarTipoTransporte(ActionEvent event) {
+        TipoTransporte tipo = tipoTransporteguardar.getSelectionModel().getSelectedItem();
+        ArrayList<ServicioAdicional> servciosEnvios = controlDespacho.enviosPrimePorTipo(tipo);
 
+
+        FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter ("XML", FileType.XML.getFilter());
+        File ruta = AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow());
+
+        try(FileWriter archvioSalida = new FileWriter(ruta)) {
+            if (servciosEnvios.size() == 0){
+                throw new ServiciosPrimeVacio("Arreglo vacio");
+            }
+            JAXBContext context = JAXBContext.newInstance(ServicioAdicional.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            for(ServicioAdicional serv: servciosEnvios){
+                m.marshal(serv, archvioSalida);
+            }
+            AlertUtils.alertConfirmation("Generar Reporte", "El reporte de Servicios Envio Prime del sistema se ha generado exitosamente", "Presiona Aceptar para continuar");
+        }catch (IOException | JAXBException ioe) {
+            ioe.printStackTrace();
+            AlertUtils.alertError("Error", "El archivo no pudo ser generado", "Intentelo nuevamente");
+        }catch (ServiciosPrimeVacio e){
+            AlertUtils.alertError("Error", "No existe reporte de este Tipo o no seleccionaste ninguno", "Intentelo nuevamente");
+        }
     }
 
     // Funciones Producto
