@@ -714,20 +714,20 @@
                                              </effect>
                                           </Label>
                                           <Label layoutX="153.0" layoutY="115.0" prefHeight="403.0" prefWidth="425.0" style="-fx-background-radius: 20; -fx-border-color: #900C3F; -fx-border-radius: 20;" />
-                                          <Label layoutX="185.0" layoutY="149.0" text="Generar reporte Productos Fruver">
+                                          <Label layoutX="175.0" layoutY="150.0" text="Generar reporte Productos Fruver">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
                                           </Label>
                                           <Separator layoutX="155.0" layoutY="193.0" prefHeight="2.0" prefWidth="421.0" />
-                                          <Label layoutX="185.0" layoutY="208.0" text="Generar reporte de Pedidos con Producto Aseo de un tipo">
+                                          <Label layoutX="175.0" layoutY="210.0" text="Generar reporte de Pedidos con Producto Aseo de un tipo">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
                                           </Label>
                                           <ComboBox fx:id="tipoProdGuardar" layoutX="185.0" layoutY="244.0" prefHeight="25.0" prefWidth="128.0" promptText="Tipo Producto" />
-                                          <Separator layoutX="157.0" layoutY="280.0" prefHeight="2.0" prefWidth="421.0" />
-                                          <Label layoutX="185.0" layoutY="300.0" text="Generar reporte de pedidos en un rango de fechas">
+                                          <Separator layoutX="157.0" layoutY="282.0" prefHeight="2.0" prefWidth="421.0" />
+                                          <Label layoutX="175.0" layoutY="296.0" text="Generar reporte de pedidos en un rango de fechas">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -735,42 +735,42 @@
                                           <DatePicker fx:id="fechaInicialGuardar" layoutX="185.0" layoutY="333.0" prefHeight="25.0" prefWidth="149.0" promptText="Fecha Inicial" style="-fx-background-radius: 20;" />
                                           <DatePicker fx:id="fechaFinalGuardar" layoutX="185.0" layoutY="366.0" prefHeight="25.0" prefWidth="149.0" promptText="Fecha Final" style="-fx-background-radius: 20;" />
                                           <Separator layoutX="153.0" layoutY="402.0" prefHeight="2.0" prefWidth="421.0" />
-                                          <Label layoutX="185.0" layoutY="413.0" text="Generar reporte de Servicios Envio Prime de un Tipo ">
+                                          <Label layoutX="175.0" layoutY="415.0" text="Generar reporte de Servicios Envio Prime de un Tipo ">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox fx:id="tipoTransporteguardar" layoutX="185.0" layoutY="445.0" prefHeight="25.0" prefWidth="128.0" promptText="Tipo Transporte" />
-                                          <Button layoutX="492.0" layoutY="220.0" mnemonicParsing="false" onAction="#guardarProductosAseoTipo" prefHeight="29.0" prefWidth="27.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" textFill="#fff9f9">
+                                          <ComboBox fx:id="tipoTransporteguardar" layoutX="185.0" layoutY="451.0" prefHeight="25.0" prefWidth="128.0" promptText="Tipo Transporte" />
+                                          <Button layoutX="477.0" layoutY="238.0" mnemonicParsing="false" onAction="#guardarProductosAseoTipo" prefHeight="25.0" prefWidth="32.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" textFill="#fff9f9">
                                              <graphic>
-                                                <ImageView fitHeight="40.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                                                <ImageView fitHeight="29.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@img/disquete.png" />
                                                    </image>
                                                 </ImageView>
                                              </graphic>
                                           </Button>
-                                          <Button layoutX="492.0" layoutY="334.0" mnemonicParsing="false" onAction="#guardarRangoFechas" prefHeight="29.0" prefWidth="27.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" textFill="#fff9f9">
+                                          <Button layoutX="478.0" layoutY="348.0" mnemonicParsing="false" onAction="#guardarRangoFechas" prefHeight="29.0" prefWidth="27.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" textFill="#fff9f9">
                                              <graphic>
-                                                <ImageView fitHeight="40.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                                                <ImageView fitHeight="29.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@img/disquete.png" />
                                                    </image>
                                                 </ImageView>
                                              </graphic>
                                           </Button>
-                                          <Button layoutX="492.0" layoutY="136.0" mnemonicParsing="false" onAction="#guardarProductoFruver" prefHeight="29.0" prefWidth="27.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" textFill="#fff9f9">
+                                          <Button layoutX="477.0" layoutY="142.0" mnemonicParsing="false" onAction="#guardarProductoFruver" prefHeight="29.0" prefWidth="27.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" textFill="#fff9f9">
                                              <graphic>
-                                                <ImageView fitHeight="40.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                                                <ImageView fitHeight="29.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@img/disquete.png" />
                                                    </image>
                                                 </ImageView>
                                              </graphic>
                                           </Button>
-                                          <Button layoutX="492.0" layoutY="446.0" mnemonicParsing="false" onAction="#guardarTipoTransporte" prefHeight="29.0" prefWidth="27.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" textFill="#fff9f9">
+                                          <Button layoutX="477.0" layoutY="445.0" mnemonicParsing="false" onAction="#guardarTipoTransporte" prefHeight="29.0" prefWidth="27.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" textFill="#fff9f9">
                                              <graphic>
-                                                <ImageView fitHeight="40.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                                                <ImageView fitHeight="29.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@img/disquete.png" />
                                                    </image>
