@@ -1,18 +1,22 @@
 package org.PUJ.Model;
 
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.UUID;
 
+@XmlRootElement
 public class Pedido {
     private UUID numeroPedido;
     private Calendar fechaRecibido;
     private Boolean pagado;
     private String nombreRepartidor;
     private Cliente solicitante;
-    private ArrayList <ServicioAdicional> serviciosAdicionales;
     private Producto productoSolicitado;
+    private ArrayList <ServicioAdicional> serviciosAdicionales;
 
     public Pedido(Calendar fechaRecibido, String nombreRepartidor, Cliente solicitante, Producto productoSolicitado) {
         this.numeroPedido = UUID.randomUUID();
@@ -22,6 +26,9 @@ public class Pedido {
         this.nombreRepartidor = nombreRepartidor;
         this.serviciosAdicionales = new ArrayList<>();
         this.productoSolicitado = productoSolicitado;
+    }
+    public Pedido (){
+
     }
 
     public UUID getNumeroPedido() {

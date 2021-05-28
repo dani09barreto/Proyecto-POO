@@ -1,5 +1,7 @@
 package org.PUJ.Controller;
 
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.PUJ.Model.*;
 import org.PUJ.utils.AlertUtils;
 import org.PUJ.utils.Fechaerror;
@@ -9,7 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class ControlDespacho {
+public class  ControlDespacho {
 
     private GestionProductos gestionProductos = new GestionProductos();
     private ArrayList<Pedido> pedidos = new ArrayList<>();
@@ -109,13 +111,6 @@ public class ControlDespacho {
         return false;
     }
 
-    public void VerPedido() {
-        if (pedidos.isEmpty())
-            System.out.println("[!] No existen pedidos.");
-        else
-            System.out.println(pedidos.toString());
-    }
-
     public ArrayList<Pedido> verListadoDePedidosDeProductoYFechaEspecífica(UUID idProd2, Calendar fecha) {
         boolean hayPedido = false;
         ArrayList<Pedido> pedidosProductoFecha = new ArrayList<>();
@@ -134,16 +129,16 @@ public class ControlDespacho {
     }
 
 
-    public Double precioPedidosDeAseoPorTipo(TipoProducto tipoABuscar) {
-        Double precio = 0.0;
+    public ArrayList<Pedido> PedidosDeAseoPorTipo (TipoProducto tipoABuscar) {
+        ArrayList <Pedido> pedidosAsociados = new ArrayList<>();
         for (Pedido pedtemp : this.pedidos) {
             if (pedtemp.getProductoSolicitado() instanceof Aseo) {
                 if (((Aseo) pedtemp.getProductoSolicitado()).getTipo() == tipoABuscar) {
-                    precio += ((Aseo) pedtemp.getProductoSolicitado()).calcularPrecio();
+                    pedidosAsociados.add(pedtemp);
                 }
             }
         }
-        return precio;
+        return pedidosAsociados;
     }
 
     public boolean validarCliente(Long ced) {
@@ -172,21 +167,31 @@ public class ControlDespacho {
         return productosFruver;
     }
 
-    public ArrayList<Pedido> verPedidosAsociadosAProductosAseo() {
-        ArrayList<Pedido> pedidosProductosAseo = new ArrayList<>();
-        for (Pedido ped : this.getPedidos()) {
-            if (ped.getProductoSolicitado() instanceof Aseo) {
-                pedidosProductosAseo.add(ped);
+    public ArrayList<Pedido> pedidoEnRangoDeFechas (Calendar fechaInicio, Calendar fechaFinal){
+        ArrayList<Pedido> pedidos = new ArrayList<>();
+        ArrayList <Calendar> fechas = new ArrayList<>();
+
+        // diferencia de dias entre las dos fechas//
+        long finMs = fechaInicio.getTimeInMillis();
+        long inicioMs = fechaFinal.getTimeInMillis();
+        int dias = (int) (Math.abs(finMs - inicioMs) / (1000 * 60 * 60 * 24));
+        int contador = 0;
+        while (contador <= dias){
+            Calendar fechtemp = Calendar.getInstance();
+            fechtemp = (Calendar) fechaInicio.clone();
+            fechtemp.set(Calendar.DATE, fechtemp.get(Calendar.DATE)+ contador);
+            fechas.add(fechtemp);
+            contador ++;
+        }
+
+        for (Pedido pedido : this.pedidos){
+            for (Calendar fechtemp : fechas){
+                if (pedido.getFechaRecibido().equals(fechtemp)){
+                    pedidos.add(pedido);
+                }
             }
         }
-        return pedidosProductosAseo;
+        return pedidos;
     }
-    public String leerString() {
-        String str = "";
-        Scanner sc = new Scanner(System.in);
-        do {
-            str = sc.nextLine();
-        } while (str.isBlank());
-        return str;
-    }
+
 }

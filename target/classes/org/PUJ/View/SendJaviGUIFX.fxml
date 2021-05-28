@@ -720,14 +720,14 @@
                                              </font>
                                           </Label>
                                           <Separator layoutX="155.0" layoutY="193.0" prefHeight="2.0" prefWidth="421.0" />
-                                          <Label layoutX="185.0" layoutY="208.0" text="Generar reporte Productos Aseo de un tipo">
+                                          <Label layoutX="185.0" layoutY="208.0" text="Generar reporte de Pedidos con Producto Aseo de un tipo">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
                                           </Label>
                                           <ComboBox fx:id="tipoProdGuardar" layoutX="185.0" layoutY="244.0" prefHeight="25.0" prefWidth="128.0" promptText="Tipo Producto" />
                                           <Separator layoutX="157.0" layoutY="280.0" prefHeight="2.0" prefWidth="421.0" />
-                                          <Label layoutX="185.0" layoutY="300.0" text="Generar reporte de productos en un rango de fechas">
+                                          <Label layoutX="185.0" layoutY="300.0" text="Generar reporte de pedidos en un rango de fechas">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -735,7 +735,7 @@
                                           <DatePicker fx:id="fechaInicialGuardar" layoutX="185.0" layoutY="333.0" prefHeight="25.0" prefWidth="149.0" promptText="Fecha Inicial" style="-fx-background-radius: 20;" />
                                           <DatePicker fx:id="fechaFinalGuardar" layoutX="185.0" layoutY="366.0" prefHeight="25.0" prefWidth="149.0" promptText="Fecha Final" style="-fx-background-radius: 20;" />
                                           <Separator layoutX="153.0" layoutY="402.0" prefHeight="2.0" prefWidth="421.0" />
-                                          <Label layoutX="185.0" layoutY="413.0" text="Generar reporte de Servicios Adicionales de un Tipo ">
+                                          <Label layoutX="185.0" layoutY="413.0" text="Generar reporte de Servicios Envio Prime de un Tipo ">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>

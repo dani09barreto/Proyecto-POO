@@ -1,7 +1,10 @@
 package org.PUJ.Model;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.util.UUID;
 
+@XmlRootElement
 public class Aseo extends Producto {
     private String nombreEmpresa;
     private Boolean tieneInvima;

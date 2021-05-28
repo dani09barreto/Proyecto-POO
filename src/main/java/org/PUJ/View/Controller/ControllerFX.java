@@ -18,6 +18,7 @@ import org.PUJ.Model.*;
 import org.PUJ.utils.*;
 
 import java.awt.*;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -751,6 +752,33 @@ public class ControllerFX implements Initializable {
 
     @FXML
     void guardarRangoFechas(ActionEvent event) {
+
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+        LocalDate localDate = fechaInicialGuardar.getValue();
+        Date date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+        Calendar fechaInicio = Calendar.getInstance();
+        fechaInicio.setTime(date);
+        localDate = fechaFinalGuardar.getValue();
+        date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+        Calendar fechaFinal = Calendar.getInstance();
+        fechaFinal.setTime(date);
+
+        ArrayList<Pedido> pedidos = controlDespacho.pedidoEnRangoDeFechas(fechaInicio, fechaFinal);
+        FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter ("XML", FileType.XML.getFilter());
+        File ruta = AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow());
+
+        try(FileWriter archvioSalida = new FileWriter(ruta)) {
+            JAXBContext context = JAXBContext.newInstance(Pedido.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            for(Pedido ped: pedidos){
+                m.marshal(ped, archvioSalida);
+            }
+            AlertUtils.alertConfirmation("Generar Reporte", "El reporte de rango de fechas se ha generado exitosamente", "Presiona OK para continuar");
+        }catch (IOException | JAXBException ioe) {
+            ioe.printStackTrace();
+            AlertUtils.alertError("Error", "El archivo no pudo ser generado", "Intentelo nuevamente");
+        }
 
     }
 
