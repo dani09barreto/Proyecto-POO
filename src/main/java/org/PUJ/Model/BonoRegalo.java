@@ -1,7 +1,10 @@
 package org.PUJ.Model;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+@XmlRootElement
 public class BonoRegalo extends ServicioAdicional{
     private String comercioAsociado;
     private String mensaje;

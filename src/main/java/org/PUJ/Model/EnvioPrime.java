@@ -1,5 +1,8 @@
 package org.PUJ.Model;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class EnvioPrime extends ServicioAdicional {
     private Double distancia;
     private TipoTransporte tipo;
