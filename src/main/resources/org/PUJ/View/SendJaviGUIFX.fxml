@@ -32,35 +32,15 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.PUJ.View.Controller.ControllerFX">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.PUJ.View.Controller.ControllerFX">
    <children>
       <AnchorPane layoutX="-1.0" prefHeight="638.0" prefWidth="1200.0">
          <children>
@@ -650,15 +630,15 @@
                            <children>
                               <AnchorPane prefHeight="870.0" prefWidth="1200.0">
                                  <children>
-                                    <Separator layoutX="476.0" layoutY="-12.0" orientation="VERTICAL" prefHeight="611.0" prefWidth="8.0" />
-                                    <AnchorPane layoutY="-1.0" prefHeight="629.0" prefWidth="479.0">
+                                    <Separator layoutX="524.0" layoutY="-12.0" orientation="VERTICAL" prefHeight="623.0" prefWidth="50.0" />
+                                    <AnchorPane layoutX="14.0" prefHeight="629.0" prefWidth="522.0">
                                        <children>
                                           <Pane layoutX="206.0" layoutY="-144.0" prefHeight="186.0" prefWidth="201.0" style="-fx-background-color: #900C3F; -fx-background-radius: 70;" />
                                           <Pane layoutX="-113.0" layoutY="-53.0" prefHeight="216.0" prefWidth="205.0" style="-fx-background-color: #900C3F; -fx-background-radius: 70;" />
                                           <Pane layoutX="-123.0" layoutY="-63.0" prefHeight="216.0" prefWidth="205.0" style="-fx-background-color: #900C3F; -fx-background-radius: 70;" />
-                                          <Label alignment="CENTER" layoutY="53.0" minWidth="60.0" prefHeight="37.0" prefWidth="481.0" style="-fx-background-color: #FFFFFF; -fx-padding: 5; -fx-background-radius: 20;" text="Listado Producto y fecha especifica" textAlignment="CENTER" wrapText="false">
+                                          <Label alignment="CENTER" layoutY="53.0" minWidth="60.0" prefHeight="37.0" prefWidth="481.0" style="-fx-background-color: #FFFFFF; -fx-padding: 5; -fx-background-radius: 20;" text="Listado de un producto para pedidos posteriores a una fecha" textAlignment="CENTER" wrapText="false">
                                              <font>
-                                                <Font size="18.0" fx:id="x111111" />
+                                                <Font size="15.0" fx:id="x111111" />
                                              </font>
                                              <effect>
                                                 <DropShadow>
@@ -697,7 +677,7 @@
                                           </AnchorPane>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane layoutX="476.0" prefHeight="871.0" prefWidth="760.0">
+                                    <AnchorPane layoutX="497.0" prefHeight="871.0" prefWidth="760.0">
                                        <children>
                                           <Pane layoutX="496.0" layoutY="563.0" prefHeight="295.0" prefWidth="283.0" rotate="-37.9" style="-fx-background-color: #900C3F; -fx-background-radius: 70;" />
                                           <Pane layoutX="229.0" layoutY="-223.0" prefHeight="295.0" prefWidth="283.0" rotate="22.6" style="-fx-background-color: #900C3F; -fx-background-radius: 70;" />

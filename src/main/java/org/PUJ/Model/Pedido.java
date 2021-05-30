@@ -18,6 +18,7 @@ public class Pedido {
     private Producto productoSolicitado;
     private ArrayList <ServicioAdicional> serviciosAdicionales;
 
+
     public Pedido(Calendar fechaRecibido, String nombreRepartidor, Cliente solicitante, Producto productoSolicitado) {
         this.numeroPedido = UUID.randomUUID();
         this.fechaRecibido = fechaRecibido;
@@ -27,9 +28,7 @@ public class Pedido {
         this.serviciosAdicionales = new ArrayList<>();
         this.productoSolicitado = productoSolicitado;
     }
-    public Pedido (){
-
-    }
+    public Pedido (){    }
 
     public UUID getNumeroPedido() {
         return numeroPedido;
