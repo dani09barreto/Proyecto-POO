@@ -5,16 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10d74ec7-bdf7-43a4-8c55-c9793e84c4e0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_05_2021_9_12_a__m___Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_05_2021_9_12_a__m___Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_05_2021_9_12_a__m___Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_05_2021_9_12_a__m___Default_Changelist_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_04_2021_4_47_p__m___Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_04_2021_4_47_p__m___Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_05_2021_7_26_a__m___Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_05_2021_7_26_a__m___Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Aseo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Aseo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Pedido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/Model/Pedido.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/View/Controller/ControllerFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/View/Controller/ControllerFX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/Model/Aseo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Model/Aseo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/Model/Pedido.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/PUJ/Model/Pedido.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/PUJ/utils/ServiciosPrimeVacio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/PUJ/utils/ArchivoVacio.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/PUJ/View/Controller/ControllerFX.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/PUJ/View/Controller/ControllerFX.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -184,22 +177,22 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho_testExistePedido.ic" NAME="TestDespacho.testExistePedido Coverage Results" MODIFIED="1619393693520" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho_testVerListadoPedidosFechaEspecifica.ic" NAME="TestDespacho.testVerListadoPedidosFechaEspecifica Coverage Results" MODIFIED="1619406209729" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>org.PUJ.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho_verPedidosAsociadosAseo.ic" NAME="TestDespacho.verPedidosAsociadosAseo Coverage Results" MODIFIED="1619407016080" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.PUJ.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho_testExisteCliente.ic" NAME="TestDespacho.testExisteCliente Coverage Results" MODIFIED="1619407385411" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.PUJ.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho_testExistePedido.ic" NAME="TestDespacho.testExistePedido Coverage Results" MODIFIED="1619393693520" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>org.PUJ.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho.ic" NAME="TestDespacho Coverage Results" MODIFIED="1619407769490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.PUJ.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho_testVerListadoPedidosFechaEspecifica.ic" NAME="TestDespacho.testVerListadoPedidosFechaEspecifica Coverage Results" MODIFIED="1619406209729" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>org.PUJ.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho_testReservarPedido.ic" NAME="TestDespacho.testReservarPedido Coverage Results" MODIFIED="1619398081218" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>org.PUJ.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/Proyecto_POO$TestDespacho_verPedidosAsociadosAseo.ic" NAME="TestDespacho.verPedidosAsociadosAseo Coverage Results" MODIFIED="1619407016080" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.PUJ.*</FILTER>
     </SUITE>
   </component>

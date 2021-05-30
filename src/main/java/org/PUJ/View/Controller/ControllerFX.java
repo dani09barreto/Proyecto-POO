@@ -3,7 +3,6 @@ package org.PUJ.View.Controller;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,16 +11,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
-import javafx.stage.Window;
 import org.PUJ.Controller.ControlDespacho;
 import org.PUJ.Model.*;
 import org.PUJ.utils.*;
 
-import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
@@ -271,7 +267,7 @@ public class ControllerFX implements Initializable {
     @FXML
     private CheckBox checkInvimaMod;
     @FXML
-    private ComboBox <TipoProducto> listTipoProductoMod;
+    private ComboBox<TipoProducto> listTipoProductoMod;
     @FXML
     private Label textFruverMod;
     @FXML
@@ -301,7 +297,7 @@ public class ControllerFX implements Initializable {
         try {
             Cliente temp = new Cliente(Long.valueOf(entrada_cedula_clientes.getText()), Entrada_Nombre_clientes.getText(), Long.valueOf(entrada_tel_clientes.getText()), entrada_dir_clientes.getText());
             this.controlDespacho.getGestionCliente().InsertarCliente(temp.getCedula(), temp.getNombreCompleto(), temp.getTelefonoContacto(), temp.getDireccion());
-            AlertUtils.alertInformation("Agregar Cliente", "El cliente se ha agregado correctamente", "Hay: " + controlDespacho.getGestionCliente().getListaClientes().size()+ " Clientes en el sistema");
+            AlertUtils.alertInformation("Agregar Cliente", "El cliente se ha agregado correctamente", "Hay: " + controlDespacho.getGestionCliente().getListaClientes().size() + " Clientes en el sistema");
             Entrada_Nombre_clientes.setText("");
             entrada_cedula_clientes.setText("");
             entrada_tel_clientes.setText("");
@@ -318,20 +314,18 @@ public class ControllerFX implements Initializable {
         Optional<ButtonType> opcion = AlertUtils.alertConfirmation(" Eliminar Cliente", "Se eliminara el cliente con cedula:  " + Lista_eliminar_clientes.getSelectionModel().getSelectedItem().toString(), "¿Esta seguro?");
         try {
             if (opcion.get().equals(ButtonType.OK)) {
-                if (controlDespacho.validarCliente(Lista_eliminar_clientes.getSelectionModel().getSelectedItem())){
+                if (controlDespacho.validarCliente(Lista_eliminar_clientes.getSelectionModel().getSelectedItem())) {
                     throw new ClienteAsociadoAPedido("cliente asociado a un pedido");
-                }
-                else{
+                } else {
                     this.controlDespacho.getGestionCliente().EliminarCliente(Lista_eliminar_clientes.getSelectionModel().getSelectedItem());
                     AlertUtils.alertInformation("Eliminar Cliente", "El cliente se ha Eliminado correctamente", "");
                 }
             }
 
-        }catch (ClienteAsociadoAPedido e){
+        } catch (ClienteAsociadoAPedido e) {
             e.printStackTrace();
             AlertUtils.alertError("Eliminar Cliente", "El cliente no pudo ser eliminado ya que esta asociado a un pedido", "Elimine el Pedido para eliminar el cliente");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             AlertUtils.alertError("ERROR", "El cliente no ha sido eliminado", "Intentalo nuevamente");
         }
@@ -363,6 +357,7 @@ public class ControllerFX implements Initializable {
         Entrada_Mod_telefono_cliente.setText(cliente.getTelefonoContacto().toString());
         Entrada_Mod_dir_cliente.setText(cliente.getDireccion());
     }
+
     @FXML
     void ModificarCliente(ActionEvent event) {
         Optional<ButtonType> opcion = AlertUtils.alertConfirmation("Modificar Cliente", "Se modificara el cliente de cedula: " + Selecion_clientes.getValue().toString(), "¿Esta seguro?");
@@ -570,6 +565,7 @@ public class ControllerFX implements Initializable {
         FechaModificar.setValue(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         repartidorModificar.setText(pedido.getNombreRepartidor());
     }
+
     @FXML
     void modificarServicio(ActionEvent event) {
         try {
@@ -717,7 +713,7 @@ public class ControllerFX implements Initializable {
         try {
             ArrayList<Pedido> productosFecha = controlDespacho.verListadoDePedidosDeProductoYFechaEspecífica(prodID, fecha);
             tablaFechaEspecifica.getItems().addAll(productosFecha);
-            AlertUtils.alertConfirmation("Productos obtenidos","Se obtenieron los productos satisfactoriamente","Presiona Aceptar para continuar");
+            AlertUtils.alertConfirmation("Productos obtenidos", "Se obtenieron los productos satisfactoriamente", "Presiona Aceptar para continuar");
         } catch (Exception ex) {
             ex.printStackTrace();
             AlertUtils.alertError("Error", "No se pueden obtener los productos", "Revise la fecha que ingresó e inténtelo de nuevo");
@@ -726,50 +722,56 @@ public class ControllerFX implements Initializable {
 
     @FXML
     void guardarProductoFruver(ActionEvent event) {
-        Map<UUID,Producto> productosFruver= controlDespacho.verProductosTipoFruver();
-        if(productosFruver.size()==0){
-            AlertUtils.alertInformation("No hay productos","Sin productos", "No se encuentran prouctos fruver, revise los productos en el sistema y vuelva a intentarlo");
-        }else{
-            FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter(FileType.XML.getFilter(), FileType.XML.getFilter());
-            try (FileWriter out = new FileWriter(AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow()))) {
-                JAXBContext context = JAXBContext.newInstance(Fruver.class);
-                Marshaller m = context.createMarshaller();
-                m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-                for(Producto auxprod: productosFruver.values()){
-                    m.marshal(auxprod,out);
-                }
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-                AlertUtils.alertError("Error", "No se pueden obtener los productos", "Revise los datos que ingresó e inténtelo de nuevo");
-            } catch (JAXBException jex) {
-                jex.printStackTrace();
-                AlertUtils.alertError("Error", "No se pueden obtener los productos", "Revise los datos que ingresó e inténtelo de nuevo");
+        Map<UUID, Producto> productosFruver = controlDespacho.verProductosTipoFruver();
+
+        FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter(FileType.XML.getFilter(), FileType.XML.getFilter());
+        try (FileWriter out = new FileWriter(AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow()))) {
+            if (productosFruver.size() == 0) {
+                throw new ArchivoVacio("Arreglo vacio");
             }
+            JAXBContext context = JAXBContext.newInstance(Fruver.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            for (Producto auxprod : productosFruver.values()) {
+                m.marshal(auxprod, out);
+            }
+            AlertUtils.alertConfirmation("Generar Reporte", "El reporte de Productos tipo fruver se ha generado exitosamente", "Presiona OK para continuar");
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            AlertUtils.alertError("Error", "No se pueden obtener los productos", "Revise los datos que ingresó e inténtelo de nuevo");
+        } catch (JAXBException jex) {
+            jex.printStackTrace();
+            AlertUtils.alertError("Error", "No se pueden obtener los productos", "Revise los datos que ingresó e inténtelo de nuevo");
+        } catch (ArchivoVacio archivoVacio) {
+            AlertUtils.alertInformation("No hay productos", "Sin productos", "No se encuentran prouctos fruver, revise los productos en el sistema y vuelva a intentarlo");
         }
 
     }
 
     @FXML
     void guardarProductosAseoTipo(ActionEvent event) {
-        ArrayList<Pedido> pedidosProductosAseo=controlDespacho.PedidosDeAseoPorTipo(tipoProdGuardar.getValue());
-        if(pedidosProductosAseo.size()==0){
-            AlertUtils.alertInformation("No hay pedidos","Sin pedidos", "No se encuentran pedidos asociados a productos de Aseo de este tipo, revise los productos en el sistema o su selección de tipo y vuelva a intentarlo");
-        }else {
-            FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter(FileType.XML.getFilter(), FileType.XML.getFilter());
-            try (FileWriter out = new FileWriter(AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow()))) {
-                JAXBContext context = JAXBContext.newInstance(Pedido.class);
-                Marshaller m = context.createMarshaller();
-                m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-                for (Pedido auxped : pedidosProductosAseo) {
-                    m.marshal(auxped, out);
-                }
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-                AlertUtils.alertError("Error", "No se pueden obtener los pedidos", "Revise los datos que ingresó e inténtelo de nuevo");
-            } catch (JAXBException jex) {
-                jex.printStackTrace();
-                AlertUtils.alertError("Error", "No se pueden obtener los pedidos", "Revise los datos que ingresó e inténtelo de nuevo");
+        ArrayList<Pedido> pedidosProductosAseo = controlDespacho.PedidosDeAseoPorTipo(tipoProdGuardar.getSelectionModel().getSelectedItem());
+
+        FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter(FileType.XML.getFilter(), FileType.XML.getFilter());
+        try (FileWriter out = new FileWriter(AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow()))) {
+            if (pedidosProductosAseo.size() == 0) {
+                throw new ArchivoVacio("Arreglo vacio");
             }
+            JAXBContext context = JAXBContext.newInstance(Pedido.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            for (Pedido auxped : pedidosProductosAseo) {
+                m.marshal(auxped, out);
+            }
+            AlertUtils.alertConfirmation("Generar Reporte", "El reporte de Pedidos de producto Aseo de un tipo especifico fue exitoso", "Presiona OK para continuar");
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            AlertUtils.alertError("Error", "No se pueden obtener los pedidos", "Revise los datos que ingresó e inténtelo de nuevo");
+        } catch (JAXBException jex) {
+            jex.printStackTrace();
+            AlertUtils.alertError("Error", "No se pueden obtener los pedidos", "Revise los datos que ingresó e inténtelo de nuevo");
+        } catch (ArchivoVacio archivoVacio) {
+            AlertUtils.alertInformation("No hay pedidos", "Sin pedidos", "No se encuentran pedidos asociados a productos de Aseo de este tipo, revise los productos en el sistema o su selección de tipo y vuelva a intentarlo");
         }
     }
 
@@ -785,24 +787,26 @@ public class ControllerFX implements Initializable {
         Calendar fechaFinal = Calendar.getInstance();
         fechaFinal.setTime(date);
         ArrayList<Pedido> pedidos = controlDespacho.pedidoEnRangoDeFechas(fechaInicio, fechaFinal);
-        if(pedidos.size()==0){
-            AlertUtils.alertInformation("No hay pedidos","Sin pedidos", "No se encuentran pedidos asociados a este rango de fechas, revise su selección de fecha y vuelva a intentarlo");
-        }else{
-            FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter ("XML", FileType.XML.getFilter());
-            File ruta = AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow());
 
-            try(FileWriter archvioSalida = new FileWriter(ruta)) {
-                JAXBContext context = JAXBContext.newInstance(Pedido.class);
-                Marshaller m = context.createMarshaller();
-                m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-                for(Pedido ped: pedidos){
-                    m.marshal(ped, archvioSalida);
-                }
-                AlertUtils.alertConfirmation("Generar Reporte", "El reporte de rango de fechas se ha generado exitosamente", "Presiona OK para continuar");
-            }catch (IOException | JAXBException ioe) {
-                ioe.printStackTrace();
-                AlertUtils.alertError("Error", "El archivo no pudo ser generado", "Intentelo nuevamente");
+        FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter("XML", FileType.XML.getFilter());
+        File ruta = AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow());
+
+        try (FileWriter archvioSalida = new FileWriter(ruta)) {
+            if (pedidos.size() == 0) {
+                throw new ArchivoVacio("Arreglo vacio");
             }
+            JAXBContext context = JAXBContext.newInstance(Pedido.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            for (Pedido ped : pedidos) {
+                m.marshal(ped, archvioSalida);
+            }
+            AlertUtils.alertConfirmation("Generar Reporte", "El reporte de rango de fechas se ha generado exitosamente", "Presiona OK para continuar");
+        } catch (IOException | JAXBException ioe) {
+            ioe.printStackTrace();
+            AlertUtils.alertError("Error", "El archivo no pudo ser generado", "Intentelo nuevamente");
+        } catch (ArchivoVacio archivoVacio) {
+            AlertUtils.alertInformation("No hay pedidos", "Sin pedidos", "No se encuentran pedidos asociados a este rango de fechas, revise su selección de fecha y vuelva a intentarlo");
         }
     }
 
@@ -810,29 +814,25 @@ public class ControllerFX implements Initializable {
     void guardarTipoTransporte(ActionEvent event) {
         TipoTransporte tipo = tipoTransporteguardar.getSelectionModel().getSelectedItem();
         ArrayList<ServicioAdicional> servciosEnvios = controlDespacho.enviosPrimePorTipo(tipo);
-        if(servciosEnvios.size()==0){
-            AlertUtils.alertInformation("No hay servicios o pedido","Sin servicios o pedido", "No se encuentran servicios asociados a este tipo de transporte, revise los pedidos en el sistema o su selección de tipo y vuelva a intentarlo");
-        }else{
-            FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter ("XML", FileType.XML.getFilter());
-            File ruta = AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow());
+        FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter("XML", FileType.XML.getFilter());
+        File ruta = AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow());
 
-            try(FileWriter archvioSalida = new FileWriter(ruta)) {
-                if (servciosEnvios.size() == 0){
-                    throw new ServiciosPrimeVacio("Arreglo vacio");
-                }
-                JAXBContext context = JAXBContext.newInstance(ServicioAdicional.class);
-                Marshaller m = context.createMarshaller();
-                m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-                for(ServicioAdicional serv: servciosEnvios){
-                    m.marshal(serv, archvioSalida);
-                }
-                AlertUtils.alertConfirmation("Generar Reporte", "El reporte de Servicios Envio Prime del sistema se ha generado exitosamente", "Presiona Aceptar para continuar");
-            }catch (IOException | JAXBException ioe) {
-                ioe.printStackTrace();
-                AlertUtils.alertError("Error", "El archivo no pudo ser generado", "Intentelo nuevamente");
-            }catch (ServiciosPrimeVacio e){
-                AlertUtils.alertError("Error", "No existe reporte de este Tipo o no seleccionaste ninguno", "Intentelo nuevamente");
+        try (FileWriter archvioSalida = new FileWriter(ruta)) {
+            if (servciosEnvios.size() == 0) {
+                throw new ArchivoVacio("Arreglo vacio");
             }
+            JAXBContext context = JAXBContext.newInstance(ServicioAdicional.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            for (ServicioAdicional serv : servciosEnvios) {
+                m.marshal(serv, archvioSalida);
+            }
+            AlertUtils.alertConfirmation("Generar Reporte", "El reporte de Servicios Envio Prime del sistema se ha generado exitosamente", "Presiona Aceptar para continuar");
+        } catch (IOException | JAXBException ioe) {
+            ioe.printStackTrace();
+            AlertUtils.alertError("Error", "El archivo no pudo ser generado", "Intentelo nuevamente");
+        } catch (ArchivoVacio e) {
+            AlertUtils.alertError("Error", "No existe reporte de este Tipo o no seleccionaste ninguno", "Intentelo nuevamente");
         }
     }
 
@@ -917,19 +917,18 @@ public class ControllerFX implements Initializable {
         Optional<ButtonType> confirmacion = AlertUtils.alertConfirmation("Eliminar Producto", "Se eliminará el producto con UUID " + tablaEliminarProductos.getSelectionModel().getSelectedItem().toString(), "¿Está seguro?");
         try {
             if (confirmacion.get().equals(ButtonType.OK)) {
-                if (controlDespacho.ValidarProducto(tablaEliminarProductos.getSelectionModel().getSelectedItem())){
+                if (controlDespacho.ValidarProducto(tablaEliminarProductos.getSelectionModel().getSelectedItem())) {
                     throw new ProductoAsociadoAPedido("Producto asociado a un pedido");
-                }else {
+                } else {
                     controlDespacho.getGestionProductos().eliminarProducto(tablaEliminarProductos.getSelectionModel().getSelectedItem());
                     AlertUtils.alertInformation("Producto eliminado correctamente", "Se ha eliminado el producto.", "");
                 }
             }
             renderWindowProducto();
-        }catch (ProductoAsociadoAPedido ex){
+        } catch (ProductoAsociadoAPedido ex) {
             ex.printStackTrace();
             AlertUtils.alertError("ERROR", "No se puede eliminar el producto ya que pertenece a un pedido", "Elimine el Pedido para eliminar el Producto selccionado");
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             AlertUtils.alertError("ERROR", "No se ha podido eliminar este producto.", "Por favor, intente de nuevo.");
         }
@@ -966,11 +965,10 @@ public class ControllerFX implements Initializable {
                     productoAnterior.setNombreComercial(insertarNombreModProd.getText());
                     productoAnterior.setPrecio(Double.valueOf(insertarPrecioModProd.getText()));
                     productoAnterior.setTienda(insertarTiendaModProd.getText());
-                    ((Fruver)productoAnterior).setImpuestoLocal(Double.valueOf(insertarImpuestoLocalMod.getText()));
-                    ((Fruver)productoAnterior).setNombreHacienda(insertarNombreHaciendaMod.getText());
+                    ((Fruver) productoAnterior).setImpuestoLocal(Double.valueOf(insertarImpuestoLocalMod.getText()));
+                    ((Fruver) productoAnterior).setNombreHacienda(insertarNombreHaciendaMod.getText());
                 }
-            }
-            else if (tipoAseoModificar.isSelected()) {
+            } else if (tipoAseoModificar.isSelected()) {
                 Producto productoAnterior = controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem());
                 Producto modificarProducto = null;
                 if (!(productoAnterior instanceof Aseo)) {
@@ -985,19 +983,18 @@ public class ControllerFX implements Initializable {
                     ((Aseo) productoAnterior).setTipo(listTipoProductoMod.getSelectionModel().getSelectedItem());
                     ((Aseo) productoAnterior).setTieneInvima(checkInvimaMod.isSelected());
                 }
-            }
-             else if (tipoOtroModificar.isSelected()) {
-                    Producto productoAnterior = controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem());
-                    Producto modificarProducto = null;
-                    if (!(productoAnterior.getClass().equals(Producto.class))) {
-                        modificarProducto = new Producto(productoAnterior.getProdId(), productoAnterior.getNombreComercial(), productoAnterior.getPrecio(), productoAnterior.getTienda());
-                        controlDespacho.getGestionProductos().eliminarProducto(productoAnterior.getProdId());
-                        controlDespacho.getGestionProductos().insertarProducto(modificarProducto);
-                    } else {
-                        productoAnterior.setNombreComercial(insertarNombreModProd.getText());
-                        productoAnterior.setPrecio(Double.valueOf(insertarPrecioModProd.getText()));
-                        productoAnterior.setTienda(insertarTiendaModProd.getText());
-                    }
+            } else if (tipoOtroModificar.isSelected()) {
+                Producto productoAnterior = controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem());
+                Producto modificarProducto = null;
+                if (!(productoAnterior.getClass().equals(Producto.class))) {
+                    modificarProducto = new Producto(productoAnterior.getProdId(), productoAnterior.getNombreComercial(), productoAnterior.getPrecio(), productoAnterior.getTienda());
+                    controlDespacho.getGestionProductos().eliminarProducto(productoAnterior.getProdId());
+                    controlDespacho.getGestionProductos().insertarProducto(modificarProducto);
+                } else {
+                    productoAnterior.setNombreComercial(insertarNombreModProd.getText());
+                    productoAnterior.setPrecio(Double.valueOf(insertarPrecioModProd.getText()));
+                    productoAnterior.setTienda(insertarTiendaModProd.getText());
+                }
             }
             AlertUtils.alertInformation("Producto modificado correctamente", "Se ha modificado el producto.", "");
         } catch (Exception ex) {
@@ -1040,8 +1037,8 @@ public class ControllerFX implements Initializable {
         }
 
         if (controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem()) instanceof Aseo) {
-            insertarNombreAseoMod.setText(((Aseo)controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem())).getNombreEmpresa());
-            if (((Aseo)controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem())).getTieneInvima()) {
+            insertarNombreAseoMod.setText(((Aseo) controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem())).getNombreEmpresa());
+            if (((Aseo) controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem())).getTieneInvima()) {
                 checkInvimaMod.fire();
             }
             listTipoProductoMod.getSelectionModel().select(((Aseo) controlDespacho.getGestionProductos().getListaProductos().get(listaProductosModificar.getSelectionModel().getSelectedItem())).getTipo());
