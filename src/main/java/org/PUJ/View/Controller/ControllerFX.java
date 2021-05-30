@@ -21,6 +21,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
@@ -716,40 +717,64 @@ public class ControllerFX implements Initializable {
         try {
             ArrayList<Pedido> productosFecha = controlDespacho.verListadoDePedidosDeProductoYFechaEspecífica(prodID, fecha);
             tablaFechaEspecifica.getItems().addAll(productosFecha);
+            AlertUtils.alertConfirmation("Productos obtenidos","Se obtenieron los productos satisfactoriamente","Presiona Aceptar para continuar");
         } catch (Exception ex) {
             ex.printStackTrace();
+            AlertUtils.alertError("Error", "No se pueden obtener los productos", "Revise la fecha que ingresó e inténtelo de nuevo");
         }
     }
 
     @FXML
     void guardarProductoFruver(ActionEvent event) {
-        ArrayList<Producto> productosFruver = new ArrayList<>();
-        for (Producto auxProd : controlDespacho.getGestionProductos().getListaProductos().values()) {
-            if (auxProd instanceof Fruver) {
-                productosFruver.add(auxProd);
-                FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter(FileType.XML.getFilter(), FileType.XML.getFilter());
-                try (FileWriter out = new FileWriter(AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow()))) {
-                    JAXBContext context = JAXBContext.newInstance(Fruver.class);
-                    Marshaller m = context.createMarshaller();
-                    m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-                    m.marshal(auxProd, out);
-                } catch (IOException ioe) {
-                    ioe.printStackTrace();
-                } catch (JAXBException jex) {
-                    jex.printStackTrace();
+        Map<UUID,Producto> productosFruver= controlDespacho.verProductosTipoFruver();
+        if(productosFruver.size()==0){
+            AlertUtils.alertInformation("No hay productos","Sin productos", "No se encuentran prouctos fruver, revise los productos en el sistema y vuelva a intentarlo");
+        }else{
+            FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter(FileType.XML.getFilter(), FileType.XML.getFilter());
+            try (FileWriter out = new FileWriter(AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow()))) {
+                JAXBContext context = JAXBContext.newInstance(Fruver.class);
+                Marshaller m = context.createMarshaller();
+                m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+                for(Producto auxprod: productosFruver.values()){
+                    m.marshal(auxprod,out);
                 }
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+                AlertUtils.alertError("Error", "No se pueden obtener los productos", "Revise los datos que ingresó e inténtelo de nuevo");
+            } catch (JAXBException jex) {
+                jex.printStackTrace();
+                AlertUtils.alertError("Error", "No se pueden obtener los productos", "Revise los datos que ingresó e inténtelo de nuevo");
+            }
+        }
+
+    }
+
+    @FXML
+    void guardarProductosAseoTipo(ActionEvent event) {
+        ArrayList<Pedido> pedidosProductosAseo=controlDespacho.PedidosDeAseoPorTipo(tipoProdGuardar.getValue());
+        if(pedidosProductosAseo.size()==0){
+            AlertUtils.alertInformation("No hay pedidos","Sin pedidos", "No se encuentran pedidos asociados a productos de Aseo de este tipo, revise los productos en el sistema o su selección de tipo y vuelva a intentarlo");
+        }else {
+            FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter(FileType.XML.getFilter(), FileType.XML.getFilter());
+            try (FileWriter out = new FileWriter(AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow()))) {
+                JAXBContext context = JAXBContext.newInstance(Pedido.class);
+                Marshaller m = context.createMarshaller();
+                m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+                for (Pedido auxped : pedidosProductosAseo) {
+                    m.marshal(auxped, out);
+                }
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+                AlertUtils.alertError("Error", "No se pueden obtener los pedidos", "Revise los datos que ingresó e inténtelo de nuevo");
+            } catch (JAXBException jex) {
+                jex.printStackTrace();
+                AlertUtils.alertError("Error", "No se pueden obtener los pedidos", "Revise los datos que ingresó e inténtelo de nuevo");
             }
         }
     }
 
     @FXML
-    void guardarProductosAseoTipo(ActionEvent event) {
-
-    }
-
-    @FXML
     void guardarRangoFechas(ActionEvent event) {
-
         ZoneId defaultZoneId = ZoneId.systemDefault();
         LocalDate localDate = fechaInicialGuardar.getValue();
         Date date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
@@ -759,51 +784,55 @@ public class ControllerFX implements Initializable {
         date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
         Calendar fechaFinal = Calendar.getInstance();
         fechaFinal.setTime(date);
-
         ArrayList<Pedido> pedidos = controlDespacho.pedidoEnRangoDeFechas(fechaInicio, fechaFinal);
-        FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter ("XML", FileType.XML.getFilter());
-        File ruta = AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow());
+        if(pedidos.size()==0){
+            AlertUtils.alertInformation("No hay pedidos","Sin pedidos", "No se encuentran pedidos asociados a este rango de fechas, revise su selección de fecha y vuelva a intentarlo");
+        }else{
+            FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter ("XML", FileType.XML.getFilter());
+            File ruta = AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow());
 
-        try(FileWriter archvioSalida = new FileWriter(ruta)) {
-            JAXBContext context = JAXBContext.newInstance(Pedido.class);
-            Marshaller m = context.createMarshaller();
-            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            for(Pedido ped: pedidos){
-                m.marshal(ped, archvioSalida);
+            try(FileWriter archvioSalida = new FileWriter(ruta)) {
+                JAXBContext context = JAXBContext.newInstance(Pedido.class);
+                Marshaller m = context.createMarshaller();
+                m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+                for(Pedido ped: pedidos){
+                    m.marshal(ped, archvioSalida);
+                }
+                AlertUtils.alertConfirmation("Generar Reporte", "El reporte de rango de fechas se ha generado exitosamente", "Presiona OK para continuar");
+            }catch (IOException | JAXBException ioe) {
+                ioe.printStackTrace();
+                AlertUtils.alertError("Error", "El archivo no pudo ser generado", "Intentelo nuevamente");
             }
-            AlertUtils.alertConfirmation("Generar Reporte", "El reporte de rango de fechas se ha generado exitosamente", "Presiona OK para continuar");
-        }catch (IOException | JAXBException ioe) {
-            ioe.printStackTrace();
-            AlertUtils.alertError("Error", "El archivo no pudo ser generado", "Intentelo nuevamente");
         }
-
     }
 
     @FXML
     void guardarTipoTransporte(ActionEvent event) {
         TipoTransporte tipo = tipoTransporteguardar.getSelectionModel().getSelectedItem();
         ArrayList<ServicioAdicional> servciosEnvios = controlDespacho.enviosPrimePorTipo(tipo);
+        if(servciosEnvios.size()==0){
+            AlertUtils.alertInformation("No hay servicios o pedido","Sin servicios o pedido", "No se encuentran servicios asociados a este tipo de transporte, revise los pedidos en el sistema o su selección de tipo y vuelva a intentarlo");
+        }else{
+            FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter ("XML", FileType.XML.getFilter());
+            File ruta = AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow());
 
-
-        FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter ("XML", FileType.XML.getFilter());
-        File ruta = AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow());
-
-        try(FileWriter archvioSalida = new FileWriter(ruta)) {
-            if (servciosEnvios.size() == 0){
-                throw new ServiciosPrimeVacio("Arreglo vacio");
+            try(FileWriter archvioSalida = new FileWriter(ruta)) {
+                if (servciosEnvios.size() == 0){
+                    throw new ServiciosPrimeVacio("Arreglo vacio");
+                }
+                JAXBContext context = JAXBContext.newInstance(ServicioAdicional.class);
+                Marshaller m = context.createMarshaller();
+                m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+                for(ServicioAdicional serv: servciosEnvios){
+                    m.marshal(serv, archvioSalida);
+                }
+                AlertUtils.alertConfirmation("Generar Reporte", "El reporte de Servicios Envio Prime del sistema se ha generado exitosamente", "Presiona Aceptar para continuar");
+            }catch (IOException | JAXBException ioe) {
+                ioe.printStackTrace();
+                AlertUtils.alertError("Error", "El archivo no pudo ser generado", "Intentelo nuevamente");
+            }catch (ServiciosPrimeVacio e){
+                AlertUtils.alertError("Error", "No existe reporte de este Tipo o no seleccionaste ninguno", "Intentelo nuevamente");
             }
-            JAXBContext context = JAXBContext.newInstance(ServicioAdicional.class);
-            Marshaller m = context.createMarshaller();
-            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            for(ServicioAdicional serv: servciosEnvios){
-                m.marshal(serv, archvioSalida);
-            }
-            AlertUtils.alertConfirmation("Generar Reporte", "El reporte de Servicios Envio Prime del sistema se ha generado exitosamente", "Presiona Aceptar para continuar");
-        }catch (IOException | JAXBException ioe) {
-            ioe.printStackTrace();
-            AlertUtils.alertError("Error", "El archivo no pudo ser generado", "Intentelo nuevamente");
-        }catch (ServiciosPrimeVacio e){
-            AlertUtils.alertError("Error", "No existe reporte de este Tipo o no seleccionaste ninguno", "Intentelo nuevamente");
         }
     }
 

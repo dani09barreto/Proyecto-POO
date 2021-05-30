@@ -10,6 +10,8 @@ public class Aseo extends Producto {
     private Boolean tieneInvima;
     private TipoProducto tipo;
 
+    public Aseo(){}
+
     public Aseo(UUID ID, String nombreComercial, Double precio, String tienda, String nombreEmpresa ,TipoProducto tipo, Boolean tieneInvima) {
         super(ID, nombreComercial, precio, tienda);
         this.nombreEmpresa = nombreEmpresa;
