@@ -4,7 +4,7 @@ import org.PUJ.Model.Cliente;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
+
 
 public class GestionCliente {
     private Map<Long, Cliente> listaClientes = new HashMap<>();
@@ -20,16 +20,6 @@ public class GestionCliente {
         return null;
     }
 
-    public void VerlistadoClientes() {
-        if (listaClientes.isEmpty()) {
-            System.out.println("\t[!] No existen clientes para mostrar \n");
-            return;
-        }
-        for (Long l : listaClientes.keySet()) {
-            System.out.println(listaClientes.get(l).toString());
-        }
-    }
-
     public void InsertarCliente(Long ced, String nom, Long tel, String dir) {
         Cliente cliNew = new Cliente(ced, nom, tel, dir);
         for (long l : listaClientes.keySet()) {
@@ -42,8 +32,6 @@ public class GestionCliente {
     }
 
     public void EliminarCliente(Long cedEliminar) {
-
-        Long temp = cedEliminar;
         if (listaClientes.containsKey(cedEliminar)) {
             listaClientes.remove(cedEliminar);
         }

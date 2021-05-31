@@ -2,9 +2,6 @@ package org.PUJ;
 
 import org.PUJ.Controller.ControlDespacho;
 import org.PUJ.Model.*;
-import org.PUJ.utils.Fechaerror;
-import org.PUJ.utils.PedidoFechaIgual;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.*;

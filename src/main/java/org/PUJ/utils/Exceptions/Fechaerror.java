@@ -1,4 +1,4 @@
-package org.PUJ.utils;
+package org.PUJ.utils.Exceptions;
 
 public class Fechaerror extends Exception{
     public Fechaerror (String mensaje){

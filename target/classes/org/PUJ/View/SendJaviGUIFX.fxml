@@ -624,7 +624,7 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab onSelectionChanged="#renderWindowOtros" style="-fx-font-size: 15;" text="Otros">
+                  <Tab onSelectionChanged="#renderWindowOtros" style="-fx-font-size: 15;" text="Reportes">
                      <content>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
@@ -636,7 +636,7 @@
                                           <Pane layoutX="206.0" layoutY="-144.0" prefHeight="186.0" prefWidth="201.0" style="-fx-background-color: #900C3F; -fx-background-radius: 70;" />
                                           <Pane layoutX="-113.0" layoutY="-53.0" prefHeight="216.0" prefWidth="205.0" style="-fx-background-color: #900C3F; -fx-background-radius: 70;" />
                                           <Pane layoutX="-123.0" layoutY="-63.0" prefHeight="216.0" prefWidth="205.0" style="-fx-background-color: #900C3F; -fx-background-radius: 70;" />
-                                          <Label alignment="CENTER" layoutY="53.0" minWidth="60.0" prefHeight="37.0" prefWidth="481.0" style="-fx-background-color: #FFFFFF; -fx-padding: 5; -fx-background-radius: 20;" text="Listado de un producto para pedidos posteriores a una fecha" textAlignment="CENTER" wrapText="false">
+                                          <Label alignment="CENTER" layoutY="53.0" minWidth="60.0" prefHeight="37.0" prefWidth="481.0" style="-fx-background-color: #FFFFFF; -fx-padding: 5; -fx-background-radius: 20;" text="Listado de Pedidos de un producto en una fecha especifica" textAlignment="CENTER" wrapText="false">
                                              <font>
                                                 <Font size="15.0" fx:id="x111111" />
                                              </font>

@@ -1,9 +1,9 @@
 package org.PUJ.Controller;
 
 import org.PUJ.Model.*;
-import org.PUJ.utils.AlertUtils;
-import org.PUJ.utils.Fechaerror;
-import org.PUJ.utils.PedidoFechaIgual;
+import org.PUJ.utils.Exceptions.FechaMenor;
+import org.PUJ.utils.Exceptions.Fechaerror;
+import org.PUJ.utils.Exceptions.PedidoFechaIgual;
 
 import java.util.*;
 
@@ -43,7 +43,7 @@ public class  ControlDespacho {
         return null;
     }
 
-    public void ReservarPedido(Producto producto, Cliente cliente, Calendar fecha, String repartidor, ArrayList<ServicioAdicional> servicios) throws Fechaerror, PedidoFechaIgual{
+    public Pedido ReservarPedido(Producto producto, Cliente cliente, Calendar fecha, String repartidor, ArrayList<ServicioAdicional> servicios) throws Fechaerror, PedidoFechaIgual, FechaMenor {
         Pedido nuevopedido = new Pedido(fecha, repartidor, cliente, producto);
         nuevopedido.setServiciosAdicionales(servicios);
 
@@ -53,41 +53,24 @@ public class  ControlDespacho {
         long inicioMs = fecha.getTimeInMillis();
         int dias = (int) (Math.abs(finMs - inicioMs) / (1000 * 60 * 60 * 24));
 
-        if (dias <= 2){
+        if (fecha.before(fechanow)){
+            throw new FechaMenor("fecha menor");
+        }
+        if (dias < 2){
             throw new Fechaerror("fecha error");
         }
         if (ExistePedido(cliente, producto, fecha) != null){
             throw new PedidoFechaIgual("Fecha igual");
         }
-        else {
-            for (ServicioAdicional serv: nuevopedido.getServiciosAdicionales()){
-                if (serv instanceof BonoRegalo){
-                    Calendar fechaservicio = (Calendar) fecha.clone();
-                    fechaservicio.set(Calendar.MONTH, fechaservicio.get(Calendar.MONTH) + 6);
-                    ((BonoRegalo) serv).setFechaVencimiento(fechaservicio);
-                }
+        for (ServicioAdicional serv: nuevopedido.getServiciosAdicionales()){
+            if (serv instanceof BonoRegalo){
+                Calendar fechaservicio = (Calendar) fecha.clone();
+                fechaservicio.set(Calendar.MONTH, fechaservicio.get(Calendar.MONTH) + 6);
+                ((BonoRegalo) serv).setFechaVencimiento(fechaservicio);
             }
-            long costoPedido = 0;
-            long PrecioSA = 0;
-            long ivaAdicional = 0;
-            costoPedido += nuevopedido.getProductoSolicitado().calcularPrecio() + nuevopedido.getProductoSolicitado().getIva();
-            for (ServicioAdicional servtemp : nuevopedido.getServiciosAdicionales()) {
-                costoPedido += servtemp.calcularPrecio();
-            }
-            costoPedido += costoPedido * 0.10;
-
-            if (nuevopedido.getProductoSolicitado().getIva() > 50000d) {
-                costoPedido += 8000;
-            }
-            nuevopedido.setPagado(true);
-            for (ServicioAdicional sev: nuevopedido.getServiciosAdicionales()){
-                PrecioSA += sev.calcularPrecio();
-            }
-            if (nuevopedido.getProductoSolicitado().getIva() > 50000d) {
-                ivaAdicional = 8000;
-            }
-            pedidos.add(nuevopedido);
         }
+        pedidos.add(nuevopedido);
+        return nuevopedido;
     }
     
     public boolean EliminarPedido(UUID eliminar) {
