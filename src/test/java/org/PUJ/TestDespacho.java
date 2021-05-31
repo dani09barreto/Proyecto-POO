@@ -2,6 +2,9 @@ package org.PUJ;
 
 import org.PUJ.Controller.ControlDespacho;
 import org.PUJ.Model.*;
+import org.PUJ.utils.Fechaerror;
+import org.PUJ.utils.PedidoFechaIgual;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.*;
@@ -9,7 +12,6 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class TestDespacho {
-    /*
     private ControlDespacho control = new ControlDespacho();
     // 5 Clientes
     private Cliente cliente1 = new Cliente(1000077617L, "Nicolas David", 316009L, "BG 6447");
@@ -38,6 +40,7 @@ public class TestDespacho {
     private Pedido pedido4 = new Pedido(Calendar.getInstance(), "Nicolas", cliente5, productoAseo1);
     private Pedido pedido5 = new Pedido(Calendar.getInstance(), "Sofia", cliente5, productoFruver1);
     private Pedido pedido6 = new Pedido(Calendar.getInstance(), "Sara", cliente4, productoAseo3);
+
     //pantalla.getCentralDespacho().
 
 
@@ -46,19 +49,20 @@ public class TestDespacho {
         control.getGestionCliente().InsertarCliente(cliente1.getCedula(), cliente1.getNombreCompleto(), cliente1.getTelefonoContacto(), cliente1.getDireccion());
         assertEquals(1, control.getGestionCliente().getListaClientes().size());
         assertFalse(control.getGestionCliente().getListaClientes().containsKey(cliente2.getCedula()));
-        control.getGestionCliente().InsertarCliente(cliente1.getCedula(),cliente1.getNombreCompleto(),cliente1.getTelefonoContacto(),cliente1.getDireccion());
-        assertEquals(1,control.getGestionCliente().getListaClientes().size());
+        control.getGestionCliente().InsertarCliente(cliente1.getCedula(), cliente1.getNombreCompleto(), cliente1.getTelefonoContacto(), cliente1.getDireccion());
+        assertEquals(1, control.getGestionCliente().getListaClientes().size());
 
     }
 
     @Test
-    public void testValidarCliente(){
-        control.getGestionCliente().InsertarCliente(cliente1.getCedula(),cliente1.getNombreCompleto(),cliente1.getTelefonoContacto(),cliente1.getDireccion());
-        assertTrue(control.validarCliente(cliente1.getCedula()));
-        control.ReservarPedido(pedido2);
+    public void testValidarCliente() throws Exception {
+
+        control.getGestionCliente().InsertarCliente(cliente1.getCedula(), cliente1.getNombreCompleto(), cliente1.getTelefonoContacto(), cliente1.getDireccion());
+        assertFalse(control.validarCliente(cliente1.getCedula()));
+        control.ReservarPedido(pedido2.getProductoSolicitado(), pedido2.getSolicitante(), pedido2.getFechaRecibido(), pedido2.getNombreRepartidor(), pedido2.getServiciosAdicionales());
         assertFalse(control.validarCliente(cliente1.getCedula()));
     }
-
+/*
     @Test
     public void testExisteCliente(){
         control.getGestionCliente().InsertarCliente(cliente1.getCedula(),cliente1.getNombreCompleto(),cliente1.getTelefonoContacto(),cliente1.getDireccion());
@@ -106,20 +110,21 @@ public class TestDespacho {
     @Test
     public void testValidarProducto(){
         control.getGestionProductos().insertarProducto(producto1);
-        assertFalse(control.ValidarProducto(producto1));
-        control.ReservarPedido(pedido1);
-        assertTrue(control.ValidarProducto(producto1));
+        assertFalse(control.ValidarProducto(producto1.getProdId()));
+       // control.ReservarPedido(pedido1.getProductoSolicitado(),pedido1.getSolicitante(),pedido1.getFechaRecibido(),pedido1.getNombreRepartidor(),pedido1.getServiciosAdicionales());
+        assertTrue(control.ValidarProducto(producto1.getProdId()));
     }
 
     @Test
     public void testReservarPedido() {
+
         ArrayList<ServicioAdicional> servicioAdicional1 = new ArrayList<>();
         ArrayList<ServicioAdicional> servicioAdicional2 = new ArrayList<>();
         ArrayList<ServicioAdicional> servicioAdicional3 = new ArrayList<>();
 
         control.ReservarPedido(pedido1);
-
         control.ReservarPedido(pedido2);
+
         assertEquals(2, control.getPedidos().size());
         servicioAdicional1.add(new BonoRegalo("Servicio adicional 1", 3500d, "Justo y bueno", "Mensaje", Calendar.getInstance()));
         pedido2.setServiciosAdicionales(servicioAdicional1);
@@ -230,7 +235,8 @@ public class TestDespacho {
         assertFalse(control.verPedidosAsociadosAProductosAseo().contains(pedido2));
     }
 
-    /*      Los métodos que no fueron testeados (como los de modificarPedido y modificarCliente)
+    /*
+            Los métodos que no fueron testeados (como los de modificarPedido y modificarCliente)
             fueron porque tienen scanners y esto hace fallar los test. Al igual que aquellos
             métodos que únicamente imprimen o hacen llamados a toString de algunos objetos.
 

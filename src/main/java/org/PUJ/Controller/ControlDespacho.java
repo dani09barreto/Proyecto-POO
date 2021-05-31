@@ -86,13 +86,6 @@ public class  ControlDespacho {
             if (nuevopedido.getProductoSolicitado().getIva() > 50000d) {
                 ivaAdicional = 8000;
             }
-            AlertUtils.alertInformation("Informacion Pedido",
-                                        "Precio Producto: $" + nuevopedido.getProductoSolicitado().calcularPrecio()+"\n"+
-                                                "Precio Iva producto: $"+ nuevopedido.getProductoSolicitado().getIva()+"\n"+
-                                                "Precio Servicios Adicionales: $"+ PrecioSA +"\n"+
-                                                "Precio Iva Adicional: $"+ ivaAdicional+"\n"+
-                                                "Costo Despacho: $"+costoPedido*0.10+"\n"+
-                                                "Costo Total: $"+ (costoPedido + costoPedido*0.10), "Pedido Almacenado");
             pedidos.add(nuevopedido);
         }
     }

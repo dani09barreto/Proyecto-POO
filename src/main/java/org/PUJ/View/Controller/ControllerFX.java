@@ -360,7 +360,7 @@ public class ControllerFX implements Initializable {
 
     @FXML
     void ModificarCliente(ActionEvent event) {
-        Optional<ButtonType> opcion = AlertUtils.alertConfirmation("Modificar Cliente", "Se modificara el cliente de cedula: " + Selecion_clientes.getValue().toString(), "¿Esta seguro?");
+        Optional<ButtonType> opcion = AlertUtils.alertConfirmation("Modificar Cliente", "Se modificará el cliente de cédula: " + Selecion_clientes.getValue().toString(), "¿Esta seguro?");
         try {
             if (opcion.get().equals(ButtonType.OK)) {
                 Long cedulaMod = Selecion_clientes.getValue();
@@ -372,7 +372,7 @@ public class ControllerFX implements Initializable {
                     }
                 }
             }
-            AlertUtils.alertInformation("Modificar Cliente", "El cliente se ha Modificado correctamente", "");
+            AlertUtils.alertInformation("Modificar Cliente", "El cliente se ha modificado correctamente", "");
             Entrada_Mod_nombre_cliente.setText("");
             Entrada_Mod_telefono_cliente.setText("");
             Entrada_Mod_dir_cliente.setText("");
@@ -463,8 +463,13 @@ public class ControllerFX implements Initializable {
             String repartidor = nameReparidor.getText();
             controlDespacho.ReservarPedido(producto, cliente, fecha, repartidor, new ArrayList<ServicioAdicional>(this.servicios));
             this.servicios.clear();
-            AlertUtils.alertConfirmation("Pedido agendado", "Su pedido a sido agendado Exitosamente", "hay: " + controlDespacho.getPedidos().size() + " Pedidos agendados");
-            fechaEntrega.setValue(LocalDate.now());
+            AlertUtils.alertInformation("Informacion Pedido",
+                    "Precio Producto: $" + producto.calcularPrecio()+"\n"+
+                            "Precio Iva producto: $"+ producto.getIva()+"\n"+
+                            "Precio Servicios Adicionales: $"+ PrecioSA +"\n"+
+                            "Precio Iva Adicional: $"+ ivaAdicional+"\n"+
+                            "Costo Despacho: $"+costoPedido*0.10+"\n"+
+                            "Costo Total: $"+ (costoPedido + costoPedido*0.0), "Pedido Almacenado");            fechaEntrega.setValue(LocalDate.now());
             nameReparidor.setText("");
         } catch (Fechaerror e) {
             e.getMessage();
@@ -476,6 +481,7 @@ public class ControllerFX implements Initializable {
             ex.printStackTrace();
             AlertUtils.alertError("ERROR", "No se pudo agregar el pedido", "Por favor, intente de nuevo");
         }
+
         renderWindowPedido();
     }
 
