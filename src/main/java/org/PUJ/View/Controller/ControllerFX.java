@@ -14,6 +14,7 @@ import javafx.stage.FileChooser;
 import org.PUJ.Controller.ControlDespacho;
 import org.PUJ.Model.*;
 import org.PUJ.utils.*;
+import org.PUJ.utils.Exceptions.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -461,17 +462,40 @@ public class ControllerFX implements Initializable {
             Calendar fecha = Calendar.getInstance();
             fecha.setTime(date);
             String repartidor = nameReparidor.getText();
-            controlDespacho.ReservarPedido(producto, cliente, fecha, repartidor, new ArrayList<ServicioAdicional>(this.servicios));
-            this.servicios.clear();
+            Pedido nuevopedido = controlDespacho.ReservarPedido(producto, cliente, fecha, repartidor, new ArrayList<ServicioAdicional>(this.servicios));
+            long costoPedido = 0;
+            long PrecioSA = 0;
+            long ivaAdicional = 0;
+            costoPedido += nuevopedido.getProductoSolicitado().calcularPrecio() + nuevopedido.getProductoSolicitado().getIva();
+            for (ServicioAdicional servtemp : nuevopedido.getServiciosAdicionales()) {
+                costoPedido += servtemp.calcularPrecio();
+            }
+            costoPedido += costoPedido * 0.10;
+
+            if (nuevopedido.getProductoSolicitado().getIva() > 50000d) {
+                costoPedido += 8000;
+            }
+            nuevopedido.setPagado(true);
+            for (ServicioAdicional sev: nuevopedido.getServiciosAdicionales()){
+                PrecioSA += sev.calcularPrecio();
+            }
+            if (nuevopedido.getProductoSolicitado().getIva() > 50000d) {
+                ivaAdicional = 8000;
+            }
             AlertUtils.alertInformation("Informacion Pedido",
-                    "Precio Producto: $" + producto.calcularPrecio()+"\n"+
-                            "Precio Iva producto: $"+ producto.getIva()+"\n"+
+                    "Precio Producto: $" + nuevopedido.getProductoSolicitado().calcularPrecio()+"\n"+
+                            "Precio Iva producto: $"+ nuevopedido.getProductoSolicitado().getIva()+"\n"+
                             "Precio Servicios Adicionales: $"+ PrecioSA +"\n"+
                             "Precio Iva Adicional: $"+ ivaAdicional+"\n"+
                             "Costo Despacho: $"+costoPedido*0.10+"\n"+
-                            "Costo Total: $"+ (costoPedido + costoPedido*0.0), "Pedido Almacenado");            fechaEntrega.setValue(LocalDate.now());
+                            "Costo Total: $"+ (costoPedido + costoPedido*0.10), "Pedido Almacenado");
+            fechaEntrega.setValue(LocalDate.now());
             nameReparidor.setText("");
-        } catch (Fechaerror e) {
+            this.servicios.clear();
+        }catch (FechaMenor e){
+            AlertUtils.alertError("Error Fecha", "La fecha no es valida ya que es menor a la fecha de hoy", "Intentalo nuevamente");
+        }
+        catch (Fechaerror e) {
             e.getMessage();
             AlertUtils.alertError("Error Fecha", "La fecha digitada no es mayor a dos dias", "Intentalo nuevamente");
         } catch (PedidoFechaIgual ex) {
@@ -718,11 +742,17 @@ public class ControllerFX implements Initializable {
         UUID prodID = productoEspecifico.getValue();
         try {
             ArrayList<Pedido> productosFecha = controlDespacho.verListadoDePedidosDeProductoYFechaEspecífica(prodID, fecha);
+            if (productosFecha.size() == 0){
+                throw new ColeccionVacia("Arreglo vacio");
+            }
             tablaFechaEspecifica.getItems().addAll(productosFecha);
-            AlertUtils.alertConfirmation("Productos obtenidos", "Se obtenieron los productos satisfactoriamente", "Presiona Aceptar para continuar");
-        } catch (Exception ex) {
+            AlertUtils.alertConfirmation("Pedidos obtenidos", "Se obtenieron los pedidos satisfactoriamente", "Presiona Aceptar para continuar");
+        }catch (ColeccionVacia e){
+            AlertUtils.alertError("Error", "No se pueden obtener los pedidos", "No existen pedidos con este producto en esta fecha");
+        }
+        catch (Exception ex) {
             ex.printStackTrace();
-            AlertUtils.alertError("Error", "No se pueden obtener los productos", "Revise la fecha que ingresó e inténtelo de nuevo");
+            AlertUtils.alertError("Error", "No se pueden obtener los pedidos", "Revise la fecha que ingresó e inténtelo de nuevo");
         }
     }
 
@@ -733,7 +763,7 @@ public class ControllerFX implements Initializable {
         FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter(FileType.XML.getFilter(), FileType.XML.getFilter());
         try (FileWriter out = new FileWriter(AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow()))) {
             if (productosFruver.size() == 0) {
-                throw new ArchivoVacio("Arreglo vacio");
+                throw new ColeccionVacia("Arreglo vacio");
             }
             JAXBContext context = JAXBContext.newInstance(Fruver.class);
             Marshaller m = context.createMarshaller();
@@ -748,7 +778,7 @@ public class ControllerFX implements Initializable {
         } catch (JAXBException jex) {
             jex.printStackTrace();
             AlertUtils.alertError("Error", "No se pueden obtener los productos", "Revise los datos que ingresó e inténtelo de nuevo");
-        } catch (ArchivoVacio archivoVacio) {
+        } catch (ColeccionVacia coleccionVacia) {
             AlertUtils.alertInformation("No hay productos", "Sin productos", "No se encuentran prouctos fruver, revise los productos en el sistema y vuelva a intentarlo");
         }
 
@@ -761,7 +791,7 @@ public class ControllerFX implements Initializable {
         FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter(FileType.XML.getFilter(), FileType.XML.getFilter());
         try (FileWriter out = new FileWriter(AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow()))) {
             if (pedidosProductosAseo.size() == 0) {
-                throw new ArchivoVacio("Arreglo vacio");
+                throw new ColeccionVacia("Arreglo vacio");
             }
             JAXBContext context = JAXBContext.newInstance(Pedido.class);
             Marshaller m = context.createMarshaller();
@@ -776,7 +806,7 @@ public class ControllerFX implements Initializable {
         } catch (JAXBException jex) {
             jex.printStackTrace();
             AlertUtils.alertError("Error", "No se pueden obtener los pedidos", "Revise los datos que ingresó e inténtelo de nuevo");
-        } catch (ArchivoVacio archivoVacio) {
+        } catch (ColeccionVacia coleccionVacia) {
             AlertUtils.alertInformation("No hay pedidos", "Sin pedidos", "No se encuentran pedidos asociados a productos de Aseo de este tipo, revise los productos en el sistema o su selección de tipo y vuelva a intentarlo");
         }
     }
@@ -799,7 +829,7 @@ public class ControllerFX implements Initializable {
 
         try (FileWriter archvioSalida = new FileWriter(ruta)) {
             if (pedidos.size() == 0) {
-                throw new ArchivoVacio("Arreglo vacio");
+                throw new ColeccionVacia("Arreglo vacio");
             }
             JAXBContext context = JAXBContext.newInstance(Pedido.class);
             Marshaller m = context.createMarshaller();
@@ -811,7 +841,7 @@ public class ControllerFX implements Initializable {
         } catch (IOException | JAXBException ioe) {
             ioe.printStackTrace();
             AlertUtils.alertError("Error", "El archivo no pudo ser generado", "Intentelo nuevamente");
-        } catch (ArchivoVacio archivoVacio) {
+        } catch (ColeccionVacia coleccionVacia) {
             AlertUtils.alertInformation("No hay pedidos", "Sin pedidos", "No se encuentran pedidos asociados a este rango de fechas, revise su selección de fecha y vuelva a intentarlo");
         }
     }
@@ -825,7 +855,7 @@ public class ControllerFX implements Initializable {
 
         try (FileWriter archvioSalida = new FileWriter(ruta)) {
             if (servciosEnvios.size() == 0) {
-                throw new ArchivoVacio("Arreglo vacio");
+                throw new ColeccionVacia("Arreglo vacio");
             }
             JAXBContext context = JAXBContext.newInstance(ServicioAdicional.class);
             Marshaller m = context.createMarshaller();
@@ -837,7 +867,7 @@ public class ControllerFX implements Initializable {
         } catch (IOException | JAXBException ioe) {
             ioe.printStackTrace();
             AlertUtils.alertError("Error", "El archivo no pudo ser generado", "Intentelo nuevamente");
-        } catch (ArchivoVacio e) {
+        } catch (ColeccionVacia e) {
             AlertUtils.alertError("Error", "No existe reporte de este Tipo o no seleccionaste ninguno", "Intentelo nuevamente");
         }
     }
