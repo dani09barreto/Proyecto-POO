@@ -303,6 +303,7 @@ public class ControllerFX implements Initializable {
             entrada_cedula_clientes.setText("");
             entrada_tel_clientes.setText("");
             entrada_dir_clientes.setText("");
+            Ver_mod_clientes.setDisable(false);
         } catch (Exception e) {
             e.printStackTrace();
             AlertUtils.alertError("ERROR", "El cliente no ha sido agregado", "Intentalo nuevamente");
@@ -321,6 +322,17 @@ public class ControllerFX implements Initializable {
                     this.controlDespacho.getGestionCliente().EliminarCliente(Lista_eliminar_clientes.getSelectionModel().getSelectedItem());
                     AlertUtils.alertInformation("Eliminar Cliente", "El cliente se ha Eliminado correctamente", "");
                 }
+            }
+            if (this.controlDespacho.getGestionCliente().getListaClientes().isEmpty()) {
+                Entrada_Mod_nombre_cliente.setText("");
+                Entrada_Mod_telefono_cliente.setText("");
+                Entrada_Mod_dir_cliente.setText("");
+                Selecion_clientes.setDisable(true);
+                Entrada_Mod_dir_cliente.setDisable(true);
+                Entrada_Mod_nombre_cliente.setDisable(true);
+                Entrada_Mod_telefono_cliente.setDisable(true);
+                boton_modi_clientes.setDisable(true);
+                Ver_mod_clientes.setDisable(true);
             }
 
         } catch (ClienteAsociadoAPedido e) {
@@ -352,8 +364,7 @@ public class ControllerFX implements Initializable {
 
     @FXML
     void clienteModificar(ActionEvent event) {
-        Long cedula = Selecion_clientes.getSelectionModel().getSelectedItem();
-        Cliente cliente = controlDespacho.getGestionCliente().existeCliente(cedula);
+        Cliente cliente = controlDespacho.getGestionCliente().existeCliente(Selecion_clientes.getSelectionModel().getSelectedItem());
         Entrada_Mod_nombre_cliente.setText(cliente.getNombreCompleto());
         Entrada_Mod_telefono_cliente.setText(cliente.getTelefonoContacto().toString());
         Entrada_Mod_dir_cliente.setText(cliente.getDireccion());
@@ -365,6 +376,7 @@ public class ControllerFX implements Initializable {
         try {
             if (opcion.get().equals(ButtonType.OK)) {
                 Long cedulaMod = Selecion_clientes.getValue();
+
                 for (Long c : this.controlDespacho.getGestionCliente().getListaClientes().keySet()) {
                     if (this.controlDespacho.getGestionCliente().getListaClientes().get(c).getCedula().equals(cedulaMod)) {
                         this.controlDespacho.getGestionCliente().getListaClientes().get(c).setTelefonoContacto(Long.valueOf(Entrada_Mod_telefono_cliente.getText()));
@@ -462,7 +474,7 @@ public class ControllerFX implements Initializable {
             Calendar fecha = Calendar.getInstance();
             fecha.setTime(date);
             String repartidor = nameReparidor.getText();
-            Pedido nuevopedido = new Pedido(fecha,repartidor,cliente,producto);
+            Pedido nuevopedido = new Pedido(fecha, repartidor, cliente, producto);
             controlDespacho.ReservarPedido(nuevopedido, new ArrayList<ServicioAdicional>(this.servicios));
             long costoPedido = 0;
             long PrecioSA = 0;
@@ -477,26 +489,25 @@ public class ControllerFX implements Initializable {
                 costoPedido += 8000;
             }
             nuevopedido.setPagado(true);
-            for (ServicioAdicional sev: nuevopedido.getServiciosAdicionales()){
+            for (ServicioAdicional sev : nuevopedido.getServiciosAdicionales()) {
                 PrecioSA += sev.calcularPrecio();
             }
             if (nuevopedido.getProductoSolicitado().getIva() > 50000d) {
                 ivaAdicional = 8000;
             }
             AlertUtils.alertInformation("Informacion Pedido",
-                    "Precio Producto: $" + nuevopedido.getProductoSolicitado().calcularPrecio()+"\n"+
-                            "Precio Iva producto: $"+ nuevopedido.getProductoSolicitado().getIva()+"\n"+
-                            "Precio Servicios Adicionales: $"+ PrecioSA +"\n"+
-                            "Precio Iva Adicional: $"+ ivaAdicional+"\n"+
-                            "Costo Despacho: $"+costoPedido*0.10+"\n"+
-                            "Costo Total: $"+ (costoPedido + costoPedido*0.10), "Pedido Almacenado");
+                    "Precio Producto: $" + nuevopedido.getProductoSolicitado().calcularPrecio() + "\n" +
+                            "Precio Iva producto: $" + nuevopedido.getProductoSolicitado().getIva() + "\n" +
+                            "Precio Servicios Adicionales: $" + PrecioSA + "\n" +
+                            "Precio Iva Adicional: $" + ivaAdicional + "\n" +
+                            "Costo Despacho: $" + costoPedido * 0.10 + "\n" +
+                            "Costo Total: $" + (costoPedido + costoPedido * 0.10), "Pedido Almacenado");
             fechaEntrega.setValue(LocalDate.now());
             nameReparidor.setText("");
             this.servicios.clear();
-        }catch (FechaMenor e){
+        } catch (FechaMenor e) {
             AlertUtils.alertError("Error Fecha", "La fecha no es valida ya que es menor a la fecha de hoy", "Intentalo nuevamente");
-        }
-        catch (Fechaerror e) {
+        } catch (Fechaerror e) {
             e.getMessage();
             AlertUtils.alertError("Error Fecha", "La fecha digitada no es mayor a dos dias", "Intentalo nuevamente");
         } catch (PedidoFechaIgual ex) {
@@ -743,15 +754,14 @@ public class ControllerFX implements Initializable {
         UUID prodID = productoEspecifico.getValue();
         try {
             ArrayList<Pedido> productosFecha = controlDespacho.verListadoDePedidosDeProductoYFechaEspecífica(prodID, fecha);
-            if (productosFecha.size() == 0){
+            if (productosFecha.size() == 0) {
                 throw new ColeccionVacia("Arreglo vacio");
             }
             tablaFechaEspecifica.getItems().addAll(productosFecha);
             AlertUtils.alertConfirmation("Pedidos obtenidos", "Se obtenieron los pedidos satisfactoriamente", "Presiona Aceptar para continuar");
-        }catch (ColeccionVacia e){
+        } catch (ColeccionVacia e) {
             AlertUtils.alertError("Error", "No se pueden obtener los pedidos", "No existen pedidos con este producto en esta fecha");
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             AlertUtils.alertError("Error", "No se pueden obtener los pedidos", "Revise la fecha que ingresó e inténtelo de nuevo");
         }
