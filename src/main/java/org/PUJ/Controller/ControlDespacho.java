@@ -87,7 +87,7 @@ public class  ControlDespacho {
         boolean hayPedido = false;
         ArrayList<Pedido> pedidosProductoFecha = new ArrayList<>();
         for (Pedido auxPedido : pedidos) {
-            if (auxPedido.getProductoSolicitado().getProdId().equals(idProd2) && ((fecha.before(auxPedido.getFechaRecibido()))||(fecha.compareTo(auxPedido.getFechaRecibido())==0))){
+            if (auxPedido.getNumeroPedido().equals(idProd2) && (auxPedido.getFechaRecibido().compareTo(fecha)==0)){
                 pedidosProductoFecha.add(auxPedido);
                 hayPedido = true;
             }

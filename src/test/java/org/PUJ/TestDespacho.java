@@ -7,11 +7,13 @@ import org.PUJ.utils.Exceptions.Fechaerror;
 import org.PUJ.utils.Exceptions.PedidoFechaIgual;
 import org.junit.Test;
 
+import javax.swing.*;
 import java.util.*;
 
 import static org.junit.Assert.*;
 
 public class TestDespacho {
+
     private ControlDespacho control = new ControlDespacho();
     // 5 Clientes
     private Cliente cliente1 = new Cliente(1000077617L, "Nicolas David", 316009L, "BG 6447");
@@ -42,7 +44,26 @@ public class TestDespacho {
     private Pedido pedido6 = new Pedido(Calendar.getInstance(), "Sara", cliente4, productoAseo3);
 
     //pantalla.getCentralDespacho().
-
+    public void iniciar() {
+    Calendar fecha1 = Calendar.getInstance();
+    fecha1.set(2021,Calendar.JUNE,5);
+    pedido1.setFechaRecibido(fecha1);
+    Calendar fecha2 = Calendar.getInstance();
+    fecha2.set(2021,Calendar.JUNE,6);
+    pedido2.setFechaRecibido(fecha2);
+    Calendar fecha3 = Calendar.getInstance();
+    fecha3.set(2021,Calendar.JUNE,7);
+    pedido3.setFechaRecibido(fecha3);
+    Calendar fecha4 = Calendar.getInstance();
+    fecha4.set(2021,Calendar.JUNE,8);
+    pedido4.setFechaRecibido(fecha4);
+    Calendar fecha5 = Calendar.getInstance();
+    fecha5.set(2021,Calendar.JUNE,9);
+    pedido5.setFechaRecibido(fecha5);
+    Calendar fecha6 = Calendar.getInstance();
+    fecha6.set(2021,Calendar.JUNE,10);
+    pedido6.setFechaRecibido(fecha6);
+    }
 
     @Test
     public void TestInsertarcliente() {
@@ -75,7 +96,7 @@ public class TestDespacho {
 
 
     @Test
-    public void TestEliminarProducto() {
+    public void TestEliminarCliente() {
         control.getGestionCliente().InsertarCliente(cliente3.getCedula(), cliente3.getNombreCompleto(), cliente3.getTelefonoContacto(), cliente3.getDireccion());
         control.getGestionCliente().InsertarCliente(cliente4.getCedula(), cliente4.getNombreCompleto(), cliente4.getTelefonoContacto(), cliente4.getDireccion());
         control.getGestionCliente().EliminarCliente(cliente3.getCedula());
@@ -83,7 +104,6 @@ public class TestDespacho {
         assertNotEquals(2, control.getGestionCliente().getListaClientes().size());
         control.getGestionCliente().EliminarCliente(cliente1.getCedula());
         assertEquals(1, control.getGestionCliente().getListaClientes().size());
-
     }
 
     @Test
@@ -113,6 +133,7 @@ public class TestDespacho {
 
     @Test
     public void testValidarProducto() {
+        iniciar();
         control.getGestionProductos().insertarProducto(producto1);
         assertFalse(control.ValidarProducto(producto1.getProdId()));
         try {
@@ -120,7 +141,7 @@ public class TestDespacho {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertFalse(control.ValidarProducto(producto1.getProdId()));
+        assertTrue(control.ValidarProducto(producto1.getProdId()));
     }
 
     @Test
@@ -129,7 +150,7 @@ public class TestDespacho {
         ArrayList<ServicioAdicional> servicioAdicional1 = new ArrayList<>();
         ArrayList<ServicioAdicional> servicioAdicional2 = new ArrayList<>();
         ArrayList<ServicioAdicional> servicioAdicional3 = new ArrayList<>();
-
+        iniciar();
         try {
             control.ReservarPedido(pedido1, pedido1.getServiciosAdicionales());
         } catch (Exception e) {
@@ -141,13 +162,14 @@ public class TestDespacho {
             e.printStackTrace();
         }
 
-        assertNotEquals(2, control.getPedidos().size());
+        assertEquals(2, control.getPedidos().size());
         servicioAdicional1.add(new BonoRegalo("Servicio adicional 1", 3500d, "Justo y bueno", "Mensaje", Calendar.getInstance()));
         pedido2.setServiciosAdicionales(servicioAdicional1);
         servicioAdicional2.add(new EnvioPrime("Envio prime", 60000d, 5d, TipoTransporte.MOTO, 3));
         pedido6.setServiciosAdicionales(servicioAdicional2);
         servicioAdicional3.add(new EnvioPrime("Servicio envio", 6000d, 6d, TipoTransporte.MOTO, 4));
         pedido4.setServiciosAdicionales(servicioAdicional3);
+
         try {
             control.ReservarPedido(pedido6, pedido6.getServiciosAdicionales());
         } catch (Exception e) {
@@ -158,7 +180,7 @@ public class TestDespacho {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertNotEquals(4, control.getPedidos().size());
+        assertEquals(4, control.getPedidos().size());
         assertNotEquals(1, control.getPedidos().size());
         try {
             control.ReservarPedido(pedido4, pedido4.getServiciosAdicionales());
@@ -174,33 +196,15 @@ public class TestDespacho {
 
     @Test
     public void testExistePedido() {
-        Calendar fecha = Calendar.getInstance();
-        fecha.set(2021, Calendar.JUNE, 4);
-        pedido1.setFechaRecibido(fecha);
-        fecha.set(2021,Calendar.JUNE,5);
-        pedido3.setFechaRecibido(fecha);
-        fecha.set(2021,Calendar.JUNE,6);
-        pedido5.setFechaRecibido(fecha);
+        iniciar();
         try {
             control.ReservarPedido(pedido1, pedido1.getServiciosAdicionales());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
             control.ReservarPedido(pedido3, pedido3.getServiciosAdicionales());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
             control.ReservarPedido(pedido5, pedido5.getServiciosAdicionales());
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         assertEquals(pedido1, control.ExistePedido(pedido1.getNumeroPedido()));
-
-
         assertEquals(pedido3, control.ExistePedido(pedido3.getNumeroPedido()));
         assertNull(control.ExistePedido(pedido6.getNumeroPedido()));
         assertEquals(pedido1, control.ExistePedido(cliente2, producto1, pedido1.getFechaRecibido()));
@@ -225,17 +229,10 @@ public class TestDespacho {
 
     @Test
     public void testEliminarPedido() {
+        iniciar();
         try {
             control.ReservarPedido(pedido1, pedido1.getServiciosAdicionales());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
             control.ReservarPedido(pedido2, pedido2.getServiciosAdicionales());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
             control.ReservarPedido(pedido3, pedido3.getServiciosAdicionales());
         } catch (Exception e) {
             e.printStackTrace();
@@ -243,14 +240,14 @@ public class TestDespacho {
 
         control.EliminarPedido(pedido1.getNumeroPedido());
         control.EliminarPedido(pedido3.getNumeroPedido());
-/*
+
         assertEquals(1, control.getPedidos().size());
         assertFalse(control.getPedidos().contains(pedido1));
         assertFalse(control.getPedidos().contains(pedido3));
         assertTrue(control.getPedidos().contains(pedido2));
         control.EliminarPedido(pedido4.getNumeroPedido());
         assertEquals(1, control.getPedidos().size());
-*/
+
     }
 
     @Test
@@ -265,6 +262,7 @@ public class TestDespacho {
 
     @Test
     public void testVerListadoPedidosFechaEspecifica() {
+        iniciar();
         try {
             control.ReservarPedido(pedido2, pedido2.getServiciosAdicionales());
             control.ReservarPedido(pedido4, pedido4.getServiciosAdicionales());
@@ -273,8 +271,8 @@ public class TestDespacho {
             e.printStackTrace();
         }
 
-        //assertFalse(control.verListadoDePedidosDeProductoYFechaEspecífica(pedido4.getNumeroPedido(), pedido4.getFechaRecibido()));
-        //assertTrue(control.verListadoDePedidosDeProductoYFechaEspecífica(pedido6.getNumeroPedido(), pedido4.getFechaRecibido()));
+        assertEquals(1, control.verListadoDePedidosDeProductoYFechaEspecífica(pedido4.getNumeroPedido(), pedido4.getFechaRecibido()).size());
+        assertNull(control.verListadoDePedidosDeProductoYFechaEspecífica(pedido4.getNumeroPedido(), pedido2.getFechaRecibido()));
 
     }
 
@@ -294,19 +292,23 @@ public class TestDespacho {
 
     @Test
     public void verPedidosAsociadosAseo() {
+        iniciar();
         try {
-            control.ReservarPedido(pedido1,pedido1.getServiciosAdicionales());
-            control.ReservarPedido(pedido2,pedido2.getServiciosAdicionales());
-            control.ReservarPedido(pedido6,pedido6.getServiciosAdicionales());
-            control.ReservarPedido(pedido4,pedido4.getServiciosAdicionales());
+            control.ReservarPedido(pedido1, pedido1.getServiciosAdicionales());
+            control.ReservarPedido(pedido2, pedido2.getServiciosAdicionales());
+            control.ReservarPedido(pedido6, pedido6.getServiciosAdicionales());
+            control.ReservarPedido(pedido4, pedido4.getServiciosAdicionales());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         ArrayList<Pedido> resultadoEsperado = new ArrayList<>();
         resultadoEsperado.add(pedido6);
+        assertEquals(resultadoEsperado,control.PedidosDeAseoPorTipo(TipoProducto.INDUSTRIAL));
+        assertNotEquals(resultadoEsperado,control.PedidosDeAseoPorTipo(TipoProducto.HOGAR));
+        resultadoEsperado.remove(pedido6);
         resultadoEsperado.add(pedido4);
-
+        assertEquals(resultadoEsperado,control.PedidosDeAseoPorTipo(TipoProducto.HOGAR));
 
     }
 
