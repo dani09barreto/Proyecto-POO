@@ -303,6 +303,7 @@ public class ControllerFX implements Initializable {
             entrada_cedula_clientes.setText("");
             entrada_tel_clientes.setText("");
             entrada_dir_clientes.setText("");
+            Ver_mod_clientes.setDisable(false);
         } catch (Exception e) {
             e.printStackTrace();
             AlertUtils.alertError("ERROR", "El cliente no ha sido agregado", "Intentalo nuevamente");
@@ -321,6 +322,17 @@ public class ControllerFX implements Initializable {
                     this.controlDespacho.getGestionCliente().EliminarCliente(Lista_eliminar_clientes.getSelectionModel().getSelectedItem());
                     AlertUtils.alertInformation("Eliminar Cliente", "El cliente se ha Eliminado correctamente", "");
                 }
+            }
+            if (this.controlDespacho.getGestionCliente().getListaClientes().isEmpty()) {
+                Entrada_Mod_nombre_cliente.setText("");
+                Entrada_Mod_telefono_cliente.setText("");
+                Entrada_Mod_dir_cliente.setText("");
+                Selecion_clientes.setDisable(true);
+                Entrada_Mod_dir_cliente.setDisable(true);
+                Entrada_Mod_nombre_cliente.setDisable(true);
+                Entrada_Mod_telefono_cliente.setDisable(true);
+                boton_modi_clientes.setDisable(true);
+                Ver_mod_clientes.setDisable(true);
             }
 
         } catch (ClienteAsociadoAPedido e) {
