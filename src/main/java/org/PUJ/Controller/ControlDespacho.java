@@ -36,6 +36,7 @@ public class  ControlDespacho {
 
     public Pedido ExistePedido(UUID id) {
         for (Pedido pedidotemp : this.pedidos) {
+            System.out.println(id+pedidotemp.getNumeroPedido().toString());
             if (pedidotemp.getNumeroPedido().equals(id)) {
                 return pedidotemp;
             }
@@ -43,10 +44,9 @@ public class  ControlDespacho {
         return null;
     }
 
-    public Pedido ReservarPedido(Producto producto, Cliente cliente, Calendar fecha, String repartidor, ArrayList<ServicioAdicional> servicios) throws Fechaerror, PedidoFechaIgual, FechaMenor {
-        Pedido nuevopedido = new Pedido(fecha, repartidor, cliente, producto);
+    public Pedido ReservarPedido(Pedido nuevopedido, ArrayList<ServicioAdicional> servicios) throws Fechaerror, PedidoFechaIgual, FechaMenor {
         nuevopedido.setServiciosAdicionales(servicios);
-
+        Calendar fecha = nuevopedido.getFechaRecibido();
         //resta de la fecha actual con la fecha de despacho
         Calendar fechanow = Calendar.getInstance();
         long finMs = fechanow.getTimeInMillis();
@@ -59,7 +59,7 @@ public class  ControlDespacho {
         if (dias < 2){
             throw new Fechaerror("fecha error");
         }
-        if (ExistePedido(cliente, producto, fecha) != null){
+        if (ExistePedido(nuevopedido.getSolicitante(), nuevopedido.getProductoSolicitado(), fecha) != null){
             throw new PedidoFechaIgual("Fecha igual");
         }
         for (ServicioAdicional serv: nuevopedido.getServiciosAdicionales()){

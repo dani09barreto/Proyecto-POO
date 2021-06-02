@@ -462,7 +462,8 @@ public class ControllerFX implements Initializable {
             Calendar fecha = Calendar.getInstance();
             fecha.setTime(date);
             String repartidor = nameReparidor.getText();
-            Pedido nuevopedido = controlDespacho.ReservarPedido(producto, cliente, fecha, repartidor, new ArrayList<ServicioAdicional>(this.servicios));
+            Pedido nuevopedido = new Pedido(fecha,repartidor,cliente,producto);
+            controlDespacho.ReservarPedido(nuevopedido, new ArrayList<ServicioAdicional>(this.servicios));
             long costoPedido = 0;
             long PrecioSA = 0;
             long ivaAdicional = 0;
