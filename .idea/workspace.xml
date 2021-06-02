@@ -68,7 +68,20 @@
       <recent name="org.PUJ.Model" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TestDespacho.testValidarCliente">
+  <component name="RunManager" selected="Application.Launcher">
+    <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.PUJ.View.Launcher" />
+      <module name="Proyecto-POO" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.PUJ.View.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TestDespacho" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Proyecto-POO" />
       <extension name="coverage">
@@ -132,29 +145,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestDespacho.verPedidosAsociadosAseo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Proyecto-POO" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.PUJ.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.PUJ" />
-      <option name="MAIN_CLASS_NAME" value="org.PUJ.TestDespacho" />
-      <option name="METHOD_NAME" value="verPedidosAsociadosAseo" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Launcher" />
         <item itemvalue="JUnit.TestDespacho.testValidarCliente" />
         <item itemvalue="JUnit.TestDespacho.TestEliminarCliente" />
         <item itemvalue="JUnit.TestDespacho.testExisteCliente" />
         <item itemvalue="JUnit.TestDespacho" />
-        <item itemvalue="JUnit.TestDespacho.verPedidosAsociadosAseo" />
       </list>
     </recent_temporary>
   </component>

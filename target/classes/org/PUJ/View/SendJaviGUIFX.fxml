@@ -156,7 +156,7 @@
                                                       <TextField fx:id="Entrada_Mod_nombre_cliente" disable="true" layoutX="72.0" layoutY="232.0" promptText="Nombre Completo" style="-fx-background-radius: 20;" />
                                                       <TextField fx:id="Entrada_Mod_telefono_cliente" disable="true" layoutX="73.0" layoutY="267.0" promptText="Telefono" style="-fx-background-radius: 20;" />
                                                       <TextField fx:id="Entrada_Mod_dir_cliente" disable="true" layoutX="72.0" layoutY="303.0" promptText="Dirección" style="-fx-background-radius: 20;" />
-                                                      <CheckBox fx:id="Ver_mod_clientes" layoutX="97.0" layoutY="361.0" mnemonicParsing="false" onAction="#VerModificar" text="¿Modificar?">
+                                                      <CheckBox fx:id="Ver_mod_clientes" disable="true" layoutX="97.0" layoutY="361.0" mnemonicParsing="false" onAction="#VerModificar" text="¿Modificar?">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
