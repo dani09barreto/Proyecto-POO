@@ -45,24 +45,24 @@ public class TestDespacho {
 
     //pantalla.getCentralDespacho().
     public void iniciar() {
-    Calendar fecha1 = Calendar.getInstance();
-    fecha1.set(2021,Calendar.JUNE,5);
-    pedido1.setFechaRecibido(fecha1);
-    Calendar fecha2 = Calendar.getInstance();
-    fecha2.set(2021,Calendar.JUNE,6);
-    pedido2.setFechaRecibido(fecha2);
-    Calendar fecha3 = Calendar.getInstance();
-    fecha3.set(2021,Calendar.JUNE,7);
-    pedido3.setFechaRecibido(fecha3);
-    Calendar fecha4 = Calendar.getInstance();
-    fecha4.set(2021,Calendar.JUNE,8);
-    pedido4.setFechaRecibido(fecha4);
-    Calendar fecha5 = Calendar.getInstance();
-    fecha5.set(2021,Calendar.JUNE,9);
-    pedido5.setFechaRecibido(fecha5);
-    Calendar fecha6 = Calendar.getInstance();
-    fecha6.set(2021,Calendar.JUNE,10);
-    pedido6.setFechaRecibido(fecha6);
+        Calendar fecha1 = Calendar.getInstance();
+        fecha1.set(2021,Calendar.JUNE,5);
+        pedido1.setFechaRecibido(fecha1);
+        Calendar fecha2 = Calendar.getInstance();
+        fecha2.set(2021,Calendar.JUNE,6);
+        pedido2.setFechaRecibido(fecha2);
+        Calendar fecha3 = Calendar.getInstance();
+        fecha3.set(2021,Calendar.JUNE,7);
+        pedido3.setFechaRecibido(fecha3);
+        Calendar fecha4 = Calendar.getInstance();
+        fecha4.set(2021,Calendar.JUNE,8);
+        pedido4.setFechaRecibido(fecha4);
+        Calendar fecha5 = Calendar.getInstance();
+        fecha5.set(2021,Calendar.JUNE,9);
+        pedido5.setFechaRecibido(fecha5);
+        Calendar fecha6 = Calendar.getInstance();
+        fecha6.set(2021,Calendar.JUNE,10);
+        pedido6.setFechaRecibido(fecha6);
     }
 
     @Test
@@ -81,17 +81,19 @@ public class TestDespacho {
         control.getGestionCliente().InsertarCliente(cliente1.getCedula(), cliente1.getNombreCompleto(), cliente1.getTelefonoContacto(), cliente1.getDireccion());
         assertFalse(control.validarCliente(cliente1.getCedula()));
         try {
+            iniciar();
             control.ReservarPedido(pedido2, pedido2.getServiciosAdicionales());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertFalse(control.validarCliente(cliente1.getCedula()));
+        assertTrue(control.validarCliente(cliente1.getCedula()));
     }
 
     @Test
     public void testExisteCliente() {
         control.getGestionCliente().InsertarCliente(cliente1.getCedula(), cliente1.getNombreCompleto(), cliente1.getTelefonoContacto(), cliente1.getDireccion());
         assertEquals(cliente1, control.getGestionCliente().existeCliente(cliente1.getCedula()));
+        assertNull(control.getGestionCliente().existeCliente(cliente2.getCedula()));
     }
 
 
@@ -313,11 +315,7 @@ public class TestDespacho {
     }
 
     /*
-            Los métodos que no fueron testeados (como los de modificarPedido y modificarCliente)
-            fueron porque tienen scanners y esto hace fallar los test. Al igual que aquellos
-            métodos que únicamente imprimen o hacen llamados a toString de algunos objetos.
-
-            Igualmente, cada @Test tiene su prueba exitosa y su prueba no exitosa.
+            Cada @Test tiene su prueba exitosa y su prueba no exitosa.
             -> Por no exitosa comprendimos el testeo mediante assertFalse, assertNotEquals
             o similares.
      */
