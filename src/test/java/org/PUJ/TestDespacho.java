@@ -278,41 +278,6 @@ public class TestDespacho {
 
     }
 
-    @Test
-    public void testVerProductosTipoFruver() {
-        control.getGestionProductos().insertarProducto(productoFruver1);
-        control.getGestionProductos().insertarProducto(productoFruver2);
-        control.getGestionProductos().insertarProducto(producto1);
-        control.getGestionProductos().insertarProducto(producto3);
-
-        Map<UUID, Producto> resultadoEsperado = new HashMap<>();
-        resultadoEsperado.put(productoFruver1.getProdId(), productoFruver1);
-        resultadoEsperado.put(productoFruver2.getProdId(), productoFruver2);
-
-        assertEquals(resultadoEsperado, control.verProductosTipoFruver());
-    }
-
-    @Test
-    public void verPedidosAsociadosAseo() {
-        iniciar();
-        try {
-            control.ReservarPedido(pedido1, pedido1.getServiciosAdicionales());
-            control.ReservarPedido(pedido2, pedido2.getServiciosAdicionales());
-            control.ReservarPedido(pedido6, pedido6.getServiciosAdicionales());
-            control.ReservarPedido(pedido4, pedido4.getServiciosAdicionales());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        ArrayList<Pedido> resultadoEsperado = new ArrayList<>();
-        resultadoEsperado.add(pedido6);
-        assertEquals(resultadoEsperado,control.PedidosDeAseoPorTipo(TipoProducto.INDUSTRIAL));
-        assertNotEquals(resultadoEsperado,control.PedidosDeAseoPorTipo(TipoProducto.HOGAR));
-        resultadoEsperado.remove(pedido6);
-        resultadoEsperado.add(pedido4);
-        assertEquals(resultadoEsperado,control.PedidosDeAseoPorTipo(TipoProducto.HOGAR));
-
-    }
 
     /*
             Cada @Test tiene su prueba exitosa y su prueba no exitosa.

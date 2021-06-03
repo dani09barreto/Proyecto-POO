@@ -1,5 +1,9 @@
 package org.PUJ.Controller;
 
+import org.PUJ.Controller.Reportes.EnvioTipoTransporte;
+import org.PUJ.Controller.Reportes.ProductoAseoTipo;
+import org.PUJ.Controller.Reportes.ProductoFruver;
+import org.PUJ.Controller.Reportes.RangoFecha;
 import org.PUJ.Model.*;
 import org.PUJ.utils.Exceptions.FechaMenor;
 import org.PUJ.utils.Exceptions.Fechaerror;
@@ -13,6 +17,13 @@ public class  ControlDespacho {
     private ArrayList<Pedido> pedidos = new ArrayList<>();
     private GestionCliente gestionCliente = new GestionCliente();
 
+    //------Enlace a clases de los reportes-----//
+    private EnvioTipoTransporte reporteEnvioTipo = new EnvioTipoTransporte();
+    private ProductoAseoTipo reporteAseoTipo = new ProductoAseoTipo();
+    private ProductoFruver reporteFruver = new ProductoFruver();
+    private RangoFecha reporteRangoFecha = new RangoFecha();
+
+
     public ArrayList<Pedido> getPedidos() {
         return pedidos;
     }
@@ -23,6 +34,22 @@ public class  ControlDespacho {
 
     public GestionProductos getGestionProductos() {
         return gestionProductos;
+    }
+
+    public EnvioTipoTransporte getReporteEnvioTipo() {
+        return reporteEnvioTipo;
+    }
+
+    public ProductoAseoTipo getReporteAseoTipo() {
+        return reporteAseoTipo;
+    }
+
+    public ProductoFruver getReporteFruver() {
+        return reporteFruver;
+    }
+
+    public RangoFecha getReporteRangoFecha() {
+        return reporteRangoFecha;
     }
 
     public Pedido ExistePedido(Cliente cliente, Producto producto, Calendar fecha) {
@@ -72,7 +99,7 @@ public class  ControlDespacho {
         pedidos.add(nuevopedido);
         return nuevopedido;
     }
-    
+
     public boolean EliminarPedido(UUID eliminar) {
         for (Pedido p : pedidos) {
             if (p.getNumeroPedido().equals(eliminar)) {
@@ -100,19 +127,6 @@ public class  ControlDespacho {
         return pedidosProductoFecha;
     }
 
-
-    public ArrayList<Pedido> PedidosDeAseoPorTipo (TipoProducto tipoABuscar) {
-        ArrayList <Pedido> pedidosAsociados = new ArrayList<>();
-        for (Pedido pedtemp : this.pedidos) {
-            if (pedtemp.getProductoSolicitado() instanceof Aseo) {
-                if (((Aseo) pedtemp.getProductoSolicitado()).getTipo() == tipoABuscar) {
-                    pedidosAsociados.add(pedtemp);
-                }
-            }
-        }
-        return pedidosAsociados;
-    }
-
     public boolean validarCliente(Long ced) {
         for (Pedido p : this.pedidos) {
             if (p.getSolicitante().getCedula().equals(ced))
@@ -129,18 +143,25 @@ public class  ControlDespacho {
         return false;
     }
 
-    public Map<UUID, Producto> verProductosTipoFruver() {
-        Map<UUID, Producto> productosFruver = new HashMap<>();
+    public void verProductosTipoFruver() {
         for (Producto prod : this.getGestionProductos().getListaProductos().values()) {
             if (prod instanceof Fruver) {
-                productosFruver.put(prod.getProdId(), prod);
+                this.reporteFruver.getProductosFruver().put(prod.getProdId(), prod);
             }
         }
-        return productosFruver;
     }
 
-    public ArrayList<Pedido> pedidoEnRangoDeFechas (Calendar fechaInicio, Calendar fechaFinal){
-        ArrayList<Pedido> pedidos = new ArrayList<>();
+    public void PedidosDeAseoPorTipo (TipoProducto tipoABuscar) {
+        for (Pedido pedtemp : this.pedidos) {
+            if (pedtemp.getProductoSolicitado() instanceof Aseo) {
+                if (((Aseo) pedtemp.getProductoSolicitado()).getTipo() == tipoABuscar) {
+                    this.reporteAseoTipo.getPedidosProductosAseo().add(pedtemp);
+                }
+            }
+        }
+    }
+
+    public void pedidoEnRangoDeFechas (Calendar fechaInicio, Calendar fechaFinal){
         ArrayList <Calendar> fechas = new ArrayList<>();
 
         // diferencia de dias entre las dos fechas//
@@ -159,24 +180,22 @@ public class  ControlDespacho {
         for (Pedido pedido : this.pedidos){
             for (Calendar fechtemp : fechas){
                 if (pedido.getFechaRecibido().equals(fechtemp)){
-                    pedidos.add(pedido);
+                    this.reporteRangoFecha.getPedidos().add(pedido);
                 }
             }
         }
-        return pedidos;
     }
-    public ArrayList <ServicioAdicional> enviosPrimePorTipo (TipoTransporte tipobuscar){
+    public void enviosPrimePorTipo (TipoTransporte tipobuscar){
         ArrayList <ServicioAdicional> listtemp = new ArrayList<>();
 
         for (Pedido pedido : this.pedidos){
             for (ServicioAdicional servtemp : pedido.getServiciosAdicionales()){
                 if (servtemp instanceof EnvioPrime){
                     if (((EnvioPrime) servtemp).getTipo() == tipobuscar){
-                        listtemp.add(servtemp);
+                        this.reporteEnvioTipo.getServciosEnvios().add(servtemp);
                     }
                 }
             }
         }
-        return listtemp;
     }
 }
