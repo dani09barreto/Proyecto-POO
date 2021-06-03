@@ -294,33 +294,32 @@ public class ControllerFX implements Initializable {
     //---------Funciones Clientes----------//
     @FXML
     void Agregar_cliente_accion(ActionEvent event) throws ClienteAsociadoAPedido {
-
         try {
             Cliente temp = new Cliente(Long.valueOf(entrada_cedula_clientes.getText()), Entrada_Nombre_clientes.getText(), Long.valueOf(entrada_tel_clientes.getText()), entrada_dir_clientes.getText());
             this.controlDespacho.getGestionCliente().InsertarCliente(temp.getCedula(), temp.getNombreCompleto(), temp.getTelefonoContacto(), temp.getDireccion());
-            AlertUtils.alertInformation("Agregar Cliente", "El cliente se ha agregado correctamente", "Hay: " + controlDespacho.getGestionCliente().getListaClientes().size() + " Clientes en el sistema");
+            AlertUtils.alertInformation("Agregar cliente", "El cliente se ha agregado correctamente", "Hay: " + controlDespacho.getGestionCliente().getListaClientes().size() + " clientes en el sistema.");
+            Ver_mod_clientes.setDisable(false);
             Entrada_Nombre_clientes.setText("");
             entrada_cedula_clientes.setText("");
             entrada_tel_clientes.setText("");
             entrada_dir_clientes.setText("");
-            Ver_mod_clientes.setDisable(false);
         } catch (Exception e) {
             e.printStackTrace();
-            AlertUtils.alertError("ERROR", "El cliente no ha sido agregado", "Intentalo nuevamente");
+            AlertUtils.alertError("ERROR", "El cliente no ha sido agregado", "Inténtalo nuevamente");
         }
         renderWindowCliente();
     }
 
     @FXML
     void Eliminar_Cliente_accion(ActionEvent event) {
-        Optional<ButtonType> opcion = AlertUtils.alertConfirmation(" Eliminar Cliente", "Se eliminara el cliente con cedula:  " + Lista_eliminar_clientes.getSelectionModel().getSelectedItem().toString(), "¿Esta seguro?");
+        Optional<ButtonType> opcion = AlertUtils.alertConfirmation("Eliminar cliente", "Se eliminará el cliente con cedula:  " + Lista_eliminar_clientes.getSelectionModel().getSelectedItem().toString(), "¿Está seguro?");
         try {
             if (opcion.get().equals(ButtonType.OK)) {
                 if (controlDespacho.validarCliente(Lista_eliminar_clientes.getSelectionModel().getSelectedItem())) {
-                    throw new ClienteAsociadoAPedido("cliente asociado a un pedido");
+                    throw new ClienteAsociadoAPedido("Cliente asociado a un pedido");
                 } else {
                     this.controlDespacho.getGestionCliente().EliminarCliente(Lista_eliminar_clientes.getSelectionModel().getSelectedItem());
-                    AlertUtils.alertInformation("Eliminar Cliente", "El cliente se ha Eliminado correctamente", "");
+                    AlertUtils.alertInformation("Eliminar cliente", "El cliente se ha eliminado correctamente", "");
                 }
             }
             if (this.controlDespacho.getGestionCliente().getListaClientes().isEmpty()) {
@@ -337,10 +336,10 @@ public class ControllerFX implements Initializable {
 
         } catch (ClienteAsociadoAPedido e) {
             e.printStackTrace();
-            AlertUtils.alertError("Eliminar Cliente", "El cliente no pudo ser eliminado ya que esta asociado a un pedido", "Elimine el Pedido para eliminar el cliente");
+            AlertUtils.alertError("Eliminar cliente", "El cliente no pudo ser eliminado ya que está asociado a un pedido", "Primero eliminé el pedido para eliminar el cliente");
         } catch (Exception e) {
             e.printStackTrace();
-            AlertUtils.alertError("ERROR", "El cliente no ha sido eliminado", "Intentalo nuevamente");
+            AlertUtils.alertError("ERROR", "El cliente no ha sido eliminado", "Inténtalo nuevamente");
         }
         renderWindowCliente();
     }
@@ -373,7 +372,7 @@ public class ControllerFX implements Initializable {
 
     @FXML
     void ModificarCliente(ActionEvent event) {
-        Optional<ButtonType> opcion = AlertUtils.alertConfirmation("Modificar Cliente", "Se modificará el cliente de cédula: " + Selecion_clientes.getValue().toString(), "¿Esta seguro?");
+        Optional<ButtonType> opcion = AlertUtils.alertConfirmation("Modificar cliente", "Se modificará el cliente de cédula: " + Selecion_clientes.getValue().toString(), "¿Está seguro?");
         try {
             if (opcion.get().equals(ButtonType.OK)) {
                 Long cedulaMod = Selecion_clientes.getValue();
@@ -385,13 +384,13 @@ public class ControllerFX implements Initializable {
                     }
                 }
             }
-            AlertUtils.alertInformation("Modificar Cliente", "El cliente se ha modificado correctamente", "");
+            AlertUtils.alertInformation("Modificar cliente", "El cliente se ha modificado correctamente", "");
             Entrada_Mod_nombre_cliente.setText("");
             Entrada_Mod_telefono_cliente.setText("");
             Entrada_Mod_dir_cliente.setText("");
         } catch (Exception e) {
             e.printStackTrace();
-            AlertUtils.alertError("ERROR", "El cliente no se ha Modificado", "Intentalo nuevamente");
+            AlertUtils.alertError("ERROR", "El cliente no se ha modificado", "Inténtalo nuevamente");
         }
 
         renderWindowCliente();
@@ -467,14 +466,13 @@ public class ControllerFX implements Initializable {
     void AgregarPedido(ActionEvent event) {
         try {
             Cliente cliente = controlDespacho.getGestionCliente().existeCliente(Long.valueOf(clientesList.getSelectionModel().getSelectedItem()));
-            Producto producto = controlDespacho.getGestionProductos().existeProducto(productosList.getSelectionModel().getSelectedItem());
+            Producto producto = controlDespacho.getGestionProductos().getListaProductos().get(productosList.getSelectionModel().getSelectedItem());
             ZoneId defaultZoneId = ZoneId.systemDefault();
             LocalDate localDate = fechaEntrega.getValue();
             Date date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
             Calendar fecha = Calendar.getInstance();
             fecha.setTime(date);
-            String repartidor = nameReparidor.getText();
-            Pedido nuevopedido = new Pedido(fecha,repartidor,cliente,producto);
+            Pedido nuevopedido = new Pedido(fecha, nameReparidor.getText(), cliente, producto);
             controlDespacho.ReservarPedido(nuevopedido, new ArrayList<ServicioAdicional>(this.servicios));
             long costoPedido = 0;
             long PrecioSA = 0;
@@ -484,36 +482,34 @@ public class ControllerFX implements Initializable {
                 costoPedido += servtemp.calcularPrecio();
             }
             costoPedido += costoPedido * 0.10;
-
             if (nuevopedido.getProductoSolicitado().getIva() > 50000d) {
                 costoPedido += 8000;
             }
             nuevopedido.setPagado(true);
-            for (ServicioAdicional sev: nuevopedido.getServiciosAdicionales()){
+            for (ServicioAdicional sev : nuevopedido.getServiciosAdicionales()) {
                 PrecioSA += sev.calcularPrecio();
             }
             if (nuevopedido.getProductoSolicitado().getIva() > 50000d) {
                 ivaAdicional = 8000;
             }
-            AlertUtils.alertInformation("Informacion Pedido",
-                    "Precio Producto: $" + nuevopedido.getProductoSolicitado().calcularPrecio()+"\n"+
-                            "Precio Iva producto: $"+ nuevopedido.getProductoSolicitado().getIva()+"\n"+
-                            "Precio Servicios Adicionales: $"+ PrecioSA +"\n"+
-                            "Precio Iva Adicional: $"+ ivaAdicional+"\n"+
-                            "Costo Despacho: $"+costoPedido*0.10+"\n"+
-                            "Costo Total: $"+ (costoPedido + costoPedido*0.10), "Pedido Almacenado");
+            AlertUtils.alertInformation("Información del pedido",
+                    "Precio producto: $" + nuevopedido.getProductoSolicitado().calcularPrecio() + "\n" +
+                            "Precio IVA producto: $" + nuevopedido.getProductoSolicitado().getIva() + "\n" +
+                            "Precio servicios adicionales: $" + PrecioSA + "\n" +
+                            "Precio IVA adicional: $" + ivaAdicional + "\n" +
+                            "Costo del despacho: $" + costoPedido * 0.10 + "\n" +
+                            "Costo total: $" + (costoPedido + costoPedido * 0.10), "Pedido almacenado");
             fechaEntrega.setValue(LocalDate.now());
             nameReparidor.setText("");
             this.servicios.clear();
-        }catch (FechaMenor e){
-            AlertUtils.alertError("Error Fecha", "La fecha no es valida ya que es menor a la fecha de hoy", "Intentalo nuevamente");
-        }
-        catch (Fechaerror e) {
+        } catch (FechaMenor e) {
+            AlertUtils.alertError("Error en la fecha", "La fecha no es válida, ya que es menor a la fecha de hoy", "Inténtalo nuevamente");
+        } catch (Fechaerror e) {
             e.getMessage();
-            AlertUtils.alertError("Error Fecha", "La fecha digitada no es mayor a dos dias", "Intentalo nuevamente");
+            AlertUtils.alertError("Error en la fecha", "La fecha ingresada no es mayor a dos dias", "Inténtalo nuevamente");
         } catch (PedidoFechaIgual ex) {
             ex.printStackTrace();
-            AlertUtils.alertError("Error Fecha", "La fecha ya pertenece a un pedido con mismo producto y cliente", "Intentalo nuevamente");
+            AlertUtils.alertError("Error en la fecha", "La fecha ya pertenece a un pedido con un mismo producto y cliente", "Inténtalo nuevamente");
         } catch (Exception ex) {
             ex.printStackTrace();
             AlertUtils.alertError("ERROR", "No se pudo agregar el pedido", "Por favor, intente de nuevo");
@@ -533,7 +529,7 @@ public class ControllerFX implements Initializable {
                 ServicioAdicional servtemp = new BonoRegalo("Bono Regalo", Double.valueOf(precioBono.getText()), comercioBono.getText(), mensajeBono.getText(), Calendar.getInstance());
                 this.servicios.add(servtemp);
             }
-            AlertUtils.alertConfirmation("Servicio Adicional añadido", "Su servicio adicional a sido añadido", "Har: " + servicios.size() + " Servicios Adicionales");
+            AlertUtils.alertConfirmation("Servicio adicional añadido", "Su servicio adicional ha sido añadido", "Hay: " + servicios.size() + " servicios adicionales");
             precioEnvio.setText("");
             distanciaEnvio.setText("");
             comercioBono.setText("");
@@ -541,23 +537,23 @@ public class ControllerFX implements Initializable {
             mensajeBono.setText("");
         } catch (Exception ex) {
             ex.printStackTrace();
-            AlertUtils.alertError("ERROR", "No se pudo agregar el Servicio Adicional", "Por favor, intente de nuevo");
+            AlertUtils.alertError("ERROR", "No se pudo agregar el servicio adicional", "Por favor, intente de nuevo");
         }
     }
 
     @FXML
     void eliminarPedido(ActionEvent event) {
         try {
-            Optional<ButtonType> opcion = AlertUtils.alertConfirmation("Eliminar Pedido", "Se eliminara el pedido seleccionado", "¿Esta seguro?");
+            Optional<ButtonType> opcion = AlertUtils.alertConfirmation("Eliminar pedido", "Se eliminará el pedido seleccionado", "¿Está seguro?");
             if (opcion.get().equals(ButtonType.OK)) {
                 if (controlDespacho.EliminarPedido(listaEliminar.getSelectionModel().getSelectedItem())) {
-                    AlertUtils.alertConfirmation("Pedido Elimando", "El pedido seleccionado a sido eliminado correctamente", "");
+                    AlertUtils.alertConfirmation("Pedido eliminado", "El pedido seleccionado ha sido eliminado correctamente", "");
                 }
             }
             renderWindowPedido();
         } catch (Exception e) {
             e.printStackTrace();
-            AlertUtils.alertError("ERROR", "No se pudo Eliminar el pedido", "Por favor, intente de nuevo");
+            AlertUtils.alertError("ERROR", "No se pudo eliminar el pedido", "Por favor, intente de nuevo");
         }
     }
 
@@ -634,7 +630,7 @@ public class ControllerFX implements Initializable {
                     }
                 }
             }
-            AlertUtils.alertConfirmation("Modificar Servicio Adicional", "Se ha modificado el servicio adicional seleccionado", "");
+            AlertUtils.alertConfirmation("Modificar servicio adicional", "Se ha modificado el servicio adicional correctamente", "");
             precioEnvio.setText("");
             distanciaEnvio.setText("");
             comercioBono.setText("");
@@ -642,7 +638,7 @@ public class ControllerFX implements Initializable {
             mensajeBono.setText("");
         } catch (Exception e) {
             e.printStackTrace();
-            AlertUtils.alertError("ERROR", "No se pudo Modificar el servicio Adicional", "Por favor, intente de nuevo");
+            AlertUtils.alertError("ERROR", "No se pudo modificar el servicio adicional", "Por favor, intente de nuevo");
         }
     }
 
@@ -678,17 +674,17 @@ public class ControllerFX implements Initializable {
                     ((BonoRegalo) serv).setFechaVencimiento(fechaservicio);
                 }
             }
-            AlertUtils.alertConfirmation("Modificar Pedido", "Se ha modificado Pedido seleccionado", "");
+            AlertUtils.alertConfirmation("Modificar pedido", "Se ha modificado el pedido seleccionado", "");
             renderWindowPedido();
         } catch (Fechaerror e) {
             e.printStackTrace();
-            AlertUtils.alertError("ERROR Fecha", "La fecha digitada no es mayor a dos dias", "Intentalo nuevamente");
+            AlertUtils.alertError("Error en la fecha", "La fecha digitada no es mayor a dos dias", "Inténtalo nuevamente");
         } catch (PedidoFechaIgual ex) {
             ex.printStackTrace();
-            AlertUtils.alertError("ERROR Fecha", "La fecha ya pertenece a un pedido con mismo producto y cliente", "Intentalo nuevamente");
+            AlertUtils.alertError("Error en la fecha", "La fecha ya pertenece a un pedido con un mismo producto y cliente", "Inténtalo nuevamente");
         } catch (Exception ex) {
             ex.printStackTrace();
-            AlertUtils.alertError("ERROR", "No se pudo modificar el Pedido", "Intentalo nuevamente");
+            AlertUtils.alertError("ERROR", "No se pudo modificar el pedido", "Inténtalo nuevamente");
         }
     }
 
@@ -755,15 +751,14 @@ public class ControllerFX implements Initializable {
         UUID prodID = productoEspecifico.getValue();
         try {
             ArrayList<Pedido> productosFecha = controlDespacho.verListadoDePedidosDeProductoYFechaEspecífica(prodID, fecha);
-            if (productosFecha.size() == 0){
+            if (productosFecha.size() == 0) {
                 throw new ColeccionVacia("Arreglo vacio");
             }
             tablaFechaEspecifica.getItems().addAll(productosFecha);
             AlertUtils.alertConfirmation("Pedidos obtenidos", "Se obtenieron los pedidos satisfactoriamente", "Presiona Aceptar para continuar");
-        }catch (ColeccionVacia e){
+        } catch (ColeccionVacia e) {
             AlertUtils.alertError("Error", "No se pueden obtener los pedidos", "No existen pedidos con este producto en esta fecha");
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             AlertUtils.alertError("Error", "No se pueden obtener los pedidos", "Revise la fecha que ingresó e inténtelo de nuevo");
         }
@@ -784,7 +779,7 @@ public class ControllerFX implements Initializable {
             for (Producto auxprod : productosFruver.values()) {
                 m.marshal(auxprod, out);
             }
-            AlertUtils.alertConfirmation("Generar Reporte", "El reporte de Productos tipo fruver se ha generado exitosamente", "Presiona OK para continuar");
+            AlertUtils.alertConfirmation("Generar reporte", "El reporte de productos tipo fruver se ha generado exitosamente", "Presiona OK para continuar");
         } catch (IOException ioe) {
             ioe.printStackTrace();
             AlertUtils.alertError("Error", "No se pueden obtener los productos", "Revise los datos que ingresó e inténtelo de nuevo");
@@ -792,7 +787,7 @@ public class ControllerFX implements Initializable {
             jex.printStackTrace();
             AlertUtils.alertError("Error", "No se pueden obtener los productos", "Revise los datos que ingresó e inténtelo de nuevo");
         } catch (ColeccionVacia coleccionVacia) {
-            AlertUtils.alertInformation("No hay productos", "Sin productos", "No se encuentran prouctos fruver, revise los productos en el sistema y vuelva a intentarlo");
+            AlertUtils.alertInformation("No hay productos", "Sin productos", "No se encuentran productos fruver, revise los productos en el sistema y vuelva a intentarlo");
         }
 
     }
@@ -812,7 +807,7 @@ public class ControllerFX implements Initializable {
             for (Pedido auxped : pedidosProductosAseo) {
                 m.marshal(auxped, out);
             }
-            AlertUtils.alertConfirmation("Generar Reporte", "El reporte de Pedidos de producto Aseo de un tipo especifico fue exitoso", "Presiona OK para continuar");
+            AlertUtils.alertConfirmation("Generar reporte", "El reporte de pedidos de productos de aseo de un tipo específico fue exitoso", "Presiona OK para continuar");
         } catch (IOException ioe) {
             ioe.printStackTrace();
             AlertUtils.alertError("Error", "No se pueden obtener los pedidos", "Revise los datos que ingresó e inténtelo de nuevo");
@@ -820,7 +815,7 @@ public class ControllerFX implements Initializable {
             jex.printStackTrace();
             AlertUtils.alertError("Error", "No se pueden obtener los pedidos", "Revise los datos que ingresó e inténtelo de nuevo");
         } catch (ColeccionVacia coleccionVacia) {
-            AlertUtils.alertInformation("No hay pedidos", "Sin pedidos", "No se encuentran pedidos asociados a productos de Aseo de este tipo, revise los productos en el sistema o su selección de tipo y vuelva a intentarlo");
+            AlertUtils.alertInformation("No hay pedidos", "Sin pedidos", "No se encuentran pedidos asociados a productos de aseo de este tipo, revise los productos en el sistema o su selección de tipo y vuelva a intentarlo");
         }
     }
 
@@ -850,10 +845,10 @@ public class ControllerFX implements Initializable {
             for (Pedido ped : pedidos) {
                 m.marshal(ped, archvioSalida);
             }
-            AlertUtils.alertConfirmation("Generar Reporte", "El reporte de rango de fechas se ha generado exitosamente", "Presiona OK para continuar");
+            AlertUtils.alertConfirmation("Generar reporte", "El reporte de rango de fechas se ha generado exitosamente", "Presiona OK para continuar");
         } catch (IOException | JAXBException ioe) {
             ioe.printStackTrace();
-            AlertUtils.alertError("Error", "El archivo no pudo ser generado", "Intentelo nuevamente");
+            AlertUtils.alertError("Error", "El archivo no pudo ser generado", "Inténtelo nuevamente");
         } catch (ColeccionVacia coleccionVacia) {
             AlertUtils.alertInformation("No hay pedidos", "Sin pedidos", "No se encuentran pedidos asociados a este rango de fechas, revise su selección de fecha y vuelva a intentarlo");
         }
@@ -876,12 +871,12 @@ public class ControllerFX implements Initializable {
             for (ServicioAdicional serv : servciosEnvios) {
                 m.marshal(serv, archvioSalida);
             }
-            AlertUtils.alertConfirmation("Generar Reporte", "El reporte de Servicios Envio Prime del sistema se ha generado exitosamente", "Presiona Aceptar para continuar");
+            AlertUtils.alertConfirmation("Generar reporte", "El reporte de servicios con envio Prime del sistema se ha generado exitosamente", "Presiona Aceptar para continuar");
         } catch (IOException | JAXBException ioe) {
             ioe.printStackTrace();
-            AlertUtils.alertError("Error", "El archivo no pudo ser generado", "Intentelo nuevamente");
+            AlertUtils.alertError("Error", "El archivo no pudo ser generado", "Inténtelo nuevamente");
         } catch (ColeccionVacia e) {
-            AlertUtils.alertError("Error", "No existe reporte de este Tipo o no seleccionaste ninguno", "Intentelo nuevamente");
+            AlertUtils.alertError("Error", "No existe reporte de este tipo o no seleccionó ninguno", "Inténtelo nuevamente");
         }
     }
 
@@ -963,7 +958,7 @@ public class ControllerFX implements Initializable {
 
     @FXML
     void eliminarProducto() {
-        Optional<ButtonType> confirmacion = AlertUtils.alertConfirmation("Eliminar Producto", "Se eliminará el producto con UUID " + tablaEliminarProductos.getSelectionModel().getSelectedItem().toString(), "¿Está seguro?");
+        Optional<ButtonType> confirmacion = AlertUtils.alertConfirmation("Eliminar producto", "Se eliminará el producto con UUID " + tablaEliminarProductos.getSelectionModel().getSelectedItem().toString(), "¿Está seguro?");
         try {
             if (confirmacion.get().equals(ButtonType.OK)) {
                 if (controlDespacho.ValidarProducto(tablaEliminarProductos.getSelectionModel().getSelectedItem())) {
@@ -973,10 +968,18 @@ public class ControllerFX implements Initializable {
                     AlertUtils.alertInformation("Producto eliminado correctamente", "Se ha eliminado el producto.", "");
                 }
             }
+            if (this.controlDespacho.getGestionProductos().getListaProductos().isEmpty()) {
+                insertarNombreModProd.setText("");
+                insertarPrecioModProd.setText("");
+                insertarPrecioModProd.setText("");
+                insertarTiendaModProd.setText("");
+                switchModificarProducto();
+            }
+
             renderWindowProducto();
         } catch (ProductoAsociadoAPedido ex) {
             ex.printStackTrace();
-            AlertUtils.alertError("ERROR", "No se puede eliminar el producto ya que pertenece a un pedido", "Elimine el Pedido para eliminar el Producto selccionado");
+            AlertUtils.alertError("ERROR", "No se puede eliminar el producto, ya que pertenece a un pedido", "Primero elimine el pedido para eliminar el producto selccionado");
         } catch (Exception ex) {
             ex.printStackTrace();
             AlertUtils.alertError("ERROR", "No se ha podido eliminar este producto.", "Por favor, intente de nuevo.");
@@ -986,7 +989,7 @@ public class ControllerFX implements Initializable {
     @FXML
     void switchModificarProducto() {
         boolean accion = false;
-        if (!actModificarProducto.isSelected()) {
+        if (!actModificarProducto.isSelected() || this.controlDespacho.getGestionProductos().getListaProductos().isEmpty()) {
             accion = true;
         }
         listaProductosModificar.setDisable(accion);
