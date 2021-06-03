@@ -167,22 +167,22 @@
                                                             </DropShadow>
                                                          </effect>
                                                       </Label>
-                                                      <Label layoutX="29.0" layoutY="83.0" prefHeight="392.0" prefWidth="227.0" style="-fx-background-color: C9C9C9; -fx-background-radius: 20; -fx-border-color: #B9BABA; -fx-border-radius: 20;" />
-                                                      <ImageView fitHeight="71.0" fitWidth="97.0" layoutX="104.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
+                                                      <Label layoutX="29.0" layoutY="129.0" prefHeight="380.0" prefWidth="227.0" style="-fx-background-color: C9C9C9; -fx-background-radius: 20; -fx-border-color: #B9BABA; -fx-border-radius: 20;" />
+                                                      <ImageView fitHeight="71.0" fitWidth="97.0" layoutX="106.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@img/user.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <TextField fx:id="Entrada_Mod_nombre_cliente" disable="true" layoutX="72.0" layoutY="232.0" promptText="Nombre Completo" style="-fx-background-radius: 20;" />
-                                                      <TextField fx:id="Entrada_Mod_telefono_cliente" disable="true" layoutX="73.0" layoutY="267.0" promptText="Telefono" style="-fx-background-radius: 20;" />
-                                                      <TextField fx:id="Entrada_Mod_dir_cliente" disable="true" layoutX="72.0" layoutY="303.0" promptText="Dirección" style="-fx-background-radius: 20;" />
-                                                      <CheckBox fx:id="Ver_mod_clientes" disable="true" layoutX="97.0" layoutY="361.0" mnemonicParsing="false" onAction="#VerModificar" text="¿Modificar?">
+                                                      <TextField fx:id="Entrada_Mod_nombre_cliente" disable="true" layoutX="72.0" layoutY="278.0" promptText="Nombre Completo" style="-fx-background-radius: 20;" />
+                                                      <TextField fx:id="Entrada_Mod_telefono_cliente" disable="true" layoutX="73.0" layoutY="313.0" promptText="Telefono" style="-fx-background-radius: 20;" />
+                                                      <TextField fx:id="Entrada_Mod_dir_cliente" disable="true" layoutX="72.0" layoutY="349.0" promptText="Dirección" style="-fx-background-radius: 20;" />
+                                                      <CheckBox fx:id="Ver_mod_clientes" disable="true" layoutX="96.0" layoutY="402.0" mnemonicParsing="false" onAction="#VerModificar" text="¿Modificar?">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
                                                       </CheckBox>
-                                                      <Button fx:id="boton_modi_clientes" disable="true" layoutX="107.0" layoutY="417.0" mnemonicParsing="false" onAction="#ModificarCliente" prefHeight="33.0" prefWidth="72.0" style="-fx-background-radius: 20; -fx-background-color: #00CED1; -fx-border-radius: 20;" text="Modificar" textFill="#fff9f9" />
-                                                      <ComboBox fx:id="Selecion_clientes" disable="true" layoutX="72.0" layoutY="199.0" onAction="#clienteModificar" prefWidth="150.0" promptText="Cliente" style="-fx-background-radius: 20;" />
+                                                      <Button fx:id="boton_modi_clientes" disable="true" layoutX="111.0" layoutY="442.0" mnemonicParsing="false" onAction="#ModificarCliente" prefHeight="33.0" prefWidth="72.0" style="-fx-background-radius: 20; -fx-background-color: #00CED1; -fx-border-radius: 20;" text="Modificar" textFill="#fff9f9" />
+                                                      <ComboBox fx:id="Selecion_clientes" disable="true" layoutX="72.0" layoutY="245.0" onAction="#clienteModificar" prefWidth="150.0" promptText="Cliente" style="-fx-background-radius: 20;" />
                                                    </children>
                                                 </AnchorPane>
                                              </items>
@@ -535,7 +535,7 @@
                                                                   </TableColumn>
                                                                </columns>
                                                             </TableView>
-                                                            <TableView fx:id="listaServicioAdicional" disable="true" layoutY="371.0" prefHeight="228.0" prefWidth="889.0" style="-fx-background-radius: 20;">
+                                                            <TableView fx:id="listaServicioAdicional" disable="true" layoutY="358.0" prefHeight="228.0" prefWidth="889.0" style="-fx-background-radius: 20;">
                                                                <columns>
                                                                   <TableColumn fx:id="colidSA" prefWidth="69.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="ID">
                                                                      <cellValueFactory>
@@ -629,8 +629,8 @@
                                                       <Button fx:id="btnVerServicios" layoutX="99.0" layoutY="549.0" mnemonicParsing="false" onAction="#verservicios" prefHeight="33.0" prefWidth="104.0" style="-fx-background-radius: 20; -fx-background-color: #EEC51A; -fx-border-radius: 20;" text="Ver servicios" textFill="#fff9f9" />
                                                       <ComboBox fx:id="listPedidos" layoutX="89.0" layoutY="510.0" prefHeight="25.0" prefWidth="124.0" promptText="Pedidos" style="-fx-background-radius: 20;" />
                                                       <Separator layoutX="23.0" layoutY="498.0" prefHeight="0.0" prefWidth="250.0" />
-                                                      <ComboBox fx:id="listEnviosModificar" disable="true" layoutX="37.0" layoutY="372.0" prefHeight="25.0" prefWidth="104.0" promptText="Envios" style="-fx-background-radius: 20;" />
-                                                      <ComboBox fx:id="listBonosModificar" disable="true" layoutX="156.0" layoutY="372.0" prefHeight="25.0" prefWidth="102.0" promptText="Bonos" style="-fx-background-radius: 20;" />
+                                                      <ComboBox fx:id="listEnviosModificar" disable="true" layoutX="37.0" layoutY="372.0" onAction="#cargarInfoEnvio" prefHeight="25.0" prefWidth="104.0" promptText="Envios" style="-fx-background-radius: 20;" />
+                                                      <ComboBox fx:id="listBonosModificar" disable="true" layoutX="156.0" layoutY="372.0" onAction="#cargarInfoBono" prefHeight="25.0" prefWidth="102.0" promptText="Bonos" style="-fx-background-radius: 20;" />
                                                       <Button fx:id="btnAgregarModServicio" disable="true" layoutX="96.0" layoutY="409.0" mnemonicParsing="false" onAction="#modificarServicio" prefHeight="25.0" prefWidth="116.0" style="-fx-background-radius: 20; -fx-background-color: #EEC51A; -fx-border-radius: 20;" text="Modificar Servicio" textFill="#fff9f9" />
                                                    </children>
                                                 </AnchorPane>

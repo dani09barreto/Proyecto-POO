@@ -466,7 +466,7 @@ public class ControllerFX implements Initializable {
     void AgregarPedido(ActionEvent event) {
         try {
             Cliente cliente = controlDespacho.getGestionCliente().existeCliente(Long.valueOf(clientesList.getSelectionModel().getSelectedItem()));
-            Producto producto = controlDespacho.getGestionProductos().getListaProductos().get(productosList.getSelectionModel().getSelectedItem());
+            Producto producto = controlDespacho.getGestionProductos().existeProducto(productosList.getSelectionModel().getSelectedItem());
             ZoneId defaultZoneId = ZoneId.systemDefault();
             LocalDate localDate = fechaEntrega.getValue();
             Date date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
@@ -514,7 +514,6 @@ public class ControllerFX implements Initializable {
             ex.printStackTrace();
             AlertUtils.alertError("ERROR", "No se pudo agregar el pedido", "Por favor, intente de nuevo");
         }
-
         renderWindowPedido();
     }
 
@@ -535,6 +534,9 @@ public class ControllerFX implements Initializable {
             comercioBono.setText("");
             precioBono.setText("");
             mensajeBono.setText("");
+            tipoTransporte.getItems().clear();
+            tipoTransporte.getItems().setAll(TipoTransporte.values());
+
         } catch (Exception ex) {
             ex.printStackTrace();
             AlertUtils.alertError("ERROR", "No se pudo agregar el servicio adicional", "Por favor, intente de nuevo");
@@ -571,6 +573,7 @@ public class ControllerFX implements Initializable {
             btnModificarPedido.setDisable(false);
             envioPrimeAgregar.setDisable(true);
             bonoRegaloAgregar.setDisable(true);
+            btnAgregarSA.setDisable(true);
         } else {
             listPedidosModificar.setDisable(true);
             FechaModificar.setDisable(true);
@@ -583,6 +586,7 @@ public class ControllerFX implements Initializable {
             btnModificarPedido.setDisable(true);
             envioPrimeAgregar.setDisable(false);
             bonoRegaloAgregar.setDisable(false);
+            btnAgregarSA.setDisable(false);
         }
     }
 
@@ -603,6 +607,32 @@ public class ControllerFX implements Initializable {
         Date date = pedido.getFechaRecibido().getTime();
         FechaModificar.setValue(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         repartidorModificar.setText(pedido.getNombreRepartidor());
+    }
+    @FXML
+    void cargarInfoBono(ActionEvent event) {
+        UUID idpedido = listPedidosModificar.getSelectionModel().getSelectedItem();
+        Pedido pedido = controlDespacho.ExistePedido(idpedido);
+        for (ServicioAdicional serv : pedido.getServiciosAdicionales()){
+            if (serv.getCodigoServicio().equals(listBonosModificar.getSelectionModel().getSelectedItem())){
+                precioBono.setText(serv.getPrecio().toString());
+                comercioBono.setText(((BonoRegalo) serv).getComercioAsociado());
+                mensajeBono.setText(((BonoRegalo) serv).getMensaje());
+            }
+        }
+    }
+
+    @FXML
+    void cargarInfoEnvio(ActionEvent event) {
+        UUID idpedido = listPedidosModificar.getSelectionModel().getSelectedItem();
+        Pedido pedido = controlDespacho.ExistePedido(idpedido);
+        for (ServicioAdicional serv : pedido.getServiciosAdicionales()){
+            if (serv.getCodigoServicio().equals(listEnviosModificar.getSelectionModel().getSelectedItem())){
+                precioEnvio.setText(serv.getPrecio().toString());
+                distanciaEnvio.setText(((EnvioPrime) serv).getDistancia().toString());
+                tipoTransporte.getSelectionModel().select(((EnvioPrime) serv).getTipo());
+                cantidadCajas.setValueFactory(cantidadCajas.getValueFactory());
+            }
+        }
     }
 
     @FXML
@@ -636,6 +666,8 @@ public class ControllerFX implements Initializable {
             comercioBono.setText("");
             precioBono.setText("");
             mensajeBono.setText("");
+            tipoTransporte.getItems().clear();
+            tipoTransporte.getItems().setAll(TipoTransporte.values());
         } catch (Exception e) {
             e.printStackTrace();
             AlertUtils.alertError("ERROR", "No se pudo modificar el servicio adicional", "Por favor, intente de nuevo");
@@ -659,11 +691,11 @@ public class ControllerFX implements Initializable {
             long inicioMs = fecha.getTimeInMillis();
             int dias = (int) (Math.abs(finMs - inicioMs) / (1000 * 60 * 60 * 24));
 
+            if (fecha.before(fechanow)){
+                throw new FechaMenor("fecha menor");
+            }
             if (dias <= 2) {
                 throw new Fechaerror("fecha error");
-            }
-            if (controlDespacho.ExistePedido(pedido.getSolicitante(), pedido.getProductoSolicitado(), fecha) != null) {
-                throw new PedidoFechaIgual("Fecha igual");
             }
             pedido.setFechaRecibido(fecha);
             pedido.setNombreRepartidor(repartidorModificar.getText());
@@ -676,10 +708,12 @@ public class ControllerFX implements Initializable {
             }
             AlertUtils.alertConfirmation("Modificar pedido", "Se ha modificado el pedido seleccionado", "");
             renderWindowPedido();
+            repartidorModificar.setText("");
+            FechaModificar.setValue(LocalDate.now());
         } catch (Fechaerror e) {
             e.printStackTrace();
             AlertUtils.alertError("Error en la fecha", "La fecha digitada no es mayor a dos dias", "Inténtalo nuevamente");
-        } catch (PedidoFechaIgual ex) {
+        } catch (FechaMenor ex) {
             ex.printStackTrace();
             AlertUtils.alertError("Error en la fecha", "La fecha ya pertenece a un pedido con un mismo producto y cliente", "Inténtalo nuevamente");
         } catch (Exception ex) {
@@ -766,19 +800,14 @@ public class ControllerFX implements Initializable {
 
     @FXML
     void guardarProductoFruver(ActionEvent event) {
-        Map<UUID, Producto> productosFruver = controlDespacho.verProductosTipoFruver();
-
+        controlDespacho.verProductosTipoFruver();
         FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter(FileType.XML.getFilter(), FileType.XML.getFilter());
-        try (FileWriter out = new FileWriter(AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow()))) {
-            if (productosFruver.size() == 0) {
-                throw new ColeccionVacia("Arreglo vacio");
+        File ruta = AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow());
+        try {
+            if (controlDespacho.getReporteFruver().getProductosFruver().size() == 0){
+                throw new ColeccionVacia("vacio");
             }
-            JAXBContext context = JAXBContext.newInstance(Fruver.class);
-            Marshaller m = context.createMarshaller();
-            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            for (Producto auxprod : productosFruver.values()) {
-                m.marshal(auxprod, out);
-            }
+            FileUtils.saveXML(ruta, controlDespacho.getReporteFruver());
             AlertUtils.alertConfirmation("Generar reporte", "El reporte de productos tipo fruver se ha generado exitosamente", "Presiona OK para continuar");
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -794,19 +823,14 @@ public class ControllerFX implements Initializable {
 
     @FXML
     void guardarProductosAseoTipo(ActionEvent event) {
-        ArrayList<Pedido> pedidosProductosAseo = controlDespacho.PedidosDeAseoPorTipo(tipoProdGuardar.getSelectionModel().getSelectedItem());
-
+        controlDespacho.PedidosDeAseoPorTipo(tipoProdGuardar.getSelectionModel().getSelectedItem());
         FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter(FileType.XML.getFilter(), FileType.XML.getFilter());
-        try (FileWriter out = new FileWriter(AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow()))) {
-            if (pedidosProductosAseo.size() == 0) {
+        File ruta = AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow());
+        try {
+            if (controlDespacho.getReporteAseoTipo().getPedidosProductosAseo().size() == 0) {
                 throw new ColeccionVacia("Arreglo vacio");
             }
-            JAXBContext context = JAXBContext.newInstance(Pedido.class);
-            Marshaller m = context.createMarshaller();
-            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            for (Pedido auxped : pedidosProductosAseo) {
-                m.marshal(auxped, out);
-            }
+            FileUtils.saveXML(ruta, controlDespacho.getReporteAseoTipo());
             AlertUtils.alertConfirmation("Generar reporte", "El reporte de pedidos de productos de aseo de un tipo específico fue exitoso", "Presiona OK para continuar");
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -830,21 +854,15 @@ public class ControllerFX implements Initializable {
         date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
         Calendar fechaFinal = Calendar.getInstance();
         fechaFinal.setTime(date);
-        ArrayList<Pedido> pedidos = controlDespacho.pedidoEnRangoDeFechas(fechaInicio, fechaFinal);
-
+        controlDespacho.pedidoEnRangoDeFechas(fechaInicio, fechaFinal);
         FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter("XML", FileType.XML.getFilter());
         File ruta = AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow());
 
-        try (FileWriter archvioSalida = new FileWriter(ruta)) {
-            if (pedidos.size() == 0) {
+        try {
+            if (controlDespacho.getReporteRangoFecha().getPedidos().size() == 0) {
                 throw new ColeccionVacia("Arreglo vacio");
             }
-            JAXBContext context = JAXBContext.newInstance(Pedido.class);
-            Marshaller m = context.createMarshaller();
-            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            for (Pedido ped : pedidos) {
-                m.marshal(ped, archvioSalida);
-            }
+            FileUtils.saveXML(ruta, controlDespacho.getReporteRangoFecha());
             AlertUtils.alertConfirmation("Generar reporte", "El reporte de rango de fechas se ha generado exitosamente", "Presiona OK para continuar");
         } catch (IOException | JAXBException ioe) {
             ioe.printStackTrace();
@@ -857,20 +875,15 @@ public class ControllerFX implements Initializable {
     @FXML
     void guardarTipoTransporte(ActionEvent event) {
         TipoTransporte tipo = tipoTransporteguardar.getSelectionModel().getSelectedItem();
-        ArrayList<ServicioAdicional> servciosEnvios = controlDespacho.enviosPrimePorTipo(tipo);
+        controlDespacho.enviosPrimePorTipo(tipo);
         FileChooser.ExtensionFilter filtro = new FileChooser.ExtensionFilter("XML", FileType.XML.getFilter());
         File ruta = AlertUtils.openFileChooserModeWrite(filtro, ((Button) event.getSource()).getScene().getWindow());
 
-        try (FileWriter archvioSalida = new FileWriter(ruta)) {
-            if (servciosEnvios.size() == 0) {
+        try {
+            if (controlDespacho.getReporteEnvioTipo().getServciosEnvios().size() == 0) {
                 throw new ColeccionVacia("Arreglo vacio");
             }
-            JAXBContext context = JAXBContext.newInstance(ServicioAdicional.class);
-            Marshaller m = context.createMarshaller();
-            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            for (ServicioAdicional serv : servciosEnvios) {
-                m.marshal(serv, archvioSalida);
-            }
+            FileUtils.saveXML(ruta, controlDespacho.getReporteEnvioTipo());
             AlertUtils.alertConfirmation("Generar reporte", "El reporte de servicios con envio Prime del sistema se ha generado exitosamente", "Presiona Aceptar para continuar");
         } catch (IOException | JAXBException ioe) {
             ioe.printStackTrace();
