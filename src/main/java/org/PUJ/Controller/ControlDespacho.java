@@ -114,7 +114,7 @@ public class  ControlDespacho {
 
         ArrayList<Pedido> pedidosProductoFecha = new ArrayList<>();
         for (Pedido auxPedido : pedidos) {
-            if (auxPedido.getProductoSolicitado().getProdId().equals(idProd2) && (auxPedido.getFechaRecibido().equals(fecha))){
+            if (auxPedido.getProductoSolicitado().getProdId().equals(idProd2) && (auxPedido.getFechaRecibido().after(fecha)||auxPedido.getFechaRecibido().equals(fecha))){
                 pedidosProductoFecha.add(auxPedido);
             }
         }
