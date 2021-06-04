@@ -111,18 +111,12 @@ public class  ControlDespacho {
     }
 
     public ArrayList<Pedido> verListadoDePedidosDeProductoYFechaEspecífica(UUID idProd2, Calendar fecha) {
-        boolean hayPedido = false;
+
         ArrayList<Pedido> pedidosProductoFecha = new ArrayList<>();
         for (Pedido auxPedido : pedidos) {
-            if (auxPedido.getNumeroPedido().equals(idProd2) && (auxPedido.getFechaRecibido().compareTo(fecha)==0)){
+            if (auxPedido.getProductoSolicitado().getProdId().equals(idProd2) && (auxPedido.getFechaRecibido().equals(fecha))){
                 pedidosProductoFecha.add(auxPedido);
-                hayPedido = true;
             }
-        }
-        if (!hayPedido) {
-            return null;
-        } else {
-            System.out.println(pedidosProductoFecha.toString());
         }
         return pedidosProductoFecha;
     }
